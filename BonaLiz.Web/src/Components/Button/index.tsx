@@ -1,0 +1,19 @@
+import React from "react";
+
+// import { Container } from './styles';
+
+const Button: React.FC<ButtonProps> = ({ color, children, onClick }) => {
+  return (
+    <button
+      type="button"
+      className={`${
+        color == "primary" ? "bg-primery" : "bg-secondary"
+      } w-full font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
+
+export default Button;

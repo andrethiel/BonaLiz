@@ -1,4 +1,4 @@
-﻿using ApiGateway.Dados.Models;
+﻿using BonaLiz.Dados.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,12 +12,9 @@ namespace ApiGateway.Dados.Context
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-            
         }
-
-        public DbSet<CatalogItem> CatalogItems { get; set; }
-        //public DbSet<CatalogBrand> CatalogBrands { get; set; }
-        //public DbSet<CatalogType> CatalogTypes { get; set; }
+        
+        public DbSet<Fornecedor> Fornecedor { get; set; }
+        public DbSet<TipoProduto> TipoProduto { get; set; }
     }
-
 }

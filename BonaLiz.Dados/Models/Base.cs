@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BonaLiz.Dados.Models
+{
+    public class Base
+    {
+        public int Id { get; set; }
+        public Guid Guid { get; set; } = Guid.NewGuid();
+    }
+}
