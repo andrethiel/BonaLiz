@@ -19,6 +19,8 @@ namespace BonaLiz.Api.Dependencias
             services.AddScoped<IFornecedorServices, FornecedorServices>();
             services.AddScoped<ITipoProdutoRepository, TipoProdutoRepository>();
             services.AddScoped<ITipoProdutoServices, TipoProdutoServices>();
+            services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IProdutoServices, ProdutoServices>();
 
 
             services.AddAutoMapper(typeof(AutoMapperConfiguration));

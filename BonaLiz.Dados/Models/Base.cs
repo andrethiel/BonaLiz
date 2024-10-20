@@ -9,6 +9,6 @@ namespace BonaLiz.Dados.Models
     public class Base
     {
         public int Id { get; set; }
-        public Guid Guid { get; set; } = Guid.NewGuid();
+        public Guid Guid { get; set; }
     }
 }

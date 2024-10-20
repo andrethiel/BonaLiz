@@ -1,31 +1,28 @@
-﻿using BonaLiz.Api.Helpers;
-using BonaLiz.Negocio.Interfaces;
+﻿using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BonaLiz.Api.Controller
 {
     [ApiController]
-    public class TipoProdutoController : ControllerBase
+    public class ProdutoController : ControllerBase
     {
-        private readonly ITipoProdutoServices _tipoProdutoServices;
-        public TipoProdutoController(ITipoProdutoServices tipoProdutoServices)
+        private readonly IProdutoServices _produtoServices;
+        public ProdutoController(IProdutoServices produtoServices)
         {
-            _tipoProdutoServices = tipoProdutoServices;
+            _produtoServices = produtoServices;
         }
-
         [HttpPost]
-        [Route("/CadastrarTipoProduto")]
-        public async Task<IActionResult> Cadastro(TipoProdutoViewModel model)
+        [Route("/CadastrarProduto")]
+        public async Task<IActionResult> Cadastro(ProdutoViewModel model)
         {
             try
             {
-                if (!_tipoProdutoServices.Listar().Where(x => x.Nome == model.Nome).Any())
+                if(!_produtoServices.Listar().Where(x => x.Nome == model.Nome).Any())
                 {
-                    _tipoProdutoServices.Cadastrar(model);
+                    _produtoServices.Cadastrar(model);
                     return Ok(new
                     {
                         status = true,
@@ -37,23 +34,23 @@ namespace BonaLiz.Api.Controller
                     return Ok(new
                     {
                         status = false,
-                        message = "Fornecedor já cadastrado"
+                        message = "Produto já cadastrado"
                     });
                 }
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpPut]
-        [Route("/EditarTipoProduto")]
-        public async Task<IActionResult> Editar(TipoProdutoViewModel model)
+        [Route("/EditarProduto")]
+        public async Task<IActionResult> Editar(ProdutoViewModel model)
         {
             try
             {
-                _tipoProdutoServices.Editar(model);
+                _produtoServices.Editar(model);
                 return Ok(new
                 {
                     status = true,
@@ -62,16 +59,16 @@ namespace BonaLiz.Api.Controller
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(ex.Message);
             }
         }
         [HttpGet]
-        [Route("/ListarTipoProduto")]
+        [Route("/ListarProdutos")]
         public async Task<IActionResult> Listar()
         {
             try
             {
-                return Ok(_tipoProdutoServices.Listar().Take(50));
+                return Ok(_produtoServices.Listar().Take(50));
             }
             catch (Exception ex)
             {
@@ -79,12 +76,12 @@ namespace BonaLiz.Api.Controller
             }
         }
         [HttpGet]
-        [Route("/TipoProdutoPorGuid")]
+        [Route("/ProdutoPorGuid")]
         public async Task<IActionResult> ObterPorGuid(Guid guid)
         {
             try
             {
-                return Ok(_tipoProdutoServices.ObterPorGuid(guid));
+                return Ok(_produtoServices.ObterPorGuid(guid));
             }
             catch (Exception ex)
             {
@@ -93,30 +90,21 @@ namespace BonaLiz.Api.Controller
         }
 
         [HttpPost]
-        [Route("/TipoProdutoFiltar")]
-        public async Task<IActionResult> Filtrar(TipoProdutoViewModel model)
+        [Route("/ProdutoFiltar")]
+        public async Task<IActionResult> Filtrar(ProdutoViewModel model)
         {
             try
             {
-                return Ok(_tipoProdutoServices.Filtrar(model));
+				model.Nome = string.IsNullOrEmpty(model.Nome) ? null : model.Nome;
+				model.FornecedorId = string.IsNullOrEmpty(model.FornecedorId) ? null : model.FornecedorId;
+				model.TipoProdutoId = string.IsNullOrEmpty(model.TipoProdutoId) ? null : model.TipoProdutoId;
+				model.DataCompra = string.IsNullOrEmpty(model.DataCompra) ? null : model.DataCompra;
+                return Ok(_produtoServices.Filtrar(model));
             }
             catch (Exception ex)
             {
                 return BadRequest(ex);
             }
         }
-		[HttpGet]
-		[Route("/SelectListTipoProduto")]
-		public async Task<IActionResult> SelectListTipoProdutor()
-		{
-			try
-			{
-				return Ok(SelectListHelper.AddSelectList(new SelectList(_tipoProdutoServices.Listar(), "Id", "Nome")));
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(ex);
-			}
-		}
-	}
+    }
 }

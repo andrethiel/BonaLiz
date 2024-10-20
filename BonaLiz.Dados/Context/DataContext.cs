@@ -13,8 +13,8 @@ namespace ApiGateway.Dados.Context
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
-        
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<TipoProduto> TipoProduto { get; set; }
+        public DbSet<Produto> Produto { get; set; }
     }
 }

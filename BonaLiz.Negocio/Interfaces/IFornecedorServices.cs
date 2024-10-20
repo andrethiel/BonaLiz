@@ -15,5 +15,6 @@ namespace BonaLiz.Negocio.Interfaces
         FornecedorViewModel ObterPorId(int id);
         FornecedorViewModel ObterPorGuid(Guid Guid);
         List<FornecedorViewModel> Filtrar(FornecedorViewModel model);
-    }
+
+	}
 }

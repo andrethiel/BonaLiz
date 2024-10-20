@@ -1,7 +1,9 @@
-﻿using BonaLiz.Negocio.Interfaces;
+﻿using BonaLiz.Api.Helpers;
+using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BonaLiz.Api.Controllers
 {
@@ -29,7 +31,7 @@ namespace BonaLiz.Api.Controllers
                     {
                         status = true,
                         message = "Cadastrado com sucesso"
-                    }); ;
+                    });
                 }
                 else
                 {
@@ -46,7 +48,7 @@ namespace BonaLiz.Api.Controllers
             
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("/EditarForncedor")]
         public async Task<IActionResult> Editar(FornecedorViewModel model)
         {
@@ -105,5 +107,18 @@ namespace BonaLiz.Api.Controllers
                 return BadRequest(ex);
             }
         }
-    }
+		[HttpGet]
+		[Route("/SelectListForncedor")]
+		public async Task<IActionResult> SelectListFornencedor()
+		{
+			try
+			{
+				return Ok(SelectListHelper.AddSelectList(new SelectList(_fornecedorServices.Listar(), "Id", "Nome")));
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex);
+			}
+		}
+	}
 }
