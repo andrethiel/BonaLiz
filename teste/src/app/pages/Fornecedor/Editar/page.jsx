@@ -3,11 +3,11 @@ import {
   EditarFornecedor,
   ObterFornecedorGuid,
 } from "@/Api/Controllers/Forncedor";
-import Alert from "@/components/Alert";
-import Button from "@/components/Button";
-import Input from "@/components/Input";
-import MaskInput from "@/components/InputMask";
-import Select from "@/components/Select";
+import Alert from "@/Components/Alert";
+import Button from "@/Components/Button";
+import Input from "@/Components/Input";
+import MaskInput from "@/Components/InputMask";
+import Select from "@/Components/Select";
 import { Estados } from "@/constants/estados";
 import { Iniciais } from "@/Utils/Iniciais";
 import { useRouter, useSearchParams } from "next/navigation";
