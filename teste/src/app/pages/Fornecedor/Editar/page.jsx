@@ -64,18 +64,27 @@ const Editar = () => {
   async function Editar() {
     setIsLoading(true);
     form.Iniciais = Iniciais(form.Nome);
-    const response = await EditarFornecedor(form);
-    if (response.status) {
-      setAlert({
-        ...alert,
-        type: "Success",
-        message: response.message,
-      });
-    } else {
+    try {
+      const response = await EditarFornecedor(form);
+      if (response.status) {
+        setAlert({
+          ...alert,
+          type: "Success",
+          message: response.message,
+        });
+      } else {
+        setAlert({
+          ...alert,
+          type: "Danger",
+          message: response.message,
+        });
+      }
+    } catch (e) {
+      setFornecedores([]);
       setAlert({
         ...alert,
         type: "Danger",
-        message: response.message,
+        message: e.message,
       });
     }
     setIsLoading(false);
