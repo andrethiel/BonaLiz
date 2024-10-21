@@ -11,23 +11,14 @@ import { FaShoppingBasket } from "react-icons/fa";
 // import { Container } from './styles';
 
 const Cadastrar = () => {
-  setIsLoading(true);
   async function Inserir() {
-    try {
-      const response = await InserirTipoProduto(form);
-      if (!response.status) {
-        setAlert({ ...alert, message: response.message, type: "Danger" });
-      } else {
-        router.back();
-      }
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
+    setIsLoading(true);
+    const response = await InserirTipoProduto(form);
+    if (!response.status) {
+      setAlert({ ...alert, message: response.message, type: "Danger" });
+    } else {
+      router.back();
     }
-
     setIsLoading(false);
   }
 
