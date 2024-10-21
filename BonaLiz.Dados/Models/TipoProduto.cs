@@ -9,5 +9,6 @@ namespace BonaLiz.Dados.Models
     public class TipoProduto : Base
     { 
         public string Nome { get; set; }
+		public bool Inativo { get; set; }
     }
 }

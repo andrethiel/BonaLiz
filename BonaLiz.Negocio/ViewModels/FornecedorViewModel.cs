@@ -14,5 +14,6 @@ namespace BonaLiz.Negocio.ViewModels
         public string CNPJ { get; set; }
         public string Estado { get; set; }
         public string Iniciais { get; set; }
-    }
+		public string Inativo { get; set; }
+	}
 }

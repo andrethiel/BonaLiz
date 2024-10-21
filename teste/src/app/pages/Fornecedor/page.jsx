@@ -99,6 +99,11 @@ function Fornecedor() {
       field: "iniciais",
     },
     {
+      field: "inativo",
+      valueFormatter: (p) =>
+        p.value.toString() == "True" ? "Inativo" : "Ativo",
+    },
+    {
       field: "",
       cellRenderer: CustomButtonComponent,
     },

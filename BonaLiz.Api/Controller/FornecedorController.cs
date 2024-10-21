@@ -60,7 +60,7 @@ namespace BonaLiz.Api.Controllers
                 return Ok(new
                 {
                     status = true,
-                    message = "Cadastrado com sucesso"
+                    message = "Editado com sucesso"
                 });
             }
             catch (Exception ex)

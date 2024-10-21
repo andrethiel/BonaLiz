@@ -5,6 +5,7 @@ import {
 } from "@/Api/Controllers/Forncedor";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
+import Check from "@/Components/Check";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import Input from "@/Components/Input";
 import MaskInput from "@/Components/InputMask";
@@ -23,23 +24,35 @@ const Editar = () => {
 
   async function Buscar() {
     setIsLoading(true);
-    const response = await ObterFornecedorGuid(guid);
-    if (response.id != 0) {
-      setForm({
-        ...form,
-        CNPJ: response.cnpj,
-        Nome: response.nome,
-        Estado: response.estado,
-        Guid: response.guid,
-        Id: response.id,
-      });
-    } else {
+    try {
+      const response = await ObterFornecedorGuid(guid);
+      if (response.id != 0) {
+        setForm({
+          ...form,
+          CNPJ: response.cnpj,
+          Nome: response.nome,
+          Estado: response.estado,
+          Guid: response.guid,
+          Id: response.id,
+          Inativo:
+            response.inativo == "True" ? setChecked(true) : setChecked(false),
+        });
+      } else {
+        setAlert({
+          ...alert,
+          type: "Danger",
+          message: "Fornecedor não encontrado",
+        });
+      }
+    } catch (e) {
+      setFornecedores([]);
       setAlert({
         ...alert,
         type: "Danger",
-        message: "Fornecedor não encontrado",
+        message: e.message,
       });
     }
+
     setIsLoading(false);
   }
   useEffect(() => {
@@ -53,17 +66,21 @@ const Editar = () => {
     CNPJ: "",
     Estado: "",
     Iniciais: "",
+    Inativo: "",
   });
   const [alert, setAlert] = useState({
     message: "",
     type: "",
   });
 
+  const [checked, setChecked] = useState(false);
+
   const router = useRouter();
 
   async function Editar() {
     setIsLoading(true);
     form.Iniciais = Iniciais(form.Nome);
+    form.Inativo = checked.toString();
     try {
       const response = await EditarFornecedor(form);
       if (response.status) {
@@ -72,6 +89,7 @@ const Editar = () => {
           type: "Success",
           message: response.message,
         });
+        router.back();
       } else {
         setAlert({
           ...alert,
@@ -127,7 +145,9 @@ const Editar = () => {
           id={"Estado"}
           value={form.Estado}
         />
-
+        <Check onChange={(e) => setChecked(e.target.checked)} value={checked}>
+          Inativo
+        </Check>
         <Button color={"primary"} onClick={Editar}>
           Editar
         </Button>

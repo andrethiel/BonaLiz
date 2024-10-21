@@ -11,5 +11,6 @@ namespace BonaLiz.Negocio.ViewModels
         public int Id { get; set; }
         public Guid Guid { get; set; } = Guid.NewGuid();
         public string Nome { get; set; }
-    }
+		public string Inativo { get; set; }
+	}
 }

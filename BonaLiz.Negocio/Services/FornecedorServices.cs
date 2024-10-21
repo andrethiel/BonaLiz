@@ -29,6 +29,7 @@ namespace BonaLiz.Negocio.Services
 				fornecedor.CNPJ = model.CNPJ;
 				fornecedor.Estado = model.Estado;
 				fornecedor.Iniciais = model.Iniciais;
+                fornecedor.Inativo = Convert.ToBoolean(model.Inativo);
 				_fornecedorRepository.Editar(fornecedor);
 			}
             
@@ -53,7 +54,8 @@ namespace BonaLiz.Negocio.Services
             Nome = fornecedor.Nome,
             CNPJ = fornecedor.CNPJ,
             Estado = fornecedor.Estado,
-            Iniciais = fornecedor.Iniciais
+            Iniciais = fornecedor.Iniciais,
+            Inativo = fornecedor.Inativo.ToString()
 
         }).ToList();
 
@@ -68,8 +70,9 @@ namespace BonaLiz.Negocio.Services
                 Nome = fornecedor.Nome,
                 CNPJ = fornecedor.CNPJ,
                 Estado = fornecedor.Estado,
-                Iniciais = fornecedor.Iniciais
-            };
+                Iniciais = fornecedor.Iniciais,
+				Inativo = fornecedor.Inativo.ToString()
+			};
         }
 
         FornecedorViewModel IFornecedorServices.ObterPorGuid(Guid guid)
@@ -85,8 +88,9 @@ namespace BonaLiz.Negocio.Services
                     Nome = fornecedor.Nome,
                     CNPJ = fornecedor.CNPJ,
                     Estado = fornecedor.Estado,
-                    Iniciais = fornecedor.Iniciais
-                };
+                    Iniciais = fornecedor.Iniciais,
+					Inativo = fornecedor.Inativo.ToString()
+				};
             }
             else
             {
@@ -106,9 +110,10 @@ namespace BonaLiz.Negocio.Services
                     Nome = x.Nome,
                     CNPJ = x.CNPJ,
                     Estado = x.Estado,
-                    Iniciais = x.Iniciais
+                    Iniciais = x.Iniciais,
+					Inativo = x.Inativo.ToString()
 
-                }).ToList();
+				}).ToList();
             }
             else
             {

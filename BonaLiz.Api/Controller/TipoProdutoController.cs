@@ -37,7 +37,7 @@ namespace BonaLiz.Api.Controller
                     return Ok(new
                     {
                         status = false,
-                        message = "Fornecedor já cadastrado"
+                        message = "Tipo de produto já cadastrado"
                     });
                 }
             }
