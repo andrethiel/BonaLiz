@@ -23,11 +23,15 @@ namespace BonaLiz.Negocio.Services
         void IFornecedorServices.Editar(FornecedorViewModel model)
         {
             var fornecedor = _fornecedorRepository.ObterPorId(model.Id);
-            fornecedor.Nome = model.Nome;
-            fornecedor.CNPJ = model.CNPJ;
-            fornecedor.Estado = model.Estado;
-            fornecedor.Iniciais = model.Iniciais;
-            _fornecedorRepository.Editar(fornecedor);
+            if(fornecedor != null)
+            {
+				fornecedor.Nome = model.Nome;
+				fornecedor.CNPJ = model.CNPJ;
+				fornecedor.Estado = model.Estado;
+				fornecedor.Iniciais = model.Iniciais;
+				_fornecedorRepository.Editar(fornecedor);
+			}
+            
         }
 
         void IFornecedorServices.Inserir(FornecedorViewModel model)

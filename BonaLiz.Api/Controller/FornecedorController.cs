@@ -54,7 +54,9 @@ namespace BonaLiz.Api.Controllers
         {
             try
             {
-                _fornecedorServices.Editar(model);
+				var cnpj = model.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "");
+				model.CNPJ = cnpj;
+				_fornecedorServices.Editar(model);
                 return Ok(new
                 {
                     status = true,

@@ -3,9 +3,9 @@ using BonaLiz.Api.Dependencias;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-builder.Services.AddControllers();
 builder.Services.AddCors();
+builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.RegisterServices(builder.Configuration);
