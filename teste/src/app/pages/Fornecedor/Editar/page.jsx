@@ -5,6 +5,7 @@ import {
 } from "@/Api/Controllers/Forncedor";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
+import CustomLoading from "@/Components/CustomLoadingGrid";
 import Input from "@/Components/Input";
 import MaskInput from "@/Components/InputMask";
 import Select from "@/Components/Select";
@@ -15,15 +16,13 @@ import React, { Suspense, useEffect, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { FaGlobeAmericas, FaShoppingBasket } from "react-icons/fa";
 
-function SearchBarFallback() {
-  return <>placeholder</>;
-}
-
 const Editar = () => {
   const param = useSearchParams();
   const guid = param.get("Guid");
+  const [isLoading, setIsLoading] = useState(false);
 
   async function Buscar() {
+    setIsLoading(true);
     const response = await ObterFornecedorGuid(guid);
     if (response.id != 0) {
       setForm({
@@ -41,6 +40,7 @@ const Editar = () => {
         message: "Fornecedor não encontrado",
       });
     }
+    setIsLoading(false);
   }
   useEffect(() => {
     Buscar();
@@ -62,17 +62,33 @@ const Editar = () => {
   const router = useRouter();
 
   async function Editar() {
+    setIsLoading(true);
     form.Iniciais = Iniciais(form.Nome);
     const response = await EditarFornecedor(form);
-    console.log(response);
+    if (response.status) {
+      setAlert({
+        ...alert,
+        type: "Success",
+        message: response.message,
+      });
+    } else {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: response.message,
+      });
+    }
+    setIsLoading(false);
   }
 
+  if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
+
   return (
-    <Suspense fallback={<SearchBarFallback />}>
+    <Suspense fallback={<CustomLoading loadingMessage="Aguarde" />}>
       <div className="p-3 m-3">
         <h3 className="text-2xl font-semibold">Cadastro de Fornecedores</h3>
       </div>
-      {alert && <Alert children={alert.message} type={alert.type} />}
+      {alert && <Alert type={alert.type}>{alert.message}</Alert>}
       <div className="w-full gap-2">
         <input name={"Id"} id={"Id"} type="hidden" value={form.Id} />
         <input name={"guid"} id={"guid"} type="hidden" value={form.Guid} />
@@ -103,12 +119,12 @@ const Editar = () => {
           value={form.Estado}
         />
 
-        <Button children={"Criar"} color={"primary"} onClick={Editar} />
-        <Button
-          children={"Voltar"}
-          color={"secondary"}
-          onClick={() => router.back()}
-        />
+        <Button color={"primary"} onClick={Editar}>
+          Editar
+        </Button>
+        <Button color={"secondary"} onClick={() => router.back()}>
+          Voltar
+        </Button>
       </div>
     </Suspense>
   );

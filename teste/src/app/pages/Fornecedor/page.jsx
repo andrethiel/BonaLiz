@@ -107,7 +107,7 @@ function Fornecedor() {
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 
   return (
-    <Suspense fallback={<div>Aguarde</div>}>
+    <Suspense fallback={<CustomLoading loadingMessage="Aguarde" />}>
       <div className="p-3 m-3">
         <h3 className="text-2xl font-semibold">Lista de Fornecedores</h3>
       </div>

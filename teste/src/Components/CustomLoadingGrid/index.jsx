@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CustomLoading(props) {
+export default function CustomLoading({ loadingMessage }) {
   return (
     <div className="flex flex-col justify-center items-center h-full w-full">
       <div
@@ -14,7 +14,7 @@ export default function CustomLoading(props) {
         }}
       ></div>
       <div aria-live="polite" aria-atomic="true">
-        {props.loadingMessage}
+        {loadingMessage}
       </div>
     </div>
   );
