@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://bonaliz.runasp.net/";
+axios.defaults.baseURL = "https://bonaliz.runasp.net/";
 
 const responseBody = (response) => response.data;
 
