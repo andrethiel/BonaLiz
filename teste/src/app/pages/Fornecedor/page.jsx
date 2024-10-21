@@ -1,7 +1,7 @@
 "use client";
 import Input from "@/Components/Input";
 import MaskInput from "@/Components/InputMask";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import Button from "@/Components/Button";
@@ -107,7 +107,7 @@ function Fornecedor() {
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 
   return (
-    <>
+    <Suspense fallback={<div>Aguarde</div>}>
       <div className="p-3 m-3">
         <h3 className="text-2xl font-semibold">Lista de Fornecedores</h3>
       </div>
@@ -146,7 +146,7 @@ function Fornecedor() {
       <div>
         <AgGrid Data={Fornecedores} Columns={columnsDef} />
       </div>
-    </>
+    </Suspense>
   );
 }
 
