@@ -1,12 +1,18 @@
 "use client";
 import Input from "@/Components/Input";
 import MaskInput from "@/Components/InputMask";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import Button from "@/Components/Button";
 import AgGrid from "@/Components/Grid";
 import Linked from "@/Components/Link";
+import {
+  ListarFornecedor,
+  PesquisarFornecedor,
+} from "@/Api/Controllers/Forncedor";
+import { useRouter } from "next/navigation";
+import CustomLoading from "@/Components/CustomLoadingGrid";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -21,6 +27,62 @@ const CustomButtonComponent = (props) => {
 };
 
 function Fornecedor() {
+  useEffect(() => {
+    Lista();
+  }, []);
+
+  async function Lista() {
+    setIsLoading(true);
+    try {
+      const response = await ListarFornecedor();
+      if (response.length > 0) {
+        setFornecedores(response);
+      }
+    } catch (e) {
+      setFornecedores([]);
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: e.message,
+      });
+    }
+    setIsLoading(false);
+  }
+
+  async function Pesquisar() {
+    setIsLoading(true);
+    try {
+      const response = await PesquisarFornecedor(form);
+      if (response.length > 0) {
+        setFornecedores(response);
+      } else {
+        setFornecedores([]);
+        setAlert({
+          ...alert,
+          type: "Danger",
+          message: "Nenhum fornecedor encontrado",
+        });
+      }
+    } catch (e) {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: e.message,
+      });
+    }
+
+    setIsLoading(false);
+  }
+
+  const [form, setForm] = useState({
+    Nome: "",
+    CNPJ: "",
+    Iniciais: "",
+  });
+  const [alert, setAlert] = useState({
+    message: "",
+    type: "",
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [Fornecedores, setFornecedores] = useState();
   const [columnsDef, setColumnsDef] = useState([
@@ -41,6 +103,8 @@ function Fornecedor() {
       cellRenderer: CustomButtonComponent,
     },
   ]);
+
+  if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 
   return (
     <>
@@ -71,7 +135,9 @@ function Fornecedor() {
           />
         </div>
         <div>
-          <Button color={"primary"}>Pesquisar</Button>
+          <Button color={"primary"} onClick={Pesquisar}>
+            Pesquisar
+          </Button>
         </div>
       </div>
       <div className="mb-5 flex justify-end">

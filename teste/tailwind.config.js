@@ -9,11 +9,10 @@ module.exports = {
   theme: {
     container: {
       center: true,
+      padding: "2rem",
     },
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
         primery: "#93D694",
         secondary: "#F0F8EE",
       },
