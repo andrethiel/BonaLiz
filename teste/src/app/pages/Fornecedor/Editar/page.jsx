@@ -3,11 +3,11 @@ import {
   EditarFornecedor,
   ObterFornecedorGuid,
 } from "@/Api/Controllers/Forncedor";
-import Alert from "@/Components/Alert";
-import Button from "@/Components/Button";
-import Input from "@/Components/Input";
-import MaskInput from "@/Components/InputMask";
-import Select from "@/Components/Select";
+import Alert from "@/components/Alert";
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import MaskInput from "@/components/InputMask";
+import Select from "@/components/Select";
 import { Estados } from "@/constants/estados";
 import { Iniciais } from "@/Utils/Iniciais";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -15,13 +15,16 @@ import React, { Suspense, useEffect, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { FaGlobeAmericas, FaShoppingBasket } from "react-icons/fa";
 
-// import { Container } from './styles';
+function SearchBarFallback() {
+  return <>placeholder</>;
+}
 
 const Editar = () => {
   const param = useSearchParams();
+  const guid = param.get("Guid");
 
   async function Buscar() {
-    const response = await ObterFornecedorGuid(param.get("Guid"));
+    const response = await ObterFornecedorGuid(guid);
     if (response.id != 0) {
       setForm({
         ...form,
@@ -65,7 +68,7 @@ const Editar = () => {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<SearchBarFallback />}>
       <div className="p-3 m-3">
         <h3 className="text-2xl font-semibold">Cadastro de Fornecedores</h3>
       </div>

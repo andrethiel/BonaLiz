@@ -1,18 +1,18 @@
 "use client";
-import Input from "@/Components/Input";
-import MaskInput from "@/Components/InputMask";
+import Input from "@/components/Input";
+import MaskInput from "@/components/InputMask";
 import React, { Suspense, useEffect, useState } from "react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import Button from "@/Components/Button";
-import AgGrid from "@/Components/Grid";
-import Linked from "@/Components/Link";
+import Button from "@/components/Button";
+import AgGrid from "@/components/Grid";
+import Linked from "@/components/Link";
 import {
   ListarFornecedor,
   PesquisarFornecedor,
 } from "@/Api/Controllers/Forncedor";
 import { useRouter } from "next/navigation";
-import CustomLoading from "@/Components/CustomLoadingGrid";
+import CustomLoading from "@/components/CustomLoadingGrid";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
