@@ -1,8 +1,9 @@
 import axios from "axios";
 
+const URLBASE = process.env.API_URL;
 // axios.defaults.baseURL = "https://bonaliz.runasp.net/";
 
-axios.defaults.baseURL = "https://localhost:7166";
+axios.defaults.baseURL = URLBASE;
 
 const responseBody = (response) => response.data;
 
