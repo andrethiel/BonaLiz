@@ -76,26 +76,32 @@ const Editar = () => {
         <h3 className="text-2xl font-semibold">Editar tipo de produto</h3>
       </div>
       {alert && <Alert type={alert.type}>{alert.message}</Alert>}
-      <div className="w-full gap-2">
+      <div className="grid gap-4">
         <input name={"Id"} id={"Id"} value={form.Id} type="hidden" />
         <input name={"guid"} id={"guid"} value={form.Guid} type="hidden" />
-        <Input
-          placeholder={"Tipo de Produto"}
-          icon={<FaShoppingBasket />}
-          name={"Nome"}
-          id={"Nome"}
-          onChange={(e) => setForm({ ...form, Nome: e.target.value })}
-          value={form.Nome}
-        />
-        <Check onChange={(e) => setChecked(e.target.checked)} value={checked}>
-          Inativo
-        </Check>
-        <Button color={"primary"} onClick={Editar}>
-          Editar
-        </Button>
-        <Button color={"secondary"} onClick={() => router.back()}>
-          Voltar
-        </Button>
+        <div>
+          <Input
+            placeholder={"Tipo de Produto"}
+            icon={<FaShoppingBasket />}
+            name={"Nome"}
+            id={"Nome"}
+            onChange={(e) => setForm({ ...form, Nome: e.target.value })}
+            value={form.Nome}
+          />
+        </div>
+        <div>
+          <Check onChange={(e) => setChecked(e.target.checked)} value={checked}>
+            Inativo
+          </Check>
+        </div>
+        <div>
+          <Button color={"primary"} onClick={Editar}>
+            Editar
+          </Button>
+          <Button color={"secondary"} onClick={() => router.back()}>
+            Voltar
+          </Button>
+        </div>
       </div>
     </Suspense>
   );

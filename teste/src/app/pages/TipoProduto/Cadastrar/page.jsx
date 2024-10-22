@@ -40,21 +40,24 @@ const Cadastrar = () => {
         <h3 className="text-2xl font-semibold">Cadastro de Fornecedores</h3>
       </div>
       {alert && <Alert type={alert.type}>{alert.message}</Alert>}
-      <div className="w-full gap-2">
-        <Input
-          placeholder={"Tipo de Produto"}
-          icon={<FaShoppingBasket />}
-          name={"Nome"}
-          id={"Nome"}
-          onChange={(e) => setForm({ ...form, Nome: e.target.value })}
-        />
-
-        <Button color={"primary"} onClick={Inserir}>
-          Criar
-        </Button>
-        <Button color={"secondary"} onClick={() => router.back()}>
-          Voltar
-        </Button>
+      <div className="grid gap-4">
+        <div>
+          <Input
+            placeholder={"Tipo de Produto"}
+            icon={<FaShoppingBasket />}
+            name={"Nome"}
+            id={"Nome"}
+            onChange={(e) => setForm({ ...form, Nome: e.target.value })}
+          />
+        </div>
+        <div>
+          <Button color={"primary"} onClick={Inserir}>
+            Criar
+          </Button>
+          <Button color={"secondary"} onClick={() => router.back()}>
+            Voltar
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -58,30 +58,36 @@ const Criar = () => {
         <h3 className="text-2xl font-semibold">Cadastro de Fornecedores</h3>
       </div>
       {alert && <Alert type={alert.type}>{alert.message}</Alert>}
-      <div className="w-full gap-2">
-        <Input
-          placeholder={"Nome do fornecedor"}
-          icon={<FaShoppingBasket />}
-          onChange={handleChange}
-          name={"Nome"}
-          id={"Nome"}
-        />
-        <MaskInput
-          placeholder={"CNPJ"}
-          icon={<AiOutlineExclamationCircle />}
-          mask={"00.000.000/0000-00"}
-          onChange={handleChange}
-          name={"CNPJ"}
-          id={"CNPJ"}
-        />
-        <Select
-          data={Estados}
-          placeholder={"Selecione um estado"}
-          icon={<FaGlobeAmericas />}
-          onChange={handleChange}
-          name={"Estado"}
-          id={"Estado"}
-        />
+      <div className="grid gap-4">
+        <div>
+          <Input
+            placeholder={"Nome do fornecedor"}
+            icon={<FaShoppingBasket />}
+            onChange={handleChange}
+            name={"Nome"}
+            id={"Nome"}
+          />
+        </div>
+        <div>
+          <MaskInput
+            placeholder={"CNPJ"}
+            icon={<AiOutlineExclamationCircle />}
+            mask={"00.000.000/0000-00"}
+            onChange={handleChange}
+            name={"CNPJ"}
+            id={"CNPJ"}
+          />
+        </div>
+        <div>
+          <Select
+            data={Estados}
+            placeholder={"Selecione um estado"}
+            icon={<FaGlobeAmericas />}
+            onChange={handleChange}
+            name={"Estado"}
+            id={"Estado"}
+          />
+        </div>
 
         <Button color={"primary"} onClick={Inserir}>
           Criar

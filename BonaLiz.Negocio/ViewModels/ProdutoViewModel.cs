@@ -20,6 +20,8 @@ namespace BonaLiz.Negocio.ViewModels
         public string Codigo { get; set; }
         public string NomeFornecedor { get; set; }
         public string TipoProduto { get; set; }
+        public string Quantidade { get; set; }
+        public string Inativo { get; set; }
 
     }
 }

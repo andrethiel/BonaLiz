@@ -41,6 +41,8 @@ namespace BonaLiz.Negocio.Services
             produto.PrecoVenda = Convert.ToDecimal(model.PrecoVenda);
             produto.Lucro = Convert.ToDecimal(model.Lucro);
             produto.DataCompra = Convert.ToDateTime(model.DataCompra);
+            produto.Quantidade = Convert.ToInt32(model.Quantidade);
+            produto.Inativo = Convert.ToBoolean(model.Inativo);
 
             _produtoRepository.Editar(produto);
         }
@@ -58,7 +60,9 @@ namespace BonaLiz.Negocio.Services
             DataCompra = x.DataCompra.Value.ToString("dd/MM/yyyy"),
             NomeFornecedor = _fornecedorRepository.ObterPorId(x.FornecedorId).Nome,
             TipoProduto = _tipoProdutoRepository.ObterPorId(x.TipoProdutoId).Nome,
-            Codigo = x.Codigo
+            Codigo = x.Codigo,
+            Quantidade = x.Quantidade.ToString(),
+            Inativo = x.Inativo.ToString()
             
         }).ToList();
 
@@ -75,8 +79,10 @@ namespace BonaLiz.Negocio.Services
             DataCompra = x.DataCompra.Value.ToString("dd/MM/yyyy"),
             NomeFornecedor = _fornecedorRepository.ObterPorId(x.FornecedorId).Nome,
             TipoProduto = _tipoProdutoRepository.ObterPorId(x.TipoProdutoId).Nome,
-            Codigo = x.Codigo
-        }).ToList();
+            Codigo = x.Codigo,
+			Quantidade = x.Quantidade.ToString(),
+			Inativo = x.Inativo.ToString()
+		}).ToList();
 
         public ProdutoViewModel ObterPorGuid(Guid guid)
         {
@@ -92,8 +98,10 @@ namespace BonaLiz.Negocio.Services
                 PrecoVenda = produto.PrecoVenda.ToString("C"),
                 Lucro = produto.Lucro.ToString("C"),
                 DataCompra = produto.DataCompra.Value.ToString("dd/MM/yyyy"),
-                Codigo = produto.Codigo
-            };
+                Codigo = produto.Codigo,
+				Quantidade = produto.Quantidade.ToString(),
+				Inativo = produto.Inativo.ToString()
+			};
         }
 
         public ProdutoViewModel ObterPorId(int id)
@@ -109,8 +117,11 @@ namespace BonaLiz.Negocio.Services
                 PrecoCusto = produto.PrecoCusto.ToString("C"),
                 PrecoVenda = produto.PrecoVenda.ToString("C"),
                 Lucro = produto.Lucro.ToString("C"),
-                DataCompra = produto.DataCompra.Value.ToString("dd/MM/yyyy")
-            };
+                DataCompra = produto.DataCompra.Value.ToString("dd/MM/yyyy"),
+				Codigo = produto.Codigo,
+				Quantidade = produto.Quantidade.ToString(),
+				Inativo = produto.Inativo.ToString()
+			};
         }
     }
 }

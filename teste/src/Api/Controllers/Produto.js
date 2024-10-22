@@ -11,3 +11,9 @@ export async function FiltrarProdutos(props) {
 
   return response;
 }
+
+export async function CadastrarProduto(props) {
+  const response = await Api.request.post("/CadastrarProduto", props);
+
+  return response;
+}

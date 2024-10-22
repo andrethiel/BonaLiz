@@ -116,7 +116,7 @@ const Editar = () => {
         <h3 className="text-2xl font-semibold">Cadastro de Fornecedores</h3>
       </div>
       {alert && <Alert type={alert.type}>{alert.message}</Alert>}
-      <div className="w-full gap-2">
+      <div className="grid gap-4">
         <input name={"Id"} id={"Id"} type="hidden" value={form.Id} />
         <input name={"guid"} id={"guid"} type="hidden" value={form.Guid} />
         <Input
