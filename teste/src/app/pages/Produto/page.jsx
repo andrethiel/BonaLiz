@@ -1,7 +1,9 @@
 "use client";
+
 import { SelectListForncedor } from "@/Api/Controllers/Forncedor";
 import { FiltrarProdutos, ListarProdutos } from "@/Api/Controllers/Produto";
 import { SelectListTipoProduto } from "@/Api/Controllers/TipoProduto";
+
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import CustomLoading from "@/Components/CustomLoadingGrid";
@@ -12,9 +14,8 @@ import Linked from "@/Components/Link";
 import Select from "@/Components/Select";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsTag } from "react-icons/bs";
-import { FaShoppingBasket } from "react-icons/fa";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -71,12 +72,7 @@ const Produto = () => {
   }
 
   async function Filtrar() {
-    if (data.startDate != null) {
-      setForm({
-        ...form,
-        DataCompra: dayjs(data.startDate).format("DD/MM/YYYY"),
-      });
-    }
+    form.DataCompra = dayjs(data.startDate).format("DD/MM/YYYY");
     setIsLoading(true);
     try {
       const response = await FiltrarProdutos(form);

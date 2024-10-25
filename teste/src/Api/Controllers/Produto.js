@@ -17,3 +17,21 @@ export async function CadastrarProduto(props) {
 
   return response;
 }
+
+export async function ProdutoPorGuid(props) {
+  const response = await Api.request.get(`/ProdutoPorGuid?guid=${props}`);
+
+  return response;
+}
+
+export async function LucroProduto(props) {
+  const response = await Api.request.post("/ProdutoLucro", props);
+
+  return response;
+}
+
+export async function EditarProduto(props) {
+  const response = await Api.request.put("/EditarProduto", props);
+
+  return response;
+}

@@ -26,7 +26,13 @@ namespace BonaLiz.Negocio.Services
         }
         public void Cadastrar(ProdutoViewModel model)
         {
-            _produtoRepository.Inserir(_mapper.Map<Produto>(model));
+            var custo = model.PrecoCusto.Replace("R$", "").Trim();
+            var venda = model.PrecoVenda.Replace("R$", "").Trim();
+            var lucro = model.Lucro.Replace("R$", "").Trim();
+			model.PrecoCusto = custo;
+			model.PrecoVenda = venda;
+            model.Lucro = lucro;
+			_produtoRepository.Inserir(_mapper.Map<Produto>(model));
         }
 
         public void Editar(ProdutoViewModel model)
@@ -37,9 +43,9 @@ namespace BonaLiz.Negocio.Services
             produto.Nome = model.Nome;
             produto.TipoProdutoId = Convert.ToInt32(model.TipoProdutoId);
             produto.FornecedorId = Convert.ToInt32(model.FornecedorId);
-            produto.PrecoCusto = Convert.ToDecimal(model.PrecoCusto);
-            produto.PrecoVenda = Convert.ToDecimal(model.PrecoVenda);
-            produto.Lucro = Convert.ToDecimal(model.Lucro);
+            produto.PrecoCusto = Convert.ToDecimal(model.PrecoCusto.Replace("R$", "").Trim());
+            produto.PrecoVenda = Convert.ToDecimal(model.PrecoVenda.Replace("R$", "").Trim());
+            produto.Lucro = Convert.ToDecimal(model.Lucro.Replace("R$", "").Trim());
             produto.DataCompra = Convert.ToDateTime(model.DataCompra);
             produto.Quantidade = Convert.ToInt32(model.Quantidade);
             produto.Inativo = Convert.ToBoolean(model.Inativo);

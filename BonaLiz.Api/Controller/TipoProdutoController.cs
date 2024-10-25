@@ -111,7 +111,7 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				return Ok(SelectListHelper.AddSelectList(new SelectList(_tipoProdutoServices.Listar(), "Id", "Nome")));
+				return Ok(SelectListHelper.AddSelectList(new SelectList(_tipoProdutoServices.Listar().Where(x => x.Inativo == "False").ToList(), "Id", "Nome")));
 			}
 			catch (Exception ex)
 			{

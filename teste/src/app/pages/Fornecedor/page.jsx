@@ -7,12 +7,9 @@ import { AiOutlineExclamationCircle } from "react-icons/ai";
 import Button from "@/Components/Button";
 import AgGrid from "@/Components/Grid";
 import Linked from "@/Components/Link";
-import {
-  ListarFornecedor,
-  PesquisarFornecedor,
-} from "@/Api/Controllers/Forncedor";
 import { useRouter } from "next/navigation";
 import CustomLoading from "@/Components/CustomLoadingGrid";
+import { ListarFornecedor } from "@/Api/Controllers/Forncedor";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -27,9 +24,54 @@ const CustomButtonComponent = (props) => {
 };
 
 function Fornecedor() {
+  const [form, setForm] = useState({
+    Nome: "",
+    CNPJ: "",
+    Iniciais: "",
+  });
+  const [alert, setAlert] = useState({
+    message: "",
+    type: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [Fornecedores, setFornecedores] = useState();
+  const [columnsDef, setColumnsDef] = useState([
+    {
+      field: "nome",
+    },
+    {
+      field: "cnpj",
+    },
+    {
+      field: "estado",
+    },
+    {
+      field: "iniciais",
+    },
+    {
+      field: "inativo",
+      valueFormatter: (p) =>
+        p.value.toString() == "True" ? "Inativo" : "Ativo",
+    },
+    {
+      field: "",
+      cellRenderer: CustomButtonComponent,
+    },
+  ]);
+
   useEffect(() => {
     Lista();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAlert({
+        ...alert,
+        message: "",
+        type: "",
+      });
+    }, [1500]);
+  }, [alert]);
 
   async function Lista() {
     setIsLoading(true);
@@ -73,41 +115,6 @@ function Fornecedor() {
 
     setIsLoading(false);
   }
-
-  const [form, setForm] = useState({
-    Nome: "",
-    CNPJ: "",
-    Iniciais: "",
-  });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [Fornecedores, setFornecedores] = useState();
-  const [columnsDef, setColumnsDef] = useState([
-    {
-      field: "nome",
-    },
-    {
-      field: "cnpj",
-    },
-    {
-      field: "estado",
-    },
-    {
-      field: "iniciais",
-    },
-    {
-      field: "inativo",
-      valueFormatter: (p) =>
-        p.value.toString() == "True" ? "Inativo" : "Ativo",
-    },
-    {
-      field: "",
-      cellRenderer: CustomButtonComponent,
-    },
-  ]);
 
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 

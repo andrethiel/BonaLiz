@@ -106,5 +106,24 @@ namespace BonaLiz.Api.Controller
                 return BadRequest(ex);
             }
         }
-    }
+
+
+		[HttpPost]
+		[Route("/ProdutoLucro")]
+		public async Task<IActionResult> LucroProduto(ProdutoViewModel model)
+		{
+			try
+			{
+                var venda = Convert.ToDecimal(model.PrecoVenda.Replace("R$", "").Trim());
+                var custo = Convert.ToDecimal(model.PrecoCusto.Replace("R$", "").Trim());
+				var lucro = venda - custo;
+
+				return Ok(lucro.ToString("C"));
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex);
+			}
+		}
+	}
 }

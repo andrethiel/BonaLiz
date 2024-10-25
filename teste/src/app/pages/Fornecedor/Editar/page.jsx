@@ -1,4 +1,5 @@
 "use client";
+
 import {
   EditarFornecedor,
   ObterFornecedorGuid,
@@ -20,9 +21,26 @@ import { FaGlobeAmericas, FaShoppingBasket } from "react-icons/fa";
 const Editar = () => {
   const param = useSearchParams();
   const guid = param.get("Guid");
-  const [isLoading, setIsLoading] = useState(false);
 
-  async function Buscar() {
+  const [form, setForm] = useState({
+    Id: 0,
+    Guid: "",
+    Nome: "",
+    CNPJ: "",
+    Estado: "",
+    Iniciais: "",
+    Inativo: "",
+  });
+  const [alert, setAlert] = useState({
+    message: "",
+    type: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
+
+  const router = useRouter();
+
+  async function BuscarFornecedor() {
     setIsLoading(true);
     try {
       const response = await ObterFornecedorGuid(guid);
@@ -45,7 +63,6 @@ const Editar = () => {
         });
       }
     } catch (e) {
-      setFornecedores([]);
       setAlert({
         ...alert,
         type: "Danger",
@@ -56,56 +73,78 @@ const Editar = () => {
     setIsLoading(false);
   }
   useEffect(() => {
-    Buscar();
+    BuscarFornecedor();
   }, []);
 
-  const [form, setForm] = useState({
-    Id: 0,
-    Guid: "",
-    Nome: "",
-    CNPJ: "",
-    Estado: "",
-    Iniciais: "",
-    Inativo: "",
-  });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
+  useEffect(() => {
+    setTimeout(() => {
+      setAlert({
+        ...alert,
+        message: "",
+        type: "",
+      });
+    }, [1500]);
+  }, [alert]);
 
-  const [checked, setChecked] = useState(false);
+  function Valida() {
+    if (form.Nome == "") {
+      setAlert({
+        ...alert,
+        message: "Digite o nome do fornecedor",
+        type: "Danger",
+      });
+      return false;
+    }
+    if (form.CNPJ == "") {
+      setAlert({
+        ...alert,
+        message: "Digite o CNPJ do fornecedor",
+        type: "Danger",
+      });
+      return false;
+    }
+    if (form.Estado == "") {
+      setAlert({
+        ...alert,
+        message: "Selecione o estado do fornecedor",
+        type: "Danger",
+      });
+      return false;
+    }
 
-  const router = useRouter();
+    return true;
+  }
 
   async function Editar() {
-    setIsLoading(true);
-    form.Iniciais = Iniciais(form.Nome);
-    form.Inativo = checked.toString();
-    try {
-      const response = await EditarFornecedor(form);
-      if (response.status) {
-        setAlert({
-          ...alert,
-          type: "Success",
-          message: response.message,
-        });
-        router.back();
-      } else {
+    if (Valida()) {
+      setIsLoading(true);
+      form.Iniciais = Iniciais(form.Nome);
+      form.Inativo = checked.toString();
+      try {
+        const response = await EditarFornecedor(form);
+        if (response.status) {
+          setAlert({
+            ...alert,
+            type: "Success",
+            message: response.message,
+          });
+          router.back();
+        } else {
+          setAlert({
+            ...alert,
+            type: "Danger",
+            message: response.message,
+          });
+        }
+      } catch (e) {
         setAlert({
           ...alert,
           type: "Danger",
-          message: response.message,
+          message: e.message,
         });
       }
-    } catch (e) {
-      setFornecedores([]);
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }
 
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;

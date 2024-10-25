@@ -9,24 +9,11 @@ import Select from "@/Components/Select";
 import { Estados } from "@/constants/estados";
 import { Iniciais } from "@/Utils/Iniciais";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { FaGlobeAmericas, FaShoppingBasket } from "react-icons/fa";
 
 const Criar = () => {
-  async function Inserir() {
-    setIsLoading(true);
-    form.Iniciais = Iniciais(form.Nome);
-    const response = await InserirFornecedor(form);
-    if (!response.status) {
-      setAlert({ ...alert, message: response.message, type: "Danger" });
-    } else {
-      setAlert({ ...alert, message: response.message, type: "Success" });
-      router.back();
-    }
-    setIsLoading(false);
-  }
-
   const [form, setForm] = useState({
     Nome: "",
     CNPJ: "",
@@ -37,6 +24,61 @@ const Criar = () => {
     message: "",
     type: "",
   });
+
+  async function CriarFornecedor() {
+    if (Valida()) {
+      setIsLoading(true);
+      form.Iniciais = Iniciais(form.Nome);
+      const response = await InserirFornecedor(form);
+      console.log(response);
+      if (!response.status) {
+        setAlert({ ...alert, message: response.message, type: "Danger" });
+      } else {
+        setAlert({ ...alert, message: response.message, type: "Success" });
+        router.back();
+      }
+      setIsLoading(false);
+    }
+  }
+
+  function Valida() {
+    if (form.Nome == "") {
+      setAlert({
+        ...alert,
+        message: "Digite o nome do fornecedor",
+        type: "Danger",
+      });
+      return false;
+    }
+    if (form.CNPJ == "") {
+      setAlert({
+        ...alert,
+        message: "Digite o CNPJ do fornecedor",
+        type: "Danger",
+      });
+      return false;
+    }
+    if (form.Estado == "") {
+      setAlert({
+        ...alert,
+        message: "Selecione o estado do fornecedor",
+        type: "Danger",
+      });
+      return false;
+    }
+
+    return true;
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAlert({
+        ...alert,
+        message: "",
+        type: "",
+      });
+    }, [1500]);
+  }, [alert]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -89,7 +131,7 @@ const Criar = () => {
           />
         </div>
 
-        <Button color={"primary"} onClick={Inserir}>
+        <Button color={"primary"} onClick={CriarFornecedor}>
           Criar
         </Button>
         <Button color={"secondary"} onClick={() => router.back()}>

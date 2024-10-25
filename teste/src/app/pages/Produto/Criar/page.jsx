@@ -1,12 +1,14 @@
 "use client";
 import { SelectListForncedor } from "@/Api/Controllers/Forncedor";
-import { CadastrarProduto } from "@/Api/Controllers/Produto";
+import { CadastrarProduto, LucroProduto } from "@/Api/Controllers/Produto";
 import { SelectListTipoProduto } from "@/Api/Controllers/TipoProduto";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
+import InputMoney from "@/Components/Currency";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import DataPicker from "@/Components/DatePicker";
 import Input from "@/Components/Input";
+import MaskInput from "@/Components/InputMask";
 import Select from "@/Components/Select";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
@@ -16,7 +18,6 @@ import { FaGlobeAmericas, FaMoneyBill } from "react-icons/fa";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 const Criar = () => {
-  const router = useRouter();
   useEffect(() => {
     Fornecedores();
   }, []);
@@ -41,15 +42,34 @@ const Criar = () => {
       setTipoProduto(response);
     }
   }
-
   async function CriarProduto() {
-    if (data.startDate != null) {
-      setForm({
-        ...form,
-        DataCompra: dayjs(data.startDate).format("DD/MM/YYYY"),
+    setIsLoading(true);
+    form.dataCompra = dayjs(data.startDate).format("DD/MM/YYYY");
+    const response = await CadastrarProduto(form);
+
+    if (response.status) {
+      setAlert({
+        ...alert,
+        type: "Success",
+        message: response.message,
+      });
+
+      router.back();
+    } else {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: response.message,
       });
     }
-    const response = await CadastrarProduto(form);
+    setIsLoading(false);
+    setTimeout(() => {
+      setAlert({
+        ...alert,
+        type: "",
+        message: "",
+      });
+    }, 1500);
   }
 
   const [form, setForm] = useState({
@@ -61,7 +81,7 @@ const Criar = () => {
     precoVenda: "",
     Lucro: "",
     dataCompra: "",
-    Inativo: "False",
+    Inativo: "false",
   });
   const [alert, setAlert] = useState({
     message: "",
@@ -74,16 +94,26 @@ const Criar = () => {
     endDate: null,
   });
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
-    if (name == "precoVenda" && form.precoCusto != "") {
-      setForm({ ...form, Lucro: value - parseFloat(form.precoCusto) });
-    }
     setForm({
       ...form,
       [name]: value,
     });
+  };
+
+  const handleBlur = async () => {
+    if (form.precoCusto != "" && form.precoVenda != "") {
+      setIsLoading(true);
+      var response = await LucroProduto(form);
+      setForm({
+        ...form,
+        Lucro: response,
+      });
+      setIsLoading(false);
+    }
   };
 
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
@@ -137,7 +167,7 @@ const Criar = () => {
           />
         </div>
         <div className="">
-          <Input
+          <InputMoney
             placeholder={"Preço de custo"}
             icon={<FaMoneyBill />}
             name={"precoCusto"}
@@ -147,13 +177,14 @@ const Criar = () => {
           />
         </div>
         <div className="">
-          <Input
+          <InputMoney
             placeholder={"Preço de venda"}
             icon={<FaMoneyBill />}
             name={"precoVenda"}
             id={"precoVenda"}
             onChange={handleChange}
             value={form.precoVenda}
+            onBlur={handleBlur}
           />
         </div>
         <div className="">

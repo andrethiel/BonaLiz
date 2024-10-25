@@ -12,10 +12,35 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 import { FaShoppingBasket } from "react-icons/fa";
 
-// import { Container } from './styles';
-
 const Editar = () => {
   const param = useSearchParams();
+
+  const [form, setForm] = useState({
+    Id: 0,
+    Guid: "",
+    Nome: "",
+    Inativo: "",
+  });
+  const [alert, setAlert] = useState({
+    message: "",
+    type: "",
+  });
+  const [checked, setChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    Buscar();
+  }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setAlert({
+        ...alert,
+        message: "",
+        type: "",
+      });
+    }, [1500]);
+  }, [alert]);
 
   async function Buscar() {
     setIsLoading(true);
@@ -38,35 +63,35 @@ const Editar = () => {
     }
     setIsLoading(false);
   }
-  useEffect(() => {
-    Buscar();
-  }, []);
 
   async function Editar() {
-    setIsLoading(true);
-    form.Inativo = checked.toString();
-    const response = await EditarTipoProduto(form);
-    if (!response.status) {
-      setAlert({ ...alert, message: response.message, type: "Danger" });
-    } else {
-      router.back();
+    if (Valida()) {
+      setIsLoading(true);
+      form.Inativo = checked.toString();
+      const response = await EditarTipoProduto(form);
+      if (response.status) {
+        setAlert({ ...alert, message: response.message, type: "Success" });
+        router.back();
+      } else {
+        setAlert({ ...alert, message: response.message, type: "Danger" });
+        router.back();
+      }
+      setIsLoading(false);
     }
-    setIsLoading(true);
   }
 
-  const [form, setForm] = useState({
-    Id: 0,
-    Guid: "",
-    Nome: "",
-    Inativo: "",
-  });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [checked, setChecked] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  function Valida() {
+    if (form.Nome == "") {
+      setAlert({
+        ...alert,
+        message: "Digite o nome do fornecedor",
+        type: "Danger",
+      });
+      return false;
+    }
+
+    return true;
+  }
 
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 

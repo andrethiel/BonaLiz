@@ -19,6 +19,8 @@ namespace BonaLiz.Domain.Repository
 
         public void Editar(Produto model)
         {
+            if (string.IsNullOrEmpty(model.Codigo))
+                Codigo(model);
             _context.Produto.Update(model);
             _context.SaveChanges();
         }
@@ -38,7 +40,7 @@ namespace BonaLiz.Domain.Repository
 
         private void Codigo(Produto produto)
         {
-            var listaCodigos = _context.Produto.Where(x => x.FornecedorId == 1).Where(x => x.Codigo != "").ToList().OrderBy(x => x.Codigo).ToList();
+            var listaCodigos = _context.Produto.Where(x => x.FornecedorId == produto.FornecedorId).Where(x => x.Codigo != "").ToList().OrderBy(x => x.Codigo).ToList();
             if(listaCodigos.Count > 0)
             {
                 if(listaCodigos.Last().Codigo == null)
@@ -47,12 +49,13 @@ namespace BonaLiz.Domain.Repository
                 }
                 else
                 {
-                    var codigo = listaCodigos.Last().Codigo.Substring(2);
+                    var codigo = listaCodigos.Last().Codigo.Length == 6 ? listaCodigos.Last().Codigo.Substring(2) : listaCodigos.Last().Codigo.Substring(1);
                     var zeros = codigo.Split("0").SkipLast(1).ToArray();
                     var codigoInt = Convert.ToInt32(codigo) + 1;
-                    var iniciais = _context.Fornecedor.Where(x => x.Id == produto.FornecedorId).FirstOrDefault().Iniciais;
+                    var iniciais = _context.Fornecedor.Where(x => x.Id == produto.FornecedorId).FirstOrDefault().Iniciais.Trim();
+                    iniciais = string.Format("{0}{1}", iniciais.PadRight(iniciais.Length + zeros.Length, '0'), codigoInt);
 
-                    produto.Codigo = string.Format("{0}", iniciais.PadRight(iniciais.Length + zeros.Length, '0') + codigoInt);
+					produto.Codigo = iniciais;
                 }
             }
 
