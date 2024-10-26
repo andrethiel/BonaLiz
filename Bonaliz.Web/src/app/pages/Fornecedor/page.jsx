@@ -1,19 +1,15 @@
 "use client";
-import {
-  ListarFornecedor,
-  PesquisarFornecedor,
-} from "@/Api/Controllers/Forncedor";
-import AgGrid from "@/Components/Grid";
-import React, { useEffect, useRef, useState } from "react";
-import { ColDef, ColGroupDef } from "@ag-grid-community/core";
-import Linked from "@/Components/Link";
-import { useRouter } from "next/navigation";
 import Input from "@/Components/Input";
-import Button from "@/Components/Button";
+import MaskInput from "@/Components/InputMask";
+import React, { Suspense, useEffect, useState } from "react";
 import { FaShoppingBasket } from "react-icons/fa";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
-import MaskInput from "@/Components/InputMask";
-import Alert from "@/Components/Alert";
+import Button from "@/Components/Button";
+import AgGrid from "@/Components/Grid";
+import Linked from "@/Components/Link";
+import { useRouter } from "next/navigation";
+import CustomLoading from "@/Components/CustomLoadingGrid";
+import { ListarFornecedor } from "@/Api/Controllers/Forncedor";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -27,10 +23,55 @@ const CustomButtonComponent = (props) => {
   );
 };
 
-const Fornecedor = () => {
+function Fornecedor() {
+  const [form, setForm] = useState({
+    Nome: "",
+    CNPJ: "",
+    Iniciais: "",
+  });
+  const [alert, setAlert] = useState({
+    message: "",
+    type: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [Fornecedores, setFornecedores] = useState();
+  const [columnsDef, setColumnsDef] = useState([
+    {
+      field: "nome",
+    },
+    {
+      field: "cnpj",
+    },
+    {
+      field: "estado",
+    },
+    {
+      field: "iniciais",
+    },
+    {
+      field: "inativo",
+      valueFormatter: (p) =>
+        p.value.toString() == "True" ? "Inativo" : "Ativo",
+    },
+    {
+      field: "",
+      cellRenderer: CustomButtonComponent,
+    },
+  ]);
+
   useEffect(() => {
     Lista();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAlert({
+        ...alert,
+        message: "",
+        type: "",
+      });
+    }, [1500]);
+  }, [alert]);
 
   async function Lista() {
     setIsLoading(true);
@@ -75,40 +116,10 @@ const Fornecedor = () => {
     setIsLoading(false);
   }
 
-  const [form, setForm] = useState({
-    Nome: "",
-    CNPJ: "",
-    Iniciais: "",
-  });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const primeiroRender = useRef(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [Fornecedores, setFornecedores] = useState();
-  const [columnsDef, setColumnsDef] = useState([
-    {
-      field: "nome",
-    },
-    {
-      field: "cnpj",
-    },
-    {
-      field: "estado",
-    },
-    {
-      field: "iniciais",
-    },
-    {
-      field: "",
-      cellRenderer: CustomButtonComponent,
-    },
-  ]);
+  if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 
   return (
-    <div>
-      {alert && <Alert children={alert.message} type={alert.type} />}
+    <Suspense fallback={<CustomLoading loadingMessage="Aguarde" />}>
       <div className="p-3 m-3">
         <h3 className="text-2xl font-semibold">Lista de Fornecedores</h3>
       </div>
@@ -136,11 +147,9 @@ const Fornecedor = () => {
           />
         </div>
         <div>
-          <Button
-            children={"Pesquisar"}
-            color={"primary"}
-            onClick={Pesquisar}
-          />
+          <Button color={"primary"} onClick={Pesquisar}>
+            Pesquisar
+          </Button>
         </div>
       </div>
       <div className="mb-5 flex justify-end">
@@ -149,8 +158,8 @@ const Fornecedor = () => {
       <div>
         <AgGrid Data={Fornecedores} Columns={columnsDef} />
       </div>
-    </div>
+    </Suspense>
   );
-};
+}
 
 export default Fornecedor;

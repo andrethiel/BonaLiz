@@ -1,5 +1,6 @@
 
 using BonaLiz.Api.Dependencias;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,12 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
     });
 
 }
+app.UseStaticFiles(
+	new StaticFileOptions
+	{
+		FileProvider = new PhysicalFileProvider(builder.Configuration.GetSection("CaminhoArquivo").Value),
+		RequestPath = "/Imagens"
+	});
 app.UseCors(builder => builder
             .SetIsOriginAllowed(orign => true)
             .AllowAnyMethod()

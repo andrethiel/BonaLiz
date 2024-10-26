@@ -1,6 +1,9 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://bonaliz.runasp.net/";
+const URLBASE = process.env.NEXT_PUBLIC_API_URL;
+// axios.defaults.baseURL = "https://bonaliz.runasp.net/";
+
+axios.defaults.baseURL = URLBASE;
 
 const responseBody = (response) => response.data;
 

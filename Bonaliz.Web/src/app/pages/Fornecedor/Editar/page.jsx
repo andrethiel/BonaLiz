@@ -1,10 +1,13 @@
 "use client";
+
 import {
   EditarFornecedor,
   ObterFornecedorGuid,
 } from "@/Api/Controllers/Forncedor";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
+import Check from "@/Components/Check";
+import CustomLoading from "@/Components/CustomLoadingGrid";
 import Input from "@/Components/Input";
 import MaskInput from "@/Components/InputMask";
 import Select from "@/Components/Select";
@@ -15,33 +18,9 @@ import React, { Suspense, useEffect, useState } from "react";
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { FaGlobeAmericas, FaShoppingBasket } from "react-icons/fa";
 
-// import { Container } from './styles';
-
 const Editar = () => {
   const param = useSearchParams();
-
-  async function Buscar() {
-    const response = await ObterFornecedorGuid(param.get("Guid"));
-    if (response.id != 0) {
-      setForm({
-        ...form,
-        CNPJ: response.cnpj,
-        Nome: response.nome,
-        Estado: response.estado,
-        Guid: response.guid,
-        Id: response.id,
-      });
-    } else {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: "Fornecedor não encontrado",
-      });
-    }
-  }
-  useEffect(() => {
-    Buscar();
-  }, []);
+  const guid = param.get("Guid");
 
   const [form, setForm] = useState({
     Id: 0,
@@ -50,27 +29,133 @@ const Editar = () => {
     CNPJ: "",
     Estado: "",
     Iniciais: "",
+    Inativo: "",
   });
   const [alert, setAlert] = useState({
     message: "",
     type: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   const router = useRouter();
 
-  async function Editar() {
-    form.Iniciais = Iniciais(form.Nome);
-    const response = await EditarFornecedor(form);
-    console.log(response);
+  async function BuscarFornecedor() {
+    setIsLoading(true);
+    try {
+      const response = await ObterFornecedorGuid(guid);
+      if (response.id != 0) {
+        setForm({
+          ...form,
+          CNPJ: response.cnpj,
+          Nome: response.nome,
+          Estado: response.estado,
+          Guid: response.guid,
+          Id: response.id,
+          Inativo:
+            response.inativo == "True" ? setChecked(true) : setChecked(false),
+        });
+      } else {
+        setAlert({
+          ...alert,
+          type: "Danger",
+          message: "Fornecedor não encontrado",
+        });
+      }
+    } catch (e) {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: e.message,
+      });
+    }
+
+    setIsLoading(false);
+  }
+  useEffect(() => {
+    BuscarFornecedor();
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAlert({
+        ...alert,
+        message: "",
+        type: "",
+      });
+    }, [1500]);
+  }, [alert]);
+
+  function Valida() {
+    if (form.Nome == "") {
+      setAlert({
+        ...alert,
+        message: "Digite o nome do fornecedor",
+        type: "Danger",
+      });
+      return false;
+    }
+    if (form.CNPJ == "") {
+      setAlert({
+        ...alert,
+        message: "Digite o CNPJ do fornecedor",
+        type: "Danger",
+      });
+      return false;
+    }
+    if (form.Estado == "") {
+      setAlert({
+        ...alert,
+        message: "Selecione o estado do fornecedor",
+        type: "Danger",
+      });
+      return false;
+    }
+
+    return true;
   }
 
+  async function Editar() {
+    if (Valida()) {
+      setIsLoading(true);
+      form.Iniciais = Iniciais(form.Nome);
+      form.Inativo = checked.toString();
+      try {
+        const response = await EditarFornecedor(form);
+        if (response.status) {
+          setAlert({
+            ...alert,
+            type: "Success",
+            message: response.message,
+          });
+          router.back();
+        } else {
+          setAlert({
+            ...alert,
+            type: "Danger",
+            message: response.message,
+          });
+        }
+      } catch (e) {
+        setAlert({
+          ...alert,
+          type: "Danger",
+          message: e.message,
+        });
+      }
+      setIsLoading(false);
+    }
+  }
+
+  if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
+
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<CustomLoading loadingMessage="Aguarde" />}>
       <div className="p-3 m-3">
         <h3 className="text-2xl font-semibold">Cadastro de Fornecedores</h3>
       </div>
-      {alert && <Alert children={alert.message} type={alert.type} />}
-      <div className="w-full gap-2">
+      {alert && <Alert type={alert.type}>{alert.message}</Alert>}
+      <div className="grid gap-4">
         <input name={"Id"} id={"Id"} type="hidden" value={form.Id} />
         <input name={"guid"} id={"guid"} type="hidden" value={form.Guid} />
         <Input
@@ -99,13 +184,15 @@ const Editar = () => {
           id={"Estado"}
           value={form.Estado}
         />
-
-        <Button children={"Criar"} color={"primary"} onClick={Editar} />
-        <Button
-          children={"Voltar"}
-          color={"secondary"}
-          onClick={() => router.back()}
-        />
+        <Check onChange={(e) => setChecked(e.target.checked)} value={checked}>
+          Inativo
+        </Check>
+        <Button color={"primary"} onClick={Editar}>
+          Editar
+        </Button>
+        <Button color={"secondary"} onClick={() => router.back()}>
+          Voltar
+        </Button>
       </div>
     </Suspense>
   );

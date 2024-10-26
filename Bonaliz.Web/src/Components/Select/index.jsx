@@ -4,7 +4,7 @@ import Icons from "../Icons";
 
 const Select = ({ icon, onChange, value, placeholder, data, name, id }) => {
   return (
-    <div className="relative mb-6">
+    <div className="relative">
       <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
         <Icons icon={icon} />
       </div>

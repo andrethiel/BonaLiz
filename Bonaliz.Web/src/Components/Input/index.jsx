@@ -1,13 +1,14 @@
 import React from "react";
 import Icons from "../Icons";
 
-const Input = ({ icon, placeholder, onChange, value, name, id }) => {
+const Input = ({ icon, placeholder, onChange, value, name, id, disabled }) => {
   return (
-    <div className="relative mb-6 w-full">
+    <div className="relative w-full">
       <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
         <Icons icon={icon} />
       </div>
       <input
+        disabled={disabled}
         name={name}
         id={id}
         placeholder={placeholder}

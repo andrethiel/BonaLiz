@@ -1,7 +1,9 @@
 "use client";
+
 import { SelectListForncedor } from "@/Api/Controllers/Forncedor";
 import { FiltrarProdutos, ListarProdutos } from "@/Api/Controllers/Produto";
 import { SelectListTipoProduto } from "@/Api/Controllers/TipoProduto";
+
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import CustomLoading from "@/Components/CustomLoadingGrid";
@@ -10,13 +12,10 @@ import AgGrid from "@/Components/Grid";
 import Input from "@/Components/Input";
 import Linked from "@/Components/Link";
 import Select from "@/Components/Select";
-import { ColDef, ColGroupDef } from "@ag-grid-community/core";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsTag } from "react-icons/bs";
-import { FaShoppingBasket } from "react-icons/fa";
-import { BarLoader } from "react-spinners";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -73,12 +72,7 @@ const Produto = () => {
   }
 
   async function Filtrar() {
-    if (data.startDate != null) {
-      setForm({
-        ...form,
-        DataCompra: dayjs(data.startDate).format("DD/MM/YYYY"),
-      });
-    }
+    form.DataCompra = dayjs(data.startDate).format("DD/MM/YYYY");
     setIsLoading(true);
     try {
       const response = await FiltrarProdutos(form);
@@ -138,6 +132,11 @@ const Produto = () => {
       field: "nome",
     },
     {
+      headerName: "Quantidade",
+      field: "quantidade",
+      maxWidth: 70,
+    },
+    {
       headerName: "Nome do fornecedor",
       field: "nomeFornecedor",
     },
@@ -163,6 +162,14 @@ const Produto = () => {
     {
       headerName: "Data da compra",
       field: "dataCompra",
+      maxWidth: 120,
+    },
+    {
+      headerName: "Inativo",
+      field: "inativo",
+      valueFormatter: (p) =>
+        p.value.toString() == "True" ? "Inativo" : "Ativo",
+      maxWidth: 90,
     },
     {
       field: "",
@@ -178,11 +185,11 @@ const Produto = () => {
     });
   };
 
-  if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
+  if (isLoading) return <CustomLoading loadingMessage="Aguarde..." />;
 
   return (
     <div>
-      {alert && <Alert children={alert.message} type={alert.type} />}
+      {alert && <Alert type={alert.type}>{alert.message}</Alert>}
       <div className="p-3 m-3">
         <h3 className="text-2xl font-semibold">Lista de Produtos</h3>
       </div>

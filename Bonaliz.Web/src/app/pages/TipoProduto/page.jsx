@@ -5,6 +5,7 @@ import {
 } from "@/Api/Controllers/TipoProduto";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
+import CustomLoading from "@/Components/CustomLoadingGrid";
 import AgGrid from "@/Components/Grid";
 import Input from "@/Components/Input";
 import Linked from "@/Components/Link";
@@ -25,11 +26,46 @@ const CustomButtonComponent = (props) => {
 };
 
 const TipoProduto = () => {
+  const [form, setForm] = useState({
+    Nome: "",
+  });
+  const [alert, setAlert] = useState({
+    message: "",
+    type: "",
+  });
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [TipoProduto, setTipoProduto] = useState();
+  const [columnsDef, setColumnsDef] = useState([
+    {
+      field: "nome",
+    },
+    {
+      field: "inativo",
+      valueFormatter: (p) =>
+        p.value.toString() == "True" ? "Inativo" : "Ativo",
+    },
+    {
+      field: "",
+      cellRenderer: CustomButtonComponent,
+    },
+  ]);
+
   useEffect(() => {
     Listar();
   }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      setAlert({
+        ...alert,
+        message: "",
+        type: "",
+      });
+    }, [1500]);
+  }, [alert]);
 
   async function Listar() {
+    document.title = "Listar Tipo Produto";
     setIsLoading(true);
     try {
       const response = await ListarTipoProduto();
@@ -66,24 +102,8 @@ const TipoProduto = () => {
     setIsLoading(false);
   }
 
-  const [form, setForm] = useState({
-    Nome: "",
-  });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [TipoProduto, setTipoProduto] = useState();
-  const [columnsDef, setColumnsDef] = useState([
-    {
-      field: "nome",
-    },
-    {
-      field: "",
-      cellRenderer: CustomButtonComponent,
-    },
-  ]);
+  if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
+
   return (
     <div>
       {alert && <Alert children={alert.message} type={alert.type} />}
@@ -110,7 +130,7 @@ const TipoProduto = () => {
         <Linked href={"TipoProduto/Cadastrar"}>Criar tipo de produto</Linked>
       </div>
       <div>
-        <AgGrid Data={TipoProduto} Columns={columnsDef} isLoading={isLoading} />
+        <AgGrid Data={TipoProduto} Columns={columnsDef} />
       </div>
     </div>
   );
