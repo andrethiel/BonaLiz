@@ -16,7 +16,7 @@ namespace BonaLiz.Api.Controller
         }
         [HttpPost]
         [Route("/CadastrarProduto")]
-        public async Task<IActionResult> Cadastro(ProdutoViewModel model)
+        public async Task<IActionResult> Cadastro([FromForm]ProdutoViewModel model)
         {
             try
             {

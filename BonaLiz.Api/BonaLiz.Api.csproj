@@ -20,4 +20,8 @@
     <ProjectReference Include="..\BonaLiz.Negocio\BonaLiz.Negocio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Imagens\" />
+  </ItemGroup>
+
 </Project>

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace BonaLiz.Negocio.ViewModels
 {
-    public class ProdutoViewModel
+	public class ProdutoViewModel
     {
         public int Id { get; set; }
         public Guid Guid { get; set; } = Guid.NewGuid();
@@ -22,6 +18,8 @@ namespace BonaLiz.Negocio.ViewModels
         public string TipoProduto { get; set; }
         public string Quantidade { get; set; }
         public string Inativo { get; set; }
-
-    }
+		public string UrlImagem { get; set; }
+		public string Imagem { get; set; }
+		public IFormFile Arquivo { get; set; }
+	}
 }
