@@ -13,7 +13,19 @@ export async function FiltrarProdutos(props) {
 }
 
 export async function CadastrarProduto(props) {
-  const response = await Api.request.post("/CadastrarProduto", props);
+  const form = new FormData();
+  form.append("Nome", props.Nome);
+  form.append("TipoProdutoId", props.TipoProdutoId);
+  form.append("FornecedorId", props.FornecedorId);
+  form.append("PrecoCusto", props.precoVenda);
+  form.append("PrecoVenda", props.precoVenda);
+  form.append("Lucro", props.Lucro);
+  form.append("DataCompra", props.dataCompra);
+  form.append("Quantidade", props.Quantidade);
+  form.append("Inativo", props.Inativo);
+  form.append("Arquivo", props.Arquivo);
+
+  const response = await Api.request.postForm("/CadastrarProduto", form);
 
   return response;
 }
@@ -25,13 +37,28 @@ export async function ProdutoPorGuid(props) {
 }
 
 export async function LucroProduto(props) {
-  const response = await Api.request.post("/ProdutoLucro", props);
+  const response = await Api.request.get(
+    `/ProdutoLucro?PrecoVenda=${props.precoCusto}&PrecoCusto=${props.precoVenda}`
+  );
 
   return response;
 }
 
 export async function EditarProduto(props) {
-  const response = await Api.request.put("/EditarProduto", props);
+  const form = new FormData();
+  form.append("Id", props.Id);
+  form.append("Guid", props.Guid);
+  form.append("Nome", props.Nome);
+  form.append("TipoProdutoId", props.TipoProdutoId);
+  form.append("FornecedorId", props.FornecedorId);
+  form.append("PrecoCusto", props.precoVenda);
+  form.append("PrecoVenda", props.precoVenda);
+  form.append("Lucro", props.Lucro);
+  form.append("DataCompra", props.DataCompra);
+  form.append("Quantidade", props.Quantidade);
+  form.append("Inativo", props.Inativo);
+  form.append("Arquivo", props.Arquivo);
+  const response = await Api.request.putForm("/EditarProduto", form);
 
   return response;
 }

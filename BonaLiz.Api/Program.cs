@@ -1,5 +1,6 @@
 
 using BonaLiz.Api.Dependencias;
+using BonaLiz.Negocio.Utils;
 using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.RegisterServices(builder.Configuration);
 
 var app = builder.Build();
+
+Arquivo.SettingsConfigure(app.Services.GetRequiredService<IConfiguration>());
 
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {

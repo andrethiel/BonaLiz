@@ -8,13 +8,12 @@ import InputMoney from "@/Components/Currency";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import DataPicker from "@/Components/DatePicker";
 import Input from "@/Components/Input";
-import MaskInput from "@/Components/InputMask";
 import Select from "@/Components/Select";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { BsTag } from "react-icons/bs";
-import { FaGlobeAmericas, FaMoneyBill } from "react-icons/fa";
+import { FaGlobeAmericas, FaMoneyBill, FaRegFileImage } from "react-icons/fa";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 const Criar = () => {
@@ -43,33 +42,96 @@ const Criar = () => {
     }
   }
   async function CriarProduto() {
-    setIsLoading(true);
-    form.dataCompra = dayjs(data.startDate).format("DD/MM/YYYY");
-    const response = await CadastrarProduto(form);
+    if (Valida()) {
+      setIsLoading(true);
+      form.dataCompra = dayjs(data.startDate).format("DD/MM/YYYY");
+      const response = await CadastrarProduto(form);
 
-    if (response.status) {
-      setAlert({
-        ...alert,
-        type: "Success",
-        message: response.message,
-      });
+      if (response.status) {
+        setAlert({
+          ...alert,
+          type: "Success",
+          message: response.message,
+        });
 
-      router.back();
-    } else {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: response.message,
-      });
+        router.back();
+      } else {
+        setAlert({
+          ...alert,
+          type: "Danger",
+          message: response.message,
+        });
+      }
+      setIsLoading(false);
     }
-    setIsLoading(false);
     setTimeout(() => {
       setAlert({
         ...alert,
         type: "",
         message: "",
       });
-    }, 1500);
+    }, 500);
+  }
+
+  function Valida() {
+    if (form.Nome == "") {
+      setAlert({
+        ...alert,
+        message: "Digite o nome do produto",
+        type: "Alert",
+      });
+      return false;
+    }
+    if (form.Quantidade == "") {
+      setAlert({
+        ...alert,
+        message: "Digite a quantidade",
+        type: "Alert",
+      });
+      return false;
+    }
+    if (form.FornecedorId == "") {
+      setAlert({
+        ...alert,
+        message: "Selecione o fornecedor do produto",
+        type: "Alert",
+      });
+      return false;
+    }
+    if (form.TipoProdutoId == "") {
+      setAlert({
+        ...alert,
+        message: "Selecione o Tipo do produto",
+        type: "Alert",
+      });
+      return false;
+    }
+    if (form.precoCusto == "") {
+      setAlert({
+        ...alert,
+        message: "Digite o valor de custo do produto",
+        type: "Alert",
+      });
+      return false;
+    }
+    if (form.precoVenda == "") {
+      setAlert({
+        ...alert,
+        message: "Digite o valor de venda do produto",
+        type: "Alert",
+      });
+      return false;
+    }
+    if (data.startDate == "") {
+      setAlert({
+        ...alert,
+        message: "Selecione a data da compra",
+        type: "Alert",
+      });
+      return false;
+    }
+
+    return true;
   }
 
   const [form, setForm] = useState({
@@ -82,6 +144,7 @@ const Criar = () => {
     Lucro: "",
     dataCompra: "",
     Inativo: "false",
+    Arquivo: "",
   });
   const [alert, setAlert] = useState({
     message: "",
@@ -172,7 +235,9 @@ const Criar = () => {
             icon={<FaMoneyBill />}
             name={"precoCusto"}
             id={"precoCusto"}
-            onChange={handleChange}
+            onChange={(event, originalValue, maskedValue) =>
+              setForm({ ...form, precoCusto: maskedValue })
+            }
             value={form.precoCusto}
           />
         </div>
@@ -182,7 +247,9 @@ const Criar = () => {
             icon={<FaMoneyBill />}
             name={"precoVenda"}
             id={"precoVenda"}
-            onChange={handleChange}
+            onChange={(event, originalValue, maskedValue) =>
+              setForm({ ...form, precoVenda: maskedValue })
+            }
             value={form.precoVenda}
             onBlur={handleBlur}
           />
@@ -206,6 +273,25 @@ const Criar = () => {
             placeholder="Selecione a data da compra"
           />
         </div>
+        <div className="">
+          <Input
+            placeholder={"Arquivo"}
+            icon={<FaRegFileImage />}
+            type={"file"}
+            name={"Arquivo"}
+            id={"Arquivo"}
+            onChange={(e) => setForm({ ...form, Arquivo: e.target.files[0] })}
+          />
+        </div>
+        {form.Arquivo && (
+          <div className="w-full flex mt-2">
+            <div className="flex flex-col justify-center items-center">
+              <span></span>
+              <img src={URL.createObjectURL(form.Arquivo)} className="h-20" />
+            </div>
+          </div>
+        )}
+
         <Button color={"primary"} onClick={CriarProduto}>
           Criar
         </Button>

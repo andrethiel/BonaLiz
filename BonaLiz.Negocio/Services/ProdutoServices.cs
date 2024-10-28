@@ -2,7 +2,9 @@
 using BonaLiz.Dados.Models;
 using BonaLiz.Domain.Interfaces;
 using BonaLiz.Negocio.Interfaces;
+using BonaLiz.Negocio.Utils;
 using BonaLiz.Negocio.ViewModels;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +19,16 @@ namespace BonaLiz.Negocio.Services
         private readonly IFornecedorRepository _fornecedorRepository;
         private readonly ITipoProdutoRepository _tipoProdutoRepository;
         private readonly IMapper _mapper;
-        public ProdutoServices(IProdutoRepository produtoRepository, IMapper mapper, ITipoProdutoRepository tipoProdutoRepository, IFornecedorRepository fornecedorRepository)
-        {
-            _produtoRepository = produtoRepository;
-            _mapper = mapper;
-            _tipoProdutoRepository = tipoProdutoRepository;
-            _fornecedorRepository = fornecedorRepository;
-        }
-        public void Cadastrar(ProdutoViewModel model)
+		private readonly IHttpContextAccessor _httpContextAccessor;
+		public ProdutoServices(IProdutoRepository produtoRepository, IMapper mapper, ITipoProdutoRepository tipoProdutoRepository, IFornecedorRepository fornecedorRepository, IHttpContextAccessor httpContextAccessor)
+		{
+			_produtoRepository = produtoRepository;
+			_mapper = mapper;
+			_tipoProdutoRepository = tipoProdutoRepository;
+			_fornecedorRepository = fornecedorRepository;
+			_httpContextAccessor = httpContextAccessor;
+		}
+		public void Cadastrar(ProdutoViewModel model)
         {
             var custo = model.PrecoCusto.Replace("R$", "").Trim();
             var venda = model.PrecoVenda.Replace("R$", "").Trim();
@@ -32,13 +36,16 @@ namespace BonaLiz.Negocio.Services
 			model.PrecoCusto = custo;
 			model.PrecoVenda = venda;
             model.Lucro = lucro;
+			model.Imagem = model.Arquivo != null ? Arquivo.Imagem(model.Arquivo) : "";
 			_produtoRepository.Inserir(_mapper.Map<Produto>(model));
         }
 
         public void Editar(ProdutoViewModel model)
         {
-            var produto = _produtoRepository.ObterPorId(model.Id);
-            produto.Id = model.Id;
+			
+			var produto = _produtoRepository.ObterPorId(model.Id);
+			model.Imagem = model.Arquivo != null ? Arquivo.Imagem(model.Arquivo) : produto.Arquivo;
+			produto.Id = model.Id;
             produto.Guid = model.Guid;
             produto.Nome = model.Nome;
             produto.TipoProdutoId = Convert.ToInt32(model.TipoProdutoId);
@@ -49,6 +56,8 @@ namespace BonaLiz.Negocio.Services
             produto.DataCompra = Convert.ToDateTime(model.DataCompra);
             produto.Quantidade = Convert.ToInt32(model.Quantidade);
             produto.Inativo = Convert.ToBoolean(model.Inativo);
+			produto.Arquivo = model.Imagem;
+            
 
             _produtoRepository.Editar(produto);
         }
@@ -106,7 +115,9 @@ namespace BonaLiz.Negocio.Services
                 DataCompra = produto.DataCompra.Value.ToString("dd/MM/yyyy"),
                 Codigo = produto.Codigo,
 				Quantidade = produto.Quantidade.ToString(),
-				Inativo = produto.Inativo.ToString()
+				Inativo = produto.Inativo.ToString(),
+
+				UrlImagem = !string.IsNullOrWhiteSpace(produto.Arquivo) ? Arquivo.FormataNomeURL(produto.Arquivo, _httpContextAccessor) : ""
 			};
         }
 

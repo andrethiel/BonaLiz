@@ -10,7 +10,23 @@ const responseBody = (response) => response.data;
 const request = {
   get: (url) => axios.get(url).then(responseBody),
   post: (url, body) => axios.post(url, body).then(responseBody),
+  postForm: (url, form) =>
+    axios
+      .post(url, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(responseBody),
   put: (url, body) => axios.put(url, body).then(responseBody),
+  putForm: (url, form) =>
+    axios
+      .put(url, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(responseBody),
 };
 
 const Api = {

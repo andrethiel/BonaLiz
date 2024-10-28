@@ -14,8 +14,9 @@ namespace BonaLiz.Api.Dependencias
         {
             services.AddDbContext<DataContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<DataContext, DataContext>();
+			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+			services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IFornecedorServices, FornecedorServices>();
             services.AddScoped<ITipoProdutoRepository, TipoProdutoRepository>();
             services.AddScoped<ITipoProdutoServices, TipoProdutoServices>();

@@ -16,12 +16,13 @@ namespace BonaLiz.Api.Controller
         }
         [HttpPost]
         [Route("/CadastrarProduto")]
-        public async Task<IActionResult> Cadastro([FromForm]ProdutoViewModel model)
+        public async Task<IActionResult> Cadastro([FromForm] ProdutoViewModel model)
         {
             try
             {
                 if(!_produtoServices.Listar().Where(x => x.Nome == model.Nome).Any())
                 {
+                    
                     _produtoServices.Cadastrar(model);
                     return Ok(new
                     {
@@ -46,11 +47,11 @@ namespace BonaLiz.Api.Controller
 
         [HttpPut]
         [Route("/EditarProduto")]
-        public async Task<IActionResult> Editar(ProdutoViewModel model)
+        public async Task<IActionResult> Editar([FromForm] ProdutoViewModel model)
         {
             try
             {
-                _produtoServices.Editar(model);
+				_produtoServices.Editar(model);
                 return Ok(new
                 {
                     status = true,
@@ -108,17 +109,32 @@ namespace BonaLiz.Api.Controller
         }
 
 
-		[HttpPost]
+		[HttpGet]
 		[Route("/ProdutoLucro")]
-		public async Task<IActionResult> LucroProduto(ProdutoViewModel model)
+		public async Task<IActionResult> LucroProduto(string PrecoVenda, string PrecoCusto)
 		{
 			try
 			{
-                var venda = Convert.ToDecimal(model.PrecoVenda.Replace("R$", "").Trim());
-                var custo = Convert.ToDecimal(model.PrecoCusto.Replace("R$", "").Trim());
-				var lucro = venda - custo;
+                var venda = Convert.ToDecimal(PrecoVenda.Replace("R$", "").Trim());
+                var custo = Convert.ToDecimal(PrecoCusto.Replace("R$", "").Trim());
+				var lucro = custo - venda;
 
 				return Ok(lucro.ToString("C"));
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex);
+			}
+		}
+
+		[HttpGet]
+		[Route("/Caminho")]
+		public async Task<IActionResult> Caminho()
+		{
+			try
+			{
+
+				return Ok(AppDomain.CurrentDomain.BaseDirectory.ToString());
 			}
 			catch (Exception ex)
 			{
