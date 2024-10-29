@@ -16,6 +16,8 @@ namespace BonaLiz.Negocio.AutoMapper
             CreateMap<FornecedorViewModel, Fornecedor>().ReverseMap();
             CreateMap<TipoProdutoViewModel, TipoProduto>().ReverseMap();
             CreateMap<ProdutoViewModel, Produto>().ReverseMap();
-        }
+			CreateMap<ClienteViewModel, Cliente>().ReverseMap();
+			CreateMap<VendaViewModel, Venda>().ReverseMap();
+		}
     }
 }

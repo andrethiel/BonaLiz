@@ -22,9 +22,11 @@ namespace BonaLiz.Api.Dependencias
             services.AddScoped<ITipoProdutoServices, TipoProdutoServices>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IProdutoServices, ProdutoServices>();
+			services.AddScoped<IClienteRepository, ClienteRepository>();
+			services.AddScoped<IClienteServices, ClienteServices>();
 
 
-            services.AddAutoMapper(typeof(AutoMapperConfiguration));
+			services.AddAutoMapper(typeof(AutoMapperConfiguration));
             AutoMapperConfiguration.Mapper();
         }
     }

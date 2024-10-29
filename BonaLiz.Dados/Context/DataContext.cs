@@ -16,5 +16,7 @@ namespace ApiGateway.Dados.Context
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<TipoProduto> TipoProduto { get; set; }
         public DbSet<Produto> Produto { get; set; }
-    }
+		public DbSet<Cliente> Cliente { get; set; }
+		public DbSet<Venda> Venda { get; set; }
+	}
 }

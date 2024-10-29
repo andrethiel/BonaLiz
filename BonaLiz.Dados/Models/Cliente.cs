@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Dados.Models
 {
-	public class Cliente
+	public class Cliente : Base
 	{
-	}
+		public string Nome { get; set; }
+		public string Email { get; set; }
+		public string Telefone { get; set; }
+        public bool Inativo { get; set; }
+    }
 }

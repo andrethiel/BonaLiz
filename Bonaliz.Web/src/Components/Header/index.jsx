@@ -8,7 +8,9 @@ import {
   FaHome,
   FaRegWindowClose,
   FaShoppingBasket,
+  FaUser,
 } from "react-icons/fa";
+import { FaCartShopping } from "react-icons/fa6";
 import { BsTag } from "react-icons/bs";
 
 // import { Container } from './styles';
@@ -43,6 +45,12 @@ const Header = () => {
             </AsideItem>
             <AsideItem icon={<BsTag />} href="/pages/Produto">
               Produtos
+            </AsideItem>
+            <AsideItem icon={<FaUser />} href="/pages/Clientes">
+              Clientes
+            </AsideItem>
+            <AsideItem icon={<FaCartShopping />} href="/pages/Vendas">
+              Vendas
             </AsideItem>
           </ul>
         </div>
