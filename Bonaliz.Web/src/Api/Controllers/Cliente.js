@@ -28,3 +28,14 @@ export async function ClienteFiltrar(form) {
 
   return response;
 }
+
+export async function SelectList() {
+  let lista = [];
+  const response = await Api.request.get("/SelectListClientes");
+
+  response.map((item) => {
+    lista.push({ value: item.value, label: item.text });
+  });
+
+  return lista;
+}

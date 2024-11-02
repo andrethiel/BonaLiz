@@ -77,9 +77,10 @@ namespace BonaLiz.Negocio.Services
             TipoProduto = _tipoProdutoRepository.ObterPorId(x.TipoProdutoId).Nome,
             Codigo = x.Codigo,
             Quantidade = x.Quantidade.ToString(),
-            Inativo = x.Inativo.ToString()
-            
-        }).ToList();
+            Inativo = x.Inativo.ToString(),
+
+			UrlImagem = !string.IsNullOrWhiteSpace(x.Arquivo) ? Arquivo.FormataNomeURL(x.Arquivo, _httpContextAccessor) : ""
+		}).ToList();
 
         public List<ProdutoViewModel> Listar() => _produtoRepository.Listar().Select(x => new ProdutoViewModel()
         {
@@ -96,7 +97,8 @@ namespace BonaLiz.Negocio.Services
             TipoProduto = _tipoProdutoRepository.ObterPorId(x.TipoProdutoId).Nome,
             Codigo = x.Codigo,
 			Quantidade = x.Quantidade.ToString(),
-			Inativo = x.Inativo.ToString()
+			Inativo = x.Inativo.ToString(),
+			UrlImagem = !string.IsNullOrWhiteSpace(x.Arquivo) ? Arquivo.FormataNomeURL(x.Arquivo, _httpContextAccessor) : ""
 		}).ToList();
 
         public ProdutoViewModel ObterPorGuid(Guid guid)
@@ -137,7 +139,8 @@ namespace BonaLiz.Negocio.Services
                 DataCompra = produto.DataCompra.Value.ToString("dd/MM/yyyy"),
 				Codigo = produto.Codigo,
 				Quantidade = produto.Quantidade.ToString(),
-				Inativo = produto.Inativo.ToString()
+				Inativo = produto.Inativo.ToString(),
+				UrlImagem = !string.IsNullOrWhiteSpace(produto.Arquivo) ? Arquivo.FormataNomeURL(produto.Arquivo, _httpContextAccessor) : ""
 			};
         }
     }

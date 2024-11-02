@@ -1,7 +1,9 @@
-﻿using BonaLiz.Negocio.Interfaces;
+﻿using BonaLiz.Api.Helpers;
+using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BonaLiz.Api.Controller
 {
@@ -104,6 +106,20 @@ namespace BonaLiz.Api.Controller
 			try
 			{
 				return Ok(_clienteServices.Filtrar(model));
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex);
+			}
+		}
+
+		[HttpGet]
+		[Route("/SelectListClientes")]
+		public async Task<IActionResult> SelectListFornencedor()
+		{
+			try
+			{
+				return Ok(SelectListHelper.AddSelectList(new SelectList(_clienteServices.Listar().Where(x => x.Inativo == "False").ToList(), "Id", "Nome")));
 			}
 			catch (Exception ex)
 			{

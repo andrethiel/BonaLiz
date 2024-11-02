@@ -6,6 +6,7 @@ import CustomLoading from "@/Components/CustomLoadingGrid";
 import AgGrid from "@/Components/Grid";
 import Input from "@/Components/Input";
 import Linked from "@/Components/Link";
+import Modal from "@/Components/Modal";
 import { useRouter } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 import { FaUser } from "react-icons/fa";
@@ -33,6 +34,7 @@ function Clientes() {
     type: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [columnsDef, setColumnsDef] = useState([
     {
       field: "nome",
@@ -107,10 +109,14 @@ function Clientes() {
         type: "Danger",
         message: e.message,
       });
+      setIsLoading(false);
     }
   }
 
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
+
+  if (modalIsOpen)
+    return <Modal cliente={form.Nome} onClick={() => setmodalIsOpen(false)} />;
 
   return (
     <Suspense fallback={<CustomLoading loadingMessage="Aguarde" />}>

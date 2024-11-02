@@ -9,7 +9,8 @@ import AgGrid from "@/Components/Grid";
 import Linked from "@/Components/Link";
 import { useRouter } from "next/navigation";
 import CustomLoading from "@/Components/CustomLoadingGrid";
-import { ListarFornecedor } from "@/Api/Controllers/Forncedor";
+import { Lista } from "@/Hooks/Fornecedor";
+import Alert from "@/Components/Alert";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -29,12 +30,17 @@ function Fornecedor() {
     CNPJ: "",
     Iniciais: "",
   });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [Fornecedores, setFornecedores] = useState();
+
+  const {
+    alert,
+    Fornecedores,
+    isLoading,
+    setAlert,
+    setIsLoading,
+    setFornecedores,
+    Pesquisar,
+  } = Lista(form);
+
   const [columnsDef, setColumnsDef] = useState([
     {
       field: "nome",
@@ -60,103 +66,58 @@ function Fornecedor() {
   ]);
 
   useEffect(() => {
-    Lista();
-  }, []);
-
-  useEffect(() => {
     setTimeout(() => {
       setAlert({
         ...alert,
         message: "",
         type: "",
       });
-    }, [1500]);
+    }, [500]);
   }, [alert]);
 
-  async function Lista() {
-    setIsLoading(true);
-    try {
-      const response = await ListarFornecedor();
-      if (response.length > 0) {
-        setFornecedores(response);
-      }
-    } catch (e) {
-      setFornecedores([]);
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
-    }
-    setIsLoading(false);
-  }
-
-  async function Pesquisar() {
-    setIsLoading(true);
-    try {
-      const response = await PesquisarFornecedor(form);
-      if (response.length > 0) {
-        setFornecedores(response);
-      } else {
-        setFornecedores([]);
-        setAlert({
-          ...alert,
-          type: "Danger",
-          message: "Nenhum fornecedor encontrado",
-        });
-      }
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
-    }
-
-    setIsLoading(false);
-  }
-
-  if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
-
   return (
-    <Suspense fallback={<CustomLoading loadingMessage="Aguarde" />}>
-      <div className="p-3 m-3">
-        <h3 className="text-2xl font-semibold">Lista de Fornecedores</h3>
-      </div>
-      <div className="grid grid-row-4 lg:grid-cols-4 gap-2">
-        <div>
-          <Input
-            icon={<FaShoppingBasket />}
-            placeholder="Nome do fornecedor"
-            onChange={(e) => setForm({ ...form, Nome: e.target.value })}
-          />
+    <Suspense>
+      {isLoading && <CustomLoading loadingMessage="Aguarde..." />}
+      <div className={`${isLoading && "hidden"}`}>
+        <div className="p-3 m-3">
+          <h3 className="text-2xl font-semibold">Lista de Fornecedores</h3>
+        </div>
+        {alert && <Alert type={alert.type}>{alert.message}</Alert>}
+        <div className="grid grid-row-4 lg:grid-cols-4 gap-2">
+          <div>
+            <Input
+              icon={<FaShoppingBasket />}
+              placeholder="Nome do fornecedor"
+              onChange={(e) => setForm({ ...form, Nome: e.target.value })}
+            />
+          </div>
+          <div>
+            <MaskInput
+              icon={<AiOutlineExclamationCircle />}
+              placeholder={"CNPJ"}
+              mask={"00.000.000/0000-00"}
+              onChange={(e) => setForm({ ...form, CNPJ: e.target.value })}
+            />
+          </div>
+          <div>
+            <Input
+              icon={<FaShoppingBasket />}
+              placeholder="Iniciais do fornecedor"
+              onChange={(e) => setForm({ ...form, Iniciais: e.target.value })}
+            />
+          </div>
+          <div>
+            <Button color={"primary"} onClick={Pesquisar}>
+              Pesquisar
+            </Button>
+          </div>
+        </div>
+        <div className="mb-5 flex justify-end">
+          <Linked href={"Fornecedor/Criar"}>Criar fornecedor</Linked>
         </div>
         <div>
-          <MaskInput
-            icon={<AiOutlineExclamationCircle />}
-            placeholder={"CNPJ"}
-            mask={"00.000.000/0000-00"}
-            onChange={(e) => setForm({ ...form, CNPJ: e.target.value })}
-          />
+          <AgGrid Data={Fornecedores} Columns={columnsDef} />
         </div>
-        <div>
-          <Input
-            icon={<FaShoppingBasket />}
-            placeholder="Iniciais do fornecedor"
-            onChange={(e) => setForm({ ...form, Iniciais: e.target.value })}
-          />
-        </div>
-        <div>
-          <Button color={"primary"} onClick={Pesquisar}>
-            Pesquisar
-          </Button>
-        </div>
-      </div>
-      <div className="mb-5 flex justify-end">
-        <Linked href={"Fornecedor/Criar"}>Criar fornecedor</Linked>
-      </div>
-      <div>
-        <AgGrid Data={Fornecedores} Columns={columnsDef} />
       </div>
     </Suspense>
   );
