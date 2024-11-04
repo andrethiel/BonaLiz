@@ -120,7 +120,6 @@ const Editar = () => {
 
   const handleChange = (e) => {
     const { value, name } = e.target;
-    console.log(value);
     setForm({
       ...form,
       [name]: value,
@@ -129,8 +128,13 @@ const Editar = () => {
 
   const handleBlur = async () => {
     if (form.precoCusto != "" && form.precoVenda != "") {
+      const custo = form.precoCusto.replace(",", ".");
+      const venda = form.precoVenda.replace(",", ".");
       setIsLoading(true);
-      var response = await LucroProduto(form);
+      var response = await LucroProduto({
+        precoCusto: custo,
+        precoVenda: venda,
+      });
       setForm({
         ...form,
         Lucro: response,

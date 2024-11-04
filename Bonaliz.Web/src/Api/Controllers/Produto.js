@@ -51,7 +51,7 @@ export async function EditarProduto(props) {
   form.append("Nome", props.Nome);
   form.append("TipoProdutoId", props.TipoProdutoId);
   form.append("FornecedorId", props.FornecedorId);
-  form.append("PrecoCusto", props.precoVenda);
+  form.append("PrecoCusto", props.precoCusto);
   form.append("PrecoVenda", props.precoVenda);
   form.append("Lucro", props.Lucro);
   form.append("DataCompra", props.DataCompra);

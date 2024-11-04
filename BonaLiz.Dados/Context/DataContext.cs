@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiGateway.Dados.Context
+namespace BonaLiz.Dados.Context
 {
     public class DataContext : DbContext
     {

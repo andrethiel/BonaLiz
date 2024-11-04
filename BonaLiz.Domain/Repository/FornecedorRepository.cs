@@ -1,4 +1,4 @@
-﻿using ApiGateway.Dados.Context;
+﻿using BonaLiz.Dados.Context;
 using BonaLiz.Dados.Models;
 using BonaLiz.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;

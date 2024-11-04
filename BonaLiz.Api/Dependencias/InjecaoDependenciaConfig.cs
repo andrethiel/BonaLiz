@@ -1,4 +1,4 @@
-﻿using ApiGateway.Dados.Context;
+﻿using BonaLiz.Dados.Context;
 using BonaLiz.Domain.Interfaces;
 using BonaLiz.Domain.Repository;
 using BonaLiz.Negocio.AutoMapper;

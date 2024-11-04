@@ -3,6 +3,7 @@ using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 
 namespace BonaLiz.Api.Controller
 {
@@ -115,26 +116,11 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-                var venda = Convert.ToDecimal(PrecoVenda.Replace("R$", "").Trim());
-                var custo = Convert.ToDecimal(PrecoCusto.Replace("R$", "").Trim());
-				var lucro = custo - venda;
+                var venda = Convert.ToSingle(PrecoVenda.Replace("R$", "").Trim());
+                var custo = Convert.ToSingle(PrecoCusto.Replace("R$", "").Trim());
+				var lucro = Convert.ToSingle(venda - custo);
 
-				return Ok(lucro.ToString("C"));
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(ex);
-			}
-		}
-
-		[HttpGet]
-		[Route("/Caminho")]
-		public async Task<IActionResult> Caminho()
-		{
-			try
-			{
-
-				return Ok(AppDomain.CurrentDomain.BaseDirectory.ToString());
+				return Ok(lucro.ToString("C", CultureInfo.GetCultureInfo("pt-BR")));
 			}
 			catch (Exception ex)
 			{
