@@ -288,7 +288,8 @@ const Editar = () => {
             name={"precoCusto"}
             id={"precoCusto"}
             onChange={(event, originalValue, maskedValue) => {
-              setForm({ ...form, precoCusto: maskedValue });
+              const custo = maskedValue.replace(",", ".");
+              setForm({ ...form, precoCusto: custo });
             }}
             value={form.precoCusto}
           />
@@ -300,7 +301,8 @@ const Editar = () => {
             name={"precoVenda"}
             id={"precoVenda"}
             onChange={(event, originalValue, maskedValue) => {
-              setForm({ ...form, precoVenda: maskedValue });
+              const venda = maskedValue.replace(",", ".");
+              setForm({ ...form, precoVenda: venda });
             }}
             value={form.precoVenda}
             onBlur={handleBlur}
