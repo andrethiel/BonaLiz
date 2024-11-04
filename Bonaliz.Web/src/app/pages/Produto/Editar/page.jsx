@@ -109,15 +109,17 @@ const Editar = () => {
           />
         </div>
         <div>
-          <Select
-            data={selectFornecedor}
-            placeholder={"Selecione um Fornecedor"}
-            icon={<FaGlobeAmericas />}
-            name={"FornecedorId"}
-            id={"FornecedorId"}
-            onChange={handleChange}
-            value={form.FornecedorId}
-          />
+          {selectFornecedor && (
+            <Select
+              data={selectFornecedor}
+              placeholder={"Selecione um Fornecedor"}
+              icon={<FaGlobeAmericas />}
+              name={"FornecedorId"}
+              id={"FornecedorId"}
+              onChange={handleChange}
+              value={form.FornecedorId}
+            />
+          )}
         </div>
         {/* <div>
           <Select
