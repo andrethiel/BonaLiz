@@ -1,7 +1,10 @@
 import { EditarProduto, ProdutoPorGuid } from "@/Api/Controllers/Produto";
+import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export function Produtos(guid) {
+  const router = useRouter();
   const [checked, setChecked] = useState(false);
 
   const [form, setForm] = useState({
@@ -173,5 +176,6 @@ export function Produtos(guid) {
     EditaProduto,
     setChecked,
     checked,
+    router,
   };
 }

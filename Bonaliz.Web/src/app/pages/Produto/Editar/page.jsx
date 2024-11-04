@@ -1,10 +1,5 @@
 "use client";
-import { SelectListForncedor } from "@/Api/Controllers/Forncedor";
-import {
-  EditarProduto,
-  LucroProduto,
-  ProdutoPorGuid,
-} from "@/Api/Controllers/Produto";
+import { LucroProduto } from "@/Api/Controllers/Produto";
 import { SelectListTipoProduto } from "@/Api/Controllers/TipoProduto";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
@@ -14,12 +9,10 @@ import CustomLoading from "@/Components/CustomLoadingGrid";
 import DataPicker from "@/Components/DatePicker";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
-import { Lista } from "@/Hooks/Fornecedor";
 import { SelectListFornecedor } from "@/Hooks/FornecedorSelect";
 import { Produtos } from "@/Hooks/Produto";
-import dayjs from "dayjs";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BsTag } from "react-icons/bs";
 import { FaGlobeAmericas, FaMoneyBill, FaRegFileImage } from "react-icons/fa";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
@@ -29,7 +22,6 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 const Editar = () => {
   const param = useSearchParams();
   const guid = param.get("Guid");
-  const router = useRouter();
 
   const {
     form,
@@ -42,6 +34,7 @@ const Editar = () => {
     EditaProduto,
     setChecked,
     checked,
+    router,
   } = Produtos(guid);
 
   const { selectFornecedor } = SelectListFornecedor();
