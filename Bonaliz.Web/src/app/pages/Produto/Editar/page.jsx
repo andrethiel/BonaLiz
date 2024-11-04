@@ -59,8 +59,8 @@ const Editar = () => {
       const venda = form.precoVenda.replace(",", ".");
       setIsLoading(true);
       var response = await LucroProduto({
-        precoCusto: custo,
-        precoVenda: venda,
+        precoCusto: form.precoCusto,
+        precoVenda: form.precoVenda,
       });
       setForm({
         ...form,
@@ -133,7 +133,7 @@ const Editar = () => {
             id={"precoCusto"}
             onChange={(event, originalValue, maskedValue) => {
               const custo = maskedValue.replace(",", ".");
-              setForm({ ...form, precoCusto: custo });
+              setForm({ ...form, precoCusto: maskedValue });
             }}
             value={form.precoCusto}
           />
@@ -146,7 +146,7 @@ const Editar = () => {
             id={"precoVenda"}
             onChange={(event, originalValue, maskedValue) => {
               const venda = maskedValue.replace(",", ".");
-              setForm({ ...form, precoVenda: venda });
+              setForm({ ...form, precoVenda: maskedValue });
             }}
             value={form.precoVenda}
             onBlur={handleBlur}

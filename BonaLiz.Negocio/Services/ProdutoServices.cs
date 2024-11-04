@@ -51,7 +51,7 @@ namespace BonaLiz.Negocio.Services
             produto.Nome = model.Nome;
             produto.TipoProdutoId = Convert.ToInt32(model.TipoProdutoId);
             produto.FornecedorId = Convert.ToInt32(model.FornecedorId);
-            produto.PrecoCusto = Convert.ToDecimal(model.PrecoCusto.Replace("R$", "").Trim());
+            produto.PrecoCusto = Convert.ToDouble(model.PrecoCusto.Replace("R$", "").Trim());
             produto.PrecoVenda = Convert.ToDecimal(model.PrecoVenda.Replace("R$", "").Trim());
             produto.Lucro = Convert.ToDecimal(model.Lucro.Replace("R$", "").Trim());
             produto.DataCompra = Convert.ToDateTime(model.DataCompra);
@@ -71,8 +71,8 @@ namespace BonaLiz.Negocio.Services
             FornecedorId = x.FornecedorId.ToString(),
             TipoProdutoId = x.TipoProdutoId.ToString(),
             PrecoCusto = Formater.FormatarMoeda(x.PrecoCusto),
-            PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
-            Lucro = Formater.FormatarMoeda(x.Lucro),
+            //PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
+            //Lucro = Formater.FormatarMoeda(x.Lucro),
 			DataCompra = x.DataCompra.Value.ToString("dd/MM/yyyy"),
             NomeFornecedor = _fornecedorRepository.ObterPorId(x.FornecedorId).Nome,
             TipoProduto = _tipoProdutoRepository.ObterPorId(x.TipoProdutoId).Nome,
@@ -91,8 +91,8 @@ namespace BonaLiz.Negocio.Services
             FornecedorId=x.FornecedorId.ToString(),
             TipoProdutoId=x.TipoProdutoId.ToString(),
             PrecoCusto = Formater.FormatarMoeda(x.PrecoCusto),
-			PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
-            Lucro = Formater.FormatarMoeda(x.Lucro),
+			//PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
+   //         Lucro = Formater.FormatarMoeda(x.Lucro),
 			DataCompra = x.DataCompra.Value.ToString("dd/MM/yyyy"),
             NomeFornecedor = _fornecedorRepository.ObterPorId(x.FornecedorId).Nome,
             TipoProduto = _tipoProdutoRepository.ObterPorId(x.TipoProdutoId).Nome,
@@ -113,8 +113,8 @@ namespace BonaLiz.Negocio.Services
                 FornecedorId = produto.FornecedorId.ToString(),
                 TipoProdutoId = produto.TipoProdutoId.ToString(),
                 PrecoCusto = Formater.FormatarMoeda(produto.PrecoCusto),
-                PrecoVenda = Formater.FormatarMoeda(produto.PrecoVenda),
-                Lucro = Formater.FormatarMoeda(produto.Lucro),
+                //PrecoVenda = Formater.FormatarMoeda(produto.PrecoVenda),
+                //Lucro = Formater.FormatarMoeda(produto.Lucro),
                 DataCompra = produto.DataCompra.Value.ToString("dd/MM/yyyy"),
                 Codigo = produto.Codigo,
 				Quantidade = produto.Quantidade.ToString(),
@@ -135,8 +135,8 @@ namespace BonaLiz.Negocio.Services
                 FornecedorId = produto.FornecedorId.ToString(),
                 TipoProdutoId = produto.TipoProdutoId.ToString(),
                 PrecoCusto = Formater.FormatarMoeda(produto.PrecoCusto),
-				PrecoVenda = Formater.FormatarMoeda(produto.PrecoVenda),
-                Lucro = Formater.FormatarMoeda(produto.Lucro),
+				//PrecoVenda = Formater.FormatarMoeda(produto.PrecoVenda),
+    //            Lucro = Formater.FormatarMoeda(produto.Lucro),
                 DataCompra = produto.DataCompra.Value.ToString("dd/MM/yyyy"),
 				Codigo = produto.Codigo,
 				Quantidade = produto.Quantidade.ToString(),

@@ -73,7 +73,7 @@ export function Produtos(guid) {
 
   async function EditaProduto() {
     if (Valida()) {
-      replaceValores();
+      //replaceValores();
       setIsLoading(true);
       form.Inativo = checked.toString();
       form.DataCompra = dayjs(data.startDate).format("DD/MM/YYYY");
@@ -161,6 +161,7 @@ export function Produtos(guid) {
     const custo = form.precoCusto.replace(",", ".");
     const venda = form.precoVenda.replace(",", ".");
     const lucro = form.Lucro.replace(",", ".");
+    console.log(custo, lucro, venda);
     setForm({ ...form, precoCusto: custo, precoVenda: venda, Lucro: lucro });
   }
 

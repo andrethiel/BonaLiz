@@ -116,9 +116,9 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-                var venda = Convert.ToSingle(PrecoVenda.Replace("R$", "").Trim());
-                var custo = Convert.ToSingle(PrecoCusto.Replace("R$", "").Trim());
-				var lucro = Convert.ToSingle(custo - venda);
+                var venda = Convert.ToDouble(PrecoVenda.Replace("R$", "").Trim());
+                var custo = Convert.ToDouble(PrecoCusto.Replace("R$", "").Trim());
+				var lucro = Convert.ToDouble(custo - venda);
 
 				return Ok(lucro.ToString("C", CultureInfo.GetCultureInfo("pt-BR")));
 			}
