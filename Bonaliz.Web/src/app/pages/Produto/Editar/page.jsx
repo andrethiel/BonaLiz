@@ -14,6 +14,9 @@ import CustomLoading from "@/Components/CustomLoadingGrid";
 import DataPicker from "@/Components/DatePicker";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
+import { Lista } from "@/Hooks/Fornecedor";
+import { SelectListFornecedor } from "@/Hooks/FornecedorSelect";
+import { Produtos } from "@/Hooks/Produto";
 import dayjs from "dayjs";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -25,98 +28,29 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 
 const Editar = () => {
   const param = useSearchParams();
+  const guid = param.get("Guid");
+  const router = useRouter();
 
-  async function Buscar() {
-    setIsLoading(true);
-    const response = await ProdutoPorGuid(param.get("Guid"));
-    if (response.id != 0) {
-      setForm({
-        ...form,
-        Nome: response.nome,
-        Id: response.id,
-        Guid: response.guid,
-        Inativo:
-          response.inativo == "True" ? setChecked(true) : setChecked(false),
-        Quantidade: response.quantidade,
-        FornecedorId: response.fornecedorId,
-        TipoProdutoId: response.tipoProdutoId,
-        precoCusto: response.precoCusto,
-        precoVenda: response.precoVenda,
-        Lucro: response.lucro,
-        Imagem: response.urlImagem,
-      });
+  const {
+    form,
+    setForm,
+    data,
+    setData,
+    alert,
+    isLoading,
+    setIsLoading,
+    EditaProduto,
+    setChecked,
+    checked,
+  } = Produtos(guid);
 
-      setData({
-        ...data,
-        startDate: Date(response.dataCompra),
-        endDate: Date(response.dataCompra),
-      });
-    } else {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: "Fornecedor não encontrado",
-      });
-    }
-    setIsLoading(false);
-  }
-
-  async function Fornecedores() {
-    try {
-      const response = await SelectListForncedor();
-      if (response.length > 0) {
-        setFornecedor(response);
-        TipoProdutos();
-      }
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
-    }
-  }
+  const { selectFornecedor } = SelectListFornecedor();
   async function TipoProdutos() {
     const response = await SelectListTipoProduto();
     if (response.length > 0) {
       setTipoProduto(response);
     }
   }
-
-  useEffect(() => {
-    Fornecedores();
-    Buscar();
-  }, []);
-
-  const [checked, setChecked] = useState(false);
-
-  const [form, setForm] = useState({
-    Nome: "",
-    Id: "",
-    Guid: "",
-    Quantidade: "",
-    FornecedorId: "",
-    TipoProdutoId: "",
-    precoCusto: "",
-    precoVenda: "",
-    Lucro: "",
-    DataCompra: "",
-    Inativo: "false",
-    Arquivo: "",
-    Imagem: "",
-  });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [Fornecedor, setFornecedor] = useState([]);
-  const [TipoProduto, setTipoProduto] = useState([]);
-  const [data, setData] = useState({
-    startDate: new Date(),
-    endDate: null,
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -142,91 +76,6 @@ const Editar = () => {
       setIsLoading(false);
     }
   };
-
-  async function EditaProduto() {
-    if (Valida()) {
-      setIsLoading(true);
-      form.Inativo = checked.toString();
-      form.DataCompra = dayjs(data.startDate).format("DD/MM/YYYY");
-      const response = await EditarProduto(form);
-      if (response.status) {
-        setAlert({
-          ...alert,
-          type: "Success",
-          message: response.message,
-        });
-        router.back();
-      } else {
-        setAlert({
-          ...alert,
-          type: "Danger",
-          message: response.message,
-        });
-      }
-      setIsLoading(false);
-    }
-  }
-
-  function Valida() {
-    if (form.Nome == "") {
-      setAlert({
-        ...alert,
-        message: "Digite o nome do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.Quantidade == "") {
-      setAlert({
-        ...alert,
-        message: "Digite a quantidade",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.FornecedorId == "") {
-      setAlert({
-        ...alert,
-        message: "Selecione o fornecedor do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.TipoProdutoId == "") {
-      setAlert({
-        ...alert,
-        message: "Selecione o Tipo do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.precoCusto == "") {
-      setAlert({
-        ...alert,
-        message: "Digite o valor de custo do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.precoVenda == "") {
-      setAlert({
-        ...alert,
-        message: "Digite o valor de venda do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (data.startDate == "") {
-      setAlert({
-        ...alert,
-        message: "Selecione a data da compra",
-        type: "Alert",
-      });
-      return false;
-    }
-
-    return true;
-  }
 
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 
@@ -261,7 +110,7 @@ const Editar = () => {
         </div>
         <div>
           <Select
-            data={Fornecedor}
+            data={selectFornecedor}
             placeholder={"Selecione um Fornecedor"}
             icon={<FaGlobeAmericas />}
             name={"FornecedorId"}
@@ -270,7 +119,7 @@ const Editar = () => {
             value={form.FornecedorId}
           />
         </div>
-        <div>
+        {/* <div>
           <Select
             data={TipoProduto}
             placeholder={"Selecione um tipo de produto"}
@@ -280,7 +129,7 @@ const Editar = () => {
             onChange={handleChange}
             value={form.TipoProdutoId}
           />
-        </div>
+        </div> */}
         <div className="">
           <InputMoney
             placeholder={"Preço de custo"}

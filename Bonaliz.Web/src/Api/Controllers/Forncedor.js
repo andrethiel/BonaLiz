@@ -31,7 +31,12 @@ export async function PesquisarFornecedor(props) {
 }
 
 export async function SelectListForncedor() {
+  let lista = [];
   const response = await Api.request.get("/SelectListForncedor");
 
-  return response;
+  response.map((item) => {
+    lista.push({ value: item.value, label: item.text });
+  });
+
+  return lista;
 }

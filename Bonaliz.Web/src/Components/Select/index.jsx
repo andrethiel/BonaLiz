@@ -18,7 +18,7 @@ const Select = ({ icon, onChange, value, placeholder, data, name, id }) => {
         <option value={""}>{placeholder}</option>
         {data.map((item, index) => (
           <option key={index} value={item.value}>
-            {item.text}
+            {item.label}
           </option>
         ))}
       </select>

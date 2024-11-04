@@ -36,6 +36,24 @@ export function PrincipalHook() {
     setIsLoading(false);
   }
 
+  async function CadastrarVenda() {
+    setIsLoading(true);
+    try {
+      const response = await ListarProdutos();
+      if (response.length > 0) {
+        setProdutos(response);
+      }
+    } catch (e) {
+      setProdutos([]);
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: e.message,
+      });
+    }
+    setIsLoading(false);
+  }
+
   return {
     Produtos,
     isLoading,
