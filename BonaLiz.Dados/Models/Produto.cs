@@ -11,10 +11,10 @@ namespace BonaLiz.Dados.Models
         public string Nome { get; set; }
         public int Quantidade { get; set; }
         public double PrecoCusto { get; set; }
-        public decimal PrecoVenda { get; set; }
+        public double PrecoVenda { get; set; }
         public int FornecedorId { get; set; }
         public int TipoProdutoId { get; set; }
-        public decimal Lucro { get; set; }
+        public double Lucro { get; set; }
         public DateTime? DataCompra { get; set; }
         public string Codigo { get; set; }
         public bool Inativo { get; set; }

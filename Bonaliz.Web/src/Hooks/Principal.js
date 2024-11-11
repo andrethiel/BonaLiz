@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 export function PrincipalHook() {
   const [isLoading, setIsLoading] = useState(false);
   const [Produtos, setProdutos] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   const [alert, setAlert] = useState({
     message: "",
     type: "",
@@ -12,6 +13,8 @@ export function PrincipalHook() {
     ClienteId: "",
     ProdutoId: "",
     Quantidade: "",
+    Nome: "",
+    FornecedorId: "",
   });
 
   useEffect(() => {
@@ -23,7 +26,7 @@ export function PrincipalHook() {
     try {
       const response = await ListarProdutos();
       if (response.length > 0) {
-        setProdutos(response);
+        setProdutos(response.filter((x) => x.quantidade > 0));
       }
     } catch (e) {
       setProdutos([]);
@@ -35,30 +38,16 @@ export function PrincipalHook() {
     }
     setIsLoading(false);
   }
-
-  async function CadastrarVenda() {
-    setIsLoading(true);
-    try {
-      const response = await ListarProdutos();
-      if (response.length > 0) {
-        setProdutos(response);
-      }
-    } catch (e) {
-      setProdutos([]);
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
-    }
-    setIsLoading(false);
-  }
-
   return {
     Produtos,
     isLoading,
     alert,
     setForm,
     form,
+    setProdutos,
+    setIsLoading,
+    listar,
+    isOpen,
+    setIsOpen,
   };
 }

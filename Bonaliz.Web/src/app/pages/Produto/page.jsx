@@ -72,7 +72,8 @@ const Produto = () => {
   }
 
   async function Filtrar() {
-    form.DataCompra = dayjs(data.startDate).format("DD/MM/YYYY");
+    form.DataCompra =
+      data.startDate != null ? dayjs(data.startDate).format("DD/MM/YYYY") : "";
     setIsLoading(true);
     try {
       const response = await FiltrarProdutos(form);
@@ -193,7 +194,7 @@ const Produto = () => {
       <div className="p-3 m-3">
         <h3 className="text-2xl font-semibold">Lista de Produtos</h3>
       </div>
-      <div className="grid grid-row-5 lg:grid-cols-5 gap-2">
+      <div className="grid grid-col-1 lg:grid-cols-5 gap-2">
         <div>
           <Input
             icon={<BsTag />}

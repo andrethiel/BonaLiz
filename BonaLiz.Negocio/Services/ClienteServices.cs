@@ -69,7 +69,11 @@ namespace BonaLiz.Negocio.Services
 
 		public ClienteViewModel ObterPorId(int id)
 		{
-			return _mapper.Map<ClienteViewModel>(_clienteRepository.ObterPorId(id));
+			var cliente = _clienteRepository.ObterPorId(id);
+			return new ClienteViewModel()
+			{
+				Nome = cliente.Nome
+			};
 		}
 	}
 }

@@ -7,6 +7,7 @@ export async function ListarProdutos() {
 }
 
 export async function FiltrarProdutos(props) {
+  console.log(props);
   const response = await Api.request.post("/ProdutoFiltar", props);
 
   return response;
@@ -61,4 +62,15 @@ export async function EditarProduto(props) {
   const response = await Api.request.putForm("/EditarProduto", form);
 
   return response;
+}
+
+export async function SelectListProduto() {
+  let lista = [];
+  const response = await Api.request.get("/SelectListProdutos");
+
+  response.map((item) => {
+    lista.push({ value: item.value, label: item.text });
+  });
+
+  return lista;
 }

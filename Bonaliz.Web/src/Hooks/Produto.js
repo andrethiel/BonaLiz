@@ -1,9 +1,13 @@
-import { EditarProduto, ProdutoPorGuid } from "@/Api/Controllers/Produto";
+import {
+  EditarProduto,
+  FiltrarProdutos,
+  ProdutoPorGuid,
+} from "@/Api/Controllers/Produto";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export function Produtos(guid) {
+export function ProdutosHook(guid) {
   const router = useRouter();
   const [checked, setChecked] = useState(false);
 
@@ -31,10 +35,6 @@ export function Produtos(guid) {
     endDate: null,
   });
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    Buscar();
-  }, []);
 
   async function Buscar() {
     setIsLoading(true);
@@ -73,7 +73,6 @@ export function Produtos(guid) {
 
   async function EditaProduto() {
     if (Valida()) {
-      //replaceValores();
       setIsLoading(true);
       form.Inativo = checked.toString();
       form.DataCompra = dayjs(data.startDate).format("DD/MM/YYYY");
@@ -94,6 +93,13 @@ export function Produtos(guid) {
       }
       setIsLoading(false);
     }
+  }
+
+  async function PesquisarProduto(pesquisa) {
+    try {
+      const response = FiltrarProdutos(pesquisa);
+      return response;
+    } catch {}
   }
 
   function Valida() {
@@ -157,14 +163,6 @@ export function Produtos(guid) {
     return true;
   }
 
-  function replaceValores() {
-    const custo = form.precoCusto.replace(",", ".");
-    const venda = form.precoVenda.replace(",", ".");
-    const lucro = form.Lucro.replace(",", ".");
-    console.log(custo, lucro, venda);
-    setForm({ ...form, precoCusto: custo, precoVenda: venda, Lucro: lucro });
-  }
-
   return {
     form,
     setForm,
@@ -178,5 +176,7 @@ export function Produtos(guid) {
     setChecked,
     checked,
     router,
+    PesquisarProduto,
+    Buscar,
   };
 }

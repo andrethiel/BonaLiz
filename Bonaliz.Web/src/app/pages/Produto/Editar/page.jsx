@@ -10,7 +10,7 @@ import DataPicker from "@/Components/DatePicker";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
 import { SelectListFornecedor } from "@/Hooks/FornecedorSelect";
-import { Produtos } from "@/Hooks/Produto";
+import { ProdutosHook } from "@/Hooks/Produto";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { BsTag } from "react-icons/bs";
@@ -35,7 +35,7 @@ const Editar = () => {
     setChecked,
     checked,
     router,
-  } = Produtos(guid);
+  } = ProdutosHook(guid);
 
   const { selectFornecedor } = SelectListFornecedor();
   async function TipoProdutos() {
@@ -55,8 +55,6 @@ const Editar = () => {
 
   const handleBlur = async () => {
     if (form.precoCusto != "" && form.precoVenda != "") {
-      const custo = form.precoCusto.replace(",", ".");
-      const venda = form.precoVenda.replace(",", ".");
       setIsLoading(true);
       var response = await LucroProduto({
         precoCusto: form.precoCusto,

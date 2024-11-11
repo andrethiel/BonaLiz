@@ -1,8 +1,10 @@
-﻿using BonaLiz.Negocio.Interfaces;
+﻿using BonaLiz.Api.Helpers;
+using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
 
 namespace BonaLiz.Api.Controller
@@ -93,7 +95,7 @@ namespace BonaLiz.Api.Controller
 
         [HttpPost]
         [Route("/ProdutoFiltar")]
-        public async Task<IActionResult> Filtrar(ProdutoViewModel model)
+        public async Task<IActionResult> Filtrar([FromBody]ProdutoViewModel model)
         {
             try
             {
@@ -101,6 +103,7 @@ namespace BonaLiz.Api.Controller
 				model.FornecedorId = string.IsNullOrEmpty(model.FornecedorId) ? null : model.FornecedorId;
 				model.TipoProdutoId = string.IsNullOrEmpty(model.TipoProdutoId) ? null : model.TipoProdutoId;
 				model.DataCompra = string.IsNullOrEmpty(model.DataCompra) ? null : model.DataCompra;
+                model.Quantidade = string.IsNullOrEmpty(model.Quantidade) ? null : model.Quantidade;
                 return Ok(_produtoServices.Filtrar(model));
             }
             catch (Exception ex)
@@ -121,6 +124,21 @@ namespace BonaLiz.Api.Controller
 				var lucro = Convert.ToDouble(custo - venda);
 
 				return Ok(lucro.ToString("C", CultureInfo.GetCultureInfo("pt-BR")));
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex);
+			}
+		}
+
+
+		[HttpGet]
+		[Route("/SelectListProdutos")]
+		public async Task<IActionResult> SelectListProdutos()
+		{
+			try
+			{
+				return Ok(SelectListHelper.AddSelectList(new SelectList(_produtoServices.Listar().Where(x => x.Inativo == "False").ToList(), "Id", "Nome")));
 			}
 			catch (Exception ex)
 			{
