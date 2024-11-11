@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export function ProdutosHook(guid) {
+export function ProdutosHook() {
   const router = useRouter();
   const [checked, setChecked] = useState(false);
 
@@ -36,7 +36,7 @@ export function ProdutosHook(guid) {
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  async function Buscar() {
+  async function Buscar(guid) {
     setIsLoading(true);
     const response = await ProdutoPorGuid(guid);
     if (response.id != 0) {

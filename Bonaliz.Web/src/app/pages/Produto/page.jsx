@@ -40,8 +40,15 @@ const Produto = () => {
       const response = await ListarProdutos();
       if (response.length > 0) {
         setProduto(response);
-        Fornecedores();
+      } else {
+        setProduto([]);
+        setAlert({
+          ...alert,
+          type: "Danger",
+          message: "Nenhum produto encontrado",
+        });
       }
+      Fornecedores();
     } catch (e) {
       setAlert({
         ...alert,

@@ -26,7 +26,7 @@ export function PrincipalHook() {
     try {
       const response = await ListarProdutos();
       if (response.length > 0) {
-        setProdutos(response.filter((x) => x.quantidade > 0));
+        setProdutos(response);
       }
     } catch (e) {
       setProdutos([]);
@@ -38,6 +38,7 @@ export function PrincipalHook() {
     }
     setIsLoading(false);
   }
+
   return {
     Produtos,
     isLoading,

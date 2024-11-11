@@ -12,9 +12,11 @@ namespace BonaLiz.Negocio.Interfaces
         void Cadastrar(ProdutoViewModel model);
         void Editar(ProdutoViewModel model);
         List<ProdutoViewModel> Listar();
-        ProdutoViewModel ObterPorGuid(Guid guid);
+        List<ProdutoViewModel> ListarPrincipal();
+		ProdutoViewModel ObterPorGuid(Guid guid);
         ProdutoViewModel ObterPorId(int id);
         List<ProdutoViewModel> Filtrar(ProdutoViewModel model);
+
 
     }
 }

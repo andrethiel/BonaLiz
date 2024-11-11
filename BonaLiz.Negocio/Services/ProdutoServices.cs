@@ -31,14 +31,22 @@ namespace BonaLiz.Negocio.Services
 		}
 		public void Cadastrar(ProdutoViewModel model)
         {
-            var custo = model.PrecoCusto;
-            var venda = model.PrecoVenda.Replace(",", ".").Replace("R$", "").Trim();
-            var lucro = model.Lucro.Replace("R$", "").Trim();
-			model.PrecoCusto = custo;
-			model.PrecoVenda = venda;
-            model.Lucro = lucro;
-			model.Imagem = model.Arquivo != null ? Arquivo.Imagem(model.Arquivo) : "";
-			_produtoRepository.Inserir(_mapper.Map<Produto>(model));
+            try
+            {
+				var custo = model.PrecoCusto.Replace("R$", "").Trim();
+				var venda = model.PrecoVenda.Replace("R$", "").Trim();
+				var lucro = model.Lucro.Replace("R$", "").Trim();
+				model.PrecoCusto = custo;
+				model.PrecoVenda = venda;
+				model.Lucro = lucro;
+				model.Imagem = model.Arquivo != null ? Arquivo.Imagem(model.Arquivo) : "";
+				model.Codigo = string.Empty;
+				_produtoRepository.Inserir(_mapper.Map<Produto>(model));
+			}catch(Exception ex)
+            {
+                throw;
+            }
+            
         }
 
         public void Editar(ProdutoViewModel model)
@@ -51,9 +59,9 @@ namespace BonaLiz.Negocio.Services
             produto.Nome = model.Nome;
             produto.TipoProdutoId = Convert.ToInt32(model.TipoProdutoId);
             produto.FornecedorId = Convert.ToInt32(model.FornecedorId);
-            produto.PrecoCusto = Convert.ToDouble(model.PrecoCusto.Replace(",", ".").Replace("R$", "").Trim());
-            produto.PrecoVenda = Convert.ToDouble(model.PrecoVenda.Replace(",", ".").Replace("R$", "").Trim());
-            produto.Lucro = Convert.ToDouble(model.Lucro.Replace(",", ".").Replace("R$", "").Trim());
+            produto.PrecoCusto = Convert.ToSingle(model.PrecoCusto.Replace(",", ".").Replace("R$", "").Trim());
+            produto.PrecoVenda = Convert.ToSingle(model.PrecoVenda.Replace(",", ".").Replace("R$", "").Trim());
+            produto.Lucro = Convert.ToSingle(model.Lucro.Replace(",", ".").Replace("R$", "").Trim());
             produto.DataCompra = Convert.ToDateTime(model.DataCompra);
             produto.Quantidade = Convert.ToInt32(model.Quantidade);
             produto.Inativo = Convert.ToBoolean(model.Inativo);
@@ -144,5 +152,17 @@ namespace BonaLiz.Negocio.Services
 				UrlImagem = !string.IsNullOrWhiteSpace(produto.Arquivo) ? Arquivo.FormataNomeURL(produto.Arquivo, _httpContextAccessor) : ""
 			};
         }
-    }
+
+        public List<ProdutoViewModel> ListarPrincipal() => _produtoRepository.Listar()
+            .Where(x => x.Quantidade > 0)
+            .Where(x => x.Inativo == false)
+			.Select(x => new ProdutoViewModel()
+			{
+				Id = x.Id,
+				Nome = x.Nome,
+				PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
+				UrlImagem = !string.IsNullOrWhiteSpace(x.Arquivo) ? Arquivo.FormataNomeURL(x.Arquivo, _httpContextAccessor) : ""
+			})
+			.ToList();
+	}
 }

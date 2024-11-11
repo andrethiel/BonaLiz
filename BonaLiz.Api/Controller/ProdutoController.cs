@@ -119,11 +119,25 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-                var venda = Convert.ToDouble(PrecoVenda.Replace("R$", "").Trim());
-                var custo = Convert.ToDouble(PrecoCusto.Replace("R$", "").Trim());
-				var lucro = Convert.ToDouble(custo - venda);
+                var venda = Convert.ToSingle(PrecoVenda.Replace("R$", "").Replace(",", ".").Trim());
+                var custo = Convert.ToSingle(PrecoCusto.Replace("R$", "").Replace(",", ".").Trim());
+				var lucro = Convert.ToSingle(custo - venda);
 
 				return Ok(lucro.ToString("C", CultureInfo.GetCultureInfo("pt-BR")));
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex);
+			}
+		}
+
+		[HttpGet]
+		[Route("/ListaPrincipal")]
+		public async Task<IActionResult> ListaPrincipal()
+		{
+			try
+			{
+				return Ok(_produtoServices.ListarPrincipal());
 			}
 			catch (Exception ex)
 			{

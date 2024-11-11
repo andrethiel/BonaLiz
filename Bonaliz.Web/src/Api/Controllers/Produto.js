@@ -6,6 +6,12 @@ export async function ListarProdutos() {
   return response;
 }
 
+export async function ListarProdutosPrincal() {
+  const response = await Api.request.get("/ListaPrincipal");
+
+  return response;
+}
+
 export async function FiltrarProdutos(props) {
   console.log(props);
   const response = await Api.request.post("/ProdutoFiltar", props);

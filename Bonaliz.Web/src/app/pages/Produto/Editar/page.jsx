@@ -12,7 +12,7 @@ import Select from "@/Components/Select";
 import { SelectListFornecedor } from "@/Hooks/FornecedorSelect";
 import { ProdutosHook } from "@/Hooks/Produto";
 import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { BsTag } from "react-icons/bs";
 import { FaGlobeAmericas, FaMoneyBill, FaRegFileImage } from "react-icons/fa";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
@@ -35,7 +35,12 @@ const Editar = () => {
     setChecked,
     checked,
     router,
+    Buscar,
   } = ProdutosHook(guid);
+
+  useEffect(() => {
+    Buscar(guid);
+  }, []);
 
   const { selectFornecedor } = SelectListFornecedor();
   async function TipoProdutos() {

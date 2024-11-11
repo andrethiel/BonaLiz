@@ -43,23 +43,21 @@ namespace BonaLiz.Domain.Repository
             var listaCodigos = _context.Produto.Where(x => x.FornecedorId == produto.FornecedorId).Where(x => x.Codigo != "").ToList().OrderBy(x => x.Codigo).ToList();
             if(listaCodigos.Count > 0)
             {
-                if(listaCodigos.Last().Codigo == null)
-                {
-                    produto.Codigo = string.Format("{0}{1}{2}", _context.Fornecedor.Where(x => x.Id == produto.FornecedorId).FirstOrDefault().Iniciais, "000", 1);
-                }
-                else
-                {
-                    var codigo = listaCodigos.Last().Codigo.Length == 6 ? listaCodigos.Last().Codigo.Substring(2) : listaCodigos.Last().Codigo.Substring(1);
-                    var zeros = codigo.Split("0").SkipLast(1).ToArray();
-                    var codigoInt = Convert.ToInt32(codigo) + 1;
-                    var iniciais = _context.Fornecedor.Where(x => x.Id == produto.FornecedorId).FirstOrDefault().Iniciais.Trim();
-                    iniciais = string.Format("{0}{1}", iniciais.PadRight(iniciais.Length + zeros.Length, '0'), codigoInt);
+				var codigo = listaCodigos.Last().Codigo.Length == 6 ? listaCodigos.Last().Codigo.Substring(2) : listaCodigos.Last().Codigo.Substring(1);
+				var zeros = codigo.Split("0").SkipLast(1).ToArray();
+				var codigoInt = Convert.ToInt32(codigo) + 1;
+				var iniciais = _context.Fornecedor.Where(x => x.Id == produto.FornecedorId).FirstOrDefault().Iniciais.Trim();
+				iniciais = string.Format("{0}{1}", iniciais.PadRight(iniciais.Length + zeros.Length, '0'), codigoInt);
 
-					produto.Codigo = iniciais;
-                }
-            }
+				produto.Codigo = iniciais;
 
-            _context.Produto.Update(produto);
+			}
+			else
+			{
+				produto.Codigo = string.Format("{0}{1}{2}", _context.Fornecedor.Where(x => x.Id == produto.FornecedorId).FirstOrDefault().Iniciais, "000", 1);
+			}
+
+			_context.Produto.Update(produto);
             _context.SaveChanges();
         }
 
