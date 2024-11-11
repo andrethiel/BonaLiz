@@ -1,4 +1,4 @@
-import { ListarProdutos } from "@/Api/Controllers/Produto";
+import { ListarProdutosPrincal } from "@/Api/Controllers/Produto";
 import { useEffect, useState } from "react";
 
 export function PrincipalHook() {
@@ -24,9 +24,11 @@ export function PrincipalHook() {
   async function listar() {
     setIsLoading(true);
     try {
-      const response = await ListarProdutos();
+      const response = await ListarProdutosPrincal();
       if (response.length > 0) {
         setProdutos(response);
+      } else {
+        setProdutos([]);
       }
     } catch (e) {
       setProdutos([]);
