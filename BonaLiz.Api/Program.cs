@@ -39,4 +39,6 @@ app.UseCors(builder => builder
             .AllowCredentials());
 app.MapControllers();
 
+app.UseRequestLocalization("pt-BR");
+
 app.Run();

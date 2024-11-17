@@ -5,7 +5,7 @@ namespace BonaLiz.Negocio.Helpers
 	public static class Formater
 	{
 		public static string FormatarMoeda(double valor) {
-			return valor.ToString("C", CultureInfo.GetCultureInfo("pt-BR"));
+			return valor.ToString("C");
 		}
 	}
 }
