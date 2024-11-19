@@ -12,10 +12,11 @@ namespace BonaLiz.Dados.Models
 		public int ClienteId { get; set; }
 		public int ProdutoId { get; set; }
 		public int Quantidade { get; set; }
-		public double Valor { get; set; }
+		public decimal Valor { get; set; }
         public bool? Cancelada { get; set; }
         public DateTime? DataVenda { get; set; }
-		[NotMapped]
+        public string Status { get; set; }
+        [NotMapped]
 		public string NomeCliente { get; set; }
 		[NotMapped]
 		public string NomeProduto { get; set; }

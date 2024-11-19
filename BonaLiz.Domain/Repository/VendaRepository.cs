@@ -52,7 +52,9 @@ namespace BonaLiz.Domain.Repository
 			{
 				return _context.Venda
 						.Where(x => model.ProdutoId == 0 || x.ProdutoId == model.ProdutoId)
-						.Where(x => model.DataVenda == null || x.DataVenda == model.DataVenda.Value).ToList();
+						.Where(x => model.DataVenda == null || x.DataVenda == model.DataVenda.Value)
+						.Where(x => string.IsNullOrEmpty(model.Status) || x.Status == model.Status)
+						.ToList();
 			}
 		}
 
@@ -67,6 +69,18 @@ namespace BonaLiz.Domain.Repository
 			}
 
 			return venda;
+		}
+
+		public void StatusVenda(int id, string status)
+		{
+			var venda = _context.Venda.Where(x => x.Id == id).FirstOrDefault();
+
+			if(venda != null)
+			{
+				venda.Status = status;
+				_context.Venda.Update(venda);
+				_context.SaveChanges();
+			}
 		}
 	}
 }

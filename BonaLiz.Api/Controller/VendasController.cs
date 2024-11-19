@@ -111,5 +111,24 @@ namespace BonaLiz.Api.Controller
 				return BadRequest(ex);
 			}
 		}
+
+		[HttpPut]
+		[Route("/VendasStatus")]
+		public async Task<IActionResult> VendasStatus(int id, string status)
+		{
+			try
+			{
+				_vendaServices.StatusVenda(id, status);
+				return Ok(new
+				{
+					status = true,
+					message = "Status da venda alterado com sucesso"
+				});
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex);
+			}
+		}
 	}
 }

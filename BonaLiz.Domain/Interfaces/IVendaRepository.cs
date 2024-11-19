@@ -14,5 +14,6 @@ namespace BonaLiz.Domain.Interfaces
 		List<Venda> Listar();
 		Venda ObterPorGuid(Guid guid);
 		List<Venda> Filtrar(Venda model);
+		void StatusVenda(int id, string status);
 	}
 }

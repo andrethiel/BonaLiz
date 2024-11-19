@@ -1,4 +1,5 @@
 import { ListarProdutosPrincal } from "@/Api/Controllers/Produto";
+import { InserirVenda } from "@/Api/Controllers/Vender";
 import { useEffect, useState } from "react";
 
 export function PrincipalHook() {
@@ -15,11 +16,8 @@ export function PrincipalHook() {
     Quantidade: "",
     Nome: "",
     FornecedorId: "",
+    Status: "",
   });
-
-  useEffect(() => {
-    listar();
-  }, []);
 
   async function listar() {
     setIsLoading(true);
@@ -41,10 +39,69 @@ export function PrincipalHook() {
     setIsLoading(false);
   }
 
+  async function Cadastrar(form) {
+    try {
+      if (Valida(form)) {
+        const response = await InserirVenda(form);
+        if (response.status) {
+          setAlert({
+            ...alert,
+            type: "Success",
+            message: response.message,
+          });
+          setIsOpen(false);
+          listar();
+        } else {
+          setAlert({
+            ...alert,
+            type: "Danger",
+            message: response.message,
+          });
+        }
+      }
+    } catch (e) {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: e.message,
+      });
+    }
+  }
+
+  function Valida(forms) {
+    if (forms.ClienteId == "") {
+      setAlert({
+        ...alert,
+        message: "Selecione um cliente",
+        type: "Alert",
+      });
+      return false;
+    }
+    if (forms.Quantidade == "") {
+      setAlert({
+        ...alert,
+        message: "Digite a quantidade do produto",
+        type: "Alert",
+      });
+      return false;
+    }
+    if (forms.Status == "") {
+      setAlert({
+        ...alert,
+        message: "Selecione um status de pagamento",
+        type: "Alert",
+      });
+      return false;
+    }
+
+    return true;
+  }
+
   return {
     Produtos,
     isLoading,
     alert,
+    setAlert,
     setForm,
     form,
     setProdutos,
@@ -52,5 +109,6 @@ export function PrincipalHook() {
     listar,
     isOpen,
     setIsOpen,
+    Cadastrar,
   };
 }

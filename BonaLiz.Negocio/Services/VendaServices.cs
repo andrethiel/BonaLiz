@@ -49,7 +49,8 @@ namespace BonaLiz.Negocio.Services
 				Quantidade = x.Quantidade.ToString(),
 				Valor = Formater.FormatarMoeda(x.Valor),
 				DataVenda = x.DataVenda.Value.ToString("dd/MM/yyyy"),
-				Cancelada = x.Cancelada.ToString()
+				Cancelada = x.Cancelada.ToString(),
+				Status = x.Status
 			}).ToList();
 
 		}
@@ -66,7 +67,8 @@ namespace BonaLiz.Negocio.Services
 				Quantidade = venda.Quantidade.ToString(),
 				Valor = Formater.FormatarMoeda(venda.Valor),
 				DataVenda = venda.DataVenda.Value.ToString("dd/MM/yyyy"),
-				Cancelada = venda.Cancelada.ToString()
+				Cancelada = venda.Cancelada.ToString(),
+				Status = venda.Status
 			};
 		}
 
@@ -89,7 +91,8 @@ namespace BonaLiz.Negocio.Services
 					Quantidade = x.Quantidade.ToString(),
 					Valor = Formater.FormatarMoeda(x.Valor),
 					DataVenda = x.DataVenda.Value.ToString("dd/MM/yyyy"),
-					Cancelada = x.Cancelada.ToString()
+					Cancelada = x.Cancelada.ToString(),
+					Status = x.Status
 				}).ToList();
 			}
 		}
@@ -103,5 +106,7 @@ namespace BonaLiz.Negocio.Services
 			_produtoRepository.Editar(produto);
 
 		}
+
+		public void StatusVenda(int id, string status) => _vendaRepository.StatusVenda(id, status);
 	}
 }

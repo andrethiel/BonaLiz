@@ -1,6 +1,7 @@
 ﻿using BonaLiz.Api.Helpers;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
+using BonaLiz.Negocio.Utils;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -119,11 +120,11 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-                var venda = Convert.ToSingle(PrecoVenda.Replace("R$", "").Replace(",", ".").Trim());
-                var custo = Convert.ToSingle(PrecoCusto.Replace("R$", "").Replace(",", ".").Trim());
-				var lucro = Convert.ToSingle(custo - venda);
+                var venda = Convert.ToDecimal(PrecoVenda.Replace("R$", "").Trim());
+                var custo = Convert.ToDecimal(PrecoCusto.Replace("R$", "").Trim());
+				var lucro = Convert.ToDecimal(custo - venda);
 
-				return Ok(lucro.ToString("C", CultureInfo.GetCultureInfo("pt-BR")));
+				return Ok(lucro.ToString("C"));
 			}
 			catch (Exception ex)
 			{
@@ -159,5 +160,12 @@ namespace BonaLiz.Api.Controller
 				return BadRequest(ex);
 			}
 		}
+
+		[HttpPost]
+		[Route("/arquivoProduto")]
+		public async Task<IActionResult> arquivoProduto([FromForm] ProdutoViewModel model)
+        {
+            return Ok(Arquivo.Imagem(model.Arquivo));
+        }
 	}
 }

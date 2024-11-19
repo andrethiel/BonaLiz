@@ -29,3 +29,11 @@ export async function CancelarVenda(id) {
 
   return response;
 }
+
+export async function StatusVenda(id, status) {
+  const response = await Api.request.put(
+    `/VendasStatus?id=${id}&status=${status}`
+  );
+
+  return response;
+}

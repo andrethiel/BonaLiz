@@ -18,7 +18,7 @@ function Modal({ children, title }) {
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                   <h3 className="text-2xl font-semibold">{title}</h3>
-                  <div className="mt-2">
+                  <div className="mt-5">
                     <div className="flex flex-col gap-5">{children}</div>
                   </div>
                 </div>

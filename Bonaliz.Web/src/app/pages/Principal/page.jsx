@@ -5,7 +5,9 @@ import Card from "@/Components/Card";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import Input from "@/Components/Input";
 import Modal from "@/Components/Modal";
+import Select from "@/Components/Select";
 import Select2 from "@/Components/Select2";
+import { StatusVenda } from "@/constants/status";
 import { SelectListClientes } from "@/Hooks/ClienteSelect";
 import { SelectListFornecedor } from "@/Hooks/FornecedorSelect";
 import { PrincipalHook } from "@/Hooks/Principal";
@@ -14,7 +16,7 @@ import { listTipoProduto } from "@/Hooks/TipoProdutoSelect";
 import { VendasHook } from "@/Hooks/Venda";
 import React, { useEffect } from "react";
 import { BsTag } from "react-icons/bs";
-import { FaCartPlus } from "react-icons/fa";
+import { FaCartPlus, FaMoneyBill } from "react-icons/fa";
 
 function Principal() {
   const {
@@ -27,8 +29,10 @@ function Principal() {
     setIsLoading,
     isOpen,
     setIsOpen,
+    Cadastrar,
+    alert,
+    setAlert,
   } = PrincipalHook();
-  const { Cadastrar, alert, setAlert } = VendasHook(form);
   const { selectFornecedor } = SelectListFornecedor();
   const { selectTipoProduto } = listTipoProduto();
   const { PesquisarProduto } = ProdutosHook();
@@ -42,12 +46,6 @@ function Principal() {
   }
   const { selectClientes } = SelectListClientes(isOpen);
 
-  async function Vender() {
-    await Cadastrar(form);
-    await listar();
-    setIsOpen(false);
-  }
-
   async function Pesquisar() {
     setIsLoading(true);
     const response = await PesquisarProduto(form);
@@ -56,6 +54,9 @@ function Principal() {
     }
     setIsLoading(false);
   }
+  useEffect(() => {
+    listar();
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -73,11 +74,7 @@ function Principal() {
       {alert && <Alert type={alert.type}>{alert.message}</Alert>}
       <div className={`flex flex-col my-6 ${isLoading && "hidden"}`}>
         {isOpen && (
-          <Modal
-            open={isOpen}
-            close={handleCloseModal}
-            title={"Realizar venda"}
-          >
+          <Modal close={handleCloseModal} title={"Realizar venda"}>
             <Select2
               placeholder={"Digite o nome do cliente"}
               data={selectClientes}
@@ -96,7 +93,18 @@ function Principal() {
                 })
               }
             />
-            <Button color={"primary"} onClick={Vender}>
+            <Select
+              placeholder={"Selecione o status de pagamento"}
+              data={StatusVenda}
+              icon={<FaMoneyBill />}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  Status: e.target.value,
+                })
+              }
+            />
+            <Button color={"primary"} onClick={() => Cadastrar(form)}>
               Vender
             </Button>
             <Button color={"secondary"} onClick={handleCloseModal}>

@@ -2,11 +2,13 @@ import {
   CancelarVenda,
   InserirVenda,
   ListarVendas,
+  StatusVenda,
   VendasFiltar,
 } from "@/Api/Controllers/Vender";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { PrincipalHook } from "./Principal";
 
 export function VendasHook() {
   const [vendasLista, setVendasLista] = useState([]);
@@ -23,11 +25,11 @@ export function VendasHook() {
     NomeCliente: "",
     ProdutoId: "",
     DataVenda: "",
+    Status: "",
+    VendaId: "",
   });
 
-  useEffect(() => {
-    Listar();
-  }, []);
+  const [IsOpen, setIsOpen] = useState(false);
 
   async function Listar() {
     setIsLoading(true);
@@ -53,31 +55,6 @@ export function VendasHook() {
     }
   }
 
-  async function Cadastrar(form) {
-    try {
-      const response = await InserirVenda(form);
-      if (response.status) {
-        setAlert({
-          ...alert,
-          type: "Success",
-          message: response.message,
-        });
-      } else {
-        setAlert({
-          ...alert,
-          type: "Danger",
-          message: response.message,
-        });
-      }
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
-    }
-  }
-
   async function Filtrar() {
     setIsLoading(true);
     form.DataVenda =
@@ -97,7 +74,6 @@ export function VendasHook() {
   }
 
   async function Cancela(id) {
-    console.log(id);
     setIsLoading(true);
     const response = await CancelarVenda(id);
     if (response.status) {
@@ -110,20 +86,34 @@ export function VendasHook() {
     setIsLoading(false);
   }
 
-  setTimeout(() => {
-    setAlert({
-      ...alert,
-      type: "",
-      message: "",
-    });
-  }, [500]);
+  async function Status(id, status) {
+    if (status == "") {
+      setAlert({
+        ...alert,
+        type: "Alert",
+        message: "Selecione um status de pagamento",
+      });
+    } else {
+      setIsLoading(true);
+      const response = await StatusVenda(id, status);
+      if (response.status) {
+        setAlert({
+          ...alert,
+          type: "Success",
+          message: response.message,
+        });
+        Listar();
+      }
+      setIsOpen(false);
+      setIsLoading(false);
+    }
+  }
 
   return {
     alert,
     setAlert,
     isLoading,
     setIsLoading,
-    Cadastrar,
     vendasLista,
     data,
     setData,
@@ -132,5 +122,8 @@ export function VendasHook() {
     setForm,
     Cancela,
     Listar,
+    IsOpen,
+    setIsOpen,
+    Status,
   };
 }

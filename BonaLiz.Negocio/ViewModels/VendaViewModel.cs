@@ -18,5 +18,6 @@ namespace BonaLiz.Negocio.ViewModels
         public string NomeCliente { get; set; }
 		public string DataVenda { get; set; }
         public string Cancelada { get; set; }
+        public string Status { get; set; }
     }
 }

@@ -25,6 +25,7 @@ export function ProdutosHook() {
     Inativo: "false",
     Arquivo: "",
     Imagem: "",
+    Status: "",
   });
   const [alert, setAlert] = useState({
     message: "",
@@ -54,6 +55,7 @@ export function ProdutosHook() {
         precoVenda: response.precoVenda,
         Lucro: response.lucro,
         Imagem: response.urlImagem,
+        Status: response.status,
       });
 
       setData({

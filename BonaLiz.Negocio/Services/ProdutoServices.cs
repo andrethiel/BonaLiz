@@ -33,15 +33,21 @@ namespace BonaLiz.Negocio.Services
         {
             try
             {
-				var custo = model.PrecoCusto.Replace("R$", "").Trim();
-				var venda = model.PrecoVenda.Replace("R$", "").Trim();
-				var lucro = model.Lucro.Replace("R$", "").Trim();
-				model.PrecoCusto = custo;
-				model.PrecoVenda = venda;
-				model.Lucro = lucro;
+                var produto = new Produto();
+
 				model.Imagem = model.Arquivo != null ? Arquivo.Imagem(model.Arquivo) : "";
-				model.Codigo = string.Empty;
-				_produtoRepository.Inserir(_mapper.Map<Produto>(model));
+				produto.Nome = model.Nome;
+				produto.TipoProdutoId = Convert.ToInt32(model.TipoProdutoId);
+				produto.FornecedorId = Convert.ToInt32(model.FornecedorId);
+				produto.PrecoCusto = Convert.ToDecimal(model.PrecoCusto.Replace("R$", "").Trim());
+				produto.PrecoVenda = Convert.ToDecimal(model.PrecoVenda.Replace("R$", "").Trim());
+				produto.Lucro = Convert.ToDecimal(model.Lucro.Replace("R$", "").Trim());
+				produto.DataCompra = Convert.ToDateTime(model.DataCompra);
+				produto.Quantidade = Convert.ToInt32(model.Quantidade);
+				produto.Inativo = Convert.ToBoolean(model.Inativo);
+				produto.Arquivo = model.Imagem;
+				produto.Codigo = "";
+				_produtoRepository.Inserir(produto);
 			}catch(Exception ex)
             {
                 throw;
@@ -53,15 +59,15 @@ namespace BonaLiz.Negocio.Services
         {
 			
 			var produto = _produtoRepository.ObterPorId(model.Id);
-			model.Imagem = model.Arquivo != null ? Arquivo.Imagem(model.Arquivo) : produto.Arquivo;
+			model.Imagem = model.Arquivo == null ? produto.Arquivo : Arquivo.Imagem(model.Arquivo);
 			produto.Id = model.Id;
             produto.Guid = model.Guid;
             produto.Nome = model.Nome;
             produto.TipoProdutoId = Convert.ToInt32(model.TipoProdutoId);
             produto.FornecedorId = Convert.ToInt32(model.FornecedorId);
-            produto.PrecoCusto = Convert.ToSingle(model.PrecoCusto.Replace(",", ".").Replace("R$", "").Trim());
-            produto.PrecoVenda = Convert.ToSingle(model.PrecoVenda.Replace(",", ".").Replace("R$", "").Trim());
-            produto.Lucro = Convert.ToSingle(model.Lucro.Replace(",", ".").Replace("R$", "").Trim());
+            produto.PrecoCusto = Convert.ToDecimal(model.PrecoCusto.Replace("R$", "").Trim());
+            produto.PrecoVenda = Convert.ToDecimal(model.PrecoVenda.Replace("R$", "").Trim());
+            produto.Lucro = Convert.ToDecimal(model.Lucro.Replace("R$", "").Trim());
             produto.DataCompra = Convert.ToDateTime(model.DataCompra);
             produto.Quantidade = Convert.ToInt32(model.Quantidade);
             produto.Inativo = Convert.ToBoolean(model.Inativo);
