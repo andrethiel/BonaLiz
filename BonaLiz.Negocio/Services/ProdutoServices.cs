@@ -167,6 +167,7 @@ namespace BonaLiz.Negocio.Services
 				Id = x.Id,
 				Nome = x.Nome,
 				PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
+                Codigo = x.Codigo,
 				UrlImagem = !string.IsNullOrWhiteSpace(x.Arquivo) ? Arquivo.FormataNomeURL(x.Arquivo, _httpContextAccessor) : ""
 			})
 			.ToList();
