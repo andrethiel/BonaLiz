@@ -34,7 +34,7 @@ namespace BonaLiz.Negocio.Services
             try
             {
                 var produto = new Produto();
-
+                produto.Guid = Guid.NewGuid();
 				model.Imagem = model.Arquivo != null ? Arquivo.Imagem(model.Arquivo) : "";
 				produto.Nome = model.Nome;
 				produto.TipoProdutoId = Convert.ToInt32(model.TipoProdutoId);

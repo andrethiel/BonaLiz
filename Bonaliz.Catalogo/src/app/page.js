@@ -77,11 +77,15 @@ export default function Home() {
           <div
             key={index}
             className="rounded overflow-hidden shadow-md flex items-center cursor-pointer"
-            onClick={() => handeleModal(item.nome, item.codigo)}
           >
             {item.urlImagem && <Image className="w-32" src={item.urlImagem} />}
             <div className="px-6 py-4">
-              <div className="text-xl">{item.nome}</div>
+              <div
+                className="text-xl"
+                onClick={() => handeleModal(item.nome, item.codigo)}
+              >
+                {item.nome}
+              </div>
               <div className="font-bold text-xl">Valor: {item.precoVenda}</div>
             </div>
           </div>
