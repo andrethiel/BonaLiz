@@ -78,7 +78,7 @@ export default function Home() {
             key={index}
             className="rounded overflow-hidden shadow-md flex items-center cursor-pointer"
           >
-            {item.urlImagem && <Image className="w-32" src={item.urlImagem} />}
+            {item.urlImagem && <img className="w-32" src={item.urlImagem} />}
             <div className="px-6 py-4">
               <div
                 className="text-xl"
