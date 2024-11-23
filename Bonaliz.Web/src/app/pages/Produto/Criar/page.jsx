@@ -11,7 +11,7 @@ import Input from "@/Components/Input";
 import Select from "@/Components/Select";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { BsTag } from "react-icons/bs";
 import { FaGlobeAmericas, FaMoneyBill, FaRegFileImage } from "react-icons/fa";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
@@ -179,127 +179,129 @@ const Criar = () => {
     }
   };
 
-  if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
-
   return (
-    <div className="w-full">
-      <div className="p-3 m-3">
-        <h3 className="text-2xl font-semibold">Cadastro de Produtos</h3>
-      </div>
-      {alert && <Alert type={alert.type}>{alert.message}</Alert>}
-      <div className="grid gap-4">
-        <div className="">
-          <Input
-            placeholder={"Nome do produto"}
-            icon={<BsTag />}
-            name={"Nome"}
-            id={"Nome"}
-            onChange={handleChange}
-          />
+    <Suspense>
+      {isLoading && <CustomLoading loadingMessage="Aguarde..." />}
+      <div className={`${isLoading && "hidden"} w-full`}>
+        <div className="p-3 m-3">
+          <h3 className="text-2xl font-semibold">Cadastro de Produtos</h3>
         </div>
-        <div className="">
-          <Input
-            placeholder={"Quantidade"}
-            icon={<MdOutlineProductionQuantityLimits />}
-            name={"Quantidade"}
-            id={"Quantidade"}
-            onChange={handleChange}
-            value={form.Quantidade}
-          />
-        </div>
-        <div>
-          <Select
-            data={Fornecedor}
-            placeholder={"Selecione um Fornecedor"}
-            icon={<FaGlobeAmericas />}
-            name={"FornecedorId"}
-            id={"FornecedorId"}
-            onChange={handleChange}
-            value={form.FornecedorId}
-          />
-        </div>
-        <div>
-          <Select
-            data={TipoProduto}
-            placeholder={"Selecione um tipo de produto"}
-            icon={<FaGlobeAmericas />}
-            name={"TipoProdutoId"}
-            id={"TipoProdutoId"}
-            onChange={handleChange}
-            value={form.TipoProdutoId}
-          />
-        </div>
-        <div className="">
-          <InputMoney
-            placeholder={"Preço de custo"}
-            icon={<FaMoneyBill />}
-            name={"precoCusto"}
-            id={"precoCusto"}
-            onChange={(event, originalValue, maskedValue) =>
-              setForm({ ...form, precoCusto: maskedValue })
-            }
-            value={form.precoCusto}
-          />
-        </div>
-        <div className="">
-          <InputMoney
-            placeholder={"Preço de venda"}
-            icon={<FaMoneyBill />}
-            name={"precoVenda"}
-            id={"precoVenda"}
-            onChange={(event, originalValue, maskedValue) =>
-              setForm({ ...form, precoVenda: maskedValue })
-            }
-            value={form.precoVenda}
-            onBlur={handleBlur}
-          />
-        </div>
-        <div className="">
-          <Input
-            placeholder={"Lucro"}
-            icon={<FaMoneyBill />}
-            name={"Lucro"}
-            id={"Lucro"}
-            value={form.Lucro}
-            disabled={true}
-          />
-        </div>
-        <div className="">
-          <DataPicker
-            onChange={(newValue) => {
-              setData(newValue);
-            }}
-            value={data}
-            placeholder="Selecione a data da compra"
-          />
-        </div>
-        <div className="">
-          <Input
-            placeholder={"Arquivo"}
-            icon={<FaRegFileImage />}
-            type={"file"}
-            name={"Arquivo"}
-            id={"Arquivo"}
-            onChange={(e) => setForm({ ...form, Arquivo: e.target.files[0] })}
-          />
-        </div>
-        {form.Arquivo && (
-          <div className="w-full flex mt-2">
-            <div className="flex flex-col justify-center items-center">
-              <span></span>
-              <img src={URL.createObjectURL(form.Arquivo)} className="h-20" />
-            </div>
-          </div>
-        )}
 
-        <Button color={"primary"} onClick={CriarProduto}>
-          Criar
-        </Button>
-        <Button color={"secondary"} onClick={() => router.back()}>
-          Voltar
-        </Button>
+        {alert && <Alert type={alert.type}>{alert.message}</Alert>}
+        <div className="grid gap-4">
+          <div className="">
+            <Input
+              placeholder={"Nome do produto"}
+              icon={<BsTag />}
+              name={"Nome"}
+              id={"Nome"}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="">
+            <Input
+              placeholder={"Quantidade"}
+              icon={<MdOutlineProductionQuantityLimits />}
+              name={"Quantidade"}
+              id={"Quantidade"}
+              onChange={handleChange}
+              value={form.Quantidade}
+            />
+          </div>
+          <div>
+            <Select
+              data={Fornecedor}
+              placeholder={"Selecione um Fornecedor"}
+              icon={<FaGlobeAmericas />}
+              name={"FornecedorId"}
+              id={"FornecedorId"}
+              onChange={handleChange}
+              value={form.FornecedorId}
+            />
+          </div>
+          <div>
+            <Select
+              data={TipoProduto}
+              placeholder={"Selecione um tipo de produto"}
+              icon={<FaGlobeAmericas />}
+              name={"TipoProdutoId"}
+              id={"TipoProdutoId"}
+              onChange={handleChange}
+              value={form.TipoProdutoId}
+            />
+          </div>
+          <div className="">
+            <InputMoney
+              placeholder={"Preço de custo"}
+              icon={<FaMoneyBill />}
+              name={"precoCusto"}
+              id={"precoCusto"}
+              onChange={(event, originalValue, maskedValue) =>
+                setForm({ ...form, precoCusto: maskedValue })
+              }
+              value={form.precoCusto}
+            />
+          </div>
+          <div className="">
+            <InputMoney
+              placeholder={"Preço de venda"}
+              icon={<FaMoneyBill />}
+              name={"precoVenda"}
+              id={"precoVenda"}
+              onChange={(event, originalValue, maskedValue) =>
+                setForm({ ...form, precoVenda: maskedValue })
+              }
+              value={form.precoVenda}
+              onBlur={handleBlur}
+            />
+          </div>
+          <div className="">
+            <Input
+              placeholder={"Lucro"}
+              icon={<FaMoneyBill />}
+              name={"Lucro"}
+              id={"Lucro"}
+              value={form.Lucro}
+              disabled={true}
+            />
+          </div>
+          <div className="">
+            <DataPicker
+              onChange={(newValue) => {
+                setData(newValue);
+              }}
+              value={data}
+              placeholder="Selecione a data da compra"
+            />
+          </div>
+          <div className="">
+            <Input
+              placeholder={"Arquivo"}
+              icon={<FaRegFileImage />}
+              type={"file"}
+              name={"Arquivo"}
+              id={"Arquivo"}
+              onChange={(e) => setForm({ ...form, Arquivo: e.target.files[0] })}
+            />
+          </div>
+          {form.Arquivo && (
+            <div className="w-full flex mt-2">
+              <div className="flex flex-col justify-center items-center">
+                <span></span>
+                <img src={URL.createObjectURL(form.Arquivo)} className="h-20" />
+              </div>
+            </div>
+          )}
+
+          <Button color={"primary"} onClick={CriarProduto}>
+            Criar
+          </Button>
+          <Button color={"secondary"} onClick={() => router.back()}>
+            Voltar
+          </Button>
+        </div>
       </div>
-    </div>
+    </Suspense>
   );
 };
 
