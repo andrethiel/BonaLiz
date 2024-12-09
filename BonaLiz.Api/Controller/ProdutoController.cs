@@ -1,4 +1,5 @@
-﻿using BonaLiz.Api.Helpers;
+﻿using BonaLiz.Api.Authentication;
+using BonaLiz.Api.Helpers;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.Utils;
@@ -11,7 +12,8 @@ using System.Globalization;
 namespace BonaLiz.Api.Controller
 {
     [ApiController]
-    public class ProdutoController : ControllerBase
+	[ApiKey]
+	public class ProdutoController : ControllerBase
     {
         private readonly IProdutoServices _produtoServices;
         public ProdutoController(IProdutoServices produtoServices)

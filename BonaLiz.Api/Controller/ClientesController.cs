@@ -1,4 +1,5 @@
-﻿using BonaLiz.Api.Helpers;
+﻿using BonaLiz.Api.Authentication;
+using BonaLiz.Api.Helpers;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.ViewModels;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace BonaLiz.Api.Controller
 {
 	[ApiController]
+	[ApiKey]
 	public class ClientesController : ControllerBase
 	{
 		private readonly IClienteServices _clienteServices;

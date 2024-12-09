@@ -1,4 +1,5 @@
-﻿using BonaLiz.Api.Helpers;
+﻿using BonaLiz.Api.Authentication;
+using BonaLiz.Api.Helpers;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -8,7 +9,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace BonaLiz.Api.Controllers
 {
     [ApiController]
-    public class FornecedorController : ControllerBase
+	[ApiKey]
+	public class FornecedorController : ControllerBase
     {
         private readonly IFornecedorServices _fornecedorServices;
         public FornecedorController(IFornecedorServices fornecedorServices)

@@ -1,0 +1,1200 @@
+2024-12-08 20:32:55.987 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 20:32:56.039 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 20:32:56.108 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 20:32:56.112 -03:00 [INF] Hosting environment: Development
+2024-12-08 20:32:56.115 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 20:32:56.825 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ - null null
+2024-12-08 20:32:57.097 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ - 301 0 null 276.7972ms
+2024-12-08 20:32:57.114 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 20:32:57.261 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 147.5569ms
+2024-12-08 20:32:57.365 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger-ui.css - null null
+2024-12-08 20:32:57.371 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger-ui-bundle.js - null null
+2024-12-08 20:32:57.372 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 20:32:57.372 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger-ui-standalone-preset.js - null null
+2024-12-08 20:32:57.460 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger-ui.css - 200 152034 text/css 95.8067ms
+2024-12-08 20:32:57.632 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 260.3536ms
+2024-12-08 20:32:57.395 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 20:32:57.671 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger-ui-standalone-preset.js - 200 230280 text/javascript 299.6825ms
+2024-12-08 20:32:57.671 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger-ui-bundle.js - 200 1456926 text/javascript 296.9493ms
+2024-12-08 20:32:57.798 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 403.3268ms
+2024-12-08 20:32:57.960 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 20:32:57.960 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/favicon-32x32.png - null null
+2024-12-08 20:32:57.998 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/favicon-32x32.png - 200 628 image/png 37.9429ms
+2024-12-08 20:32:58.016 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 55.9719ms
+2024-12-08 20:33:26.973 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListarClientes - null null
+2024-12-08 20:33:31.497 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListarClientes - 401 null null 4524.1834ms
+2024-12-08 20:46:07.564 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 20:46:07.613 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 20:46:07.676 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 20:46:07.680 -03:00 [INF] Hosting environment: Development
+2024-12-08 20:46:07.682 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 20:46:08.264 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 20:46:08.556 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 298.5391ms
+2024-12-08 20:46:08.608 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 20:46:08.608 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 20:46:08.637 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 29.0862ms
+2024-12-08 20:46:08.689 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 81.3347ms
+2024-12-08 20:46:08.864 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 20:46:09.098 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 234.3028ms
+2024-12-08 20:46:19.526 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListarClientes - null null
+2024-12-08 20:46:42.723 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListarClientes - 401 null null 23197.2397ms
+2024-12-08 20:48:19.318 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 20:48:19.396 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 20:48:19.464 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 20:48:19.467 -03:00 [INF] Hosting environment: Development
+2024-12-08 20:48:19.470 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 20:48:20.107 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 20:48:20.373 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 272.4312ms
+2024-12-08 20:48:20.404 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 20:48:20.419 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 20:48:20.509 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 105.8241ms
+2024-12-08 20:48:20.579 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 159.4449ms
+2024-12-08 20:48:20.633 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 20:48:20.720 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 87.6789ms
+2024-12-08 20:48:32.895 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListarClientes - null null
+2024-12-08 20:48:32.926 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 20:48:32.961 -03:00 [INF] Route matched with {action = "Listar", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Listar() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 20:48:33.557 -03:00 [WRN] No store type was specified for the decimal property 'Lucro' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:48:33.570 -03:00 [WRN] No store type was specified for the decimal property 'PrecoCusto' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:48:33.587 -03:00 [WRN] No store type was specified for the decimal property 'PrecoVenda' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:48:33.599 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'Venda'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:48:36.290 -03:00 [INF] Executed DbCommand (240ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 20:48:36.383 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ClienteViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 20:48:36.413 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api) in 3436.8378ms
+2024-12-08 20:48:36.423 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 20:48:36.438 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListarClientes - 200 null application/json; charset=utf-8 3543.5813ms
+2024-12-08 20:50:05.375 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 20:50:05.437 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 20:50:05.501 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 20:50:05.512 -03:00 [INF] Hosting environment: Development
+2024-12-08 20:50:05.515 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 20:50:05.947 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 20:50:06.222 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 281.5853ms
+2024-12-08 20:50:06.264 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 20:50:06.264 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 20:50:06.288 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 24.6364ms
+2024-12-08 20:50:06.368 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 104.4501ms
+2024-12-08 20:50:06.438 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 20:50:06.505 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 67.5877ms
+2024-12-08 20:50:13.654 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListarClientes - null null
+2024-12-08 20:50:13.677 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 20:50:13.701 -03:00 [INF] Route matched with {action = "Listar", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Listar() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 20:50:14.266 -03:00 [WRN] No store type was specified for the decimal property 'Lucro' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:50:14.280 -03:00 [WRN] No store type was specified for the decimal property 'PrecoCusto' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:50:14.291 -03:00 [WRN] No store type was specified for the decimal property 'PrecoVenda' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:50:14.302 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'Venda'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:50:16.276 -03:00 [INF] Executed DbCommand (233ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 20:50:16.353 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ClienteViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 20:50:16.379 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api) in 2662.8697ms
+2024-12-08 20:50:16.389 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 20:50:16.408 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListarClientes - 200 null application/json; charset=utf-8 2753.1609ms
+2024-12-08 20:51:52.404 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListTipoProduto - null null
+2024-12-08 20:51:52.404 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListClientes - null null
+2024-12-08 20:51:52.404 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 20:51:52.404 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListForncedor - null null
+2024-12-08 20:51:52.422 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:51:52.430 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:51:52.454 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:51:52.468 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:51:52.476 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api)'
+2024-12-08 20:51:52.488 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:51:52.511 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:51:52.515 -03:00 [INF] Route matched with {action = "SelectListTipoProdutor", controller = "TipoProduto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListTipoProdutor() on controller BonaLiz.Api.Controller.TipoProdutoController (BonaLiz.Api).
+2024-12-08 20:51:52.516 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 20:51:52.524 -03:00 [INF] Route matched with {action = "SelectListFornencedor", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListFornencedor() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 20:51:52.569 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 20:51:52.569 -03:00 [INF] Route matched with {action = "SelectListFornencedor", controller = "Fornecedor"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListFornencedor() on controller BonaLiz.Api.Controllers.FornecedorController (BonaLiz.Api).
+2024-12-08 20:51:52.811 -03:00 [INF] Executed DbCommand (216ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 20:51:52.832 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 20:51:52.849 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api) in 262.8224ms
+2024-12-08 20:51:52.865 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:51:52.879 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListClientes - 200 null application/json; charset=utf-8 474.6107ms
+2024-12-08 20:51:53.046 -03:00 [INF] Executed DbCommand (220ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Arquivo], [p].[Codigo], [p].[DataCompra], [p].[FornecedorId], [p].[Guid], [p].[Inativo], [p].[Lucro], [p].[Nome], [p].[PrecoCusto], [p].[PrecoVenda], [p].[Quantidade], [p].[TipoProdutoId]
+FROM [Produto] AS [p]
+2024-12-08 20:51:53.138 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ProdutoViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 20:51:53.168 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 570.105ms
+2024-12-08 20:51:53.178 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 20:51:53.186 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 200 null application/json; charset=utf-8 781.6435ms
+2024-12-08 20:51:53.221 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - null null
+2024-12-08 20:51:53.221 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - null null
+2024-12-08 20:51:53.236 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - 404 0 null 15.619ms
+2024-12-08 20:51:53.246 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - 404 0 null 24.2977ms
+2024-12-08 20:51:53.258 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg, Response status code: 404
+2024-12-08 20:51:53.267 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg, Response status code: 404
+2024-12-08 20:51:53.276 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - null null
+2024-12-08 20:51:53.284 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - null null
+2024-12-08 20:51:53.295 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - 404 0 null 18.5611ms
+2024-12-08 20:51:53.304 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - 404 0 null 19.4654ms
+2024-12-08 20:51:53.313 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg, Response status code: 404
+2024-12-08 20:51:53.324 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg, Response status code: 404
+2024-12-08 20:51:53.332 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - null null
+2024-12-08 20:51:53.341 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - null null
+2024-12-08 20:51:53.350 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - 404 0 null 17.9388ms
+2024-12-08 20:51:53.352 -03:00 [INF] Executed DbCommand (217ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [f].[Id], [f].[CNPJ], [f].[Estado], [f].[Guid], [f].[Inativo], [f].[Iniciais], [f].[Nome]
+FROM [Fornecedor] AS [f]
+2024-12-08 20:51:53.359 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - 404 0 null 18.4114ms
+2024-12-08 20:51:53.369 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg, Response status code: 404
+2024-12-08 20:51:53.391 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg, Response status code: 404
+2024-12-08 20:51:53.393 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 20:51:53.407 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - null null
+2024-12-08 20:51:53.417 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - null null
+2024-12-08 20:51:53.428 -03:00 [INF] Executed action BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api) in 817.5264ms
+2024-12-08 20:51:53.437 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - 404 0 null 29.5898ms
+2024-12-08 20:51:53.447 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - 404 0 null 29.9983ms
+2024-12-08 20:51:53.454 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:51:53.465 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg, Response status code: 404
+2024-12-08 20:51:53.476 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg, Response status code: 404
+2024-12-08 20:51:53.483 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListForncedor - 200 null application/json; charset=utf-8 1079.9617ms
+2024-12-08 20:51:53.493 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - null null
+2024-12-08 20:51:53.501 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - null null
+2024-12-08 20:51:53.512 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - null null
+2024-12-08 20:51:53.521 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - 404 0 null 28.3361ms
+2024-12-08 20:51:53.530 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - 404 0 null 29.5454ms
+2024-12-08 20:51:53.539 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - 404 0 null 27.1293ms
+2024-12-08 20:51:53.549 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg, Response status code: 404
+2024-12-08 20:51:53.559 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg, Response status code: 404
+2024-12-08 20:51:53.569 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg, Response status code: 404
+2024-12-08 20:51:53.578 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - null null
+2024-12-08 20:51:53.587 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - null null
+2024-12-08 20:51:53.595 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - null null
+2024-12-08 20:51:53.606 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - 404 0 null 27.4044ms
+2024-12-08 20:51:53.616 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - 404 0 null 29.6989ms
+2024-12-08 20:51:53.626 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - 404 0 null 30.7917ms
+2024-12-08 20:51:53.636 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg, Response status code: 404
+2024-12-08 20:51:53.648 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg, Response status code: 404
+2024-12-08 20:51:53.659 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg, Response status code: 404
+2024-12-08 20:51:53.674 -03:00 [INF] Executed DbCommand (217ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Guid], [t].[Inativo], [t].[Nome]
+FROM [TipoProduto] AS [t]
+2024-12-08 20:51:53.670 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - null null
+2024-12-08 20:51:53.683 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - null null
+2024-12-08 20:51:53.703 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - null null
+2024-12-08 20:51:53.737 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 20:51:53.739 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - 404 0 null 68.7129ms
+2024-12-08 20:51:53.749 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - 404 0 null 65.1816ms
+2024-12-08 20:51:53.759 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - 404 0 null 56.5944ms
+2024-12-08 20:51:53.774 -03:00 [INF] Executed action BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api) in 1220.101ms
+2024-12-08 20:51:53.783 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg, Response status code: 404
+2024-12-08 20:51:53.793 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg, Response status code: 404
+2024-12-08 20:51:53.803 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg, Response status code: 404
+2024-12-08 20:51:53.812 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api)'
+2024-12-08 20:51:53.822 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - null null
+2024-12-08 20:51:53.831 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - null null
+2024-12-08 20:51:53.841 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - null null
+2024-12-08 20:51:53.849 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListTipoProduto - 200 null application/json; charset=utf-8 1445.0062ms
+2024-12-08 20:51:53.860 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - 404 0 null 37.9953ms
+2024-12-08 20:51:53.877 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - 404 0 null 45.8889ms
+2024-12-08 20:51:53.886 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - 404 0 null 44.9844ms
+2024-12-08 20:51:53.896 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - null null
+2024-12-08 20:51:53.905 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg, Response status code: 404
+2024-12-08 20:51:53.916 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg, Response status code: 404
+2024-12-08 20:51:53.926 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg, Response status code: 404
+2024-12-08 20:51:53.935 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - 404 0 null 38.5493ms
+2024-12-08 20:51:53.944 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - null null
+2024-12-08 20:51:54.001 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg, Response status code: 404
+2024-12-08 20:51:54.011 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - 404 0 null 67.483ms
+2024-12-08 20:51:54.032 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg, Response status code: 404
+2024-12-08 20:52:34.286 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListForncedor - null null
+2024-12-08 20:52:34.287 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListTipoProduto - null null
+2024-12-08 20:52:34.287 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListClientes - null null
+2024-12-08 20:52:34.287 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 20:52:34.308 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:52:34.317 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:52:34.329 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:52:34.341 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:52:34.349 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:52:34.358 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api)'
+2024-12-08 20:52:34.367 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:52:34.375 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 20:52:34.386 -03:00 [INF] Route matched with {action = "SelectListFornencedor", controller = "Fornecedor"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListFornencedor() on controller BonaLiz.Api.Controllers.FornecedorController (BonaLiz.Api).
+2024-12-08 20:52:34.396 -03:00 [INF] Route matched with {action = "SelectListTipoProdutor", controller = "TipoProduto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListTipoProdutor() on controller BonaLiz.Api.Controller.TipoProdutoController (BonaLiz.Api).
+2024-12-08 20:52:34.404 -03:00 [INF] Route matched with {action = "SelectListFornencedor", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListFornencedor() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 20:52:34.413 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 20:52:36.429 -03:00 [INF] Executed DbCommand (215ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Guid], [t].[Inativo], [t].[Nome]
+FROM [TipoProduto] AS [t]
+2024-12-08 20:52:36.430 -03:00 [INF] Executed DbCommand (216ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Arquivo], [p].[Codigo], [p].[DataCompra], [p].[FornecedorId], [p].[Guid], [p].[Inativo], [p].[Lucro], [p].[Nome], [p].[PrecoCusto], [p].[PrecoVenda], [p].[Quantidade], [p].[TipoProdutoId]
+FROM [Produto] AS [p]
+2024-12-08 20:52:36.444 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 20:52:36.459 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ProdutoViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 20:52:36.469 -03:00 [INF] Executed action BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api) in 2032.6822ms
+2024-12-08 20:52:36.490 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 2020.4175ms
+2024-12-08 20:52:36.492 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api)'
+2024-12-08 20:52:36.501 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 20:52:36.510 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListTipoProduto - 200 null application/json; charset=utf-8 2222.9852ms
+2024-12-08 20:52:36.518 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 200 null application/json; charset=utf-8 2231.2993ms
+2024-12-08 20:52:36.567 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - null null
+2024-12-08 20:52:36.574 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - null null
+2024-12-08 20:52:36.596 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - 404 0 null 29.1391ms
+2024-12-08 20:52:36.604 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - 404 0 null 30.7611ms
+2024-12-08 20:52:36.620 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg, Response status code: 404
+2024-12-08 20:52:36.633 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg, Response status code: 404
+2024-12-08 20:52:36.643 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - null null
+2024-12-08 20:52:36.650 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - null null
+2024-12-08 20:52:36.659 -03:00 [INF] Executed DbCommand (215ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [f].[Id], [f].[CNPJ], [f].[Estado], [f].[Guid], [f].[Inativo], [f].[Iniciais], [f].[Nome]
+FROM [Fornecedor] AS [f]
+2024-12-08 20:52:36.659 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - 404 0 null 16.4147ms
+2024-12-08 20:52:36.667 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - 404 0 null 17.7142ms
+2024-12-08 20:52:36.680 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 20:52:36.690 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg, Response status code: 404
+2024-12-08 20:52:36.699 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg, Response status code: 404
+2024-12-08 20:52:36.710 -03:00 [INF] Executed action BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api) in 2284.6732ms
+2024-12-08 20:52:36.720 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - null null
+2024-12-08 20:52:36.729 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - null null
+2024-12-08 20:52:36.738 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:52:36.748 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - 404 0 null 27.3802ms
+2024-12-08 20:52:36.756 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - 404 0 null 26.7385ms
+2024-12-08 20:52:36.764 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListForncedor - 200 null application/json; charset=utf-8 2477.9558ms
+2024-12-08 20:52:36.774 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg, Response status code: 404
+2024-12-08 20:52:36.788 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg, Response status code: 404
+2024-12-08 20:52:36.802 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - null null
+2024-12-08 20:52:36.810 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - null null
+2024-12-08 20:52:36.818 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - null null
+2024-12-08 20:52:36.828 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - 404 0 null 25.9453ms
+2024-12-08 20:52:36.836 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - 404 0 null 25.9301ms
+2024-12-08 20:52:36.845 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - 404 0 null 26.2005ms
+2024-12-08 20:52:36.854 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg, Response status code: 404
+2024-12-08 20:52:36.863 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg, Response status code: 404
+2024-12-08 20:52:36.873 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg, Response status code: 404
+2024-12-08 20:52:36.883 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - null null
+2024-12-08 20:52:36.894 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - null null
+2024-12-08 20:52:36.905 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - null null
+2024-12-08 20:52:36.914 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - 404 0 null 30.6902ms
+2024-12-08 20:52:36.922 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - 404 0 null 28.3329ms
+2024-12-08 20:52:36.931 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - 404 0 null 26.3431ms
+2024-12-08 20:52:36.941 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg, Response status code: 404
+2024-12-08 20:52:36.949 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg, Response status code: 404
+2024-12-08 20:52:36.959 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg, Response status code: 404
+2024-12-08 20:52:36.967 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - null null
+2024-12-08 20:52:36.976 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - null null
+2024-12-08 20:52:36.985 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - null null
+2024-12-08 20:52:36.995 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - 404 0 null 27.6941ms
+2024-12-08 20:52:37.005 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - 404 0 null 29.4571ms
+2024-12-08 20:52:37.016 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - 404 0 null 31.248ms
+2024-12-08 20:52:37.028 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg, Response status code: 404
+2024-12-08 20:52:37.039 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg, Response status code: 404
+2024-12-08 20:52:37.050 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg, Response status code: 404
+2024-12-08 20:52:37.059 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - null null
+2024-12-08 20:52:37.069 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - null null
+2024-12-08 20:52:37.078 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - null null
+2024-12-08 20:52:37.088 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - 404 0 null 29.2954ms
+2024-12-08 20:52:37.099 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - 404 0 null 30.2179ms
+2024-12-08 20:52:37.108 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - 404 0 null 29.6834ms
+2024-12-08 20:52:37.118 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg, Response status code: 404
+2024-12-08 20:52:37.129 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg, Response status code: 404
+2024-12-08 20:52:37.138 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg, Response status code: 404
+2024-12-08 20:52:37.147 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - null null
+2024-12-08 20:52:37.155 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - null null
+2024-12-08 20:52:37.164 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - null null
+2024-12-08 20:52:37.173 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - 404 0 null 25.3149ms
+2024-12-08 20:52:37.268 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - 404 0 null 111.6091ms
+2024-12-08 20:52:37.280 -03:00 [INF] Executed DbCommand (213ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 20:52:37.284 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - 404 0 null 119.898ms
+2024-12-08 20:52:37.294 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg, Response status code: 404
+2024-12-08 20:52:37.310 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg, Response status code: 404
+2024-12-08 20:52:37.325 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 20:52:37.364 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api) in 2904.4411ms
+2024-12-08 20:52:37.343 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - null null
+2024-12-08 20:52:37.334 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg, Response status code: 404
+2024-12-08 20:52:37.376 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:52:37.390 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - 404 0 null 47.2877ms
+2024-12-08 20:52:37.441 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListClientes - 200 null application/json; charset=utf-8 3154.4139ms
+2024-12-08 20:52:37.454 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg, Response status code: 404
+2024-12-08 20:53:03.945 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListForncedor - null null
+2024-12-08 20:53:03.946 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListTipoProduto - null null
+2024-12-08 20:53:03.946 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListClientes - null null
+2024-12-08 20:53:03.964 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 20:53:03.982 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:53:03.994 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:53:04.004 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:53:04.016 -03:00 [INF] CORS policy execution successful.
+2024-12-08 20:53:04.025 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:53:04.033 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api)'
+2024-12-08 20:53:04.042 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:53:04.049 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 20:53:04.057 -03:00 [INF] Route matched with {action = "SelectListFornencedor", controller = "Fornecedor"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListFornencedor() on controller BonaLiz.Api.Controllers.FornecedorController (BonaLiz.Api).
+2024-12-08 20:53:04.065 -03:00 [INF] Route matched with {action = "SelectListTipoProdutor", controller = "TipoProduto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListTipoProdutor() on controller BonaLiz.Api.Controller.TipoProdutoController (BonaLiz.Api).
+2024-12-08 20:53:04.073 -03:00 [INF] Route matched with {action = "SelectListFornencedor", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListFornencedor() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 20:53:04.081 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 20:53:05.931 -03:00 [INF] Executed DbCommand (1,793ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 20:53:05.931 -03:00 [INF] Executed DbCommand (1,803ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Guid], [t].[Inativo], [t].[Nome]
+FROM [TipoProduto] AS [t]
+2024-12-08 20:53:05.931 -03:00 [INF] Executed DbCommand (1,817ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [f].[Id], [f].[CNPJ], [f].[Estado], [f].[Guid], [f].[Inativo], [f].[Iniciais], [f].[Nome]
+FROM [Fornecedor] AS [f]
+2024-12-08 20:53:05.950 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 20:53:05.965 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 20:53:05.979 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 20:53:05.991 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api) in 1853.6323ms
+2024-12-08 20:53:06.025 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:53:06.016 -03:00 [INF] Executed action BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api) in 1904.7172ms
+2024-12-08 20:53:06.003 -03:00 [INF] Executed action BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api) in 1876.8772ms
+2024-12-08 20:53:06.033 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListClientes - 200 null application/json; charset=utf-8 2086.6918ms
+2024-12-08 20:53:06.045 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 20:53:06.053 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api)'
+2024-12-08 20:53:06.076 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListForncedor - 200 null application/json; charset=utf-8 2131.2735ms
+2024-12-08 20:53:06.094 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListTipoProduto - 200 null application/json; charset=utf-8 2147.8432ms
+2024-12-08 20:53:07.004 -03:00 [INF] Executed DbCommand (215ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Arquivo], [p].[Codigo], [p].[DataCompra], [p].[FornecedorId], [p].[Guid], [p].[Inativo], [p].[Lucro], [p].[Nome], [p].[PrecoCusto], [p].[PrecoVenda], [p].[Quantidade], [p].[TipoProdutoId]
+FROM [Produto] AS [p]
+2024-12-08 20:53:07.040 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ProdutoViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 20:53:07.070 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 2920.0969ms
+2024-12-08 20:53:07.102 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 20:53:07.110 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 200 null application/json; charset=utf-8 3147.5991ms
+2024-12-08 20:53:07.144 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - null null
+2024-12-08 20:53:07.144 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - null null
+2024-12-08 20:53:07.145 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - null null
+2024-12-08 20:53:07.149 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - null null
+2024-12-08 20:53:07.192 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - 404 0 null 48.3106ms
+2024-12-08 20:53:07.201 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - 404 0 null 56.569ms
+2024-12-08 20:53:07.210 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - 404 0 null 65.4005ms
+2024-12-08 20:53:07.219 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - 404 0 null 70.1853ms
+2024-12-08 20:53:07.228 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg, Response status code: 404
+2024-12-08 20:53:07.237 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg, Response status code: 404
+2024-12-08 20:53:07.247 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg, Response status code: 404
+2024-12-08 20:53:07.257 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg, Response status code: 404
+2024-12-08 20:53:07.267 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - null null
+2024-12-08 20:53:07.277 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - null null
+2024-12-08 20:53:07.285 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - null null
+2024-12-08 20:53:07.296 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - null null
+2024-12-08 20:53:07.305 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - 404 0 null 37.7833ms
+2024-12-08 20:53:07.315 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - 404 0 null 37.9046ms
+2024-12-08 20:53:07.323 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - 404 0 null 37.7884ms
+2024-12-08 20:53:07.333 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - 404 0 null 37.0503ms
+2024-12-08 20:53:07.342 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg, Response status code: 404
+2024-12-08 20:53:07.353 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg, Response status code: 404
+2024-12-08 20:53:07.363 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg, Response status code: 404
+2024-12-08 20:53:07.375 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg, Response status code: 404
+2024-12-08 20:53:07.384 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - null null
+2024-12-08 20:53:07.394 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - null null
+2024-12-08 20:53:07.406 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - null null
+2024-12-08 20:53:07.416 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - null null
+2024-12-08 20:53:07.425 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - 404 0 null 41.4051ms
+2024-12-08 20:53:07.434 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - 404 0 null 40.2899ms
+2024-12-08 20:53:07.443 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - 404 0 null 37.3624ms
+2024-12-08 20:53:07.452 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - 404 0 null 36.7178ms
+2024-12-08 20:53:07.462 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg, Response status code: 404
+2024-12-08 20:53:07.471 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg, Response status code: 404
+2024-12-08 20:53:07.482 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg, Response status code: 404
+2024-12-08 20:53:07.496 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg, Response status code: 404
+2024-12-08 20:53:07.505 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - null null
+2024-12-08 20:53:07.513 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - null null
+2024-12-08 20:53:07.521 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - null null
+2024-12-08 20:53:07.531 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - null null
+2024-12-08 20:53:07.540 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - 404 0 null 35.0232ms
+2024-12-08 20:53:07.548 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - 404 0 null 34.6385ms
+2024-12-08 20:53:07.556 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - 404 0 null 34.7975ms
+2024-12-08 20:53:07.566 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - 404 0 null 35.4819ms
+2024-12-08 20:53:07.576 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg, Response status code: 404
+2024-12-08 20:53:07.585 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg, Response status code: 404
+2024-12-08 20:53:07.604 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg, Response status code: 404
+2024-12-08 20:53:07.594 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg, Response status code: 404
+2024-12-08 20:53:07.613 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - null null
+2024-12-08 20:53:07.614 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - null null
+2024-12-08 20:53:07.625 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - null null
+2024-12-08 20:53:07.634 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - null null
+2024-12-08 20:53:07.642 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - null null
+2024-12-08 20:53:07.649 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - null null
+2024-12-08 20:53:07.700 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - 404 0 null 87.2353ms
+2024-12-08 20:53:07.711 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - 404 0 null 96.762ms
+2024-12-08 20:53:07.729 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - 404 0 null 104.2625ms
+2024-12-08 20:53:07.739 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - 404 0 null 105.3375ms
+2024-12-08 20:53:07.749 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - 404 0 null 107.6263ms
+2024-12-08 20:53:07.760 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - 404 0 null 110.4685ms
+2024-12-08 20:53:07.770 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg, Response status code: 404
+2024-12-08 20:53:07.780 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg, Response status code: 404
+2024-12-08 20:53:07.789 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg, Response status code: 404
+2024-12-08 20:53:07.799 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg, Response status code: 404
+2024-12-08 20:53:07.808 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg, Response status code: 404
+2024-12-08 20:53:07.817 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg, Response status code: 404
+2024-12-08 20:53:25.818 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 20:53:25.866 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 20:53:25.921 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 20:53:25.925 -03:00 [INF] Hosting environment: Development
+2024-12-08 20:53:25.928 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 20:53:26.438 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 20:53:26.691 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 257.585ms
+2024-12-08 20:53:26.733 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 20:53:26.733 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 20:53:26.762 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 29.448ms
+2024-12-08 20:53:26.845 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 112.2581ms
+2024-12-08 20:53:26.905 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 20:53:26.980 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 75.4889ms
+2024-12-08 20:53:48.041 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListarClientes - null null
+2024-12-08 20:53:52.499 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 20:53:52.528 -03:00 [INF] Route matched with {action = "Listar", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Listar() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 20:53:53.088 -03:00 [WRN] No store type was specified for the decimal property 'Lucro' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:53:53.104 -03:00 [WRN] No store type was specified for the decimal property 'PrecoCusto' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:53:53.117 -03:00 [WRN] No store type was specified for the decimal property 'PrecoVenda' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:53:53.130 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'Venda'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 20:53:55.108 -03:00 [INF] Executed DbCommand (234ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 20:53:55.198 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ClienteViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 20:53:55.226 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api) in 2678.9818ms
+2024-12-08 20:53:55.235 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 20:53:55.252 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListarClientes - 200 null application/json; charset=utf-8 7211.2098ms
+2024-12-08 20:54:04.286 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListForncedor - null null
+2024-12-08 20:54:04.286 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListClientes - null null
+2024-12-08 20:54:04.289 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 20:54:48.340 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListForncedor - 401 null null 44052.0085ms
+2024-12-08 20:54:50.011 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListClientes - 401 null null 45724.9751ms
+2024-12-08 20:54:04.286 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListTipoProduto - null null
+2024-12-08 20:54:50.660 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 null null 46373.7717ms
+2024-12-08 20:57:41.043 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListTipoProduto - 401 null null 216756.5959ms
+2024-12-08 20:58:23.086 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListTipoProduto - null null
+2024-12-08 20:58:23.099 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListClientes - null null
+2024-12-08 20:58:23.086 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListForncedor - null null
+2024-12-08 20:58:25.418 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListTipoProduto - 401 null null 2331.9586ms
+2024-12-08 20:58:26.335 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListClientes - 401 null null 3236.6988ms
+2024-12-08 20:58:26.602 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListForncedor - 401 null null 3516.6158ms
+2024-12-08 20:59:38.152 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 21:00:10.364 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 401 null null 32214.7558ms
+2024-12-08 21:03:35.573 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 21:04:27.355 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 null null 51782.4598ms
+2024-12-08 21:05:19.414 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 21:05:19.549 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 21:05:19.989 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 21:05:20.023 -03:00 [INF] Hosting environment: Development
+2024-12-08 21:05:20.147 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 21:05:20.155 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 21:05:20.774 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 626.696ms
+2024-12-08 21:05:20.899 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 21:05:20.905 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 21:05:21.301 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 402.7557ms
+2024-12-08 21:05:21.789 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 884.5584ms
+2024-12-08 21:05:21.923 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 21:05:21.982 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 58.9974ms
+2024-12-08 21:05:48.369 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 21:05:57.235 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 null null 8870.9528ms
+2024-12-08 21:07:02.853 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListarClientes - null null
+2024-12-08 21:07:05.465 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 21:07:05.492 -03:00 [INF] Route matched with {action = "Listar", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Listar() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 21:07:06.054 -03:00 [WRN] No store type was specified for the decimal property 'Lucro' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 21:07:06.070 -03:00 [WRN] No store type was specified for the decimal property 'PrecoCusto' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 21:07:06.083 -03:00 [WRN] No store type was specified for the decimal property 'PrecoVenda' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 21:07:06.097 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'Venda'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 21:07:08.113 -03:00 [INF] Executed DbCommand (233ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 21:07:08.195 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ClienteViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 21:07:08.220 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api) in 2709.4066ms
+2024-12-08 21:07:08.231 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 21:07:08.247 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListarClientes - 200 null application/json; charset=utf-8 5395.0535ms
+2024-12-08 21:07:50.483 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 21:07:50.541 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 21:07:50.603 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 21:07:50.606 -03:00 [INF] Hosting environment: Development
+2024-12-08 21:07:50.610 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 21:07:50.989 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 21:07:51.342 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 357.9776ms
+2024-12-08 21:07:51.438 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 21:07:51.478 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 21:07:51.518 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 79.1695ms
+2024-12-08 21:07:51.612 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 134.3495ms
+2024-12-08 21:07:51.662 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 21:07:51.729 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 67.0134ms
+2024-12-08 21:08:05.654 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 21:08:05.711 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 21:08:05.790 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 21:08:05.794 -03:00 [INF] Hosting environment: Development
+2024-12-08 21:08:05.797 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 21:08:06.879 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 21:08:07.159 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 285.6315ms
+2024-12-08 21:08:07.205 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 21:08:07.205 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 21:08:07.256 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 51.7088ms
+2024-12-08 21:08:07.331 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 126.0584ms
+2024-12-08 21:08:07.381 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 21:08:07.457 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 76.0748ms
+2024-12-08 21:08:25.825 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListarClientes - null null
+2024-12-08 21:08:28.017 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 21:08:28.044 -03:00 [INF] Route matched with {action = "Listar", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Listar() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 21:08:28.593 -03:00 [WRN] No store type was specified for the decimal property 'Lucro' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 21:08:28.606 -03:00 [WRN] No store type was specified for the decimal property 'PrecoCusto' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 21:08:28.619 -03:00 [WRN] No store type was specified for the decimal property 'PrecoVenda' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 21:08:28.630 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'Venda'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 21:08:31.354 -03:00 [INF] Executed DbCommand (230ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 21:08:31.617 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ClienteViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 21:08:31.745 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api) in 3685.7683ms
+2024-12-08 21:08:31.761 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 21:08:31.786 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListarClientes - 200 null application/json; charset=utf-8 5961.2628ms
+2024-12-08 21:09:10.370 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 21:09:28.423 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 401 null null 18052.9827ms
+2024-12-08 21:11:55.527 -03:00 [INF] Request starting HTTP/1.1 GET https://localhost:7166/SelectListClientes - null null
+2024-12-08 21:11:57.155 -03:00 [INF] Request finished HTTP/1.1 GET https://localhost:7166/SelectListClientes - 401 null null 1627.7099ms
+2024-12-08 21:12:13.834 -03:00 [INF] Request starting HTTP/1.1 GET https://localhost:7166/SelectListClientes - null null
+2024-12-08 21:12:15.276 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 21:12:15.292 -03:00 [INF] Route matched with {action = "SelectListFornencedor", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListFornencedor() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 21:12:15.638 -03:00 [INF] Executed DbCommand (215ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 21:12:17.816 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 21:12:17.833 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api) in 2522.6767ms
+2024-12-08 21:12:17.845 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 21:12:17.855 -03:00 [INF] Request finished HTTP/1.1 GET https://localhost:7166/SelectListClientes - 200 null application/json; charset=utf-8 4021.039ms
+2024-12-08 21:13:01.495 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 21:13:11.207 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 401 null null 9712.0698ms
+2024-12-08 21:13:15.552 -03:00 [INF] Request starting HTTP/1.1 GET https://localhost:7166/SelectListClientes - null null
+2024-12-08 21:13:18.532 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 21:13:18.543 -03:00 [INF] Route matched with {action = "SelectListFornencedor", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListFornencedor() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 21:13:18.828 -03:00 [INF] Executed DbCommand (212ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 21:13:18.842 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 21:13:18.857 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api) in 300.4832ms
+2024-12-08 21:13:18.869 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 21:13:18.879 -03:00 [INF] Request finished HTTP/1.1 GET https://localhost:7166/SelectListClientes - 200 null application/json; charset=utf-8 3326.5638ms
+2024-12-08 21:14:13.182 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/SelectListClientes - null null
+2024-12-08 21:14:17.621 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/SelectListClientes - 401 null null 4438.2328ms
+2024-12-08 21:14:48.555 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/SelectListClientes - null null
+2024-12-08 21:17:36.740 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/SelectListClientes - 401 null null 168185.9022ms
+2024-12-08 21:17:53.755 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/SelectListClientes - null null
+2024-12-08 21:17:59.246 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/SelectListClientes - 401 null null 5491.356ms
+2024-12-08 21:20:06.914 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/SelectListClientes - null null
+2024-12-08 21:20:13.959 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/SelectListClientes - 401 null null 7044.9347ms
+2024-12-08 21:21:43.634 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 21:21:49.554 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 401 null null 5919.797ms
+2024-12-08 21:22:46.172 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 21:22:49.578 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 401 null null 3405.7793ms
+2024-12-08 21:23:01.053 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 21:23:03.896 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 401 null null 2842.8824ms
+2024-12-08 21:23:47.232 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 21:23:55.160 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 401 null null 7927.7277ms
+2024-12-08 21:24:19.523 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 21:24:28.278 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 null null 8754.4115ms
+2024-12-08 21:24:49.611 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 21:25:07.011 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 401 null null 17399.7152ms
+2024-12-08 22:15:32.380 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 22:15:32.429 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 22:15:32.490 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 22:15:32.494 -03:00 [INF] Hosting environment: Development
+2024-12-08 22:15:32.498 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 22:15:33.123 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 22:15:33.513 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 395.3127ms
+2024-12-08 22:15:33.532 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 22:15:33.572 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 22:15:33.575 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 44.0186ms
+2024-12-08 22:15:33.724 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 152.101ms
+2024-12-08 22:15:33.773 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 22:15:33.847 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 73.8269ms
+2024-12-08 22:15:44.273 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListarClientes - null null
+2024-12-08 22:15:44.300 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 22:15:44.326 -03:00 [INF] Route matched with {action = "Listar", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Listar() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 22:15:44.873 -03:00 [WRN] No store type was specified for the decimal property 'Lucro' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:15:44.888 -03:00 [WRN] No store type was specified for the decimal property 'PrecoCusto' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:15:44.900 -03:00 [WRN] No store type was specified for the decimal property 'PrecoVenda' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:15:44.914 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'Venda'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:15:47.297 -03:00 [INF] Executed DbCommand (240ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 22:15:47.382 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ClienteViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 22:15:47.411 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api) in 3067.9981ms
+2024-12-08 22:15:47.423 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.Listar (BonaLiz.Api)'
+2024-12-08 22:15:47.441 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListarClientes - 200 null application/json; charset=utf-8 3169.2499ms
+2024-12-08 22:15:54.290 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:15:54.309 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:15:54.322 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:16:23.378 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:16:23.393 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 29059.3264ms
+2024-12-08 22:16:23.415 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:16:23.425 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 22 text/plain; charset=utf-8 29136.1696ms
+2024-12-08 22:16:40.742 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:16:40.781 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:16:40.789 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:17:06.974 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 26174.5289ms
+2024-12-08 22:17:07.001 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:17:07.020 -03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentNullException: Value cannot be null. (Parameter 'configuration')
+   at System.ThrowHelper.Throw(String paramName)
+   at Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(IConfiguration configuration, Type type, String key, Object defaultValue)
+   at Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue[T](IConfiguration configuration, String key, T defaultValue)
+   at Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue[T](IConfiguration configuration, String key)
+   at BonaLiz.Api.Authentication.ApiKeyAttribute.OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-12-08 22:17:07.096 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 500 null text/plain; charset=utf-8 26354.245ms
+2024-12-08 22:17:21.281 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:17:21.292 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:17:21.306 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:17:29.144 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 7826.1951ms
+2024-12-08 22:17:29.159 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:17:29.177 -03:00 [ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentNullException: Value cannot be null. (Parameter 'configuration')
+   at System.ThrowHelper.Throw(String paramName)
+   at Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(IConfiguration configuration, Type type, String key, Object defaultValue)
+   at Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue[T](IConfiguration configuration, String key, T defaultValue)
+   at Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue[T](IConfiguration configuration, String key)
+   at BonaLiz.Api.Authentication.ApiKeyAttribute.OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Localization.RequestLocalizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2024-12-08 22:17:29.204 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 500 null text/plain; charset=utf-8 7922.5655ms
+2024-12-08 22:18:18.162 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 22:18:18.216 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 22:18:18.281 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 22:18:18.286 -03:00 [INF] Hosting environment: Development
+2024-12-08 22:18:18.311 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 22:18:19.138 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 22:18:19.450 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 318.1054ms
+2024-12-08 22:18:19.514 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 22:18:19.514 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 22:18:19.548 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 33.4158ms
+2024-12-08 22:18:19.582 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 67.9463ms
+2024-12-08 22:18:19.655 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 22:18:19.724 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 68.9316ms
+2024-12-08 22:19:12.085 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 22:19:12.146 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 22:19:12.213 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 22:19:12.216 -03:00 [INF] Hosting environment: Development
+2024-12-08 22:19:12.219 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 22:19:12.480 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 22:19:12.718 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 241.027ms
+2024-12-08 22:19:12.772 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 22:19:12.772 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 22:19:12.803 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 30.9057ms
+2024-12-08 22:19:12.888 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 116.1347ms
+2024-12-08 22:19:12.936 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 22:19:12.998 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 61.0655ms
+2024-12-08 22:19:25.931 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:19:25.954 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:19:25.981 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:19:36.480 -03:00 [WRN] No store type was specified for the decimal property 'Lucro' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:19:36.494 -03:00 [WRN] No store type was specified for the decimal property 'PrecoCusto' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:19:36.508 -03:00 [WRN] No store type was specified for the decimal property 'PrecoVenda' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:19:36.522 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'Venda'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:19:38.593 -03:00 [INF] Executed DbCommand (248ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Arquivo], [p].[Codigo], [p].[DataCompra], [p].[FornecedorId], [p].[Guid], [p].[Inativo], [p].[Lucro], [p].[Nome], [p].[PrecoCusto], [p].[PrecoVenda], [p].[Quantidade], [p].[TipoProdutoId]
+FROM [Produto] AS [p]
+2024-12-08 22:19:38.695 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ProdutoViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 22:19:38.731 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 12734.084ms
+2024-12-08 22:19:38.743 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:19:38.761 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 200 null application/json; charset=utf-8 12830.0746ms
+2024-12-08 22:19:50.227 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:19:50.246 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:19:50.259 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 204 null null 32.0051ms
+2024-12-08 22:19:50.270 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:19:50.289 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:19:50.306 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:19:50.329 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:20:25.782 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:20:25.805 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 35454.3555ms
+2024-12-08 22:20:25.813 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:20:25.824 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 22 text/plain; charset=utf-8 35554.0959ms
+2024-12-08 22:21:06.964 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:21:07.002 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:21:07.177 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 204 null null 213.8754ms
+2024-12-08 22:21:07.181 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:21:07.246 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:21:07.261 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:21:07.276 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:21:15.939 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:21:15.960 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 8667.9553ms
+2024-12-08 22:21:15.978 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:21:15.990 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 403 22 text/plain; charset=utf-8 8809.8802ms
+2024-12-08 22:21:26.679 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:21:26.693 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:21:26.724 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 204 null null 44.6889ms
+2024-12-08 22:21:26.727 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:21:26.755 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:21:26.764 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:21:26.773 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:21:35.704 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:21:35.732 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 8941.4585ms
+2024-12-08 22:21:35.744 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:21:35.756 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 403 22 text/plain; charset=utf-8 9028.5408ms
+2024-12-08 22:22:25.312 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:22:25.357 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:22:25.368 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:22:25.379 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:22:36.057 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:22:36.078 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 10682.7161ms
+2024-12-08 22:22:36.090 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:22:36.101 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 22 text/plain; charset=utf-8 10791.1487ms
+2024-12-08 22:23:08.649 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:23:08.680 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:23:08.700 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:23:08.724 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:23:10.535 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:23:10.549 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 1803.9805ms
+2024-12-08 22:23:10.560 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:23:10.574 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 22 text/plain; charset=utf-8 1924.5874ms
+2024-12-08 22:23:39.724 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:23:39.751 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:23:39.761 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 204 null null 37.0393ms
+2024-12-08 22:23:39.766 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:23:39.803 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:23:39.812 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:23:39.821 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:23:46.809 -03:00 [INF] Executed DbCommand (216ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Arquivo], [p].[Codigo], [p].[DataCompra], [p].[FornecedorId], [p].[Guid], [p].[Inativo], [p].[Lucro], [p].[Nome], [p].[PrecoCusto], [p].[PrecoVenda], [p].[Quantidade], [p].[TipoProdutoId]
+FROM [Produto] AS [p]
+2024-12-08 22:23:46.827 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ProdutoViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 22:23:46.860 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 7026.2615ms
+2024-12-08 22:23:46.881 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:23:46.897 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 200 null application/json; charset=utf-8 7130.8142ms
+2024-12-08 22:23:46.971 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - null null
+2024-12-08 22:23:46.971 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - null null
+2024-12-08 22:23:46.971 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - null null
+2024-12-08 22:23:46.971 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - null null
+2024-12-08 22:23:46.989 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - 404 0 null 18.2577ms
+2024-12-08 22:23:46.996 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - 404 0 null 25.3399ms
+2024-12-08 22:23:47.006 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - 404 0 null 35.4431ms
+2024-12-08 22:23:47.015 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - 404 0 null 43.5474ms
+2024-12-08 22:23:47.026 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg, Response status code: 404
+2024-12-08 22:23:47.035 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg, Response status code: 404
+2024-12-08 22:23:47.044 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg, Response status code: 404
+2024-12-08 22:23:47.054 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg, Response status code: 404
+2024-12-08 22:23:47.113 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - null null
+2024-12-08 22:23:47.063 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - null null
+2024-12-08 22:23:47.071 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - null null
+2024-12-08 22:23:47.077 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - null null
+2024-12-08 22:23:47.083 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - null null
+2024-12-08 22:23:47.089 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - null null
+2024-12-08 22:23:47.095 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - null null
+2024-12-08 22:23:47.102 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - null null
+2024-12-08 22:23:47.108 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - null null
+2024-12-08 22:23:47.113 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - null null
+2024-12-08 22:23:47.120 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - null null
+2024-12-08 22:23:47.126 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - null null
+2024-12-08 22:23:47.134 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - null null
+2024-12-08 22:23:47.139 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - null null
+2024-12-08 22:23:47.143 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - null null
+2024-12-08 22:23:47.153 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - null null
+2024-12-08 22:23:47.162 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - 404 0 null 49.1114ms
+2024-12-08 22:23:47.172 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - 404 0 null 109.1167ms
+2024-12-08 22:23:47.183 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - 404 0 null 112.6966ms
+2024-12-08 22:23:47.193 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - 404 0 null 116.5673ms
+2024-12-08 22:23:47.203 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - 404 0 null 120.4922ms
+2024-12-08 22:23:47.212 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - 404 0 null 123.3288ms
+2024-12-08 22:23:47.221 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - 404 0 null 126.2105ms
+2024-12-08 22:23:47.230 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - 404 0 null 127.5385ms
+2024-12-08 22:23:47.239 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - 404 0 null 131.9759ms
+2024-12-08 22:23:47.249 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - 404 0 null 136.2658ms
+2024-12-08 22:23:47.258 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - 404 0 null 138.6953ms
+2024-12-08 22:23:47.267 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - 404 0 null 142.0365ms
+2024-12-08 22:23:47.277 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - 404 0 null 144.5915ms
+2024-12-08 22:23:47.285 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - 404 0 null 146.0868ms
+2024-12-08 22:23:47.294 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - 404 0 null 150.5059ms
+2024-12-08 22:23:47.302 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - 404 0 null 149.4373ms
+2024-12-08 22:23:47.317 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg, Response status code: 404
+2024-12-08 22:23:47.326 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg, Response status code: 404
+2024-12-08 22:23:47.478 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - null null
+2024-12-08 22:23:47.345 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg, Response status code: 404
+2024-12-08 22:23:47.354 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg, Response status code: 404
+2024-12-08 22:23:47.364 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg, Response status code: 404
+2024-12-08 22:23:47.373 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg, Response status code: 404
+2024-12-08 22:23:47.383 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg, Response status code: 404
+2024-12-08 22:23:47.392 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg, Response status code: 404
+2024-12-08 22:23:47.402 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg, Response status code: 404
+2024-12-08 22:23:47.411 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg, Response status code: 404
+2024-12-08 22:23:47.422 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg, Response status code: 404
+2024-12-08 22:23:47.432 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg, Response status code: 404
+2024-12-08 22:23:47.444 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg, Response status code: 404
+2024-12-08 22:23:47.453 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg, Response status code: 404
+2024-12-08 22:23:47.462 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg, Response status code: 404
+2024-12-08 22:23:47.470 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - null null
+2024-12-08 22:23:47.335 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg, Response status code: 404
+2024-12-08 22:23:47.487 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - 404 0 null 8.7912ms
+2024-12-08 22:23:47.786 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - 404 0 null 315.1918ms
+2024-12-08 22:23:47.809 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg, Response status code: 404
+2024-12-08 22:23:47.823 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg, Response status code: 404
+2024-12-08 22:24:47.656 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:24:47.704 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:24:47.723 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 204 null null 67.2896ms
+2024-12-08 22:24:47.725 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:24:47.756 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:24:47.767 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:24:47.779 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:24:58.372 -03:00 [INF] Executed DbCommand (217ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Arquivo], [p].[Codigo], [p].[DataCompra], [p].[FornecedorId], [p].[Guid], [p].[Inativo], [p].[Lucro], [p].[Nome], [p].[PrecoCusto], [p].[PrecoVenda], [p].[Quantidade], [p].[TipoProdutoId]
+FROM [Produto] AS [p]
+2024-12-08 22:24:58.397 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ProdutoViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 22:24:58.411 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 10618.1579ms
+2024-12-08 22:24:58.425 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:24:58.433 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 200 null application/json; charset=utf-8 10708.443ms
+2024-12-08 22:24:58.467 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - null null
+2024-12-08 22:24:58.468 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - null null
+2024-12-08 22:24:58.468 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - null null
+2024-12-08 22:24:58.469 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - null null
+2024-12-08 22:24:58.509 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - 404 0 null 40.197ms
+2024-12-08 22:24:58.573 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg, Response status code: 404
+2024-12-08 22:24:58.477 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - null null
+2024-12-08 22:24:58.483 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - null null
+2024-12-08 22:24:58.489 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - null null
+2024-12-08 22:24:58.495 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - null null
+2024-12-08 22:24:58.504 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - null null
+2024-12-08 22:24:58.510 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - null null
+2024-12-08 22:24:58.517 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - null null
+2024-12-08 22:24:58.523 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - null null
+2024-12-08 22:24:58.529 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - null null
+2024-12-08 22:24:58.536 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - null null
+2024-12-08 22:24:58.541 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - null null
+2024-12-08 22:24:58.544 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - 404 0 null 76.0598ms
+2024-12-08 22:24:58.553 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - 404 0 null 85.7204ms
+2024-12-08 22:24:58.562 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - 404 0 null 92.0632ms
+2024-12-08 22:24:58.470 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - null null
+2024-12-08 22:24:58.582 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - null null
+2024-12-08 22:24:58.591 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - 404 0 null 114.4708ms
+2024-12-08 22:24:58.600 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - 404 0 null 117.2752ms
+2024-12-08 22:24:58.608 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - 404 0 null 119.4176ms
+2024-12-08 22:24:58.617 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - 404 0 null 122.3072ms
+2024-12-08 22:24:58.625 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - 404 0 null 121.87ms
+2024-12-08 22:24:58.634 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - 404 0 null 124.5753ms
+2024-12-08 22:24:58.642 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - 404 0 null 125.9113ms
+2024-12-08 22:24:58.652 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - 404 0 null 128.8644ms
+2024-12-08 22:24:58.661 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - 404 0 null 132.0237ms
+2024-12-08 22:24:58.670 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - 404 0 null 134.0383ms
+2024-12-08 22:24:58.678 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - 404 0 null 137.0434ms
+2024-12-08 22:24:58.687 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg, Response status code: 404
+2024-12-08 22:24:58.696 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg, Response status code: 404
+2024-12-08 22:24:58.705 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg, Response status code: 404
+2024-12-08 22:24:58.715 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - 404 0 null 245.0896ms
+2024-12-08 22:24:58.724 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - 404 0 null 141.9008ms
+2024-12-08 22:24:58.735 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg, Response status code: 404
+2024-12-08 22:24:58.749 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg, Response status code: 404
+2024-12-08 22:24:58.759 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg, Response status code: 404
+2024-12-08 22:24:58.770 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg, Response status code: 404
+2024-12-08 22:24:58.780 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg, Response status code: 404
+2024-12-08 22:24:58.792 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg, Response status code: 404
+2024-12-08 22:24:58.802 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg, Response status code: 404
+2024-12-08 22:24:58.812 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg, Response status code: 404
+2024-12-08 22:24:58.823 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg, Response status code: 404
+2024-12-08 22:24:58.836 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg, Response status code: 404
+2024-12-08 22:24:58.845 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg, Response status code: 404
+2024-12-08 22:24:58.855 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - null null
+2024-12-08 22:24:58.863 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - null null
+2024-12-08 22:24:58.872 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - null null
+2024-12-08 22:24:58.881 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg, Response status code: 404
+2024-12-08 22:24:58.890 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg, Response status code: 404
+2024-12-08 22:24:58.899 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - null null
+2024-12-08 22:24:58.907 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - null null
+2024-12-08 22:24:59.000 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - 404 0 null 144.7301ms
+2024-12-08 22:24:59.009 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - 404 0 null 146.1544ms
+2024-12-08 22:24:59.020 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - 404 0 null 148.7394ms
+2024-12-08 22:24:59.048 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - 404 0 null 149.2031ms
+2024-12-08 22:24:59.057 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - 404 0 null 150.6058ms
+2024-12-08 22:24:59.069 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg, Response status code: 404
+2024-12-08 22:24:59.079 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg, Response status code: 404
+2024-12-08 22:24:59.167 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg, Response status code: 404
+2024-12-08 22:24:59.187 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg, Response status code: 404
+2024-12-08 22:24:59.204 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg, Response status code: 404
+2024-12-08 22:26:16.510 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:26:16.540 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:26:16.563 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:26:16.575 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:26:19.796 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:26:19.809 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 3214.9869ms
+2024-12-08 22:26:19.824 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:26:19.835 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 22 text/plain; charset=utf-8 3325.7747ms
+2024-12-08 22:26:33.471 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:26:33.504 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:26:33.517 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:26:33.534 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:26:33.554 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:26:33.567 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 13.9756ms
+2024-12-08 22:26:33.584 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:26:33.602 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 22 text/plain; charset=utf-8 131.2099ms
+2024-12-08 22:26:52.356 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:26:52.385 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:26:52.404 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:26:52.424 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:26:52.445 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:26:52.459 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 14.3731ms
+2024-12-08 22:26:52.473 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:26:52.483 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 22 text/plain; charset=utf-8 127.6745ms
+2024-12-08 22:27:23.643 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:27:23.671 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:27:23.688 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:27:23.703 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:27:23.720 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:27:23.738 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 17.7654ms
+2024-12-08 22:27:23.753 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:27:23.773 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 22 text/plain; charset=utf-8 129.6469ms
+2024-12-08 22:27:55.690 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:27:55.718 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:27:55.727 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:27:55.739 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:27:55.758 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:27:55.782 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 23.5127ms
+2024-12-08 22:27:55.799 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:27:55.814 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 22 text/plain; charset=utf-8 123.7494ms
+2024-12-08 22:27:59.299 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:27:59.326 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:27:59.336 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:27:59.351 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:27:59.363 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 12.1884ms
+2024-12-08 22:27:59.375 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:27:59.389 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 22 text/plain; charset=utf-8 89.9737ms
+2024-12-08 22:27:59.467 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/favicon.ico - null null
+2024-12-08 22:27:59.478 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/favicon.ico - 404 0 null 11.9438ms
+2024-12-08 22:27:59.492 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/favicon.ico, Response status code: 404
+2024-12-08 22:28:13.573 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:28:13.588 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:28:13.602 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:28:13.617 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:28:13.642 -03:00 [INF] Executing ContentResult with HTTP Response ContentType of text/plain; charset=utf-8
+2024-12-08 22:28:13.696 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 55.1146ms
+2024-12-08 22:28:13.714 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:28:13.724 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 401 22 text/plain; charset=utf-8 151.1048ms
+2024-12-08 22:28:33.189 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:28:33.220 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:28:33.228 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 204 null null 44.5449ms
+2024-12-08 22:28:33.240 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:28:33.266 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:28:33.282 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:28:33.291 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:28:33.525 -03:00 [INF] Executed DbCommand (214ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Arquivo], [p].[Codigo], [p].[DataCompra], [p].[FornecedorId], [p].[Guid], [p].[Inativo], [p].[Lucro], [p].[Nome], [p].[PrecoCusto], [p].[PrecoVenda], [p].[Quantidade], [p].[TipoProdutoId]
+FROM [Produto] AS [p]
+2024-12-08 22:28:33.539 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ProdutoViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 22:28:33.553 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 243.225ms
+2024-12-08 22:28:33.565 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:28:33.574 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 200 null application/json; charset=utf-8 333.9911ms
+2024-12-08 22:28:33.637 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - null null
+2024-12-08 22:28:33.708 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - null null
+2024-12-08 22:28:33.638 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - null null
+2024-12-08 22:28:33.710 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - 404 0 null 73.3851ms
+2024-12-08 22:28:33.637 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - null null
+2024-12-08 22:28:33.652 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - null null
+2024-12-08 22:28:33.658 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - null null
+2024-12-08 22:28:33.688 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - null null
+2024-12-08 22:28:33.695 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - null null
+2024-12-08 22:28:33.710 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - null null
+2024-12-08 22:28:33.718 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - null null
+2024-12-08 22:28:33.724 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - null null
+2024-12-08 22:28:33.731 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - null null
+2024-12-08 22:28:33.737 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - null null
+2024-12-08 22:28:33.744 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - null null
+2024-12-08 22:28:33.751 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - null null
+2024-12-08 22:28:33.751 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - 404 0 null 43.3065ms
+2024-12-08 22:28:33.760 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - 404 0 null 122.7899ms
+2024-12-08 22:28:33.770 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg, Response status code: 404
+2024-12-08 22:28:33.780 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - 404 0 null 142.4154ms
+2024-12-08 22:28:33.789 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - 404 0 null 136.8603ms
+2024-12-08 22:28:33.798 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - 404 0 null 139.8439ms
+2024-12-08 22:28:33.807 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - 404 0 null 118.256ms
+2024-12-08 22:28:33.817 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - 404 0 null 122.1934ms
+2024-12-08 22:28:33.825 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - 404 0 null 114.839ms
+2024-12-08 22:28:33.834 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - 404 0 null 116.5356ms
+2024-12-08 22:28:33.843 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - 404 0 null 119.529ms
+2024-12-08 22:28:33.852 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - 404 0 null 121.6475ms
+2024-12-08 22:28:33.862 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - 404 0 null 124.43ms
+2024-12-08 22:28:33.871 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - 404 0 null 126.9957ms
+2024-12-08 22:28:33.880 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - 404 0 null 129.1519ms
+2024-12-08 22:28:33.890 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg, Response status code: 404
+2024-12-08 22:28:33.899 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg, Response status code: 404
+2024-12-08 22:28:33.907 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - null null
+2024-12-08 22:28:33.918 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg, Response status code: 404
+2024-12-08 22:28:33.928 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg, Response status code: 404
+2024-12-08 22:28:33.937 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg, Response status code: 404
+2024-12-08 22:28:33.947 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg, Response status code: 404
+2024-12-08 22:28:33.956 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg, Response status code: 404
+2024-12-08 22:28:33.968 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg, Response status code: 404
+2024-12-08 22:28:33.978 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg, Response status code: 404
+2024-12-08 22:28:33.989 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg, Response status code: 404
+2024-12-08 22:28:33.999 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg, Response status code: 404
+2024-12-08 22:28:34.008 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg, Response status code: 404
+2024-12-08 22:28:34.019 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg, Response status code: 404
+2024-12-08 22:28:34.029 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg, Response status code: 404
+2024-12-08 22:28:34.037 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - null null
+2024-12-08 22:28:34.046 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - null null
+2024-12-08 22:28:34.055 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - 404 0 null 147.444ms
+2024-12-08 22:28:34.064 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - null null
+2024-12-08 22:28:34.073 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - null null
+2024-12-08 22:28:34.081 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - null null
+2024-12-08 22:28:34.090 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - null null
+2024-12-08 22:28:34.216 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - 404 0 null 178.5579ms
+2024-12-08 22:28:34.225 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - 404 0 null 178.9999ms
+2024-12-08 22:28:34.239 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg, Response status code: 404
+2024-12-08 22:28:34.250 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - 404 0 null 186.3121ms
+2024-12-08 22:28:34.260 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - 404 0 null 187.3568ms
+2024-12-08 22:28:34.272 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - 404 0 null 191.1985ms
+2024-12-08 22:28:34.284 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - 404 0 null 194.3166ms
+2024-12-08 22:28:34.298 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg, Response status code: 404
+2024-12-08 22:28:34.308 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg, Response status code: 404
+2024-12-08 22:28:34.327 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg, Response status code: 404
+2024-12-08 22:28:34.338 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg, Response status code: 404
+2024-12-08 22:28:34.348 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg, Response status code: 404
+2024-12-08 22:28:34.358 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg, Response status code: 404
+2024-12-08 22:30:20.288 -03:00 [INF] Now listening on: https://localhost:7166
+2024-12-08 22:30:20.387 -03:00 [INF] Now listening on: http://localhost:5125
+2024-12-08 22:30:20.452 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-12-08 22:30:20.456 -03:00 [INF] Hosting environment: Development
+2024-12-08 22:30:20.459 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2024-12-08 22:30:21.266 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2024-12-08 22:30:21.996 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 736.5543ms
+2024-12-08 22:30:22.050 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2024-12-08 22:30:22.050 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2024-12-08 22:30:22.082 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 31.9908ms
+2024-12-08 22:30:22.167 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 116.7643ms
+2024-12-08 22:30:22.218 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2024-12-08 22:30:22.317 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 98.1138ms
+2024-12-08 22:30:29.108 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/SelectListTipoProduto - null null
+2024-12-08 22:30:29.108 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/SelectListClientes - null null
+2024-12-08 22:30:29.109 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/SelectListForncedor - null null
+2024-12-08 22:30:29.109 -03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:30:29.127 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:30:29.138 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:30:29.153 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:30:29.164 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:30:29.176 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/SelectListTipoProduto - 204 null null 67.3601ms
+2024-12-08 22:30:29.186 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/SelectListClientes - 204 null null 77.389ms
+2024-12-08 22:30:29.209 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/ListaPrincipal - 204 null null 99.7853ms
+2024-12-08 22:30:29.199 -03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7166/SelectListForncedor - 204 null null 90.2567ms
+2024-12-08 22:30:29.247 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListTipoProduto - null null
+2024-12-08 22:30:29.484 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListClientes - null null
+2024-12-08 22:30:29.496 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/SelectListForncedor - null null
+2024-12-08 22:30:29.507 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ListaPrincipal - null null
+2024-12-08 22:30:29.518 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:30:29.526 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:30:29.538 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:30:29.549 -03:00 [INF] CORS policy execution successful.
+2024-12-08 22:30:29.571 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api)'
+2024-12-08 22:30:29.571 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 22:30:29.575 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 22:30:29.583 -03:00 [INF] Executing endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:30:29.620 -03:00 [INF] Route matched with {action = "SelectListFornencedor", controller = "Clientes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListFornencedor() on controller BonaLiz.Api.Controller.ClientesController (BonaLiz.Api).
+2024-12-08 22:30:29.620 -03:00 [INF] Route matched with {action = "SelectListTipoProdutor", controller = "TipoProduto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListTipoProdutor() on controller BonaLiz.Api.Controller.TipoProdutoController (BonaLiz.Api).
+2024-12-08 22:30:29.620 -03:00 [INF] Route matched with {action = "ListaPrincipal", controller = "Produto"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ListaPrincipal() on controller BonaLiz.Api.Controller.ProdutoController (BonaLiz.Api).
+2024-12-08 22:30:29.620 -03:00 [INF] Route matched with {action = "SelectListFornencedor", controller = "Fornecedor"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SelectListFornencedor() on controller BonaLiz.Api.Controllers.FornecedorController (BonaLiz.Api).
+2024-12-08 22:30:30.440 -03:00 [WRN] No store type was specified for the decimal property 'Lucro' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:30:30.452 -03:00 [WRN] No store type was specified for the decimal property 'PrecoCusto' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:30:30.464 -03:00 [WRN] No store type was specified for the decimal property 'PrecoVenda' on entity type 'Produto'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:30:30.477 -03:00 [WRN] No store type was specified for the decimal property 'Valor' on entity type 'Venda'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-08 22:30:32.614 -03:00 [INF] Executed DbCommand (244ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[Guid], [t].[Inativo], [t].[Nome]
+FROM [TipoProduto] AS [t]
+2024-12-08 22:30:32.701 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 22:30:32.731 -03:00 [INF] Executed action BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api) in 3080.4732ms
+2024-12-08 22:30:32.740 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.TipoProdutoController.SelectListTipoProdutor (BonaLiz.Api)'
+2024-12-08 22:30:32.757 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListTipoProduto - 200 null application/json; charset=utf-8 3512.1795ms
+2024-12-08 22:30:32.902 -03:00 [INF] Executed DbCommand (214ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [c].[Email], [c].[Guid], [c].[Inativo], [c].[Nome], [c].[Telefone]
+FROM [Cliente] AS [c]
+2024-12-08 22:30:32.931 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 22:30:32.946 -03:00 [INF] Executed action BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api) in 3311.7287ms
+2024-12-08 22:30:32.973 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ClientesController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 22:30:33.001 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListClientes - 200 null application/json; charset=utf-8 3503.034ms
+2024-12-08 22:30:33.141 -03:00 [INF] Executed DbCommand (214ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[Id], [p].[Arquivo], [p].[Codigo], [p].[DataCompra], [p].[FornecedorId], [p].[Guid], [p].[Inativo], [p].[Lucro], [p].[Nome], [p].[PrecoCusto], [p].[PrecoVenda], [p].[Quantidade], [p].[TipoProdutoId]
+FROM [Produto] AS [p]
+2024-12-08 22:30:33.200 -03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BonaLiz.Negocio.ViewModels.ProdutoViewModel, BonaLiz.Negocio, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-12-08 22:30:33.243 -03:00 [INF] Executed action BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api) in 3583.4116ms
+2024-12-08 22:30:33.305 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controller.ProdutoController.ListaPrincipal (BonaLiz.Api)'
+2024-12-08 22:30:33.318 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ListaPrincipal - 200 null application/json; charset=utf-8 3810.6745ms
+2024-12-08 22:30:33.418 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - null null
+2024-12-08 22:30:33.437 -03:00 [INF] Executed DbCommand (221ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [f].[Id], [f].[CNPJ], [f].[Estado], [f].[Guid], [f].[Inativo], [f].[Iniciais], [f].[Nome]
+FROM [Fornecedor] AS [f]
+2024-12-08 22:30:33.613 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg - 404 0 null 195.0003ms
+2024-12-08 22:30:33.418 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - null null
+2024-12-08 22:30:33.418 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - null null
+2024-12-08 22:30:33.420 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - null null
+2024-12-08 22:30:33.426 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - null null
+2024-12-08 22:30:33.446 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - null null
+2024-12-08 22:30:33.454 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - null null
+2024-12-08 22:30:33.472 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - null null
+2024-12-08 22:30:33.478 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - null null
+2024-12-08 22:30:33.495 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - null null
+2024-12-08 22:30:33.507 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - null null
+2024-12-08 22:30:33.517 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - null null
+2024-12-08 22:30:33.525 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - null null
+2024-12-08 22:30:33.534 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - null null
+2024-12-08 22:30:33.541 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - null null
+2024-12-08 22:30:33.553 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - null null
+2024-12-08 22:30:33.571 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - null null
+2024-12-08 22:30:33.578 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - null null
+2024-12-08 22:30:33.585 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - null null
+2024-12-08 22:30:33.593 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - null null
+2024-12-08 22:30:33.599 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - null null
+2024-12-08 22:30:33.606 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - null null
+2024-12-08 22:30:33.649 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/de34ca16-8316-43a2-8fab-0e3d71868658.jpeg, Response status code: 404
+2024-12-08 22:30:33.652 -03:00 [INF] Executing OkObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.Rendering.SelectList'.
+2024-12-08 22:30:33.657 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg - 404 0 null 239.9086ms
+2024-12-08 22:30:33.669 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg - 404 0 null 251.4825ms
+2024-12-08 22:30:33.681 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg - 404 0 null 261.7209ms
+2024-12-08 22:30:33.692 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg - 404 0 null 266.864ms
+2024-12-08 22:30:33.705 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg - 404 0 null 261.0768ms
+2024-12-08 22:30:33.727 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg - 404 0 null 273.7579ms
+2024-12-08 22:30:33.741 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg - 404 0 null 269.8727ms
+2024-12-08 22:30:33.755 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg - 404 0 null 277.7072ms
+2024-12-08 22:30:33.771 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg - 404 0 null 281.3999ms
+2024-12-08 22:30:33.780 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg - 404 0 null 274.1606ms
+2024-12-08 22:30:33.792 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg - 404 0 null 276.281ms
+2024-12-08 22:30:33.805 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg - 404 0 null 281.3519ms
+2024-12-08 22:30:33.825 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg - 404 0 null 290.8507ms
+2024-12-08 22:30:33.834 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg - 404 0 null 293.5586ms
+2024-12-08 22:30:33.845 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg - 404 0 null 293.7508ms
+2024-12-08 22:30:33.857 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg - 404 0 null 287.054ms
+2024-12-08 22:30:33.869 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg - 404 0 null 291.7406ms
+2024-12-08 22:30:33.880 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg - 404 0 null 295.9677ms
+2024-12-08 22:30:33.891 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg - 404 0 null 299.3086ms
+2024-12-08 22:30:33.907 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg - 404 0 null 308.1397ms
+2024-12-08 22:30:33.923 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg - 404 0 null 316.9267ms
+2024-12-08 22:30:33.949 -03:00 [INF] Executed action BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api) in 4275.4015ms
+2024-12-08 22:30:33.964 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c2c60ee0-8b9b-4988-a623-8bf6f378b51c.jpeg, Response status code: 404
+2024-12-08 22:30:33.974 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/05105345-224f-402b-99e7-41f612c4d2af.jpg, Response status code: 404
+2024-12-08 22:30:33.985 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/36b2a32c-0cec-4567-a09c-a748f1401d45.jpg, Response status code: 404
+2024-12-08 22:30:33.997 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/8f4cb1ec-0682-4634-b4e5-c46e972e90ee.jpeg, Response status code: 404
+2024-12-08 22:30:34.008 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c76f3ead-0002-4fc4-abeb-a35047c7adc6.jpeg, Response status code: 404
+2024-12-08 22:30:34.019 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/a6566705-876f-48f9-98b1-a7e346bea10c.jpeg, Response status code: 404
+2024-12-08 22:30:34.030 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/24787052-44b8-4521-b5de-b9fef65ff1a4.jpg, Response status code: 404
+2024-12-08 22:30:34.040 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/cdb22126-a463-4b45-a68e-418408eb4a6f.jpg, Response status code: 404
+2024-12-08 22:30:34.051 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac681dc1-2936-4a4b-a214-ee2a214a996f.jpeg, Response status code: 404
+2024-12-08 22:30:34.063 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ea5c6d9c-6476-4d8d-9fef-2f40077dfbc7.jpeg, Response status code: 404
+2024-12-08 22:30:34.073 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/71bbe243-b2b3-4000-ab65-c68a8f5edd18.jpg, Response status code: 404
+2024-12-08 22:30:34.083 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/c4cdeb79-cd5d-418a-bf3c-3ed16a417830.jpg, Response status code: 404
+2024-12-08 22:30:34.093 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/baf1a89e-a4ed-4517-a627-c69440b4a9af.jpg, Response status code: 404
+2024-12-08 22:30:34.102 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/850c453e-ac3d-4068-acea-8b98ae1fe5f8.jpg, Response status code: 404
+2024-12-08 22:30:34.112 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/ac0dd9b3-d3dd-487c-a16e-03b3c071dcc7.jpg, Response status code: 404
+2024-12-08 22:30:34.122 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/93f4d583-776c-4506-b117-b5a802019f17.jpg, Response status code: 404
+2024-12-08 22:30:34.134 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/bac145db-0563-490f-9547-0497155494c2.jpg, Response status code: 404
+2024-12-08 22:30:34.149 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/6d1e999d-74de-4535-9a50-33787fe8fe85.jpg, Response status code: 404
+2024-12-08 22:30:34.160 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/31120543-f085-47d8-a094-743f94d14deb.jpg, Response status code: 404
+2024-12-08 22:30:34.174 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/1cb73990-db17-4a1d-8a9e-cedbd5025dc2.jpg, Response status code: 404
+2024-12-08 22:30:34.189 -03:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7166/Imagens/66b3b6cc-ccbd-460e-8eb5-20f89309d27a.jpg, Response status code: 404
+2024-12-08 22:30:34.198 -03:00 [INF] Executed endpoint 'BonaLiz.Api.Controllers.FornecedorController.SelectListFornencedor (BonaLiz.Api)'
+2024-12-08 22:30:34.410 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/SelectListForncedor - 200 null application/json; charset=utf-8 4914.9189ms

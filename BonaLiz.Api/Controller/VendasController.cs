@@ -1,4 +1,5 @@
-﻿using BonaLiz.Negocio.Interfaces;
+﻿using BonaLiz.Api.Authentication;
+using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BonaLiz.Api.Controller
 {
 	[ApiController]
+	[ApiKey]
 	public class VendasController : ControllerBase
 	{
         private readonly IVendaServices _vendaServices;
