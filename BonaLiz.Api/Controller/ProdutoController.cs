@@ -75,7 +75,7 @@ namespace BonaLiz.Api.Controller
         {
             try
             {
-                return Ok(_produtoServices.Listar().Take(50));
+                return Ok(_produtoServices.Listar());
             }
             catch (Exception ex)
             {
@@ -163,11 +163,11 @@ namespace BonaLiz.Api.Controller
 			}
 		}
 
-		[HttpPost]
-		[Route("/arquivoProduto")]
-		public async Task<IActionResult> arquivoProduto([FromForm] ProdutoViewModel model)
-        {
-            return Ok(Arquivo.Imagem(model.Arquivo));
-        }
+		//[HttpPost]
+		//[Route("/arquivoProduto")]
+		//public async Task<IActionResult> arquivoProduto([FromForm] ProdutoViewModel model)
+  //      {
+  //          return Ok(Arquivo.Imagem(model.Arquivo));
+  //      }
 	}
 }

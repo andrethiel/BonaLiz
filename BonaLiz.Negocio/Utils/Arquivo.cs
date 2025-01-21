@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BonaLiz.Negocio.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
 namespace BonaLiz.Negocio.Utils
@@ -30,15 +31,24 @@ namespace BonaLiz.Negocio.Utils
 			}
 		}
 
-		public static string FormataNomeURL(string nome, IHttpContextAccessor _httpContextAccessor)
+		public static List<ImagemProdutoViewModel> FormataNomeURL(List<ImagemProdutoViewModel> arquivos, IHttpContextAccessor _httpContextAccessor)
 		{
-			if (!string.IsNullOrEmpty(nome))
+			var lista = new List<ImagemProdutoViewModel>();
+
+			foreach(var item in arquivos)
 			{
-				var request = _httpContextAccessor.HttpContext.Request;
-				return string.Format("{0}://{1}/Imagens/{2}", request.Scheme, request.Host, nome);
-			}
-			return "";
-		}
+				var arquivo = new ImagemProdutoViewModel();
+                if (!string.IsNullOrEmpty(item.NomeArquivo))
+                {
+                    var request = _httpContextAccessor.HttpContext.Request;
+                    arquivo.NomeArquivo = string.Format("{0}://{1}/Imagens/{2}", request.Scheme, request.Host, item.NomeArquivo);
+					lista.Add(arquivo);
+                }
+
+            }
+            return lista;
+
+        }
 
 		public static string Caminho(string key)
 		{

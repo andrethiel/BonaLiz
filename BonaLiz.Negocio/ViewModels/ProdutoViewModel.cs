@@ -18,8 +18,8 @@ namespace BonaLiz.Negocio.ViewModels
         public string TipoProduto { get; set; }
         public string Quantidade { get; set; }
         public string Inativo { get; set; }
-		public string UrlImagem { get; set; }
+		public List<ImagemProdutoViewModel> UrlImagem { get; set; }
 		public string Imagem { get; set; }
-		public IFormFile Arquivo { get; set; }
+		public List<IFormFile> Arquivo { get; set; }
 	}
 }

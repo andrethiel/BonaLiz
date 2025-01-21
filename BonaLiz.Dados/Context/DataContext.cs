@@ -18,5 +18,6 @@ namespace BonaLiz.Dados.Context
         public DbSet<Produto> Produto { get; set; }
 		public DbSet<Cliente> Cliente { get; set; }
 		public DbSet<Venda> Venda { get; set; }
-	}
+        public DbSet<ImagemProduto> ImagemProduto { get; set; }
+    }
 }

@@ -7,6 +7,7 @@ import Button from "@/Components/Button";
 import InputMoney from "@/Components/Currency";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import DataPicker from "@/Components/DatePicker";
+import ImageArquivo from "@/Components/Image";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
 import dayjs from "dayjs";
@@ -144,8 +145,10 @@ const Criar = () => {
     Lucro: "",
     dataCompra: "",
     Inativo: "false",
-    Arquivo: "",
+    Arquivo: [],
   });
+
+  const [arquivo, setArquivo] = useState([]);
   const [alert, setAlert] = useState({
     message: "",
     type: "",
@@ -178,6 +181,29 @@ const Criar = () => {
       setIsLoading(false);
     }
   };
+
+  function Image(event) {
+    if (event.target.files) {
+      const fileArray = Array.from(event.target.files).map((file) =>
+        URL.createObjectURL(file)
+      );
+
+      setArquivo((imagem) => imagem.concat(fileArray));
+      // Array.from(event.target.file).map((file) => URL.revokeObjectURL(file));
+    }
+  }
+  function handleRemovePhotoFile(file) {
+    const filter = arquivo.filter((filter) => filter != file);
+    setArquivo(filter);
+  }
+
+  function renderImage(image) {
+    return image.map((arquivoImagem) => {
+      return (
+        <ImageArquivo arquivo={arquivoImagem} onClick={handleRemovePhotoFile} />
+      );
+    });
+  }
 
   return (
     <Suspense>
@@ -275,23 +301,23 @@ const Criar = () => {
             />
           </div>
           <div className="">
-            <Input
+            <input
+              type="file"
+              multiple
+              placeholder="Arquivo"
+              onChange={Image}
+              accept="image/*"
+            />
+            {/* <Input
               placeholder={"Arquivo"}
               icon={<FaRegFileImage />}
               type={"file"}
               name={"Arquivo"}
               id={"Arquivo"}
               onChange={(e) => setForm({ ...form, Arquivo: e.target.files[0] })}
-            />
+            /> */}
           </div>
-          {form.Arquivo && (
-            <div className="w-full flex mt-2">
-              <div className="flex flex-col justify-center items-center">
-                <span></span>
-                <img src={URL.createObjectURL(form.Arquivo)} className="h-20" />
-              </div>
-            </div>
-          )}
+          <div className="w-full flex mt-2">{renderImage(arquivo)}</div>
 
           <Button color={"primary"} onClick={CriarProduto}>
             Criar

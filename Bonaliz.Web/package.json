@@ -11,6 +11,7 @@
   "dependencies": {
     "@ag-grid-community/core": "^32.2.2",
     "@ag-grid-community/react": "^32.2.2",
+    "@hello-pangea/dnd": "^17.0.0",
     "ag-grid-react": "^32.2.2",
     "axios": "^1.7.7",
     "dayjs": "^1.11.13",

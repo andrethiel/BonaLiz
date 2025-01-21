@@ -1,0 +1,23 @@
+2025-01-15 17:31:56.746 -03:00 [INF] Now listening on: https://localhost:7166
+2025-01-15 17:31:56.796 -03:00 [INF] Now listening on: http://localhost:5125
+2025-01-15 17:31:56.862 -03:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-01-15 17:31:56.874 -03:00 [INF] Hosting environment: Development
+2025-01-15 17:31:56.877 -03:00 [INF] Content root path: E:\GitHub\BonaLiz\BonaLiz.Api
+2025-01-15 17:31:57.380 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/ - null null
+2025-01-15 17:31:57.716 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/ - 301 0 null 342.0263ms
+2025-01-15 17:31:57.839 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/index.html - null null
+2025-01-15 17:31:58.087 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/index.html - 200 null text/html;charset=utf-8 247.2825ms
+2025-01-15 17:31:58.178 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger-ui.css - null null
+2025-01-15 17:31:58.179 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger-ui-bundle.js - null null
+2025-01-15 17:31:58.182 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger-ui-standalone-preset.js - null null
+2025-01-15 17:31:58.266 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_vs/browserLink - null null
+2025-01-15 17:31:58.202 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - null null
+2025-01-15 17:31:58.311 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger-ui.css - 200 152034 text/css 134.8893ms
+2025-01-15 17:31:58.319 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_framework/aspnetcore-browser-refresh.js - 200 13774 application/javascript; charset=utf-8 117.395ms
+2025-01-15 17:31:58.339 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger-ui-standalone-preset.js - 200 230280 text/javascript 157.6825ms
+2025-01-15 17:31:58.402 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/_vs/browserLink - 200 null text/javascript; charset=UTF-8 136.7595ms
+2025-01-15 17:31:58.407 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger-ui-bundle.js - 200 1456926 text/javascript 227.7033ms
+2025-01-15 17:31:58.629 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - null null
+2025-01-15 17:31:58.629 -03:00 [INF] Request starting HTTP/2 GET https://localhost:7166/favicon-32x32.png - null null
+2025-01-15 17:31:58.656 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/favicon-32x32.png - 200 628 image/png 27.4969ms
+2025-01-15 17:31:58.695 -03:00 [INF] Request finished HTTP/2 GET https://localhost:7166/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 66.0961ms

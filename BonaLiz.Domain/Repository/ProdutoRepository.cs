@@ -32,7 +32,7 @@ namespace BonaLiz.Domain.Repository
             Codigo(model);
         }
 
-        public List<Produto> Listar() => _context.Produto.ToList();
+        public List<Produto> Listar() => _context.Produto.Where(x => x.Quantidade > 0).Where(x => x.Inativo == false).ToList();
 
         public Produto ObterPorGuid(Guid guid) => _context.Produto.Where(x => x.Guid == guid).FirstOrDefault();
 
@@ -66,6 +66,8 @@ namespace BonaLiz.Domain.Repository
             .Where(x => model.FornecedorId == 0 || x.FornecedorId == model.FornecedorId)
             .Where(x => model.TipoProdutoId == 0 || x.TipoProdutoId == model.TipoProdutoId)
             .Where(x => model.DataCompra == null || x.DataCompra == model.DataCompra)
+            .Where(x => x.Quantidade > 0)
+            .Where(x => x.Inativo == false)
             .ToList();
             
     }

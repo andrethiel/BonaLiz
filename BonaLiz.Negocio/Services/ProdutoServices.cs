@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BonaLiz.Negocio.Services
 {
@@ -21,21 +22,23 @@ namespace BonaLiz.Negocio.Services
         private readonly ITipoProdutoRepository _tipoProdutoRepository;
         private readonly IMapper _mapper;
 		private readonly IHttpContextAccessor _httpContextAccessor;
-		public ProdutoServices(IProdutoRepository produtoRepository, IMapper mapper, ITipoProdutoRepository tipoProdutoRepository, IFornecedorRepository fornecedorRepository, IHttpContextAccessor httpContextAccessor)
-		{
-			_produtoRepository = produtoRepository;
-			_mapper = mapper;
-			_tipoProdutoRepository = tipoProdutoRepository;
-			_fornecedorRepository = fornecedorRepository;
-			_httpContextAccessor = httpContextAccessor;
-		}
-		public void Cadastrar(ProdutoViewModel model)
+        private readonly IImagemServices _imagemServices;
+        public ProdutoServices(IProdutoRepository produtoRepository, IMapper mapper, ITipoProdutoRepository tipoProdutoRepository, IFornecedorRepository fornecedorRepository, IHttpContextAccessor httpContextAccessor, IImagemServices imagemServices)
+        {
+            _produtoRepository = produtoRepository;
+            _mapper = mapper;
+            _tipoProdutoRepository = tipoProdutoRepository;
+            _fornecedorRepository = fornecedorRepository;
+            _httpContextAccessor = httpContextAccessor;
+            _imagemServices = imagemServices;
+        }
+        public void Cadastrar(ProdutoViewModel model)
         {
             try
             {
                 var produto = new Produto();
                 produto.Guid = Guid.NewGuid();
-				model.Imagem = model.Arquivo != null ? Arquivo.Imagem(model.Arquivo) : "";
+				//model.Imagem = model.Arquivo != null ? Arquivo.Imagem(model.Arquivo) : "";
 				produto.Nome = model.Nome;
 				produto.TipoProdutoId = Convert.ToInt32(model.TipoProdutoId);
 				produto.FornecedorId = Convert.ToInt32(model.FornecedorId);
@@ -45,10 +48,15 @@ namespace BonaLiz.Negocio.Services
 				produto.DataCompra = Convert.ToDateTime(model.DataCompra);
 				produto.Quantidade = Convert.ToInt32(model.Quantidade);
 				produto.Inativo = Convert.ToBoolean(model.Inativo);
-				produto.Arquivo = model.Imagem;
 				produto.Codigo = "";
 				_produtoRepository.Inserir(produto);
-			}catch(Exception ex)
+
+                if(model.Arquivo.Count() > 0)
+                {
+                    _imagemServices.Inserir(model.Arquivo, produto.Id);
+                }
+			}
+            catch(Exception ex)
             {
                 throw;
             }
@@ -59,7 +67,6 @@ namespace BonaLiz.Negocio.Services
         {
 			
 			var produto = _produtoRepository.ObterPorId(model.Id);
-			model.Imagem = model.Arquivo == null ? produto.Arquivo : Arquivo.Imagem(model.Arquivo);
 			produto.Id = model.Id;
             produto.Guid = model.Guid;
             produto.Nome = model.Nome;
@@ -70,55 +77,74 @@ namespace BonaLiz.Negocio.Services
             produto.Lucro = Convert.ToDecimal(model.Lucro.Replace("R$", "").Trim());
             produto.DataCompra = Convert.ToDateTime(model.DataCompra);
             produto.Quantidade = Convert.ToInt32(model.Quantidade);
-            produto.Inativo = Convert.ToBoolean(model.Inativo);
-			produto.Arquivo = model.Imagem;
-            
+            produto.Inativo = Convert.ToBoolean(model.Inativo);            
 
             _produtoRepository.Editar(produto);
+
+            //if (model.Arquivo.Count() > 0)
+            //{
+            //    _imagemServices.Inserir(model.Arquivo, produto.Id);
+            //}
         }
 
-        public List<ProdutoViewModel> Filtrar(ProdutoViewModel model) => _produtoRepository.Filtrar(_mapper.Map<Produto>(model)).Select(x => new ProdutoViewModel()
+        public List<ProdutoViewModel> Filtrar(ProdutoViewModel model)
         {
-            Id = x.Id,
-            Guid = x.Guid,
-            Nome = x.Nome,
-            FornecedorId = x.FornecedorId.ToString(),
-            TipoProdutoId = x.TipoProdutoId.ToString(),
-            PrecoCusto = Formater.FormatarMoeda(x.PrecoCusto),
-            PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
-            Lucro = Formater.FormatarMoeda(x.Lucro),
-            DataCompra = x.DataCompra.Value.ToString("dd/MM/yyyy"),
-            NomeFornecedor = _fornecedorRepository.ObterPorId(x.FornecedorId).Nome,
-            TipoProduto = _tipoProdutoRepository.ObterPorId(x.TipoProdutoId).Nome,
-            Codigo = x.Codigo,
-            Quantidade = x.Quantidade.ToString(),
-            Inativo = x.Inativo.ToString(),
+            var imagens = _imagemServices.Listar().Result;
+            var fornecedores = _fornecedorRepository.Listar();
+            var tipoProdutos = _tipoProdutoRepository.Listar();
 
-			UrlImagem = !string.IsNullOrWhiteSpace(x.Arquivo) ? Arquivo.FormataNomeURL(x.Arquivo, _httpContextAccessor) : ""
-		}).ToList();
+            return _produtoRepository.Filtrar(_mapper.Map<Produto>(model)).Select(x => new ProdutoViewModel()
+            {
+                Id = x.Id,
+                Guid = x.Guid,
+                Nome = x.Nome,
+                FornecedorId = x.FornecedorId.ToString(),
+                TipoProdutoId = x.TipoProdutoId.ToString(),
+                PrecoCusto = Formater.FormatarMoeda(x.PrecoCusto),
+                PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
+                Lucro = Formater.FormatarMoeda(x.Lucro),
+                DataCompra = x.DataCompra.Value.ToString("dd/MM/yyyy"),
+                NomeFornecedor = fornecedores.Where(y => y.Id == x.FornecedorId).First().Nome,
+                TipoProduto = tipoProdutos.Where(y => y.Id == x.TipoProdutoId).First().Nome,
+                Codigo = x.Codigo,
+                Quantidade = x.Quantidade.ToString(),
+                Inativo = x.Inativo.ToString(),
 
-        public List<ProdutoViewModel> Listar() => _produtoRepository.Listar().Select(x => new ProdutoViewModel()
+                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor)
+            }).ToList();
+        }
+
+        public List<ProdutoViewModel> Listar()
         {
-            Id = x.Id,
-            Guid = x.Guid,
-            Nome = x.Nome,
-            FornecedorId=x.FornecedorId.ToString(),
-            TipoProdutoId=x.TipoProdutoId.ToString(),
-            PrecoCusto = Formater.FormatarMoeda(x.PrecoCusto),
-            PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
-            Lucro = Formater.FormatarMoeda(x.Lucro),
-            DataCompra = x.DataCompra.Value.ToString("dd/MM/yyyy"),
-            NomeFornecedor = _fornecedorRepository.ObterPorId(x.FornecedorId).Nome,
-            TipoProduto = _tipoProdutoRepository.ObterPorId(x.TipoProdutoId).Nome,
-            Codigo = x.Codigo,
-			Quantidade = x.Quantidade.ToString(),
-			Inativo = x.Inativo.ToString(),
-			UrlImagem = !string.IsNullOrWhiteSpace(x.Arquivo) ? Arquivo.FormataNomeURL(x.Arquivo, _httpContextAccessor) : ""
-		}).ToList();
+            var imagens = _imagemServices.Listar().Result;
+            var fornecedores = _fornecedorRepository.Listar();
+            var tipoProdutos = _tipoProdutoRepository.Listar();
+
+            return _produtoRepository.Listar().Select(x => new ProdutoViewModel()
+            {
+                Id = x.Id,
+                Guid = x.Guid,
+                Nome = x.Nome,
+                FornecedorId = x.FornecedorId.ToString(),
+                TipoProdutoId = x.TipoProdutoId.ToString(),
+                PrecoCusto = Formater.FormatarMoeda(x.PrecoCusto),
+                PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
+                Lucro = Formater.FormatarMoeda(x.Lucro),
+                DataCompra = x.DataCompra.Value.ToString("dd/MM/yyyy"),
+                NomeFornecedor = fornecedores.Where(y => y.Id == x.FornecedorId).First().Nome,
+                TipoProduto = tipoProdutos.Where(y => y.Id == x.TipoProdutoId).First().Nome,
+                Codigo = x.Codigo,
+                Quantidade = x.Quantidade.ToString(),
+                Inativo = x.Inativo.ToString(),
+                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor)
+            }).ToList();
+        }
 
         public ProdutoViewModel ObterPorGuid(Guid guid)
         {
             var produto = _produtoRepository.ObterPorGuid(guid);
+
+            var imagens = _imagemServices.Listar().Result;
             return new ProdutoViewModel()
             {
                 Id = produto.Id,
@@ -132,15 +158,16 @@ namespace BonaLiz.Negocio.Services
                 DataCompra = produto.DataCompra.Value.ToString("dd/MM/yyyy"),
                 Codigo = produto.Codigo,
 				Quantidade = produto.Quantidade.ToString(),
-				Inativo = produto.Inativo.ToString(),
+                Inativo = produto.Inativo.ToString(),
 
-				UrlImagem = !string.IsNullOrWhiteSpace(produto.Arquivo) ? Arquivo.FormataNomeURL(produto.Arquivo, _httpContextAccessor) : ""
-			};
+                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == produto.Id).ToList(), _httpContextAccessor)
+            };
         }
 
         public ProdutoViewModel ObterPorId(int id)
         {
             var produto = _produtoRepository.ObterPorId(id);
+            var imagens = _imagemServices.Listar().Result;
             return new ProdutoViewModel()
             {
                 Id = produto.Id,
@@ -155,21 +182,24 @@ namespace BonaLiz.Negocio.Services
 				Codigo = produto.Codigo,
 				Quantidade = produto.Quantidade.ToString(),
 				Inativo = produto.Inativo.ToString(),
-				UrlImagem = !string.IsNullOrWhiteSpace(produto.Arquivo) ? Arquivo.FormataNomeURL(produto.Arquivo, _httpContextAccessor) : ""
-			};
+                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == produto.Id).ToList(), _httpContextAccessor)
+            };
         }
 
-        public List<ProdutoViewModel> ListarPrincipal() => _produtoRepository.Listar()
-            .Where(x => x.Quantidade > 0)
-            .Where(x => x.Inativo == false)
-			.Select(x => new ProdutoViewModel()
-			{
-				Id = x.Id,
-				Nome = x.Nome,
-				PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
+        public List<ProdutoViewModel> ListarPrincipal()
+        {
+            var imagens = _imagemServices.Listar().Result;
+
+            return _produtoRepository.Listar()
+            .Select(x => new ProdutoViewModel()
+            {
+                Id = x.Id,
+                Nome = x.Nome,
+                PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
                 Codigo = x.Codigo,
-				UrlImagem = !string.IsNullOrWhiteSpace(x.Arquivo) ? Arquivo.FormataNomeURL(x.Arquivo, _httpContextAccessor) : ""
-			})
-			.ToList();
+                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor)
+            })
+            .ToList();
+        }
 	}
 }

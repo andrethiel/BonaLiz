@@ -18,6 +18,6 @@ namespace BonaLiz.Dados.Models
         public DateTime? DataCompra { get; set; }
         public string Codigo { get; set; }
         public bool Inativo { get; set; }
-        public string Arquivo { get; set; }
+        public List<ImagemProduto> Imagens { get; set; }
     }
 }

@@ -8,6 +8,10 @@ import Button from "../components/Button";
 import CustomLoading from "@/components/CustomLoadingGrid";
 import Select from "@/components/Select";
 import Modal from "@/components/Modal";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Autoplay, Navigation } from "swiper/modules";
 
 export default function Home() {
   const { produtos, Listar, SelectList, selectTipoProduto, FiltrarProdutos } =
@@ -57,20 +61,23 @@ export default function Home() {
 
       <div className="flex items-center flex-col my-6 gap-4">
         <Image src={Logo} alt="" className="w-16 mr-3" />
-        <div className="w-full flex flex-col gap-4">
-          <Select
-            data={selectTipoProduto}
-            icon={<FiFilter />}
-            placeholder={"Selecione um tipo de produto"}
-            onChange={(e) => setTipoProduto(e.target.value)}
-          />
-          <Button
-            color={"primary"}
-            onClick={() => FiltrarProdutos(tipoProduto)}
-          >
-            Filtrar
-          </Button>
-        </div>
+
+        {selectTipoProduto && (
+          <div className="w-full flex flex-col gap-4">
+            <Select
+              data={selectTipoProduto}
+              icon={<FiFilter />}
+              placeholder={"Selecione um tipo de produto"}
+              onChange={(e) => setTipoProduto(e.target.value)}
+            />
+            <Button
+              color={"primary"}
+              onClick={() => FiltrarProdutos(tipoProduto)}
+            >
+              Filtrar
+            </Button>
+          </div>
+        )}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-6">
         {produtos.map((item, index) => (
@@ -78,7 +85,20 @@ export default function Home() {
             key={index}
             className="rounded overflow-hidden shadow-md flex items-center cursor-pointer"
           >
-            {item.urlImagem && <img className="w-32" src={item.urlImagem} />}
+            {item.urlImagem &&
+            item.urlImagem.length == 0 ? (
+              ""
+            ) : item.urlImagem.length > 1 ? (
+              item.urlImagem.map((imagem) => (
+                <img className="w-32 object-cover" src={imagem} />
+              ))
+            ) : (
+              <img
+                className="w-32 object-cover"
+                src={item.urlImagem[0].nomeArquivo}
+              />
+            )}
+
             <div className="px-6 py-4">
               <div
                 className="text-xl"

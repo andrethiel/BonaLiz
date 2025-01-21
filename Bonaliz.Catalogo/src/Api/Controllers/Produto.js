@@ -17,7 +17,9 @@ export async function SelectListTipoProduto() {
 }
 
 export async function Filtrar(params) {
-  const response = await Api.request.post("/ProdutoFiltar", params);
+  const response = await Api.request.post("/ProdutoFiltar", {
+    fornecedorId: params,
+  });
 
   return response;
 }

@@ -26,9 +26,11 @@ namespace BonaLiz.Api.Dependencias
 			services.AddScoped<IClienteServices, ClienteServices>();
 			services.AddScoped<IVendaRepository, VendaRepository>();
 			services.AddScoped<IVendaServices, VendaServices>();
+            services.AddScoped<IImagemRepository, ImagemRepository>();
+            services.AddScoped<IImagemServices, ImagemServices>();
 
 
-			services.AddAutoMapper(typeof(AutoMapperConfiguration));
+            services.AddAutoMapper(typeof(AutoMapperConfiguration));
             AutoMapperConfiguration.Mapper();
         }
     }

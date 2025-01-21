@@ -1,0 +1,56 @@
+﻿using BonaLiz.Dados.Models;
+using BonaLiz.Domain.Interfaces;
+using BonaLiz.Negocio.Interfaces;
+using BonaLiz.Negocio.Utils;
+using BonaLiz.Negocio.ViewModels;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BonaLiz.Negocio.Services
+{
+    public class ImagemServices : IImagemServices
+    {
+        private readonly IImagemRepository _imagemRepository;
+
+        public ImagemServices(IImagemRepository imagemRepository)
+        {
+            _imagemRepository = imagemRepository;
+        }
+
+        public async Task Inserir(List<IFormFile> lista, int idProduto)
+        {
+            var imagem = new List<ImagemProduto>();
+
+            foreach (var item in lista)
+            {
+                var arquivo = new ImagemProduto();
+                arquivo.NomeImagem = Arquivo.Imagem(item);
+                arquivo.ProdutoId = idProduto;
+                imagem.Add(arquivo);
+            }
+
+            await _imagemRepository.Inserir(imagem);
+        }
+
+        public async Task<List<ImagemProdutoViewModel>> Listar()
+        {
+            try
+            {
+                var lista = await _imagemRepository.Listar();
+
+                return lista.Select(x => new ImagemProdutoViewModel()
+                {
+                    ProdutoId = x.ProdutoId,
+                    Id = x.Id,
+                    NomeArquivo = x.NomeImagem
+                }).ToList();
+            }
+            catch(Exception ex) { throw; }
+            
+        }
+    }
+}
