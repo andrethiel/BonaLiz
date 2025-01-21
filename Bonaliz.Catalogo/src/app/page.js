@@ -85,12 +85,11 @@ export default function Home() {
             key={index}
             className="rounded overflow-hidden shadow-md flex items-center cursor-pointer"
           >
-            {item.urlImagem &&
-            item.urlImagem.length == 0 ? (
+            {item.urlImagem && item.urlImagem.length == 0 ? (
               ""
             ) : item.urlImagem.length > 1 ? (
-              item.urlImagem.map((imagem) => (
-                <img className="w-32 object-cover" src={imagem} />
+              item.urlImagem.map((imagem, index) => (
+                <img className="w-32 object-cover" src={imagem} key={index} />
               ))
             ) : (
               <img
