@@ -36,31 +36,37 @@ namespace BonaLiz.Negocio.Services
 
 		public List<ClienteViewModel> Filtrar(ClienteViewModel model)
 		{
-			return _clienteRepository.Filtrar(_mapper.Map<Cliente>(model)).Select(x => new ClienteViewModel()
+			var lista = _clienteRepository.Filtrar(_mapper.Map<Cliente>(model));
+			return lista.Select(x => new ClienteViewModel()
+            {
+                Id = x.Id,
+                Guid = x.Guid,
+                Nome = x.Nome,
+                Telefone = x.Telefone,
+                Email = x.Email,
+                Inativo = x.Inativo.ToString()
+            }).ToList();
+        }
+
+		public void Inserir(ClienteViewModel model) => _clienteRepository.Inserir(_mapper.Map<Cliente>(model));
+
+		public List<ClienteViewModel> Listar()
+		{
+			try
 			{
-				Id = x.Id,
-				Guid = x.Guid,
-				Nome = x.Nome,
-				Telefone = x.Telefone,
-				Email = x.Email,
-				Inativo = x.Inativo.ToString()
-			}).ToList();
-		}
-
-		public void Inserir(ClienteViewModel model)
-		{
-			_clienteRepository.Inserir(_mapper.Map<Cliente>(model));
-		}
-
-		public List<ClienteViewModel> Listar() => _clienteRepository.Listar().Select(x => new ClienteViewModel()
-		{
-			Id = x.Id,
-			Guid = x.Guid,
-			Nome = x.Nome,
-			Telefone = x.Telefone,
-			Email = x.Email,
-			Inativo = x.Inativo.ToString()
-		}).ToList();
+                var lista =  _clienteRepository.Listar();
+                return lista.Select(x => new ClienteViewModel()
+                {
+                    Id = x.Id,
+                    Guid = x.Guid,
+                    Nome = x.Nome,
+                    Telefone = x.Telefone,
+                    Email = x.Email,
+                    Inativo = x.Inativo.ToString()
+                }).ToList();
+            }
+			catch (Exception ex) { throw; }
+        }
 
 		public ClienteViewModel ObterPorGuid(Guid Guid)
 		{
@@ -74,6 +80,6 @@ namespace BonaLiz.Negocio.Services
 			{
 				Nome = cliente.Nome
 			};
-		}
-	}
+		}        
+    }
 }

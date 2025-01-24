@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Dados.Models
 {
-    public class Base
+    public abstract class Base
     {
         public int Id { get; set; }
         public Guid Guid { get; set; }

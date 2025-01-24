@@ -1,11 +1,10 @@
-
-using BonaLiz.Api.Authentication;
 using BonaLiz.Api.Dependencias;
 using BonaLiz.Api.Extensions;
 using BonaLiz.Negocio.Utils;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Text.Json.Serialization;
 
 SerilogExtensions.AddSerilog("Api BonaLiz");
 
@@ -14,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog(Log.Logger);
 
 builder.Services.AddCors();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>

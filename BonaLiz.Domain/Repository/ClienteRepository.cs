@@ -1,47 +1,45 @@
 ﻿using BonaLiz.Dados.Context;
 using BonaLiz.Dados.Models;
 using BonaLiz.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BonaLiz.Domain.Repository
 {
-	public class ClienteRepository : IClienteRepository
-	{
-		private readonly DataContext _context;
+    public class ClienteRepository : IClienteRepository
+    {
+        private readonly IRepositoryBase<Cliente> _repositoryBase;
 
-		public ClienteRepository(DataContext context)
-		{
-			_context = context;
-		}
+        public ClienteRepository(IRepositoryBase<Cliente> repositoryBase)
+        {
+            _repositoryBase = repositoryBase;
+        }
+        public void Editar(Cliente model) => _repositoryBase.Editar(model);
 
-		public void Editar(Cliente model)
-		{
-			_context.Cliente.Update(model);
-			_context.SaveChanges();
-		}
+        public List<Cliente> Filtrar(Cliente model)
+        {
+            var filtro = _repositoryBase.Filtrar(Expressions.PredicateBuilder.And<Cliente>(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome), 
+                x => string.IsNullOrEmpty(model.Email) || x.Email.Contains(model.Email)));
 
-		public List<Cliente> Filtrar(Cliente model)
-		{
-			return _context.Cliente
-				.Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome))
-				.Where(x => string.IsNullOrEmpty(model.Email) || x.Email.Contains(model.Email))
-				.ToList();
-		}
+            if(filtro.Count() == 0)
+            {
+                return new List<Cliente>();
+            }
 
-		public void Inserir(Cliente model)
-		{
-			_context.Cliente.Add(model);
-			_context.SaveChanges();
-		}
+            return filtro;
+        }
 
-		public List<Cliente> Listar() => _context.Cliente.ToList();
+        public void Inserir(Cliente model) => _repositoryBase.Inserir(model);
 
-		public Cliente ObterPorGuid(Guid Guid) => _context.Cliente.FirstOrDefault(x => x.Guid == Guid);
+        public List<Cliente> Listar() => _repositoryBase.Listar();
 
-		public Cliente ObterPorId(int id) => _context.Cliente.FirstOrDefault(x => x.Id == id);
-	}
+        public Cliente ObterPorGuid(Guid Guid) => _repositoryBase.ObterPorGuid(Guid);
+
+        public Cliente ObterPorId(int id) => _repositoryBase.ObterPorId(id);
+    }
 }

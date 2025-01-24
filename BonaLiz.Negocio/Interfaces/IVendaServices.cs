@@ -11,9 +11,9 @@ namespace BonaLiz.Negocio.Interfaces
 	{
 		void Inserir(VendaViewModel model);
 		void Cancelar(int id);
-		List<VendaViewModel> Listar();
-		VendaViewModel ObterPorGuid(Guid guid);
-		List<VendaViewModel> Filtrar(VendaViewModel model);
+		Task<IEnumerable<VendaViewModel>> Listar();
+		Task<VendaViewModel> ObterPorGuid(Guid guid);
+        Task<IEnumerable<VendaViewModel>> Filtrar(VendaViewModel model);
 		void StatusVenda(int id, string status);
 	}
 }

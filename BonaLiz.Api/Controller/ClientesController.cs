@@ -26,7 +26,9 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				if (!_clienteServices.Listar().Where(x => x.Nome == model.Nome).Any())
+				var lista = _clienteServices.Listar();
+
+                if (!lista.Where(x => x.Nome == model.Nome).Any())
 				{
 					var telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
 					model.Telefone = telefone;
@@ -54,7 +56,7 @@ namespace BonaLiz.Api.Controller
 
 		[HttpPut]
 		[Route("/EditarCliente")]
-		public async Task<IActionResult> Editar(ClienteViewModel model)
+		public IActionResult Editar(ClienteViewModel model)
 		{
 			try
 			{
@@ -121,7 +123,8 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				return Ok(SelectListHelper.AddSelectList(new SelectList(_clienteServices.Listar().Where(x => x.Inativo == "False").ToList(), "Id", "Nome")));
+				var lista = _clienteServices.Listar();
+                return Ok(SelectListHelper.AddSelectList(new SelectList(lista.Where(x => x.Inativo == "False").ToList(), "Id", "Nome")));
 			}
 			catch (Exception ex)
 			{

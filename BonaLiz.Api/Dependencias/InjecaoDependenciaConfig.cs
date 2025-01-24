@@ -16,7 +16,9 @@ namespace BonaLiz.Api.Dependencias
             services.AddScoped<DataContext, DataContext>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-			services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+            services.AddScoped(typeof(IRepositoryBase<>), typeof(RepositoryBase<>));
+
+            services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IFornecedorServices, FornecedorServices>();
             services.AddScoped<ITipoProdutoRepository, TipoProdutoRepository>();
             services.AddScoped<ITipoProdutoServices, TipoProdutoServices>();
@@ -26,6 +28,7 @@ namespace BonaLiz.Api.Dependencias
 			services.AddScoped<IClienteServices, ClienteServices>();
 			services.AddScoped<IVendaRepository, VendaRepository>();
 			services.AddScoped<IVendaServices, VendaServices>();
+            services.AddScoped<ILoginServices, LoginServices>();
             services.AddScoped<IImagemRepository, ImagemRepository>();
             services.AddScoped<IImagemServices, ImagemServices>();
 

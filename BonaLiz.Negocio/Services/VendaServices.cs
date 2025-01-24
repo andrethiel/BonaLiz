@@ -38,14 +38,17 @@ namespace BonaLiz.Negocio.Services
 			_produtoRepository.Editar(produto);
 		}
 
-		public List<VendaViewModel> Listar()
+		public async Task<IEnumerable<VendaViewModel>> Listar()
 		{
-			return _vendaRepository.Listar().Select(x => new VendaViewModel()
+			var produtos = _produtoRepository.Listar();
+			var clientes = _clienteRepository.Listar();
+
+            return _vendaRepository.Listar().Select(x => new VendaViewModel()
 			{
 				Id = x.Id, 
 				Guid = x.Guid,
-				NomeCliente = _clienteRepository.ObterPorId(x.ClienteId).Nome,
-				NomeProduto = _produtoRepository.ObterPorId(x.ProdutoId).Nome,
+				NomeCliente = clientes.Where(y => y.Id.Equals(x.ClienteId)).First().Nome,
+				NomeProduto = produtos.Where(y => y.Id.Equals(x.ProdutoId)).First().Nome,
 				Quantidade = x.Quantidade.ToString(),
 				Valor = Formater.FormatarMoeda(x.Valor),
 				DataVenda = x.DataVenda.Value.ToString("dd/MM/yyyy"),
@@ -55,16 +58,18 @@ namespace BonaLiz.Negocio.Services
 
 		}
 
-		public VendaViewModel ObterPorGuid(Guid guid)
+		public async Task<VendaViewModel> ObterPorGuid(Guid guid)
 		{
-			var venda = _vendaRepository.ObterPorGuid(guid);
+            var produtos = _produtoRepository.Listar();
+            var clientes = _clienteRepository.Listar();
+            var venda = _vendaRepository.ObterPorGuid(guid);
 			return new VendaViewModel()
 			{
 				Id = venda.Id,
 				Guid = venda.Guid,
-				NomeCliente = _clienteRepository.ObterPorId(venda.ClienteId).Nome,
-				NomeProduto = _produtoRepository.ObterPorId(venda.ProdutoId).Nome,
-				Quantidade = venda.Quantidade.ToString(),
+                NomeCliente = clientes.Where(y => y.Id.Equals(venda.ClienteId)).First().Nome,
+                NomeProduto = produtos.Where(y => y.Id.Equals(venda.ProdutoId)).First().Nome,
+                Quantidade = venda.Quantidade.ToString(),
 				Valor = Formater.FormatarMoeda(venda.Valor),
 				DataVenda = venda.DataVenda.Value.ToString("dd/MM/yyyy"),
 				Cancelada = venda.Cancelada.ToString(),
@@ -73,10 +78,12 @@ namespace BonaLiz.Negocio.Services
 		}
 
 
-		public List<VendaViewModel> Filtrar(VendaViewModel model)
+		public async Task<IEnumerable<VendaViewModel>> Filtrar(VendaViewModel model)
 		{
 			var lista = _vendaRepository.Filtrar(_mapper.Map<Venda>(model));
-			if (lista == null)
+            var produtos = _produtoRepository.Listar();
+            var clientes = _clienteRepository.Listar();
+            if (lista == null)
 			{
 				return new List<VendaViewModel>();
 			}
@@ -86,9 +93,9 @@ namespace BonaLiz.Negocio.Services
 				{
 					Id = x.Id,
 					Guid = x.Guid,
-					NomeCliente = _clienteRepository.ObterPorId(x.ClienteId).Nome,
-					NomeProduto = _produtoRepository.ObterPorId(x.ProdutoId).Nome,
-					Quantidade = x.Quantidade.ToString(),
+                    NomeCliente = clientes.Where(y => y.Id.Equals(x.ClienteId)).First().Nome,
+                    NomeProduto = produtos.Where(y => y.Id.Equals(x.ProdutoId)).First().Nome,
+                    Quantidade = x.Quantidade.ToString(),
 					Valor = Formater.FormatarMoeda(x.Valor),
 					DataVenda = x.DataVenda.Value.ToString("dd/MM/yyyy"),
 					Cancelada = x.Cancelada.ToString(),
