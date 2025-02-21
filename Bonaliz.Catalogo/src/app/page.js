@@ -152,6 +152,7 @@ export default function Home() {
                 icon={<IoPhonePortraitOutline />}
                 mask={"(00) 00000-0000"}
                 onChange={(e) => setUser({ ...user, telefone: e.target.value })}
+                value={user.telefone}
               />
             </div>
             <div>
@@ -159,6 +160,7 @@ export default function Home() {
                 placeholder={"Nome completo"}
                 icon={<PiUser />}
                 onChange={(e) => setUser({ ...user, nome: e.target.value })}
+                value={user.nome}
               />
             </div>
             <Button color={"primary"} onClick={Login}>
