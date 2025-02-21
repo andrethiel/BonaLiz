@@ -9,20 +9,14 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Domain.Repository
 {
-    public class TipoProdutoRepository : ITipoProdutoRepository
+    public class TipoProdutoRepository(IRepositoryBase<TipoProduto> _repositoryBase) : ITipoProdutoRepository
     {
-        private readonly DataContext _context;
-        public TipoProdutoRepository(DataContext Context)
-        {
-            _context = Context;
-        }
 
         public void Cadastrar(TipoProduto model)
         {
             try
             {
-                _context.TipoProduto.Add(model);
-                _context.SaveChanges();
+                _repositoryBase.Inserir(model);
             }
             catch (Exception ex) { }
             
@@ -32,19 +26,18 @@ namespace BonaLiz.Domain.Repository
         {
             try
             {
-                _context.TipoProduto.Update(model);
-                _context.SaveChanges();
+                _repositoryBase.Editar(model);
             }
             catch (Exception ex) { }   
         }
 
-        public List<TipoProduto> Filtrar(TipoProduto model) => _context.TipoProduto.Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome)).ToList();
+        public List<TipoProduto> Filtrar(TipoProduto model) => _repositoryBase.Filtrar(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome));
 
-        public List<TipoProduto> Listar() => _context.TipoProduto.ToList();
+        public List<TipoProduto> Listar() => _repositoryBase.Listar();
 
-        public TipoProduto ObterPorGuid(Guid guid) => _context.TipoProduto.Where(x => x.Guid == guid).FirstOrDefault();
+        public TipoProduto ObterPorGuid(Guid guid) => _repositoryBase.ObterPorGuid(guid);
 
-        public TipoProduto ObterPorId(int id) => _context.TipoProduto.Where(x => x.Id == id).FirstOrDefault();
+        public TipoProduto ObterPorId(int id) => _repositoryBase.ObterPorId(id);
 
     }
 }

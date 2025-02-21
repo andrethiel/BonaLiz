@@ -7,80 +7,49 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace BonaLiz.Domain.Repository
 {
-	public class VendaRepository : IVendaRepository
+	public class VendaRepository(IRepositoryBase<Venda> _repositoryBase) : IVendaRepository
 	{
-		private readonly DataContext _context;
-		public VendaRepository(DataContext context)
-		{
-			_context = context;
-		}
-
 		public void Inserir(Venda model)
 		{
 			model.DataVenda = DateTime.Now;
-			_context.Venda.Add(model);
-			_context.SaveChanges();
-		}
+			_repositoryBase.Inserir(model);
+        }
 
-		public List<Venda> Listar() => _context.Venda.ToList();
+		public List<Venda> Listar() => _repositoryBase.Listar();
 
-		public Venda ObterPorGuid(Guid guid) => _context.Venda.Where(x => x.Guid == guid).FirstOrDefault();
+        public Venda ObterPorGuid(Guid guid) => _repositoryBase.ObterPorGuid(guid);
 
-		public List<Venda> Filtrar(Venda model)
-		{
-			var listaClientes = _context.Cliente.ToList();
-			var novaListaVenda = new List<Venda>();
-			var novaListaClientes = new List<Cliente>();
-			if (!string.IsNullOrEmpty(model.NomeCliente))
-				novaListaClientes = listaClientes.Where(x => x.Nome.Contains(model.NomeCliente)).ToList();
-			if (novaListaClientes.Count() > 0)
-			{
-				foreach (var item in novaListaClientes)
-				{
-					var venda = _context.Venda
-						.Where(x => string.IsNullOrEmpty(model.NomeCliente) || x.ClienteId == item.Id)
-						.Where(x => model.ProdutoId == 0 || x.ProdutoId == model.ProdutoId)
-						.Where(x => model.DataVenda == null || x.DataVenda == model.DataVenda.Value).FirstOrDefault();
-					novaListaVenda.Add(venda);
-				}
-				return novaListaVenda;
-			}
-			else
-			{
-				return _context.Venda
-						.Where(x => model.ProdutoId == 0 || x.ProdutoId == model.ProdutoId)
-						.Where(x => model.DataVenda == null || x.DataVenda == model.DataVenda.Value)
-						.Where(x => string.IsNullOrEmpty(model.Status) || x.Status == model.Status)
-						.ToList();
-			}
-		}
-
+		public List<Venda> Filtrar(Expression<Func<Venda, bool>> filter = null) => _repositoryBase.Filtrar(filter);
 		public Venda Cancelar(int id)
 		{
-			var venda = _context.Venda.Where(x => x.Id == id).FirstOrDefault();
-			if(venda != null)
+			var venda = _repositoryBase.ObterPorId(id);
+            if (venda != null)
 			{
 				venda.Cancelada = true;
-				_context.Venda.Update(venda);
-				_context.SaveChanges();
-			}
+				_repositoryBase.Editar(venda);
+            }
 
 			return venda;
 		}
 
 		public void StatusVenda(int id, string status)
 		{
-			var venda = _context.Venda.Where(x => x.Id == id).FirstOrDefault();
+			var venda = _repositoryBase.ObterPorId(id);
 
-			if(venda != null)
+            if (venda != null)
 			{
 				venda.Status = status;
-				_context.Venda.Update(venda);
-				_context.SaveChanges();
-			}
+                _repositoryBase.Editar(venda);
+            }
 		}
-	}
+
+        public List<Venda> Filtrar(Venda model)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

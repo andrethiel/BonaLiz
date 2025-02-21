@@ -10,19 +10,13 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Domain.Repository
 {
-    public class FornecedorRepository : IFornecedorRepository
+    public class FornecedorRepository(IRepositoryBase<Fornecedor> _repositoryBase) : IFornecedorRepository
     {
-        private readonly DataContext _context;
-        public FornecedorRepository(DataContext context)
-        {
-            _context = context;
-        }
         void IFornecedorRepository.Editar(Fornecedor model)
         {
             try
             {
-                _context.Fornecedor.Update(model);
-                _context.SaveChanges();
+                _repositoryBase.Editar(model);
             }
             catch(Exception ex)
             {
@@ -34,8 +28,7 @@ namespace BonaLiz.Domain.Repository
         {
             try
             {
-                _context.Fornecedor.Add(model);
-                _context.SaveChanges();
+                _repositoryBase.Inserir(model);
             }
             catch(Exception ex)
             {
@@ -43,16 +36,14 @@ namespace BonaLiz.Domain.Repository
             }
             
         }
-        List<Fornecedor> IFornecedorRepository.Listar() => _context.Fornecedor.ToList();
-        Fornecedor IFornecedorRepository.ObterPorId(int id) => _context.Fornecedor.Where(x => x.Id == id).FirstOrDefault();
-        Fornecedor IFornecedorRepository.ObterPorGuid(Guid Guid) => _context.Fornecedor.Where(x => x.Guid == Guid).FirstOrDefault();
+        List<Fornecedor> IFornecedorRepository.Listar() => _repositoryBase.Listar();
+        Fornecedor IFornecedorRepository.ObterPorId(int id) => _repositoryBase.ObterPorId(id);
+        Fornecedor IFornecedorRepository.ObterPorGuid(Guid Guid) => _repositoryBase.ObterPorGuid(Guid);
         List<Fornecedor> IFornecedorRepository.Filtrar(Fornecedor model)
         {
-            return _context.Fornecedor
-                .Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome))
-                .Where(x => string.IsNullOrEmpty(model.CNPJ) || x.CNPJ == model.CNPJ.Replace(".", "").Replace("/", "").Replace("-", ""))
-                .Where(x => string.IsNullOrEmpty(model.Iniciais) || x.Nome.Contains(model.Iniciais.ToUpper()))
-                .ToList();
+            return _repositoryBase.Filtrar(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome) 
+            && string.IsNullOrEmpty(model.CNPJ) || x.CNPJ == model.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "")
+            && string.IsNullOrEmpty(model.Iniciais) || x.Nome.Contains(model.Iniciais.ToUpper()));
         }
     }
 }

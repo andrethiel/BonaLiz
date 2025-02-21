@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Negocio.ViewModels
 {
-    public class LoginViewModel
+    public class CarrinhoViewModel
     {
-        public string Usuario { get; set; }
-        public string Senha { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
     }
 }

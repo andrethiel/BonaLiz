@@ -11,16 +11,8 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Negocio.Services
 {
-	public class ClienteServices : IClienteServices
+	public class ClienteServices(IClienteRepository _clienteRepository, IMapper _mapper) : IClienteServices
 	{
-		private readonly IClienteRepository _clienteRepository;
-		private readonly IMapper _mapper;
-
-		public ClienteServices(IClienteRepository clienteRepository, IMapper mapper)
-		{
-			_clienteRepository = clienteRepository;
-			_mapper = mapper;
-		}
 
 		public void Editar(ClienteViewModel model)
 		{
@@ -48,9 +40,9 @@ namespace BonaLiz.Negocio.Services
             }).ToList();
         }
 
-		public void Inserir(ClienteViewModel model) => _clienteRepository.Inserir(_mapper.Map<Cliente>(model));
+        public void Inserir(ClienteViewModel model) => _clienteRepository.Inserir(_mapper.Map<Cliente>(model));
 
-		public List<ClienteViewModel> Listar()
+        public List<ClienteViewModel> Listar()
 		{
 			try
 			{

@@ -18,7 +18,7 @@ namespace BonaLiz.Negocio.Utils
 			try
 			{
 				string nomeArquivo = Guid.NewGuid().ToString() + Path.GetExtension(arquivo.FileName);
-				using (var stream = new FileStream(Path.Combine(Caminho("CaminhoArquivo"), nomeArquivo), FileMode.Create))
+				using (var stream = new FileStream(Path.Combine(Directory.GetCurrentDirectory(), "Imagens"), FileMode.Create))
 				{
 					arquivo.CopyTo(stream);
 				}

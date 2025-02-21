@@ -9,8 +9,8 @@ namespace BonaLiz.Domain.Interfaces
 {
     public interface IImagemRepository
     {
-        Task Inserir(List<ImagemProduto> lista);
+        void Inserir(List<ImagemProduto> lista);
 
-        Task<List<ImagemProduto>> Listar();
+        List<ImagemProduto> Listar();
     }
 }

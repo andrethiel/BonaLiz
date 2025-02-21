@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using BonaLiz.Dados.Models;
 using BonaLiz.Domain.Interfaces;
+using BonaLiz.Domain.Repository;
 using BonaLiz.Negocio.Helpers;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +40,7 @@ namespace BonaLiz.Negocio.Services
 			_produtoRepository.Editar(produto);
 		}
 
-		public async Task<IEnumerable<VendaViewModel>> Listar()
+		public List<VendaViewModel> Listar()
 		{
 			var produtos = _produtoRepository.Listar();
 			var clientes = _clienteRepository.Listar();
@@ -58,7 +60,7 @@ namespace BonaLiz.Negocio.Services
 
 		}
 
-		public async Task<VendaViewModel> ObterPorGuid(Guid guid)
+		public VendaViewModel ObterPorGuid(Guid guid)
 		{
             var produtos = _produtoRepository.Listar();
             var clientes = _clienteRepository.Listar();
@@ -78,12 +80,12 @@ namespace BonaLiz.Negocio.Services
 		}
 
 
-		public async Task<IEnumerable<VendaViewModel>> Filtrar(VendaViewModel model)
+		public List<VendaViewModel> Filtrar(VendaViewModel model)
 		{
-			var lista = _vendaRepository.Filtrar(_mapper.Map<Venda>(model));
-            var produtos = _produtoRepository.Listar();
-            var clientes = _clienteRepository.Listar();
-            if (lista == null)
+			var lista = Filtrar(_mapper.Map<Venda>(model));
+			var produtos = _produtoRepository.Listar();
+			var clientes = _clienteRepository.Listar();
+			if (lista == null)
 			{
 				return new List<VendaViewModel>();
 			}
@@ -93,9 +95,9 @@ namespace BonaLiz.Negocio.Services
 				{
 					Id = x.Id,
 					Guid = x.Guid,
-                    NomeCliente = clientes.Where(y => y.Id.Equals(x.ClienteId)).First().Nome,
-                    NomeProduto = produtos.Where(y => y.Id.Equals(x.ProdutoId)).First().Nome,
-                    Quantidade = x.Quantidade.ToString(),
+					NomeCliente = clientes.Where(y => y.Id.Equals(x.ClienteId)).First().Nome,
+					NomeProduto = produtos.Where(y => y.Id.Equals(x.ProdutoId)).First().Nome,
+					Quantidade = x.Quantidade.ToString(),
 					Valor = Formater.FormatarMoeda(x.Valor),
 					DataVenda = x.DataVenda.Value.ToString("dd/MM/yyyy"),
 					Cancelada = x.Cancelada.ToString(),
@@ -115,5 +117,35 @@ namespace BonaLiz.Negocio.Services
 		}
 
 		public void StatusVenda(int id, string status) => _vendaRepository.StatusVenda(id, status);
+
+		private List<Venda> Filtrar(Venda model)
+		{
+			var listaClientes = _clienteRepository.Listar();
+            var vendas = _vendaRepository.Listar();
+            var novaListaVenda = new List<Venda>();
+			var novaListaClientes = new List<Cliente>();
+			if (!string.IsNullOrEmpty(model.NomeCliente))
+				novaListaClientes = listaClientes.Where(x => x.Nome.Contains(model.NomeCliente)).ToList();
+			if (novaListaClientes.Count() > 0)
+			{
+				foreach (var item in novaListaClientes)
+				{
+					var venda = vendas
+						.Where(x => string.IsNullOrEmpty(model.NomeCliente) || x.ClienteId == item.Id)
+						.Where(x => model.ProdutoId == 0 || x.ProdutoId == model.ProdutoId)
+						.Where(x => model.DataVenda == null || x.DataVenda == model.DataVenda.Value).FirstOrDefault();
+					novaListaVenda.Add(venda);
+				}
+				return novaListaVenda;
+			}
+			else
+			{
+				return vendas
+						.Where(x => model.ProdutoId == 0 || x.ProdutoId == model.ProdutoId)
+						.Where(x => model.DataVenda == null || x.DataVenda == model.DataVenda.Value)
+						.Where(x => string.IsNullOrEmpty(model.Status) || x.Status == model.Status)
+						.ToList();
+			}
+		}
 	}
 }

@@ -7,37 +7,40 @@ import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import CustomLoading from "@/components/CustomLoadingGrid";
 import Select from "@/components/Select";
-import Modal from "@/components/Modal";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Navigation } from "swiper/modules";
+import { PiShoppingCart, PiSignOut, PiUser } from "react-icons/pi";
+import Carrinho from "@/components/Carrinho";
+import { UseCarrinho } from "@/hook/CarrinhoContext";
+import Modal from "@/components/Modal";
+import Input from "@/components/Input";
+import { useAuth } from "@/hook/AuthContext";
+import { IoPhonePortraitOutline } from "react-icons/io5";
+import MaskInput from "@/components/InputMask";
 
 export default function Home() {
   const { produtos, Listar, SelectList, selectTipoProduto, FiltrarProdutos } =
     Principal();
   const [tipoProduto, setTipoProduto] = useState("");
-  const [Produto, setProduto] = useState({
-    Produto: "",
-    Codigo: "",
-  });
-  const [isOpen, setOpen] = useState(false);
+
+  const { EnviarCarrinho, itensCarrinho, setIsOpen } = UseCarrinho();
+
+  const {
+    isAuthenticated,
+    logout,
+    modalLogin,
+    setModalLogin,
+    setUser,
+    user,
+    Login,
+  } = useAuth();
 
   useEffect(() => {
     SelectList();
     Listar();
   }, []);
-
-  function handeleModal(nome, codigo) {
-    setOpen(true);
-    setProduto({ ...Produto, Produto: nome, Codigo: codigo });
-  }
-
-  function handaleWhats() {
-    window.open(
-      `https://api.whatsapp.com/send/?phone=5541987704278&text=Olá estou interessada no produto ${Produto.Produto}(${Produto.Codigo})&type=phone_number&app_absent=0`
-    );
-  }
 
   if (produtos.length === 0) {
     return <CustomLoading loadingMessage="Aguarde..." />;
@@ -45,23 +48,45 @@ export default function Home() {
 
   return (
     <div>
-      {isOpen && (
-        <Modal>
-          <div className="flex flex-col gap-6">
-            <h3 className="text-2xl font-semibold">
-              {"Você está interessado nesse produto ?"}
-            </h3>
-            <Button color={"primary"} onClick={() => handaleWhats()}>
-              Sim
-            </Button>
-            <Button onClick={() => setOpen(false)}>Não</Button>
+      <nav className="border-gray-200">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+          <a href="#" className="flex items-center">
+            <Image src={Logo} alt="" className="w-16 mr-3" />
+          </a>
+          <div className="flex gap-2">
+            <div className="flex justify-center items-center p-1 border-0 bg-transparent gap-3">
+              {isAuthenticated ? (
+                <div
+                  className="flex flex-row gap-1 cursor-pointer"
+                  onClick={logout}
+                >
+                  <span>Sair</span>
+                  <PiSignOut size={24} />
+                </div>
+              ) : (
+                <div
+                  className="flex flex-row gap-1 cursor-pointer"
+                  onClick={() => setModalLogin(true)}
+                >
+                  <span>Entrar</span>
+                  <PiUser size={24} />
+                </div>
+              )}
+            </div>
+            <button
+              className="flex justify-center items-center p-1 border-0 bg-transparent relative"
+              onClick={() => !setIsOpen(true)}
+            >
+              <PiShoppingCart size={24} />
+              <span className="bg-secondary w-4 h-4 absolute top-0 left-0 text-xs font-semibold flex justify-center items-center rounded-xl">
+                {itensCarrinho.length}
+              </span>
+            </button>
           </div>
-        </Modal>
-      )}
+        </div>
+      </nav>
 
       <div className="flex items-center flex-col my-6 gap-4">
-        <Image src={Logo} alt="" className="w-16 mr-3" />
-
         {selectTipoProduto && (
           <div className="w-full flex flex-col gap-4">
             <Select
@@ -98,18 +123,58 @@ export default function Home() {
               />
             )}
 
-            <div className="px-6 py-4">
-              <div
-                className="text-xl"
-                onClick={() => handeleModal(item.nome, item.codigo)}
-              >
-                {item.nome}
-              </div>
+            <div className="flex flex-col px-6 py-4 gap-4">
+              <div className="text-xl">{item.nome}</div>
               <div className="font-bold text-xl">Valor: {item.precoVenda}</div>
+              <div className="flex justify-end">
+                <Button onClick={() => EnviarCarrinho(item)}>
+                  Adicionar ao carrinho
+                </Button>
+              </div>
             </div>
           </div>
         ))}
       </div>
+      <div>
+        <Carrinho />
+      </div>
+      {modalLogin && (
+        <Modal>
+          <div>
+            <h5 className="text-center text-lg font-medium mb-4">
+              Nos diga quem é você
+            </h5>
+          </div>
+          <div className="space-y-4 w-full max-w-sm mx-auto">
+            <div>
+              <MaskInput
+                placeholder={"N° de telefone"}
+                icon={<IoPhonePortraitOutline />}
+                mask={"(00) 00000-0000"}
+                onChange={(e) => setUser({ ...user, telefone: e.target.value })}
+              />
+            </div>
+            <div>
+              <Input
+                placeholder={"Nome completo"}
+                icon={<PiUser />}
+                onChange={(e) => setUser({ ...user, nome: e.target.value })}
+              />
+            </div>
+            <Button color={"primary"} onClick={Login}>
+              Enviar
+            </Button>
+            <Button color={"secondary"} onClick={() => setModalLogin(false)}>
+              Cancelar
+            </Button>
+            {/* <div className="border-t-2 mt-4 py-4">
+              <Link className="text-center font-bold text-sm cursor-pointer">
+                Criar sua conta.
+              </Link>
+            </div> */}
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

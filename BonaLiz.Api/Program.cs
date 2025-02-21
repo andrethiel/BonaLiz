@@ -49,7 +49,7 @@ var app = builder.Build();
 
 Arquivo.SettingsConfigure(app.Services.GetRequiredService<IConfiguration>());
 
-if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+if (app.Environment.IsDevelopment())
 {
 	app.UseSwagger();
 	app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.
@@ -62,13 +62,18 @@ if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 
 app.MapSwagger().RequireAuthorization();
 
-//app.UseMiddleware<ApiKeyAuthMiddleware>();
+if(!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Imagens")))
+{
+	Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), "Imagens"));
+}
+
 
 
 app.UseStaticFiles(
-	new StaticFileOptions
+
+    new StaticFileOptions
 	{
-		FileProvider = new PhysicalFileProvider(builder.Configuration.GetSection("CaminhoArquivo").Value),
+		FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Imagens")),
 		RequestPath = "/Imagens"
 	});
 app.UseCors(builder => builder

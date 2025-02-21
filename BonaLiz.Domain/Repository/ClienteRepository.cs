@@ -11,30 +11,27 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Domain.Repository
 {
-    public class ClienteRepository : IClienteRepository
+    public class ClienteRepository(IRepositoryBase<Cliente> _repositoryBase) : IClienteRepository
     {
-        private readonly IRepositoryBase<Cliente> _repositoryBase;
-
-        public ClienteRepository(IRepositoryBase<Cliente> repositoryBase)
-        {
-            _repositoryBase = repositoryBase;
-        }
         public void Editar(Cliente model) => _repositoryBase.Editar(model);
 
         public List<Cliente> Filtrar(Cliente model)
         {
-            var filtro = _repositoryBase.Filtrar(Expressions.PredicateBuilder.And<Cliente>(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome), 
-                x => string.IsNullOrEmpty(model.Email) || x.Email.Contains(model.Email)));
+            var filtro = _repositoryBase.Filtrar(x =>
+        (string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome)) &&
+        (string.IsNullOrEmpty(model.Email) || x.Email.Contains(model.Email)));
 
             if(filtro.Count() == 0)
             {
                 return new List<Cliente>();
             }
 
-            return filtro;
+            return filtro.ToList();
         }
 
-        public void Inserir(Cliente model) => _repositoryBase.Inserir(model);
+        //public void Inserir(Cliente model) => _repositoryBase.Inserir(model);
+
+        public int Inserir(Cliente model) => _repositoryBase.InserirScalar(model);
 
         public List<Cliente> Listar() => _repositoryBase.Listar();
 

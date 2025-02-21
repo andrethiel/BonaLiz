@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.EntityFrameworkCore;
 
 namespace BonaLiz.Negocio.Services
 {
@@ -51,7 +52,9 @@ namespace BonaLiz.Negocio.Services
 				produto.Codigo = "";
 				_produtoRepository.Inserir(produto);
 
-                if(model.Arquivo.Count() > 0)
+                //Codigo(model);
+
+                if (model.Arquivo.Count() > 0)
                 {
                     _imagemServices.Inserir(model.Arquivo, produto.Id);
                 }
@@ -80,16 +83,19 @@ namespace BonaLiz.Negocio.Services
             produto.Inativo = Convert.ToBoolean(model.Inativo);            
 
             _produtoRepository.Editar(produto);
+            //if (string.IsNullOrEmpty(model.Codigo))
+                //Codigo(model);
 
-            //if (model.Arquivo.Count() > 0)
-            //{
-            //    _imagemServices.Inserir(model.Arquivo, produto.Id);
-            //}
+
+                //if (model.Arquivo.Count() > 0)
+                //{
+                //    _imagemServices.Inserir(model.Arquivo, produto.Id);
+                //}
         }
 
         public List<ProdutoViewModel> Filtrar(ProdutoViewModel model)
         {
-            var imagens = _imagemServices.Listar().Result;
+            var imagens = _imagemServices.Listar();
             var fornecedores = _fornecedorRepository.Listar();
             var tipoProdutos = _tipoProdutoRepository.Listar();
 
@@ -116,7 +122,7 @@ namespace BonaLiz.Negocio.Services
 
         public List<ProdutoViewModel> Listar()
         {
-            var imagens = _imagemServices.Listar().Result;
+            var imagens = _imagemServices.Listar();
             var fornecedores = _fornecedorRepository.Listar();
             var tipoProdutos = _tipoProdutoRepository.Listar();
 
@@ -144,7 +150,7 @@ namespace BonaLiz.Negocio.Services
         {
             var produto = _produtoRepository.ObterPorGuid(guid);
 
-            var imagens = _imagemServices.Listar().Result;
+            var imagens = _imagemServices.Listar();
             return new ProdutoViewModel()
             {
                 Id = produto.Id,
@@ -167,7 +173,7 @@ namespace BonaLiz.Negocio.Services
         public ProdutoViewModel ObterPorId(int id)
         {
             var produto = _produtoRepository.ObterPorId(id);
-            var imagens = _imagemServices.Listar().Result;
+            var imagens = _imagemServices.Listar();
             return new ProdutoViewModel()
             {
                 Id = produto.Id,
@@ -188,12 +194,13 @@ namespace BonaLiz.Negocio.Services
 
         public List<ProdutoViewModel> ListarPrincipal()
         {
-            var imagens = _imagemServices.Listar().Result;
+            var imagens = _imagemServices.Listar();
 
             return _produtoRepository.Listar()
             .Select(x => new ProdutoViewModel()
             {
                 Id = x.Id,
+                Quantidade = x.Quantidade.ToString(),
                 Nome = x.Nome,
                 PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
                 Codigo = x.Codigo,
@@ -201,5 +208,29 @@ namespace BonaLiz.Negocio.Services
             })
             .ToList();
         }
-	}
+
+        //private void Codigo(Produto produto)
+        //{
+        //    var lista = Listar();
+        //    var listaCodigos = lista.Where(x => x.FornecedorId == produto.FornecedorId).Where(x => x.Codigo != "").ToList().OrderBy(x => x.Codigo).ToList();
+        //    if (listaCodigos.Count > 0)
+        //    {
+        //        var codigo = listaCodigos.Last().Codigo.Length == 6 ? listaCodigos.Last().Codigo.Substring(2) : listaCodigos.Last().Codigo.Substring(1);
+        //        var zeros = codigo.Split("0").SkipLast(1).ToArray();
+        //        var codigoInt = Convert.ToInt32(codigo) + 1;
+        //        var iniciais = _context.Fornecedor.Where(x => x.Id == produto.FornecedorId).FirstOrDefault().Iniciais.Trim();
+        //        iniciais = string.Format("{0}{1}", iniciais.PadRight(iniciais.Length + zeros.Length, '0'), codigoInt);
+
+        //        produto.Codigo = iniciais;
+
+        //    }
+        //    else
+        //    {
+        //        produto.Codigo = string.Format("{0}{1}{2}", _context.Fornecedor.Where(x => x.Id == produto.FornecedorId).FirstOrDefault().Iniciais, "000", 1);
+        //    }
+
+        //    _context.Produto.Update(produto);
+        //    _context.SaveChanges();
+        //}
+    }
 }

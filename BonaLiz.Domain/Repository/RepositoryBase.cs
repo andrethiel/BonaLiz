@@ -39,6 +39,20 @@ namespace BonaLiz.Domain.Repository
              _context.SaveChanges();
         }
 
+        public int InserirScalar(TEntity model)
+        {
+            _DbSet.Add(model);
+            _context.SaveChanges();
+
+            return model.Id;
+        }
+
+        public void InserirRange(List<TEntity> model)
+        {
+            _DbSet.AddRange(model);
+            _context.SaveChanges();
+        }
+
         public void Editar(TEntity model)
         {
             _DbSet.Update(model);
@@ -52,6 +66,12 @@ namespace BonaLiz.Domain.Repository
                 query = query.Where(filter).AsNoTracking();
 
             return query.ToList();
+        }
+
+        public void Deletar(TEntity id)
+        {
+            _DbSet.Remove(id);
+            _context.SaveChanges();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace BonaLiz.Negocio.Services
             _imagemRepository = imagemRepository;
         }
 
-        public async Task Inserir(List<IFormFile> lista, int idProduto)
+        public void Inserir(List<IFormFile> lista, int idProduto)
         {
             var imagem = new List<ImagemProduto>();
 
@@ -33,14 +33,14 @@ namespace BonaLiz.Negocio.Services
                 imagem.Add(arquivo);
             }
 
-            await _imagemRepository.Inserir(imagem);
+            _imagemRepository.Inserir(imagem);
         }
 
-        public async Task<List<ImagemProdutoViewModel>> Listar()
+        public List<ImagemProdutoViewModel> Listar()
         {
             try
             {
-                var lista = await _imagemRepository.Listar();
+                var lista = _imagemRepository.Listar();
 
                 return lista.Select(x => new ImagemProdutoViewModel()
                 {

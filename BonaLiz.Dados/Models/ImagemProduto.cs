@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Dados.Models
 {
-    public class ImagemProduto
+    public class ImagemProduto : Base
     {
-        public int Id { get; set; }
         public int ProdutoId { get; set; }
         public string NomeImagem { get; set; }
     }

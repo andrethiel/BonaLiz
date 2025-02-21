@@ -9,7 +9,7 @@ namespace BonaLiz.Negocio.Interfaces
 {
 	public interface IClienteServices
 	{
-		void Inserir(ClienteViewModel model);
+        void Inserir(ClienteViewModel model);
 		void Editar(ClienteViewModel model);
         List<ClienteViewModel> Listar();
 		ClienteViewModel ObterPorId(int id);

@@ -10,8 +10,8 @@ namespace BonaLiz.Negocio.Interfaces
 {
     public interface IImagemServices
     {
-        Task Inserir(List<IFormFile> lista, int idProduto);
+        void Inserir(List<IFormFile> lista, int idProduto);
 
-        Task<List<ImagemProdutoViewModel>> Listar();
+        List<ImagemProdutoViewModel> Listar();
     }
 }

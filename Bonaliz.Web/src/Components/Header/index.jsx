@@ -34,22 +34,25 @@ const Header = () => {
         </div>
         <div className={`${!navbar ? "hidden" : ""} w-full md:block md:w-auto`}>
           <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border-2 lg:bg-white md:bg-white border-gray-600 bg-secondary rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0">
-            <AsideItem icon={<FaHome />} href="/pages/Principal">
+            <AsideItem icon={<FaHome />} href="/pages/Adm/Principal">
               Inicio
             </AsideItem>
-            <AsideItem icon={<FaShoppingBasket />} href="/pages/Fornecedor">
+            <AsideItem icon={<FaShoppingBasket />} href="/pages/Adm/Fornecedor">
               Forncedor
             </AsideItem>
-            <AsideItem icon={<FaShoppingBasket />} href="/pages/TipoProduto">
+            <AsideItem
+              icon={<FaShoppingBasket />}
+              href="/pages/Adm/TipoProduto"
+            >
               Tipo Produto
             </AsideItem>
-            <AsideItem icon={<BsTag />} href="/pages/Produto">
+            <AsideItem icon={<BsTag />} href="/pages/Adm/Produto">
               Produtos
             </AsideItem>
-            <AsideItem icon={<FaUser />} href="/pages/Clientes">
+            <AsideItem icon={<FaUser />} href="/pages/Adm/Clientes">
               Clientes
             </AsideItem>
-            <AsideItem icon={<FaCartShopping />} href="/pages/Vendas">
+            <AsideItem icon={<FaCartShopping />} href="/pages/Adm/Vendas">
               Vendas
             </AsideItem>
           </ul>

@@ -10,26 +10,19 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Domain.Repository
 {
-    public class ImagemRepository : IImagemRepository
+    public class ImagemRepository(IRepositoryBase<ImagemProduto> _repositoryBase) : IImagemRepository
     {
-        private readonly DataContext _context;
 
-        public ImagemRepository(DataContext context)
-        {
-            _context = context;
-        }
-
-        public async Task Inserir(List<ImagemProduto> lista)
+        public void Inserir(List<ImagemProduto> lista)
         {
             try
             {
-                await _context.ImagemProduto.AddRangeAsync(lista);
-                _context.SaveChanges();
+                _repositoryBase.InserirRange(lista);
             }
             catch (Exception ex) { }
             
         }
 
-        public async Task<List<ImagemProduto>> Listar() => await _context.ImagemProduto.ToListAsync();
+        public List<ImagemProduto> Listar() => _repositoryBase.Listar();
     }
 }
