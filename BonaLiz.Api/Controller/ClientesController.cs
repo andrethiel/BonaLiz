@@ -26,7 +26,7 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				var lista = _clienteServices.Listar();
+				var lista = _clienteServices.Listar(model);
 
                 if (!lista.Where(x => x.Nome == model.Nome).Any())
 				{
@@ -77,11 +77,11 @@ namespace BonaLiz.Api.Controller
 
 		[HttpGet]
 		[Route("/ListarClientes")]
-		public async Task<IActionResult> Listar()
+		public async Task<IActionResult> Listar(ClienteViewModel model)
 		{
 			try
 			{
-				return Ok(_clienteServices.Listar());
+				return Ok(_clienteServices.Listar(model));
 			}
 			catch (Exception ex)
 			{
@@ -119,12 +119,12 @@ namespace BonaLiz.Api.Controller
 
 		[HttpGet]
 		[Route("/SelectListClientes")]
-		public async Task<IActionResult> SelectListFornencedor()
+		public async Task<IActionResult> SelectListFornencedor(ClienteViewModel model)
 		{
 			try
 			{
-				var lista = _clienteServices.Listar();
-                return Ok(SelectListHelper.AddSelectList(new SelectList(lista.Where(x => x.Inativo == "False").ToList(), "Id", "Nome")));
+				var lista = _clienteServices.Listar(model);
+                return Ok(SelectListHelper.AddSelectList(new SelectList(lista, "Id", "Nome")));
 			}
 			catch (Exception ex)
 			{

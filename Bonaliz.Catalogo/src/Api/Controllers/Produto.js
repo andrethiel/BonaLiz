@@ -1,7 +1,7 @@
 import Api from "..";
 
 export async function ListarProdutosPrincal() {
-  const response = await Api.request.get("/ListaPrincipal");
+  const response = await Api.request.get("/ListaPrincipal?Inativo=false");
 
   return response;
 }

@@ -1,5 +1,5 @@
-import React from "react";
+import { DynamicIcon } from "lucide-react/dynamic";
 
-export default function Icons({ icon }) {
-  return <>{icon}</>;
+export default function Icones({ icon, ...res }) {
+  return <DynamicIcon name={icon} {...res} />;
 }

@@ -2,8 +2,6 @@
 import Input from "@/Components/Input";
 import MaskInput from "@/Components/InputMask";
 import React, { Suspense, useEffect, useState } from "react";
-import { FaShoppingBasket } from "react-icons/fa";
-import { AiOutlineExclamationCircle } from "react-icons/ai";
 import Button from "@/Components/Button";
 import AgGrid from "@/Components/Grid";
 import Linked from "@/Components/Link";
@@ -11,6 +9,7 @@ import { useRouter } from "next/navigation";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import { Lista } from "@/Hooks/Fornecedor";
 import Alert from "@/Components/Alert";
+import Icones from "@/Components/Icons";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -86,14 +85,14 @@ function Fornecedor() {
         <div className="grid grid-row-4 lg:grid-cols-4 gap-2">
           <div>
             <Input
-              icon={<FaShoppingBasket />}
+              icon={"shopping-basket"}
               placeholder="Nome do fornecedor"
               onChange={(e) => setForm({ ...form, Nome: e.target.value })}
             />
           </div>
           <div>
             <MaskInput
-              icon={<AiOutlineExclamationCircle />}
+              icon={"circle-alert"}
               placeholder={"CNPJ"}
               mask={"00.000.000/0000-00"}
               onChange={(e) => setForm({ ...form, CNPJ: e.target.value })}
@@ -101,7 +100,7 @@ function Fornecedor() {
           </div>
           <div>
             <Input
-              icon={<FaShoppingBasket />}
+              icon={"shopping-basket"}
               placeholder="Iniciais do fornecedor"
               onChange={(e) => setForm({ ...form, Iniciais: e.target.value })}
             />

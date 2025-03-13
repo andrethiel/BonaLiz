@@ -10,12 +10,13 @@ namespace BonaLiz.Api.Authentication
 		public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
 		{
 			if (!context.HttpContext.Request.Headers.TryGetValue(APIKEY, out var apiKey))
-			{
+
+            {
 				context.Result = new ContentResult()
 				{
 					StatusCode = 401,
-					Content = "ApiKey não encontrada"
-				};
+					Content = "ApiKey não encontrada/Token não encontrado"
+                };
 				return;
 			}
 

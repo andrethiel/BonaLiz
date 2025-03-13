@@ -14,7 +14,7 @@ namespace BonaLiz.Negocio.Services
     {
         public CarrinhoIdViewModel Inserir(ClienteViewModel model)
         {
-            var cliente = _clienteRepository.Listar().Where(x => x.Nome == model.Nome && x.Telefone == model.Telefone).ToList();
+            var cliente = _clienteRepository.Listar().Where(x => x.Telefone == model.Telefone).ToList();
             
 
             if (cliente.Count == 0)

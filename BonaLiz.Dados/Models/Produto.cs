@@ -19,5 +19,7 @@ namespace BonaLiz.Dados.Models
         public string Codigo { get; set; }
         public bool Inativo { get; set; }
         public List<ImagemProduto> Imagens { get; set; }
+
+        // public int? EmpresaId { get; set; }
     }
 }

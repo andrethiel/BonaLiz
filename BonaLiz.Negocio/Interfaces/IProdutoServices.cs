@@ -11,8 +11,8 @@ namespace BonaLiz.Negocio.Interfaces
     {
         void Cadastrar(ProdutoViewModel model);
         void Editar(ProdutoViewModel model);
-        List<ProdutoViewModel> Listar();
-        List<ProdutoViewModel> ListarPrincipal();
+        List<ProdutoViewModel> Listar(ProdutoViewModel model);
+        List<ProdutoViewModel> ListarPrincipal(ProdutoViewModel model);
 		ProdutoViewModel ObterPorGuid(Guid guid);
         ProdutoViewModel ObterPorId(int id);
         List<ProdutoViewModel> Filtrar(ProdutoViewModel model);

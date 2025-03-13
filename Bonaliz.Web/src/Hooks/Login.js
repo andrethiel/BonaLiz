@@ -1,13 +1,19 @@
+"use client";
 import { Entrar } from "@/Api/Controllers/Login";
+import { validateLoginForm } from "@/Utils/validation";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-export function LoginEntrar() {
+export const AuthContext = createContext(null);
+
+export function AuthProvider({ children }) {
   const router = useRouter();
   const [user, setUser] = useState({
-    Usuario: "",
+    Email: "",
     Senha: "",
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const [alert, setAlert] = useState({
     message: "",
@@ -15,64 +21,96 @@ export function LoginEntrar() {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [touched, setTouched] = useState({});
 
   useEffect(() => {
-    setTimeout(() => {
-      setAlert({
-        ...alert,
-        message: "",
-        type: "",
-      });
-    }, [500]);
-  }, [alert]);
+    const timer = setTimeout(() => {
+      setAlert({ message: "", type: "" });
+    }, 1000);
 
-  async function EntrarLogin() {
-    if (user.Usuario == "") {
-      setAlert({
-        ...alert,
-        message: "Digite o usuário",
-        type: "Alert",
-      });
+    return () => clearTimeout(timer);
+  }, [alert.message]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prev) => ({ ...prev, [name]: value }));
+
+    // Validate on change if field was already touched
+    if (touched[name]) {
+      const result = validateLoginForm({ ...user, [name]: value });
+      setErrors((prev) => ({ ...prev, [name]: result.errors[name] }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+
+    // Validate on blur
+    const result = validateLoginForm(user);
+    setErrors((prev) => ({ ...prev, [name]: result.errors[name] }));
+  };
+
+  async function onSubmit(e) {
+    e.preventDefault();
+
+    // Validate all fields on submit
+    const result = validateLoginForm(user);
+    setErrors(result.errors);
+
+    // Mark all fields as touched
+    setTouched({ Email: true, Senha: true });
+
+    if (!result.valid) {
       return;
     }
+    setIsLoading(true);
+    setUser((prevUser) => {
+      const updatedUser = { ...prevUser };
+      EntrarLogin(updatedUser);
+      return updatedUser;
+    });
+  }
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
-    if (user.Senha == "") {
-      setAlert({
-        ...alert,
-        message: "Digite a senha",
-        type: "Alert",
-      });
-      return;
-    }
+  async function EntrarLogin(updatedUser) {
     try {
-      setIsLoading(true);
-      const response = await Entrar(user);
-      if (!response.status) {
-        setAlert({
-          ...alert,
-          message: response.message,
-          type: "Danger",
-        });
-      } else {
-        router.replace("/pages/Adm/Principal");
+      const response = await Entrar(updatedUser);
+      if (response.status) {
+        console.log(response);
+        router.replace("/pages/Adm");
+        localStorage.setItem("accessToken", response.accessToken);
+        localStorage.setItem("nome", response.nome);
       }
-      setIsLoading(false);
     } catch (e) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: e.response.data.detail,
       });
+      setUser({ Email: "", Senha: "" });
+    } finally {
       setIsLoading(false);
     }
   }
 
-  return {
-    user,
-    setUser,
-    EntrarLogin,
-    alert,
-    isLoading,
-    setIsLoading,
-  };
+  return (
+    <AuthContext.Provider
+      value={{
+        isLoading,
+        setIsLoading,
+        onSubmit,
+        handleBlur,
+        handleChange,
+        user,
+        errors,
+        touched,
+        alert,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 }

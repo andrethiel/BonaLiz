@@ -1,10 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { FaCartPlus } from "react-icons/fa";
-import Input from "../Input";
-import Button from "../Button";
-import Select2 from "../Select2";
-import { SelectListClientes } from "@/Hooks/ClienteSelect";
+import React from "react";
 
 function Modal({ children, title }) {
   return (

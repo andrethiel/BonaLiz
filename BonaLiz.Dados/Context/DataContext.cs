@@ -21,6 +21,8 @@ namespace BonaLiz.Dados.Context
             modelBuilder.Entity<ImagemProduto>().Ignore(x => x.Guid);
             modelBuilder.Entity<Carrinho>().Ignore(x => x.Guid);
             modelBuilder.Entity<Carrinho>().Ignore(x => x.Id);
+
+            modelBuilder.Entity<Empresa>(builder => builder.HasIndex(x => x.TenantId));
         }
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<TipoProduto> TipoProduto { get; set; }
@@ -30,6 +32,5 @@ namespace BonaLiz.Dados.Context
         public DbSet<ImagemProduto> ImagemProduto { get; set; }
         public DbSet<Carrinho> Carrinho { get; set; }
         public DbSet<CarrinhoItens> CarrinhoItens { get; set; }
-        public DbSet<Login> Login { get; set; }
     }
 }

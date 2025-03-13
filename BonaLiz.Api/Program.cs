@@ -1,9 +1,13 @@
 using BonaLiz.Api.Dependencias;
 using BonaLiz.Api.Extensions;
+using BonaLiz.Dados.Models;
+using BonaLiz.Identity.Context;
 using BonaLiz.Negocio.Utils;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Reflection.Metadata;
 using System.Text.Json.Serialization;
 
 SerilogExtensions.AddSerilog("Api BonaLiz");
@@ -18,32 +22,76 @@ builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.Re
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-	c.AddSecurityDefinition("X-API-Key", new OpenApiSecurityScheme
+	//c.AddSecurityDefinition("X-API-Key", new OpenApiSecurityScheme
+	//{
+	//	Description = "",
+	//	Type = SecuritySchemeType.ApiKey,
+	//	Name = "X-API-Key",
+	//	In = ParameterLocation.Header,
+	//	Scheme = "ApiKeyScheme"
+	//});
+
+	//var key = new OpenApiSecurityScheme()
+	//{
+	//	Reference = new OpenApiReference()
+	//	{
+	//		Type = ReferenceType.SecurityScheme,
+	//		Id = "X-API-Key"
+	//	},
+	//	In = ParameterLocation.Header,
+	//};
+
+	//var requirement = new OpenApiSecurityRequirement
+	//				{
+	//						 { key, new List<string>() }
+	//				};
+	//c.AddSecurityRequirement(requirement);
+
+	c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
 	{
-		Description = "",
+		Name = "Authorization",
 		Type = SecuritySchemeType.ApiKey,
-		Name = "X-API-Key",
+		Scheme = "Bearer",
+		BearerFormat = "JWT",
 		In = ParameterLocation.Header,
-		Scheme = "ApiKeyScheme"
+		Description = "JWT Authorization header using the Bearer scheme.",
 	});
 
-	var key = new OpenApiSecurityScheme()
-	{
-		Reference = new OpenApiReference()
-		{
-			Type = ReferenceType.SecurityScheme,
-			Id = "X-API-Key"
-		},
-		In = ParameterLocation.Header,
-	};
-
-	var requirement = new OpenApiSecurityRequirement
-					{
-							 { key, new List<string>() }
-					};
-	c.AddSecurityRequirement(requirement);
+	c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
 });
+builder.Services.AddAuthentication(builder.Configuration);
 builder.Services.RegisterServices(builder.Configuration);
+builder.Services.ConfigureApplicationCookie(options =>
+{
+	options.Cookie.HttpOnly = true;
+	options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
+	options.LoginPath = "/api/auth/login";
+	options.LogoutPath = "/api/auth/logout";
+	options.AccessDeniedPath = "/api/auth/access-denied";
+});
+
+builder.Services.Configure<IdentityOptions>(x =>
+{
+    x.Password.RequireDigit = false;
+    x.Password.RequireUppercase = false;
+    x.Password.RequireLowercase = false;
+    x.Password.RequireNonAlphanumeric = false;
+});
+
+
 
 var app = builder.Build();
 
@@ -76,14 +124,15 @@ app.UseStaticFiles(
 		FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Imagens")),
 		RequestPath = "/Imagens"
 	});
-app.UseCors(builder => builder
-			.SetIsOriginAllowed(orign => true)
-			.AllowAnyMethod()
-			.AllowAnyHeader()
-			.AllowCredentials());
+
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseCors(builder => builder
+            .SetIsOriginAllowed(orign => true)
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
 app.MapControllers();
 
 app.UseRequestLocalization("pt-BR");

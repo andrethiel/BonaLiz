@@ -2,15 +2,16 @@
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BonaLiz.Api.Controller
 {
-	[ApiController]
-	[ApiKey]
-	public class VendasController : ControllerBase
-	{
+    [ApiController]
+    [Authorize(Roles = "Administrador")]
+    public class VendasController : ControllerBase
+    {
         private readonly IVendaServices _vendaServices;
 		private readonly IProdutoServices _produtoServices;
 
@@ -53,7 +54,8 @@ namespace BonaLiz.Api.Controller
 
 		[HttpGet]
 		[Route("/ListarVendas")]
-		public async Task<IActionResult> Listar()
+        
+        public async Task<IActionResult> Listar()
 		{
 			try
 			{

@@ -120,13 +120,13 @@ namespace BonaLiz.Negocio.Services
             }).ToList();
         }
 
-        public List<ProdutoViewModel> Listar()
+        public List<ProdutoViewModel> Listar(ProdutoViewModel model)
         {
             var imagens = _imagemServices.Listar();
             var fornecedores = _fornecedorRepository.Listar();
             var tipoProdutos = _tipoProdutoRepository.Listar();
 
-            return _produtoRepository.Listar().Select(x => new ProdutoViewModel()
+            return _produtoRepository.Listar().Where(x => x.Inativo == Convert.ToBoolean(model.Inativo)).Select(x => new ProdutoViewModel()
             {
                 Id = x.Id,
                 Guid = x.Guid,
@@ -192,11 +192,11 @@ namespace BonaLiz.Negocio.Services
             };
         }
 
-        public List<ProdutoViewModel> ListarPrincipal()
+        public List<ProdutoViewModel> ListarPrincipal(ProdutoViewModel model)
         {
             var imagens = _imagemServices.Listar();
 
-            return _produtoRepository.Listar()
+            return _produtoRepository.Listar().Where(x => x.Inativo == Convert.ToBoolean(model.Inativo))
             .Select(x => new ProdutoViewModel()
             {
                 Id = x.Id,

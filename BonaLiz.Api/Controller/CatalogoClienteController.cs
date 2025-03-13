@@ -1,4 +1,5 @@
-﻿using BonaLiz.Negocio.Interfaces;
+﻿using BonaLiz.Api.Authentication;
+using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BonaLiz.Api.Controller
 {
     [ApiController]
+    [ApiKey]
     public class CatalogoClienteController(IClienteCarrinhoServices _clienteCarrinhoServices) : ControllerBase
     {
         [HttpPost]

@@ -26,7 +26,7 @@ namespace BonaLiz.Api.Controller
         {
             try
             {
-                if(!_produtoServices.Listar().Where(x => x.Nome == model.Nome).Any())
+                if(!_produtoServices.Listar(model).Where(x => x.Nome == model.Nome).Any())
                 {
                     
                     _produtoServices.Cadastrar(model);
@@ -71,11 +71,11 @@ namespace BonaLiz.Api.Controller
         }
         [HttpGet]
         [Route("/ListarProdutos")]
-        public async Task<IActionResult> Listar()
+        public async Task<IActionResult> Listar(ProdutoViewModel model)
         {
             try
             {
-                return Ok(_produtoServices.Listar());
+                return Ok(_produtoServices.Listar(model));
             }
             catch (Exception ex)
             {
@@ -136,11 +136,11 @@ namespace BonaLiz.Api.Controller
 
 		[HttpGet]
 		[Route("/ListaPrincipal")]
-		public async Task<IActionResult> ListaPrincipal()
+		public async Task<IActionResult> ListaPrincipal(ProdutoViewModel model)
 		{
 			try
 			{
-				return Ok(_produtoServices.ListarPrincipal());
+				return Ok(_produtoServices.ListarPrincipal(model));
 			}
 			catch (Exception ex)
 			{
@@ -151,11 +151,11 @@ namespace BonaLiz.Api.Controller
 
 		[HttpGet]
 		[Route("/SelectListProdutos")]
-		public async Task<IActionResult> SelectListProdutos()
+		public async Task<IActionResult> SelectListProdutos(ProdutoViewModel model)
 		{
 			try
 			{
-				return Ok(SelectListHelper.AddSelectList(new SelectList(_produtoServices.Listar().Where(x => x.Inativo == "False").ToList(), "Id", "Nome")));
+				return Ok(SelectListHelper.AddSelectList(new SelectList(_produtoServices.Listar(model), "Id", "Nome")));
 			}
 			catch (Exception ex)
 			{

@@ -13,5 +13,6 @@ namespace BonaLiz.Dados.Models
         public string Estado { get; set; }
         public string Iniciais { get; set; }
 		public bool Inativo { get; set; }
-	}
+        // public int? EmpresaId { get; set; }
+    }
 }

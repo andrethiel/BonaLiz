@@ -42,11 +42,11 @@ namespace BonaLiz.Negocio.Services
 
         public void Inserir(ClienteViewModel model) => _clienteRepository.Inserir(_mapper.Map<Cliente>(model));
 
-        public List<ClienteViewModel> Listar()
+        public List<ClienteViewModel> Listar(ClienteViewModel model)
 		{
 			try
 			{
-                var lista =  _clienteRepository.Listar();
+                var lista =  _clienteRepository.Listar().Where(x => x.Inativo == Convert.ToBoolean(model.Inativo));
                 return lista.Select(x => new ClienteViewModel()
                 {
                     Id = x.Id,

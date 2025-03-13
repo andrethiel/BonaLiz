@@ -20,5 +20,6 @@ namespace BonaLiz.Dados.Models
 		public string NomeCliente { get; set; }
 		[NotMapped]
 		public string NomeProduto { get; set; }
-	}
+        // public int? EmpresaId { get; set; }
+    }
 }

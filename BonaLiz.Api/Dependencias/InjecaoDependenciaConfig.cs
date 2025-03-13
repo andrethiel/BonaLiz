@@ -1,9 +1,14 @@
 ﻿using BonaLiz.Dados.Context;
+using BonaLiz.Dados.Models;
 using BonaLiz.Domain.Interfaces;
 using BonaLiz.Domain.Repository;
+using BonaLiz.Identity.Context;
+using BonaLiz.Identity.Interfaces;
+using BonaLiz.Identity.Services;
 using BonaLiz.Negocio.AutoMapper;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BonaLiz.Api.Dependencias
@@ -13,6 +18,7 @@ namespace BonaLiz.Api.Dependencias
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<DataContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContextIdentity>(option => option.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<DataContext, DataContext>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -33,11 +39,16 @@ namespace BonaLiz.Api.Dependencias
             services.AddScoped<ICarrinhoRepository, CarrinhoRepository>();
             services.AddScoped<ICarrinhoServices, CarrinhoServices>();
             services.AddScoped<IClienteCarrinhoServices, ClienteCarrinhoServices>();
+            services.AddScoped<IIdentityService, IdentityService>();
 
 
 
             services.AddAutoMapper(typeof(AutoMapperConfiguration));
-            AutoMapperConfiguration.Mapper();
+            AutoMapperConfiguration.Mapper();            
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<DataContextIdentity>()
+                .AddDefaultTokenProviders();
         }
     }
 }
