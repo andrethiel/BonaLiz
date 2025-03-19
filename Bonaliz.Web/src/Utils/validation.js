@@ -9,7 +9,6 @@ function isValidPassword(password) {
   return passwordRegex.test(password);
 }
 export function validateLoginForm(values) {
-  console.log(values);
   const errors = {};
 
   // Validate email
@@ -27,6 +26,64 @@ export function validateLoginForm(values) {
   //     message:
   //       "A senha deve ter pelo menos 8 caracteres, 1 letra maiúscula, 1 letra minúscula e pelo menos um caractere especial",
   //   };
+  // }
+
+  // function Valida() {
+  //   if (form.Nome == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Digite o nome do fornecedor",
+  //       type: "Danger",
+  //     });
+  //     return false;
+  //   }
+  //   if (form.CNPJ == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Digite o CNPJ do fornecedor",
+  //       type: "Danger",
+  //     });
+  //     return false;
+  //   }
+  //   if (form.Estado == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Selecione o estado do fornecedor",
+  //       type: "Danger",
+  //     });
+  //     return false;
+  //   }
+
+  //   return true;
+  // }
+
+  // function Valida() {
+  //   if (form.Nome == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Digite o nome do fornecedor",
+  //       type: "Danger",
+  //     });
+  //     return false;
+  //   }
+  //   if (form.CNPJ == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Digite o CNPJ do fornecedor",
+  //       type: "Danger",
+  //     });
+  //     return false;
+  //   }
+  //   if (form.Estado == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Selecione o estado do fornecedor",
+  //       type: "Danger",
+  //     });
+  //     return false;
+  //   }
+
+  //   return true;
   // }
 
   return {

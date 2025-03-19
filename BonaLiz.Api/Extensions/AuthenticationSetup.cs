@@ -1,6 +1,7 @@
 ﻿using BonaLiz.Identity.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -30,6 +31,12 @@ namespace BonaLiz.Api.Extensions
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredLength = 6;
             });
+            
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressMapClientErrors = false;
+            });
+
 
             var tokenValidationParameters = new TokenValidationParameters
             {

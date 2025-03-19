@@ -11,7 +11,6 @@ import Input from "@/Components/Input";
 import Linked from "@/Components/Link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { FaShoppingBasket } from "react-icons/fa";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -106,14 +105,14 @@ const TipoProduto = () => {
 
   return (
     <div>
-      {alert && <Alert children={alert.message} type={alert.type} />}
+      {alert.message && <Alert children={alert.message} type={alert.type} />}
       <div className="p-3 m-3">
         <h3 className="text-2xl font-semibold">Lista de Tipo de produtos</h3>
       </div>
       <div className="grid grid-row-2 lg:grid-cols-2 gap-2">
         <div>
           <Input
-            icon={<FaShoppingBasket />}
+            icon={"shopping-basket"}
             placeholder="Tipo de produto"
             onChange={(e) => setForm({ ...form, Nome: e.target.value })}
           />

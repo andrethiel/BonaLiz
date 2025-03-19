@@ -31,7 +31,7 @@ namespace BonaLiz.Domain.Repository
             catch (Exception ex) { }   
         }
 
-        public List<TipoProduto> Filtrar(TipoProduto model) => _repositoryBase.Filtrar(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome));
+        public List<TipoProduto> Filtrar(TipoProduto model) => _repositoryBase.Listar().Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome)).ToList();
 
         public List<TipoProduto> Listar() => _repositoryBase.Listar();
 

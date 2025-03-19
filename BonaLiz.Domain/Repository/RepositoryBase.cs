@@ -33,10 +33,11 @@ namespace BonaLiz.Domain.Repository
             catch(TaskCanceledException ex) { throw; }
             
         }
-        public void Inserir(TEntity model)
+        public TEntity Inserir(TEntity model)
         {
              _DbSet.Add(model);
-             _context.SaveChanges();
+            model.Id = _context.SaveChanges();
+            return model;
         }
 
         public int InserirScalar(TEntity model)
@@ -53,10 +54,12 @@ namespace BonaLiz.Domain.Repository
             _context.SaveChanges();
         }
 
-        public void Editar(TEntity model)
+        public TEntity Editar(TEntity model)
         {
             _DbSet.Update(model);
             _context.SaveChanges();
+            return model;
+
         }
 
         public List<TEntity> Filtrar(Expression<Func<TEntity, bool>> filter = null)

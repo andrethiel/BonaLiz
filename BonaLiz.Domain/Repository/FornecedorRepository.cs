@@ -12,11 +12,11 @@ namespace BonaLiz.Domain.Repository
 {
     public class FornecedorRepository(IRepositoryBase<Fornecedor> _repositoryBase) : IFornecedorRepository
     {
-        void IFornecedorRepository.Editar(Fornecedor model)
+        Fornecedor IFornecedorRepository.Editar(Fornecedor model)
         {
             try
             {
-                _repositoryBase.Editar(model);
+                return _repositoryBase.Editar(model);
             }
             catch(Exception ex)
             {
@@ -24,11 +24,12 @@ namespace BonaLiz.Domain.Repository
             }
             
         }
-        void IFornecedorRepository.Inserir(Fornecedor model)
+        Fornecedor IFornecedorRepository.Inserir(Fornecedor model)
         {
             try
             {
-                _repositoryBase.Inserir(model);
+                model.Id = _repositoryBase.InserirScalar(model);
+                return model;
             }
             catch(Exception ex)
             {
@@ -41,9 +42,11 @@ namespace BonaLiz.Domain.Repository
         Fornecedor IFornecedorRepository.ObterPorGuid(Guid Guid) => _repositoryBase.ObterPorGuid(Guid);
         List<Fornecedor> IFornecedorRepository.Filtrar(Fornecedor model)
         {
-            return _repositoryBase.Filtrar(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome) 
-            && string.IsNullOrEmpty(model.CNPJ) || x.CNPJ == model.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "")
-            && string.IsNullOrEmpty(model.Iniciais) || x.Nome.Contains(model.Iniciais.ToUpper()));
+            Console.Write(model.Nome == "");
+            var cnpj = model.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "");
+            return _repositoryBase.Listar()
+                .Where(x => model.CNPJ == "" || x.CNPJ == cnpj)
+                .Where(x => model.Nome == "" || x.Nome.Contains(model.Nome)).ToList();
         }
     }
 }

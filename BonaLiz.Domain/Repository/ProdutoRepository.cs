@@ -23,11 +23,12 @@ namespace BonaLiz.Domain.Repository
 
 
 
-        public List<Produto> Filtrar(Produto model) => _repositoryBase.Filtrar(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome)
-        && model.FornecedorId == null || x.FornecedorId == model.FornecedorId
-        && model.TipoProdutoId == null || x.TipoProdutoId == model.TipoProdutoId
-        && model.DataCompra == null || x.DataCompra == model.DataCompra
-        && x.Quantidade > 0 && x.Inativo == false);
+        public List<Produto> Filtrar(Produto model) => _repositoryBase.Listar()
+            .Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome))
+            .Where(x => model.FornecedorId == null || x.FornecedorId == model.FornecedorId)
+            .Where(x => model.TipoProdutoId == null || x.TipoProdutoId == model.TipoProdutoId)
+            .Where(x=> model.DataCompra == null || x.DataCompra == model.DataCompra)
+            .Where(x => x.Quantidade > 0 && x.Inativo == false).ToList();
             
     }
 }

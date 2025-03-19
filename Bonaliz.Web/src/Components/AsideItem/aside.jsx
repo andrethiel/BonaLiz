@@ -15,7 +15,7 @@ function AsideItem({
   toggleExpandedItem,
 }) {
   const isExpendedItem = expandedItems.includes(item.id);
-  const hasChildren = item.subItems && item.subItems.length > 0;
+  const hasChildren = item.subitens && item.subitens.length > 0;
   const isActive = activeItem === item.id;
   const router = useRouter();
 
@@ -56,7 +56,7 @@ function AsideItem({
       </button>
       {hasChildren && isExpendedItem && isExpanded && (
         <ul className="pl-6 mt-1 space-y-1">
-          {item.subItems.map((child, index) => (
+          {item.subitens.map((child, index) => (
             <li key={index}>
               <button
                 onClick={() => router.replace(child.href)}

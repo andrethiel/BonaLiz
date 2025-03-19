@@ -1,14 +1,12 @@
 import axios from "axios";
 
 const URLBASE = process.env.NEXT_PUBLIC_API_URL;
-const apiKey = "43e4dbf0-52ed-4203-895d-42b586496bd4";
-
 axios.defaults.baseURL = URLBASE;
+axios.defaults.withCredentials = true;
 
-axios.defaults.headers.common = {
-  "X-API-Key": apiKey,
-};
-
+// axios.defaults.headers.common = {
+//   "Access-Control-Allow-Origin": "http://localhost:3000",
+// };
 const responseBody = (response) => response.data;
 
 const request = {
@@ -22,7 +20,12 @@ const request = {
         },
       })
       .then(responseBody),
-  put: (url, body) => axios.put(url, body).then(responseBody),
+  put: (url, body) =>
+    axios
+      .put(url, body, {
+        withCredentials: true,
+      })
+      .then(responseBody),
   putForm: (url, form) =>
     axios
       .put(url, form, {

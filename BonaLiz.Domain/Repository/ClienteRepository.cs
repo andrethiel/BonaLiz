@@ -17,9 +17,8 @@ namespace BonaLiz.Domain.Repository
 
         public List<Cliente> Filtrar(Cliente model)
         {
-            var filtro = _repositoryBase.Filtrar(x =>
-        (string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome)) &&
-        (string.IsNullOrEmpty(model.Email) || x.Email.Contains(model.Email)));
+            var filtro = _repositoryBase.Listar().Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome))
+                .Where(x => string.IsNullOrEmpty(model.Email) || x.Email.Contains(model.Email));
 
             if(filtro.Count() == 0)
             {

@@ -30,7 +30,6 @@ function Login() {
             <Input
               placeholder={"Email"}
               name={"Email"}
-              type="email"
               autoComplete="email"
               icon={"at-sign"}
               value={user.Email}

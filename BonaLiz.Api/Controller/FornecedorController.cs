@@ -1,8 +1,12 @@
 ﻿using BonaLiz.Api.Authentication;
+using BonaLiz.Api.Controller.Response;
 using BonaLiz.Api.Helpers;
+using BonaLiz.Dados.Models;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.ViewModels;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +15,7 @@ namespace BonaLiz.Api.Controllers
 {
     [ApiController]
     [Authorize(Roles = "Administrador")]
+    
     public class FornecedorController : ControllerBase
     {
         private readonly IFornecedorServices _fornecedorServices;
@@ -23,26 +28,23 @@ namespace BonaLiz.Api.Controllers
         [Route("/CadastrarForncedor")]
         public async Task<IActionResult> Cadastro(FornecedorViewModel model)
         {
+            var cookie = Response.HttpContext.Request.Cookies;
             try
             {
                 if(!_fornecedorServices.Listar().Where(x => x.Nome == model.Nome).Any())
                 {
                     var cnpj = model.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "");
                     model.CNPJ = cnpj;
-                    _fornecedorServices.Inserir(model);
-                    return Ok(new
+                    var fornecedor = _fornecedorServices.Inserir(model);
+                    if (fornecedor == null)
                     {
-                        status = true,
-                        message = "Cadastrado com sucesso"
-                    });
+                        return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Erro ao editar fornecedor"));
+                    }
+                    return Ok(BaseResponseFactory.Success(fornecedor));
                 }
                 else
                 {
-                    return Ok(new
-                    {
-                        status = false,
-                        message = "Fornecedor já cadastrado"
-                    });
+                    return Ok(BaseResponseFactory.Fail<FornecedorViewModel>("Fornecedor já cadastrado"));
                 }
             }
             catch (Exception ex) {
@@ -59,12 +61,12 @@ namespace BonaLiz.Api.Controllers
             {
 				var cnpj = model.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "");
 				model.CNPJ = cnpj;
-				_fornecedorServices.Editar(model);
-                return Ok(new
+				var fornecedor = _fornecedorServices.Editar(model);
+                if (fornecedor == null)
                 {
-                    status = true,
-                    message = "Editado com sucesso"
-                });
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Erro ao editar fornecedor"));
+                }
+                return Ok(BaseResponseFactory.Success(fornecedor));
             }
             catch (Exception ex)
             {

@@ -17,7 +17,7 @@ namespace BonaLiz.Api.Dependencias
     {
         public static void RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<DataContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")).EnableSensitiveDataLogging());
             services.AddDbContext<DataContextIdentity>(option => option.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<DataContext, DataContext>();
 			services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -40,6 +40,9 @@ namespace BonaLiz.Api.Dependencias
             services.AddScoped<ICarrinhoServices, CarrinhoServices>();
             services.AddScoped<IClienteCarrinhoServices, ClienteCarrinhoServices>();
             services.AddScoped<IIdentityService, IdentityService>();
+
+            services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IMenuServices, MenuServices>();
 
 
 

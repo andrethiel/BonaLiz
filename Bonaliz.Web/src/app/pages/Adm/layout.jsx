@@ -1,19 +1,25 @@
 import Header from "@/Components/Header/menu";
 import "../../globals.css";
+import { MenuProvider } from "@/Hooks/Menu";
+import { FornecedorProvider } from "@/Hooks/Fornecedor";
 
 export const metadata = {
   title: "Sistema - Bona Liz",
 };
 
-export default function RootLayout({ children }) {
+export default function PrincipalLayout({ children }) {
   return (
     <html lang="br">
-      <body>
-        <div>
-          <Header />
-        </div>
-        <div className="ml-8 md:ml-24 lg:ml-24 xl:ml-24">{children}</div>
-      </body>
+      <MenuProvider>
+        <FornecedorProvider>
+          <body className="container">
+            <div>
+              <Header />
+            </div>
+            <div className="pl-12 md:pl-64 lg:pl-64 xl:pl-64">{children}</div>
+          </body>
+        </FornecedorProvider>
+      </MenuProvider>
     </html>
   );
 }

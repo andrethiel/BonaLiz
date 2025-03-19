@@ -1,15 +1,18 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Icones from "../Icons";
-import { MenuItens } from "@/constants/menu";
 import AsideItem from "../AsideItem/aside";
+import { MenuContext } from "@/Hooks/Menu";
+import { AuthContext } from "@/Hooks/Login";
 
 function Header() {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState("dashboard");
+  const [activeItem, setActiveItem] = useState("Inicio");
   const [expandedItems, setExpandedItems] = useState([]);
 
+  const { user, menu } = useContext(MenuContext);
+  const { sair } = useContext(AuthContext);
   const toggleExpandedItem = (id) => {
     setExpandedItems((current) =>
       current.includes(id)
@@ -60,39 +63,36 @@ function Header() {
         </div>
         <div className="flex-1 overflow-y-auto py-4 px-3">
           <ul className="space-y-1">
-            {MenuItens.map((item, index) => (
-              <AsideItem
-                key={index}
-                item={item}
-                isExpanded={isExpanded}
-                activeItem={activeItem}
-                setActiveItem={setActiveItem}
-                expandedItems={expandedItems}
-                toggleExpandedItem={toggleExpandedItem}
-              />
-            ))}
+            {menu &&
+              menu.map((item, index) => (
+                <AsideItem
+                  key={index}
+                  item={item}
+                  isExpanded={isExpanded}
+                  activeItem={activeItem}
+                  setActiveItem={setActiveItem}
+                  expandedItems={expandedItems}
+                  toggleExpandedItem={toggleExpandedItem}
+                />
+              ))}
           </ul>
         </div>
         <div className="p-4 border-t border-border">
-          {isExpanded ? (
-            <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center">
-                <span className="text-sm font-medium">AU</span>
-              </div>
-              <div className="ml-3">
-                <p className="text-sm font-medium">Usuário</p>
-                <p className="text-xs text-muted-foreground">
-                  admin@exemplo.com
-                </p>
+          <div className="flex items-center">
+            <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center">
+              <span className="text-sm font-medium">{user.nome}</span>
+            </div>
+            <div className="ml-3 cursor-pointer">
+              <p className="text-sm font-medium">Usuário</p>
+              <p className="text-xs text-muted-foreground">{user.email}</p>
+            </div>
+            <div className="ml-auto" onClick={() => sair()}>
+              <div className="flex flex-col items-center cursor-pointer">
+                <Icones name={"log-out"} size={16} />
+                <p className="text-xs text-muted-foreground">Sair</p>
               </div>
             </div>
-          ) : (
-            <div className="flex justify-center">
-              <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center">
-                <span className="text-sm font-medium">AU</span>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       </aside>
     </>

@@ -11,35 +11,61 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Negocio.Services
 {
-    public class FornecedorServices : IFornecedorServices
+    public class FornecedorServices(IFornecedorRepository _fornecedorRepository) : IFornecedorServices
     {
-        private readonly IMapper _mapper;
-        private readonly IFornecedorRepository _fornecedorRepository;
-        public FornecedorServices(IMapper mapper, IFornecedorRepository fornecedorRepository)
+        FornecedorViewModel IFornecedorServices.Editar(FornecedorViewModel model)
         {
-            _mapper = mapper;
-            _fornecedorRepository = fornecedorRepository;
-        }
-        void IFornecedorServices.Editar(FornecedorViewModel model)
-        {
-            var fornecedor = _fornecedorRepository.ObterPorId(model.Id);
+            var fornecedor = _fornecedorRepository.ObterPorId(model.Id.Value);
             if(fornecedor != null)
             {
-				fornecedor.Nome = model.Nome;
+                fornecedor.Id = model.Id.Value;
+                fornecedor.Guid = model.Guid;
+                fornecedor.Nome = model.Nome;
 				fornecedor.CNPJ = model.CNPJ;
 				fornecedor.Estado = model.Estado;
-				fornecedor.Iniciais = model.Iniciais;
                 fornecedor.Inativo = Convert.ToBoolean(model.Inativo);
-				_fornecedorRepository.Editar(fornecedor);
+
+                var entity = _fornecedorRepository.Editar(fornecedor);
+
+                return new FornecedorViewModel
+                {
+                    Id = fornecedor.Id,
+                    CNPJ = entity.CNPJ,
+                    Guid = entity.Guid,
+                    Estado = entity.Estado,
+                    Nome = entity.Nome,
+                    Inativo = entity.Inativo.ToString()
+                };
 			}
-            
+
+            return new FornecedorViewModel();
+
         }
 
-        void IFornecedorServices.Inserir(FornecedorViewModel model)
+        FornecedorViewModel IFornecedorServices.Inserir(FornecedorViewModel model)
         {
             try
             {
-                _fornecedorRepository.Inserir(_mapper.Map<Fornecedor>(model));
+                var fornecedor = new Fornecedor()
+                {
+                    Guid = Guid.NewGuid(),
+                    CNPJ = model.CNPJ,
+                    Estado = model.Estado,
+                    Nome = model.Nome,
+                    Inativo = false
+                };
+
+                var entity = _fornecedorRepository.Inserir(fornecedor);
+
+                return new FornecedorViewModel
+                {
+                    Id = entity.Id,
+                    CNPJ = entity.CNPJ,
+                    Guid = entity.Guid,
+                    Estado = entity.Estado,
+                    Nome = entity.Nome,
+                    Inativo = entity.Inativo.ToString()
+                };
             }
             catch(Exception ex)
             {
@@ -54,7 +80,6 @@ namespace BonaLiz.Negocio.Services
             Nome = fornecedor.Nome,
             CNPJ = fornecedor.CNPJ,
             Estado = fornecedor.Estado,
-            Iniciais = fornecedor.Iniciais,
             Inativo = fornecedor.Inativo.ToString()
 
         }).ToList();
@@ -70,7 +95,6 @@ namespace BonaLiz.Negocio.Services
                 Nome = fornecedor.Nome,
                 CNPJ = fornecedor.CNPJ,
                 Estado = fornecedor.Estado,
-                Iniciais = fornecedor.Iniciais,
 				Inativo = fornecedor.Inativo.ToString()
 			};
         }
@@ -88,7 +112,6 @@ namespace BonaLiz.Negocio.Services
                     Nome = fornecedor.Nome,
                     CNPJ = fornecedor.CNPJ,
                     Estado = fornecedor.Estado,
-                    Iniciais = fornecedor.Iniciais,
 					Inativo = fornecedor.Inativo.ToString()
 				};
             }
@@ -99,18 +122,26 @@ namespace BonaLiz.Negocio.Services
         }
         List<FornecedorViewModel> IFornecedorServices.Filtrar(FornecedorViewModel model)
         {
-            var fornecedor = _fornecedorRepository.Filtrar(_mapper.Map<Fornecedor>(model));
-
-            if (fornecedor.Count() > 0)
+            var fornecedor = new Fornecedor()
             {
-                return fornecedor.Select(x => new FornecedorViewModel()
+                CNPJ = model.CNPJ,
+                Estado = model.Estado,
+                Nome = model.Nome,
+                Inativo = model.Inativo != null ? Convert.ToBoolean(model.Inativo) : null,
+            };
+
+
+            var listaFornecedor = _fornecedorRepository.Filtrar(fornecedor);
+
+            if (listaFornecedor.Count() > 0)
+            {
+                return listaFornecedor.Select(x => new FornecedorViewModel()
                 {
                     Id = x.Id,
                     Guid = x.Guid,
                     Nome = x.Nome,
                     CNPJ = x.CNPJ,
                     Estado = x.Estado,
-                    Iniciais = x.Iniciais,
 					Inativo = x.Inativo.ToString()
 
 				}).ToList();

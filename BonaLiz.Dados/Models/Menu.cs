@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Dados.Models
 {
-    public class Fornecedor : Base
+    public class Menu : Base
     {
+        public int? IdMenuPai { get; set; }
         public string Nome { get; set; }
-        public string CNPJ { get; set; }
-        public string Estado { get; set; }
-		public bool? Inativo { get; set; }
-        // public int? EmpresaId { get; set; }
+        public string Url { get; set; }
+        public string Icone { get; set; }
+        public int Ordem { get; set; }
     }
 }

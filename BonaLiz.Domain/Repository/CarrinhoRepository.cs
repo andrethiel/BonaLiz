@@ -15,9 +15,9 @@ namespace BonaLiz.Domain.Repository
 
         public void InserirItens(List<CarrinhoItens> model) => _repositoryCarrinhoItens.InserirRange(model);
 
-        public Carrinho ObterPorClienteId(int clienteId) => _repositoryCarrinho.Filtrar(x => x.ClienteId == clienteId).FirstOrDefault()!;
+        public Carrinho ObterPorClienteId(int clienteId) => _repositoryCarrinho.ObterPorId(clienteId)!;
 
-        public List<CarrinhoItens> ObterItensPorId(Guid CarrinhoId) => _repositoryCarrinhoItens.Filtrar(x => x.CarrinhoId == CarrinhoId).ToList();
+        public List<CarrinhoItens> ObterItensPorId(Guid CarrinhoId) => _repositoryCarrinhoItens.Listar().Where(x => x.CarrinhoId == CarrinhoId).ToList();
 
         public void Editar(CarrinhoItens model) => _repositoryCarrinhoItens.Editar(model);
 

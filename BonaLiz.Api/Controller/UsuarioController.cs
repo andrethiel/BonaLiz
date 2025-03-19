@@ -4,6 +4,9 @@ using BonaLiz.Dados.Models;
 using BonaLiz.Identity.Interfaces;
 using BonaLiz.Identity.Services;
 using BonaLiz.Negocio.ViewModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +17,7 @@ namespace BonaLiz.Api.Controller
     [ApiController]
     public class UsuarioController(IIdentityService _identityService, IHttpContextAccessor _acessor) : ControllerBase
     {
+        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
         [Route("CadastrarUsuario")]
         [HttpPost]
         public async Task<IActionResult> Cadastrar(UsuarioViewModel model)
@@ -30,31 +34,32 @@ namespace BonaLiz.Api.Controller
 
         [HttpPost]
         [Route("Login")]
+        [AllowAnonymous]
 
         public async Task<ActionResult<UsuarioResponseViewModel>> Login(UsuarioViewModel model)
         {
-            var resultado = await _identityService.Login(model);
+            var resultado = await _identityService.Login(model, Response.HttpContext);
             if (!resultado.Status)
             {
                 var problemas = new CustomProblemDetails(HttpStatusCode.BadRequest, Request, errors: resultado.Erros);
                 return BadRequest(problemas);
             }
 
-            Response.Cookies.Append("refreshToken", resultado.RefreshToken, new CookieOptions
-            {
-                HttpOnly = true,
-                Secure = true,
-                SameSite = SameSiteMode.Strict,
-                Expires = DateTime.UtcNow.AddDays(7)
-            });
-
             return Ok(new
             {
                 status = resultado.Status,
-                accessToken = resultado.AccessToken,
                 nome = resultado.Nome,
-                email = resultado.Email
+                email = resultado.Email,
+                role = resultado.Role
             });
+        }
+
+        [HttpGet]
+        [Route("Sair")]
+        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+        public async Task Sair()
+        {
+            await Response.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         //[HttpPost("refresh-token")]

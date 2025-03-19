@@ -9,8 +9,8 @@ namespace BonaLiz.Negocio.Interfaces
 {
     public interface IFornecedorServices
     {
-        void Inserir(FornecedorViewModel model);
-        void Editar(FornecedorViewModel model);
+        FornecedorViewModel Inserir(FornecedorViewModel model);
+        FornecedorViewModel Editar(FornecedorViewModel model);
         List<FornecedorViewModel> Listar();
         FornecedorViewModel ObterPorId(int id);
         FornecedorViewModel ObterPorGuid(Guid Guid);

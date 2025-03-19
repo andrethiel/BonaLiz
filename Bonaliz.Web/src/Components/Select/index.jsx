@@ -6,7 +6,12 @@ const Select = ({ icon, onChange, value, placeholder, data, name, id }) => {
   return (
     <div className="relative">
       <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-        <Icones icon={icon} />
+        <Icones
+          icon={icon}
+          size={18}
+          className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground"
+          color={"gray"}
+        />
       </div>
       <select
         name={name}

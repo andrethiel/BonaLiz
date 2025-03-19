@@ -1,5 +1,5 @@
 "use client";
-import { Entrar } from "@/Api/Controllers/Login";
+import { Entrar, Logout } from "@/Api/Controllers/Login";
 import { validateLoginForm } from "@/Utils/validation";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -55,15 +55,15 @@ export function AuthProvider({ children }) {
     e.preventDefault();
 
     // Validate all fields on submit
-    const result = validateLoginForm(user);
-    setErrors(result.errors);
+    // const result = validateLoginForm(user);
+    // setErrors(result.errors);
 
-    // Mark all fields as touched
-    setTouched({ Email: true, Senha: true });
+    // // Mark all fields as touched
+    // setTouched({ Email: true, Senha: true });
 
-    if (!result.valid) {
-      return;
-    }
+    // if (!result.valid) {
+    //   return;
+    // }
     setIsLoading(true);
     setUser((prevUser) => {
       const updatedUser = { ...prevUser };
@@ -77,23 +77,30 @@ export function AuthProvider({ children }) {
 
   async function EntrarLogin(updatedUser) {
     try {
+      localStorage.clear();
       const response = await Entrar(updatedUser);
       if (response.status) {
-        console.log(response);
-        router.replace("/pages/Adm");
-        localStorage.setItem("accessToken", response.accessToken);
         localStorage.setItem("nome", response.nome);
+        localStorage.setItem("email", response.email);
+        localStorage.setItem("role", response.role);
+        router.replace("/pages/Adm");
       }
     } catch (e) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.response.data.detail,
+        message: e.response,
       });
       setUser({ Email: "", Senha: "" });
     } finally {
       setIsLoading(false);
     }
+  }
+
+  async function sair() {
+    await Logout();
+    localStorage.clear();
+    router.replace("/");
   }
 
   return (
@@ -108,6 +115,7 @@ export function AuthProvider({ children }) {
         errors,
         touched,
         alert,
+        sair,
       }}
     >
       {children}

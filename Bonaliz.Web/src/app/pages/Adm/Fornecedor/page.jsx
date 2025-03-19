@@ -1,15 +1,14 @@
 "use client";
 import Input from "@/Components/Input";
 import MaskInput from "@/Components/InputMask";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 import Button from "@/Components/Button";
 import AgGrid from "@/Components/Grid";
 import Linked from "@/Components/Link";
 import { useRouter } from "next/navigation";
 import CustomLoading from "@/Components/CustomLoadingGrid";
-import { Lista } from "@/Hooks/Fornecedor";
+import { FornecedorContext, Lista } from "@/Hooks/Fornecedor";
 import Alert from "@/Components/Alert";
-import Icones from "@/Components/Icons";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -24,21 +23,15 @@ const CustomButtonComponent = (props) => {
 };
 
 function Fornecedor() {
-  const [form, setForm] = useState({
-    Nome: "",
-    CNPJ: "",
-    Iniciais: "",
-  });
-
   const {
     alert,
     Fornecedores,
     isLoading,
-    setAlert,
-    setIsLoading,
-    setFornecedores,
     Pesquisar,
-  } = Lista(form);
+    form,
+    setForm,
+    handleChange,
+  } = useContext(FornecedorContext);
 
   const [columnsDef, setColumnsDef] = useState([
     {
@@ -51,9 +44,6 @@ function Fornecedor() {
       field: "estado",
     },
     {
-      field: "iniciais",
-    },
-    {
       field: "inativo",
       valueFormatter: (p) =>
         p.value.toString() == "True" ? "Inativo" : "Ativo",
@@ -64,16 +54,6 @@ function Fornecedor() {
     },
   ]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setAlert({
-        ...alert,
-        message: "",
-        type: "",
-      });
-    }, [500]);
-  }, [alert]);
-
   return (
     <Suspense>
       {isLoading && <CustomLoading loadingMessage="Aguarde..." />}
@@ -81,13 +61,15 @@ function Fornecedor() {
         <div className="p-3 m-3">
           <h3 className="text-2xl font-semibold">Lista de Fornecedores</h3>
         </div>
-        {alert && <Alert type={alert.type}>{alert.message}</Alert>}
-        <div className="grid grid-row-4 lg:grid-cols-4 gap-2">
+        {alert.message && <Alert type={alert.type}>{alert.message}</Alert>}
+        <div className="grid grid-row-3 lg:grid-cols-3 gap-2">
           <div>
             <Input
               icon={"shopping-basket"}
               placeholder="Nome do fornecedor"
-              onChange={(e) => setForm({ ...form, Nome: e.target.value })}
+              onChange={handleChange}
+              id={"Nome"}
+              name={"Nome"}
             />
           </div>
           <div>
@@ -95,14 +77,9 @@ function Fornecedor() {
               icon={"circle-alert"}
               placeholder={"CNPJ"}
               mask={"00.000.000/0000-00"}
-              onChange={(e) => setForm({ ...form, CNPJ: e.target.value })}
-            />
-          </div>
-          <div>
-            <Input
-              icon={"shopping-basket"}
-              placeholder="Iniciais do fornecedor"
-              onChange={(e) => setForm({ ...form, Iniciais: e.target.value })}
+              id={"CNPJ"}
+              name={"CNPJ"}
+              onChange={handleChange}
             />
           </div>
           <div>

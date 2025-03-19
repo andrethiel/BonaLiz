@@ -8,12 +8,11 @@ namespace BonaLiz.Negocio.ViewModels
 {
     public class FornecedorViewModel
     {
-        public int Id { get; set; }
-        public Guid Guid { get; set; } = Guid.NewGuid();
+        public int? Id { get; set; }
+        public Guid Guid { get; set; }
         public string Nome { get; set; }
         public string CNPJ { get; set; }
         public string Estado { get; set; }
-        public string Iniciais { get; set; }
-		public string Inativo { get; set; }
+		public string? Inativo { get; set; }
 	}
 }

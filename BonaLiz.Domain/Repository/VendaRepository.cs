@@ -23,7 +23,7 @@ namespace BonaLiz.Domain.Repository
 
         public Venda ObterPorGuid(Guid guid) => _repositoryBase.ObterPorGuid(guid);
 
-		public List<Venda> Filtrar(Expression<Func<Venda, bool>> filter = null) => _repositoryBase.Filtrar(filter);
+		public List<Venda> Filtrar(Venda model) => _repositoryBase.Listar();
 		public Venda Cancelar(int id)
 		{
 			var venda = _repositoryBase.ObterPorId(id);
@@ -46,10 +46,5 @@ namespace BonaLiz.Domain.Repository
                 _repositoryBase.Editar(venda);
             }
 		}
-
-        public List<Venda> Filtrar(Venda model)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
