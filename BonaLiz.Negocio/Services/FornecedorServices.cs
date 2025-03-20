@@ -19,7 +19,7 @@ namespace BonaLiz.Negocio.Services
             if(fornecedor != null)
             {
                 fornecedor.Id = model.Id.Value;
-                fornecedor.Guid = model.Guid;
+                fornecedor.Guid = model.Guid.Value;
                 fornecedor.Nome = model.Nome;
 				fornecedor.CNPJ = model.CNPJ;
 				fornecedor.Estado = model.Estado;

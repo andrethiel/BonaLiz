@@ -61,12 +61,12 @@ namespace BonaLiz.Api.Controllers
             {
 				var cnpj = model.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "");
 				model.CNPJ = cnpj;
-				var fornecedor = _fornecedorServices.Editar(model);
-                if (fornecedor == null)
+				var fornecerdor = _fornecedorServices.Editar(model);
+                if (fornecerdor == null)
                 {
                     return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Erro ao editar fornecedor"));
                 }
-                return Ok(BaseResponseFactory.Success(fornecedor));
+                return Ok(BaseResponseFactory.Success(fornecerdor));
             }
             catch (Exception ex)
             {
@@ -80,7 +80,12 @@ namespace BonaLiz.Api.Controllers
         {
             try
             {
-                return Ok(_fornecedorServices.Listar().Take(50));
+                var fornecerdor = _fornecedorServices.Listar().Take(50);
+                if (fornecerdor == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Erro ao listar fornecedores"));
+                }
+                return Ok(BaseResponseFactory.Success(fornecerdor));
             }
             catch (Exception ex)
             {
@@ -93,7 +98,12 @@ namespace BonaLiz.Api.Controllers
         {
             try
             {
-                return Ok(_fornecedorServices.ObterPorGuid(guid));
+                var fornecedor = _fornecedorServices.ObterPorGuid(guid);
+                if (fornecedor == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Fornecedor não encontrado"));
+                }
+                return Ok(BaseResponseFactory.Success(fornecedor));
             }
             catch (Exception ex)
             {
@@ -107,7 +117,12 @@ namespace BonaLiz.Api.Controllers
         {
             try
             {
-                return Ok(_fornecedorServices.Filtrar(model));
+                var fornecedor = _fornecedorServices.Filtrar(model);
+                if (fornecedor.Count == 0)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Fornecedor não encontrado"));
+                }
+                return Ok(BaseResponseFactory.Success(fornecedor));
             }
             catch (Exception ex)
             {
@@ -120,8 +135,14 @@ namespace BonaLiz.Api.Controllers
 		{
 			try
 			{
-				return Ok(SelectListHelper.AddSelectList(new SelectList(_fornecedorServices.Listar().Where(x => x.Inativo == "False").ToList(), "Id", "Nome")));
-			}
+                var fornecedor = SelectListHelper.AddSelectList(new SelectList(_fornecedorServices.Listar().Where(x => x.Inativo == "False").ToList(), "Id", "Nome"));
+
+                if (fornecedor == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Fornecedor não encontrado"));
+                }
+                return Ok(BaseResponseFactory.Success(fornecedor));
+            }
 			catch (Exception ex)
 			{
 				return BadRequest(ex);

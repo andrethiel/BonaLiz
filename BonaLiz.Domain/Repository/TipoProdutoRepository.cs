@@ -12,26 +12,32 @@ namespace BonaLiz.Domain.Repository
     public class TipoProdutoRepository(IRepositoryBase<TipoProduto> _repositoryBase) : ITipoProdutoRepository
     {
 
-        public void Cadastrar(TipoProduto model)
+        public TipoProduto Cadastrar(TipoProduto model)
         {
             try
             {
-                _repositoryBase.Inserir(model);
+                model.Id = _repositoryBase.InserirScalar(model);
+                return model;
             }
-            catch (Exception ex) { }
+            catch (Exception ex) {
+                throw;
+            }
             
         }
 
-        public void Editar(TipoProduto model)
+        public TipoProduto Editar(TipoProduto model)
         {
             try
             {
-                _repositoryBase.Editar(model);
+                return _repositoryBase.Editar(model);
             }
-            catch (Exception ex) { }   
+            catch (Exception ex) { 
+                throw;
+            }   
         }
 
-        public List<TipoProduto> Filtrar(TipoProduto model) => _repositoryBase.Listar().Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome)).ToList();
+        public List<TipoProduto> Filtrar(TipoProduto model) => _repositoryBase.Listar()
+            .Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.ToUpper().Contains(model.Nome.ToUpper())).ToList();
 
         public List<TipoProduto> Listar() => _repositoryBase.Listar();
 

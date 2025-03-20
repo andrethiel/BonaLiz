@@ -9,7 +9,7 @@ namespace BonaLiz.Negocio.ViewModels
     public class FornecedorViewModel
     {
         public int? Id { get; set; }
-        public Guid Guid { get; set; }
+        public Guid? Guid { get; set; }
         public string Nome { get; set; }
         public string CNPJ { get; set; }
         public string Estado { get; set; }

@@ -1,9 +1,4 @@
 "use client";
-
-import {
-  EditarFornecedor,
-  ObterFornecedorGuid,
-} from "@/Api/Controllers/Forncedor";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import Check from "@/Components/Check";
@@ -13,14 +8,11 @@ import MaskInput from "@/Components/InputMask";
 import Select from "@/Components/Select";
 import { Estados } from "@/constants/estados";
 import { FornecedorContext } from "@/Hooks/Fornecedor";
-import { Iniciais } from "@/Utils/Iniciais";
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { Suspense, useContext, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import React, { Suspense, useContext, useEffect } from "react";
 const Editar = () => {
   const param = useSearchParams();
   const guid = param.get("Guid");
-
-  const router = useRouter();
 
   const {
     form,
@@ -32,6 +24,7 @@ const Editar = () => {
     BuscarFornecedor,
     Editar,
     handleChange,
+    router,
   } = useContext(FornecedorContext);
 
   useEffect(() => {

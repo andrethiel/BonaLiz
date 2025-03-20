@@ -1,16 +1,13 @@
 "use client";
-import {
-  ListarTipoProduto,
-  PesquisarTipoProduto,
-} from "@/Api/Controllers/TipoProduto";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import AgGrid from "@/Components/Grid";
 import Input from "@/Components/Input";
 import Linked from "@/Components/Link";
+import { TipoProdutoContext } from "@/Hooks/TipoProduto";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -25,16 +22,9 @@ const CustomButtonComponent = (props) => {
 };
 
 const TipoProduto = () => {
-  const [form, setForm] = useState({
-    Nome: "",
-  });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
+  const { Pesquisar, handleChange, isLoading, TipoProduto, alert } =
+    useContext(TipoProdutoContext);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [TipoProduto, setTipoProduto] = useState();
   const [columnsDef, setColumnsDef] = useState([
     {
       field: "nome",
@@ -50,57 +40,6 @@ const TipoProduto = () => {
     },
   ]);
 
-  useEffect(() => {
-    Listar();
-  }, []);
-  useEffect(() => {
-    setTimeout(() => {
-      setAlert({
-        ...alert,
-        message: "",
-        type: "",
-      });
-    }, [1500]);
-  }, [alert]);
-
-  async function Listar() {
-    document.title = "Listar Tipo Produto";
-    setIsLoading(true);
-    try {
-      const response = await ListarTipoProduto();
-      if (response.length > 0) {
-        setTipoProduto(response);
-      }
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
-    }
-    setIsLoading(false);
-  }
-
-  async function Pesquisar() {
-    setIsLoading(true);
-    try {
-      const response = await PesquisarTipoProduto(form);
-      if (response.length > 0) {
-        setTipoProduto(response);
-      } else {
-        setTipoProduto([]);
-      }
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
-    }
-
-    setIsLoading(false);
-  }
-
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 
   return (
@@ -114,7 +53,9 @@ const TipoProduto = () => {
           <Input
             icon={"shopping-basket"}
             placeholder="Tipo de produto"
-            onChange={(e) => setForm({ ...form, Nome: e.target.value })}
+            id={"Nome"}
+            name={"Nome"}
+            onChange={handleChange}
           />
         </div>
         <div>

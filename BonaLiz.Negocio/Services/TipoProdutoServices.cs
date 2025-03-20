@@ -11,19 +11,28 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Negocio.Services
 {
-    public class TipoProdutoServices : ITipoProdutoServices
+    public class TipoProdutoServices(ITipoProdutoRepository _tipoProdutoRepository) : ITipoProdutoServices
     {
-        private readonly IMapper _mapper;
-        private readonly ITipoProdutoRepository _tipoProdutoRepository;
-        public TipoProdutoServices(ITipoProdutoRepository tipoProdutoRepository, IMapper mapper)
+        public TipoProdutoViewModel Cadastrar(TipoProdutoViewModel model)
         {
-            _tipoProdutoRepository = tipoProdutoRepository;
-            _mapper = mapper;
+            var tipoProduto = new TipoProduto()
+            {
+                Guid = Guid.NewGuid(),
+                Nome = model.Nome,
+                Inativo = false
+            };
+            var entity = _tipoProdutoRepository.Cadastrar(tipoProduto);
+            
+            return new TipoProdutoViewModel()
+            {
+                Id = entity.Id,
+                Guid = entity.Guid,
+                Nome = entity.Nome,
+                Inativo = entity.Inativo.ToString()
+            };
         }
 
-        public void Cadastrar(TipoProdutoViewModel model) => _tipoProdutoRepository.Cadastrar(_mapper.Map<TipoProduto>(model));
-
-        public void Editar(TipoProdutoViewModel model)
+        public TipoProdutoViewModel Editar(TipoProdutoViewModel model)
         {
             var tipoProduto = _tipoProdutoRepository.ObterPorId(model.Id);
             if(tipoProduto != null)
@@ -31,17 +40,40 @@ namespace BonaLiz.Negocio.Services
 				tipoProduto.Nome = model.Nome;
 				tipoProduto.Inativo = Convert.ToBoolean(model.Inativo);
 
-				_tipoProdutoRepository.Editar(tipoProduto);
-			}
+				var entity = _tipoProdutoRepository.Editar(tipoProduto);
+
+                return new TipoProdutoViewModel()
+                {
+                    Id = entity.Id,
+                    Guid = entity.Guid,
+                    Nome = entity.Nome,
+                    Inativo = entity.Inativo.ToString()
+                };
+            }
+            else
+            {
+                return new TipoProdutoViewModel();
+            }
         }
 
-        public List<TipoProdutoViewModel> Filtrar(TipoProdutoViewModel model) => _tipoProdutoRepository.Filtrar(_mapper.Map<TipoProduto>(model)).Select(x => new TipoProdutoViewModel()
+        public List<TipoProdutoViewModel> Filtrar(TipoProdutoViewModel model)
         {
-            Id = x.Id,
-            Guid = x.Guid,
-            Nome = x.Nome,
-            Inativo = x.Inativo.ToString()
-        }).ToList();
+            var tipoProduto = new TipoProduto()
+            {
+                Nome = model.Nome,
+                Inativo = model.Inativo != null ? Convert.ToBoolean(model.Inativo) : null,
+            };
+
+
+
+            return _tipoProdutoRepository.Filtrar(tipoProduto).Select(x => new TipoProdutoViewModel()
+            {
+                Id = x.Id,
+                Guid = x.Guid,
+                Nome = x.Nome,
+                Inativo = x.Inativo.ToString()
+            }).ToList();
+        }
 
         public List<TipoProdutoViewModel> Listar() => _tipoProdutoRepository.Listar().Select(x => new TipoProdutoViewModel()
         {

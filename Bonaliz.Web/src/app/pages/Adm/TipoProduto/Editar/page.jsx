@@ -1,97 +1,32 @@
 "use client";
-import {
-  EditarTipoProduto,
-  TipoProdutoPorGuid,
-} from "@/Api/Controllers/TipoProduto";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import Check from "@/Components/Check";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import Input from "@/Components/Input";
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { Suspense, useEffect, useState } from "react";
-import { FaShoppingBasket } from "react-icons/fa";
+import { TipoProdutoContext } from "@/Hooks/TipoProduto";
+import { useSearchParams } from "next/navigation";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 
 const Editar = () => {
   const param = useSearchParams();
+  const guid = param.get("Guid");
 
-  const [form, setForm] = useState({
-    Id: 0,
-    Guid: "",
-    Nome: "",
-    Inativo: "",
-  });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [checked, setChecked] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  const {
+    Buscar,
+    isLoading,
+    alert,
+    form,
+    handleChange,
+    Editar,
+    router,
+    checked,
+    setChecked,
+  } = useContext(TipoProdutoContext);
 
   useEffect(() => {
-    Buscar();
-  }, []);
-  useEffect(() => {
-    setTimeout(() => {
-      setAlert({
-        ...alert,
-        message: "",
-        type: "",
-      });
-    }, [1500]);
-  }, [alert]);
-
-  async function Buscar() {
-    setIsLoading(true);
-    const response = await TipoProdutoPorGuid(param.get("Guid"));
-    if (response.id != 0) {
-      setForm({
-        ...form,
-        Nome: response.nome,
-        Id: response.id,
-        Guid: response.guid,
-        Inativo:
-          response.inativo == "True" ? setChecked(true) : setChecked(false),
-      });
-    } else {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: "Fornecedor não encontrado",
-      });
-    }
-    setIsLoading(false);
-  }
-
-  async function Editar() {
-    if (Valida()) {
-      setIsLoading(true);
-      form.Inativo = checked.toString();
-      const response = await EditarTipoProduto(form);
-      if (response.status) {
-        setAlert({ ...alert, message: response.message, type: "Success" });
-        router.back();
-      } else {
-        setAlert({ ...alert, message: response.message, type: "Danger" });
-        router.back();
-      }
-      setIsLoading(false);
-    }
-  }
-
-  function Valida() {
-    if (form.Nome == "") {
-      setAlert({
-        ...alert,
-        message: "Digite o nome do fornecedor",
-        type: "Danger",
-      });
-      return false;
-    }
-
-    return true;
-  }
+    Buscar(guid);
+  }, [guid]);
 
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 
@@ -107,10 +42,10 @@ const Editar = () => {
         <div>
           <Input
             placeholder={"Tipo de Produto"}
-            icon={<FaShoppingBasket />}
+            icon={"shopping-basket"}
             name={"Nome"}
             id={"Nome"}
-            onChange={(e) => setForm({ ...form, Nome: e.target.value })}
+            onChange={handleChange}
             value={form.Nome}
           />
         </div>

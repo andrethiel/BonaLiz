@@ -86,6 +86,19 @@ export function validateLoginForm(values) {
   //   return true;
   // }
 
+  // function Valida() {
+  //   if (form.Nome == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Digite o nome do fornecedor",
+  //       type: "Danger",
+  //     });
+  //     return false;
+  //   }
+
+  //   return true;
+  // }
+
   return {
     valid: Object.keys(errors).length === 0,
     errors,

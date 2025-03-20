@@ -24,16 +24,14 @@ export function FornecedorProvider({ children }) {
 
   const [form, setForm] = useState({
     Id: 0,
-    Guid: "",
+    Guid: null,
     Nome: "",
     CNPJ: "",
     Estado: "",
-    Iniciais: "",
-    Inativo: "",
+    Inativo: null,
   });
 
   useEffect(() => {
-    console.log(window.location.href);
     if (!window.location.href.includes("Criar" || "Editar")) {
       listar();
     }
@@ -51,11 +49,10 @@ export function FornecedorProvider({ children }) {
     setIsLoading(true);
     try {
       const response = await ListarFornecedor();
-      if (response.length > 0) {
-        setFornecedores(response);
+      if (response.success) {
+        setFornecedores(response.data);
       }
     } catch (e) {
-      console.log(e);
       setFornecedores([]);
       if (e.response == "Network Error") {
         setAlert({
@@ -78,22 +75,18 @@ export function FornecedorProvider({ children }) {
     setIsLoading(true);
     try {
       const response = await ObterFornecedorGuid(guid);
-      if (response.id != 0) {
+      if (response.success) {
         setForm({
           ...form,
-          CNPJ: response.cnpj,
-          Nome: response.nome,
-          Estado: response.estado,
-          Guid: response.guid,
-          Id: response.id,
+          CNPJ: response.data.cnpj,
+          Nome: response.data.nome,
+          Estado: response.data.estado,
+          Guid: response.data.guid,
+          Id: response.data.id,
           Inativo:
-            response.inativo == "True" ? setChecked(true) : setChecked(false),
-        });
-      } else {
-        setAlert({
-          ...alert,
-          type: "Danger",
-          message: "Fornecedor não encontrado",
+            response.data.inativo == "True"
+              ? setChecked(true)
+              : setChecked(false),
         });
       }
     } catch (e) {
@@ -111,8 +104,8 @@ export function FornecedorProvider({ children }) {
     setIsLoading(true);
     try {
       const response = await PesquisarFornecedor(form);
-      if (response.length > 0) {
-        setFornecedores(response);
+      if (response.success) {
+        setFornecedores(response.data);
       } else {
         setFornecedores([]);
         setAlert({
@@ -224,6 +217,7 @@ export function FornecedorProvider({ children }) {
         BuscarFornecedor,
         checked,
         setChecked,
+        router,
       }}
     >
       {children}

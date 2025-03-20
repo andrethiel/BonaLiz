@@ -4,8 +4,8 @@ namespace BonaLiz.Negocio.Interfaces
 {
     public interface ITipoProdutoServices
     {
-        void Cadastrar(TipoProdutoViewModel model);
-        void Editar(TipoProdutoViewModel model);
+        TipoProdutoViewModel Cadastrar(TipoProdutoViewModel model);
+        TipoProdutoViewModel Editar(TipoProdutoViewModel model);
         List<TipoProdutoViewModel> Listar();
         TipoProdutoViewModel ObterPorId(int id);
         TipoProdutoViewModel ObterPorGuid(Guid guid);

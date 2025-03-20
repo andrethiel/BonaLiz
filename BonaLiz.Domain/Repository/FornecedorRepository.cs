@@ -45,8 +45,8 @@ namespace BonaLiz.Domain.Repository
             Console.Write(model.Nome == "");
             var cnpj = model.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "");
             return _repositoryBase.Listar()
-                .Where(x => model.CNPJ == "" || x.CNPJ == cnpj)
-                .Where(x => model.Nome == "" || x.Nome.Contains(model.Nome)).ToList();
+                .Where(x => string.IsNullOrEmpty(model.CNPJ) || x.CNPJ == cnpj)
+                .Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.ToUpper().Contains(model.Nome.ToUpper())).ToList();
         }
     }
 }
