@@ -34,9 +34,11 @@ export async function SelectListForncedor() {
   let lista = [];
   const response = await Api.request.get("/SelectListForncedor");
 
-  response.map((item) => {
-    lista.push({ value: item.value, label: item.text });
-  });
+  if (response.success) {
+    response.data.map((item) => {
+      lista.push({ value: item.value, label: item.text });
+    });
+  }
 
   return lista;
 }

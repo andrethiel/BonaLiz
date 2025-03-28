@@ -6,13 +6,6 @@ namespace BonaLiz.Negocio.Utils
 {
 	public static class Arquivo
 	{
-		private static IConfiguration _configuration;
-
-		public static void SettingsConfigure(IConfiguration configuration)
-		{
-			_configuration = configuration;
-		}
-
 		public static string Imagem(IFormFile arquivo)
 		{
 			try
@@ -27,7 +20,7 @@ namespace BonaLiz.Negocio.Utils
 				return nomeArquivo;
 			}
 			catch (Exception ex) {
-				throw new Exception();
+				throw new Exception("Erro ao gravar arquivo");
 			}
 		}
 
@@ -41,8 +34,10 @@ namespace BonaLiz.Negocio.Utils
                 if (!string.IsNullOrEmpty(item.NomeArquivo))
                 {
                     var request = _httpContextAccessor.HttpContext.Request;
+					arquivo.Id = item.Id;
                     arquivo.NomeArquivo = string.Format("{0}://{1}/Imagens/{2}", request.Scheme, request.Host, item.NomeArquivo);
-					lista.Add(arquivo);
+					arquivo.ProdutoId = item.ProdutoId;
+                    lista.Add(arquivo);
                 }
 
             }
@@ -50,9 +45,23 @@ namespace BonaLiz.Negocio.Utils
 
         }
 
-		public static string Caminho(string key)
+		public static string RemoveURL(string imagem)
 		{
-			return _configuration.GetSection(key).Value;
+			var arquivo = imagem.Split("/");
+
+			return arquivo.Last().Trim();
 		}
-	}
+
+		public static void DeletaArquivo(string nomeArquivo)
+        {
+            try
+            {
+                File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "Imagens", nomeArquivo));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
+        }
+    }
 }

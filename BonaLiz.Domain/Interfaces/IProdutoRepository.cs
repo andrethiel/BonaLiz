@@ -9,8 +9,8 @@ namespace BonaLiz.Domain.Interfaces
 {
     public interface IProdutoRepository
     {
-        void Inserir(Produto model);
-        void Editar(Produto model);
+        Produto Inserir(Produto model);
+        Produto Editar(Produto model);
         List<Produto> Listar();
         Produto ObterPorId(int id);
         Produto ObterPorGuid(Guid guid);

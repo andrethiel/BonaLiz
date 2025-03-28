@@ -1,7 +1,5 @@
 import { AuthProvider } from "@/Hooks/Login";
 import "./globals.css";
-import { FornecedorProvider } from "@/Hooks/Fornecedor";
-import { MenuContext } from "@/Hooks/Menu";
 
 export const metadata = {
   title: "Sistema - Bona Liz",

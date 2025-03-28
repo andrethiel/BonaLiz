@@ -30,7 +30,11 @@ export async function CadastrarProduto(props) {
   form.append("DataCompra", props.dataCompra);
   form.append("Quantidade", props.Quantidade);
   form.append("Inativo", props.Inativo);
-  form.append("Arquivo", props.Arquivo);
+  if (props.Arquivo.length > 0) {
+    props.Arquivo.forEach((file, index) => {
+      form.append(`Arquivo`, file);
+    });
+  }
 
   const response = await Api.request.postForm("/CadastrarProduto", form);
 
@@ -64,7 +68,15 @@ export async function EditarProduto(props) {
   form.append("DataCompra", props.DataCompra);
   form.append("Quantidade", props.Quantidade);
   form.append("Inativo", props.Inativo);
-  form.append("Arquivo", props.Arquivo);
+  if (props.Imagem.length > 0) {
+    form.append("Imagem", JSON.stringify(props.Imagem));
+  }
+  if (props.Arquivo.length > 0) {
+    props.Arquivo.forEach((file, index) => {
+      form.append(`Arquivo`, file); // Não precisa do índice na chave, apenas no backend
+    });
+  }
+
   const response = await Api.request.putForm("/EditarProduto", form);
 
   return response;

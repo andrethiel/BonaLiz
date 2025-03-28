@@ -30,9 +30,11 @@ export async function TipoProdutoPorGuid(props) {
 export async function SelectListTipoProduto() {
   var lista = [];
   const response = await Api.request.get("/SelectListTipoProduto");
-  response.map((item) => {
-    lista.push({ value: item.value, label: item.text });
-  });
+  if (response.success) {
+    response.data.map((item) => {
+      lista.push({ value: item.value, label: item.text });
+    });
+  }
 
   return lista;
 }

@@ -28,7 +28,7 @@ namespace BonaLiz.Domain.Repository
         {
             try
             {
-                return _DbSet.ToList();
+                return _DbSet.AsNoTracking().ToList();
             }
             catch(TaskCanceledException ex) { throw; }
             
@@ -71,9 +71,9 @@ namespace BonaLiz.Domain.Repository
             return query.ToList();
         }
 
-        public void Deletar(TEntity id)
+        public void Deletar(TEntity model)
         {
-            _DbSet.Remove(id);
+            _DbSet.Remove(model);
             _context.SaveChanges();
         }
     }

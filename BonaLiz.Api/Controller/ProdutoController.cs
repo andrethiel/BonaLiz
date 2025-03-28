@@ -1,9 +1,12 @@
 ﻿using BonaLiz.Api.Authentication;
+using BonaLiz.Api.Controller.Response;
 using BonaLiz.Api.Helpers;
+using BonaLiz.Dados.Models;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.Utils;
 using BonaLiz.Negocio.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,14 +15,9 @@ using System.Globalization;
 namespace BonaLiz.Api.Controller
 {
     [ApiController]
-	[ApiKey]
-	public class ProdutoController : ControllerBase
+    [Authorize(Roles = "Administrador")]
+    public class ProdutoController(IProdutoServices _produtoServices) : ControllerBase
     {
-        private readonly IProdutoServices _produtoServices;
-        public ProdutoController(IProdutoServices produtoServices)
-        {
-            _produtoServices = produtoServices;
-        }
         [HttpPost]
         [Route("/CadastrarProduto")]
         public async Task<IActionResult> Cadastro([FromForm] ProdutoViewModel model)
@@ -28,21 +26,16 @@ namespace BonaLiz.Api.Controller
             {
                 if(!_produtoServices.Listar(model).Where(x => x.Nome == model.Nome).Any())
                 {
-                    
-                    _produtoServices.Cadastrar(model);
-                    return Ok(new
+                    var produto = _produtoServices.Cadastrar(model);
+                    if (produto == null)
                     {
-                        status = true,
-                        message = "Cadastrado com sucesso"
-                    });
+                        return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>("Erro ao cadastrar produto"));
+                    }
+                    return Ok(BaseResponseFactory.Success(produto));
                 }
                 else
                 {
-                    return Ok(new
-                    {
-                        status = false,
-                        message = "Produto já cadastrado"
-                    });
+                    return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>("Erro produto já cadastrado"));
                 }
             }
             catch (Exception ex)
@@ -57,16 +50,16 @@ namespace BonaLiz.Api.Controller
         {
             try
             {
-				_produtoServices.Editar(model);
-                return Ok(new
+                var produto = _produtoServices.Editar(model);
+                if (produto == null)
                 {
-                    status = true,
-                    message = "Editado com sucesso"
-                });
+                    return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>("Erro ao cadastrar produto"));
+                }
+                return Ok(BaseResponseFactory.Success(produto));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>(ex.Message));
             }
         }
         [HttpGet]
@@ -75,11 +68,16 @@ namespace BonaLiz.Api.Controller
         {
             try
             {
-                return Ok(_produtoServices.Listar(model));
+                var produto = _produtoServices.Listar(model);
+                if (produto.Count == 0)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>("Erro ao cadastrar produto"));
+                }
+                return Ok(BaseResponseFactory.Success(produto));
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>(ex.Message));
             }
         }
         [HttpGet]
@@ -88,7 +86,12 @@ namespace BonaLiz.Api.Controller
         {
             try
             {
-                return Ok(_produtoServices.ObterPorGuid(guid));
+                var produto = _produtoServices.ObterPorGuid(guid);
+                if (produto == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>("Erro ao cadastrar produto"));
+                }
+                return Ok(BaseResponseFactory.Success(produto));
             }
             catch (Exception ex)
             {
@@ -102,12 +105,13 @@ namespace BonaLiz.Api.Controller
         {
             try
             {
-				model.Nome = string.IsNullOrEmpty(model.Nome) ? null : model.Nome;
-				model.FornecedorId = string.IsNullOrEmpty(model.FornecedorId) ? null : model.FornecedorId;
-				model.TipoProdutoId = string.IsNullOrEmpty(model.TipoProdutoId) ? null : model.TipoProdutoId;
-				model.DataCompra = string.IsNullOrEmpty(model.DataCompra) ? null : model.DataCompra;
-                model.Quantidade = string.IsNullOrEmpty(model.Quantidade) ? null : model.Quantidade;
-                return Ok(_produtoServices.Filtrar(model));
+                var produto = _produtoServices.Filtrar(model);
+
+                if (produto.Count == 0)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>("Nenhum produto encontrado"));
+                }
+                return Ok(BaseResponseFactory.Success(produto));
             }
             catch (Exception ex)
             {
@@ -140,8 +144,13 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				return Ok(_produtoServices.ListarPrincipal(model));
-			}
+                var produto = _produtoServices.ListarPrincipal(model);
+                if (produto.Count == 0)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>("Erro ao cadastrar produto"));
+                }
+                return Ok(BaseResponseFactory.Success(produto));
+            }
 			catch (Exception ex)
 			{
 				return BadRequest(ex);
@@ -155,7 +164,12 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				return Ok(SelectListHelper.AddSelectList(new SelectList(_produtoServices.Listar(model), "Id", "Nome")));
+                var produto = _produtoServices.Listar(model);
+                if (produto.Count == 0)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>("Erro ao cadastrar produto"));
+                }
+                return Ok(BaseResponseFactory.Success(SelectListHelper.AddSelectList(new SelectList(produto, "Id", "Nome"))));
 			}
 			catch (Exception ex)
 			{

@@ -16,7 +16,7 @@ const Select = ({ icon, onChange, value, placeholder, data, name, id }) => {
       <select
         name={name}
         id={id}
-        className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5"
+        className="border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2"
         onChange={onChange}
         value={value}
       >

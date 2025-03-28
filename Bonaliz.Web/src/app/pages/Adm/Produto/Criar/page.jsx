@@ -1,7 +1,4 @@
 "use client";
-import { SelectListForncedor } from "@/Api/Controllers/Forncedor";
-import { CadastrarProduto, LucroProduto } from "@/Api/Controllers/Produto";
-import { SelectListTipoProduto } from "@/Api/Controllers/TipoProduto";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import InputMoney from "@/Components/Currency";
@@ -10,199 +7,53 @@ import DataPicker from "@/Components/DatePicker";
 import ImageArquivo from "@/Components/Image";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
-import dayjs from "dayjs";
-import { useRouter } from "next/navigation";
-import React, { Suspense, useEffect, useState } from "react";
-import { BsTag } from "react-icons/bs";
-import { FaGlobeAmericas, FaMoneyBill, FaRegFileImage } from "react-icons/fa";
-import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { ProdutoContext } from "@/Hooks/Produto";
+import React, { Suspense, useContext } from "react";
 
 const Criar = () => {
-  useEffect(() => {
-    Fornecedores();
-  }, []);
-  async function Fornecedores() {
-    try {
-      const response = await SelectListForncedor();
-      if (response.length > 0) {
-        setFornecedor(response);
-        TipoProdutos();
-      }
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
-    }
-  }
-  async function TipoProdutos() {
-    const response = await SelectListTipoProduto();
-    if (response.length > 0) {
-      setTipoProduto(response);
-    }
-  }
-  async function CriarProduto() {
-    if (Valida()) {
-      setIsLoading(true);
-      form.dataCompra = dayjs(data.startDate).format("DD/MM/YYYY");
-      const response = await CadastrarProduto(form);
-
-      if (response.status) {
-        setAlert({
-          ...alert,
-          type: "Success",
-          message: response.message,
-        });
-
-        router.back();
-      } else {
-        setAlert({
-          ...alert,
-          type: "Danger",
-          message: response.message,
-        });
-      }
-      setIsLoading(false);
-    }
-    setTimeout(() => {
-      setAlert({
-        ...alert,
-        type: "",
-        message: "",
-      });
-    }, 500);
-  }
-
-  function Valida() {
-    if (form.Nome == "") {
-      setAlert({
-        ...alert,
-        message: "Digite o nome do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.Quantidade == "") {
-      setAlert({
-        ...alert,
-        message: "Digite a quantidade",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.FornecedorId == "") {
-      setAlert({
-        ...alert,
-        message: "Selecione o fornecedor do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.TipoProdutoId == "") {
-      setAlert({
-        ...alert,
-        message: "Selecione o Tipo do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.precoCusto == "") {
-      setAlert({
-        ...alert,
-        message: "Digite o valor de custo do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.precoVenda == "") {
-      setAlert({
-        ...alert,
-        message: "Digite o valor de venda do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (data.startDate == "") {
-      setAlert({
-        ...alert,
-        message: "Selecione a data da compra",
-        type: "Alert",
-      });
-      return false;
-    }
-
-    return true;
-  }
-
-  const [form, setForm] = useState({
-    Nome: "",
-    Quantidade: "",
-    FornecedorId: "",
-    TipoProdutoId: "",
-    precoCusto: "",
-    precoVenda: "",
-    Lucro: "",
-    dataCompra: "",
-    Inativo: "false",
-    Arquivo: [],
-  });
-
-  const [arquivo, setArquivo] = useState([]);
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [Fornecedor, setFornecedor] = useState([]);
-  const [TipoProduto, setTipoProduto] = useState([]);
-  const [data, setData] = useState({
-    startDate: new Date(),
-    endDate: null,
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
-
-  const handleChange = (e) => {
-    const { value, name } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
-  const handleBlur = async () => {
-    if (form.precoCusto != "" && form.precoVenda != "") {
-      setIsLoading(true);
-      var response = await LucroProduto(form);
-      setForm({
-        ...form,
-        Lucro: response,
-      });
-      setIsLoading(false);
-    }
-  };
+  const {
+    alert,
+    Fornecedor,
+    isLoading,
+    form,
+    setForm,
+    handleChange,
+    TipoProduto,
+    handleBlur,
+    CriarProduto,
+    arquivo,
+    setArquivo,
+    router,
+    fileInputRef,
+    Voltar,
+  } = useContext(ProdutoContext);
 
   function Image(event) {
-    if (event.target.files) {
-      const fileArray = Array.from(event.target.files).map((file) =>
-        URL.createObjectURL(file)
-      );
+    if (!event.target.files) return;
 
-      setArquivo((imagem) => imagem.concat(fileArray));
-      // Array.from(event.target.file).map((file) => URL.revokeObjectURL(file));
+    const files = Array.from(event.target.files);
+    const fileURLs = files.map((file) => URL.createObjectURL(file));
+
+    setArquivo((prev) => [...prev, ...fileURLs]);
+    setForm((prevForm) => ({
+      ...prevForm,
+      Arquivo: [...prevForm.Arquivo, ...files],
+    }));
+
+    // Limpa URLs antigas ao sair da memória
+    files.forEach((file) => URL.revokeObjectURL(file));
+  }
+  function handleRemovePhotoFile(index) {
+    setArquivo((prev) => prev.filter((_, i) => i !== index));
+    setForm((prevForm) => ({
+      ...prevForm,
+      Arquivo: prevForm.Arquivo.filter((_, i) => i !== index),
+    }));
+
+    // Se não houver mais arquivos, reseta o input
+    if (arquivo.length === 1 && fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
-  }
-  function handleRemovePhotoFile(file) {
-    const filter = arquivo.filter((filter) => filter != file);
-    setArquivo(filter);
-  }
-
-  function renderImage(image) {
-    return image.map((arquivoImagem) => {
-      return (
-        <ImageArquivo arquivo={arquivoImagem} onClick={handleRemovePhotoFile} />
-      );
-    });
   }
 
   return (
@@ -213,12 +64,12 @@ const Criar = () => {
           <h3 className="text-2xl font-semibold">Cadastro de Produtos</h3>
         </div>
 
-        {alert && <Alert type={alert.type}>{alert.message}</Alert>}
+        {alert.message && <Alert type={alert.type}>{alert.message}</Alert>}
         <div className="grid gap-4">
           <div className="">
             <Input
               placeholder={"Nome do produto"}
-              icon={<BsTag />}
+              icon={"tag"}
               name={"Nome"}
               id={"Nome"}
               onChange={handleChange}
@@ -227,7 +78,7 @@ const Criar = () => {
           <div className="">
             <Input
               placeholder={"Quantidade"}
-              icon={<MdOutlineProductionQuantityLimits />}
+              icon={"arrow-down-0-1"}
               name={"Quantidade"}
               id={"Quantidade"}
               onChange={handleChange}
@@ -238,7 +89,7 @@ const Criar = () => {
             <Select
               data={Fornecedor}
               placeholder={"Selecione um Fornecedor"}
-              icon={<FaGlobeAmericas />}
+              icon={"globe"}
               name={"FornecedorId"}
               id={"FornecedorId"}
               onChange={handleChange}
@@ -249,7 +100,7 @@ const Criar = () => {
             <Select
               data={TipoProduto}
               placeholder={"Selecione um tipo de produto"}
-              icon={<FaGlobeAmericas />}
+              icon={"globe"}
               name={"TipoProdutoId"}
               id={"TipoProdutoId"}
               onChange={handleChange}
@@ -259,7 +110,7 @@ const Criar = () => {
           <div className="">
             <InputMoney
               placeholder={"Preço de custo"}
-              icon={<FaMoneyBill />}
+              icon={"badge-dollar-sign"}
               name={"precoCusto"}
               id={"precoCusto"}
               onChange={(event, originalValue, maskedValue) =>
@@ -271,7 +122,7 @@ const Criar = () => {
           <div className="">
             <InputMoney
               placeholder={"Preço de venda"}
-              icon={<FaMoneyBill />}
+              icon={"badge-dollar-sign"}
               name={"precoVenda"}
               id={"precoVenda"}
               onChange={(event, originalValue, maskedValue) =>
@@ -284,7 +135,7 @@ const Criar = () => {
           <div className="">
             <Input
               placeholder={"Lucro"}
-              icon={<FaMoneyBill />}
+              icon={"badge-dollar-sign"}
               name={"Lucro"}
               id={"Lucro"}
               value={form.Lucro}
@@ -292,13 +143,13 @@ const Criar = () => {
             />
           </div>
           <div className="">
-            <DataPicker
+            {/* <DataPicker
               onChange={(newValue) => {
                 setData(newValue);
               }}
               value={data}
               placeholder="Selecione a data da compra"
-            />
+            /> */}
           </div>
           <div className="">
             <input
@@ -307,6 +158,7 @@ const Criar = () => {
               placeholder="Arquivo"
               onChange={Image}
               accept="image/*"
+              ref={fileInputRef}
             />
             {/* <Input
               placeholder={"Arquivo"}
@@ -317,12 +169,20 @@ const Criar = () => {
               onChange={(e) => setForm({ ...form, Arquivo: e.target.files[0] })}
             /> */}
           </div>
-          <div className="w-full flex mt-2">{renderImage(arquivo)}</div>
+          <div className="w-full flex mt-2 gap-4">
+            {arquivo.map((imgSrc, index) => (
+              <ImageArquivo
+                key={index}
+                arquivo={imgSrc}
+                onClick={() => handleRemovePhotoFile(index)}
+              />
+            ))}
+          </div>
 
           <Button color={"primary"} onClick={CriarProduto}>
             Criar
           </Button>
-          <Button color={"secondary"} onClick={() => router.back()}>
+          <Button color={"secondary"} onClick={Voltar}>
             Voltar
           </Button>
         </div>

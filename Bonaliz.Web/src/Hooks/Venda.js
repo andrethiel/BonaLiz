@@ -49,7 +49,7 @@ export function VendasHook() {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
       setIsLoading(false);
     }
@@ -80,7 +80,7 @@ export function VendasHook() {
       setAlert({
         ...alert,
         type: "Success",
-        message: response.message,
+        message: responsJSON.parse(e.request.response).message,
       });
     }
     setIsLoading(false);
@@ -100,7 +100,7 @@ export function VendasHook() {
         setAlert({
           ...alert,
           type: "Success",
-          message: response.message,
+          message: responsJSON.parse(e.request.response).message,
         });
         Listar();
       }

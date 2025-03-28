@@ -111,9 +111,7 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-Arquivo.SettingsConfigure(app.Services.GetRequiredService<IConfiguration>());
-
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.

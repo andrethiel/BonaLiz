@@ -33,7 +33,7 @@ export function PrincipalHook() {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     }
     setIsLoading(false);
@@ -47,7 +47,7 @@ export function PrincipalHook() {
           setAlert({
             ...alert,
             type: "Success",
-            message: response.message,
+            message: responsJSON.parse(e.request.response).message,
           });
           setIsOpen(false);
           listar();
@@ -55,7 +55,7 @@ export function PrincipalHook() {
           setAlert({
             ...alert,
             type: "Danger",
-            message: response.message,
+            message: responsJSON.parse(e.request.response).message,
           });
         }
       }
@@ -63,7 +63,7 @@ export function PrincipalHook() {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     }
   }

@@ -53,14 +53,14 @@ function Criar() {
         setAlert({
           ...alert,
           type: "Success",
-          message: response.message,
+          message: responsJSON.parse(e.request.response).message,
         });
         router.back();
       } else {
         setAlert({
           ...alert,
           type: "Danger",
-          message: response.message,
+          message: responsJSON.parse(e.request.response).message,
         });
       }
       setIsLoading(false);
@@ -68,7 +68,7 @@ function Criar() {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     }
   }

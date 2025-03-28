@@ -22,7 +22,7 @@ export function listTipoProduto() {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     }
   }

@@ -12,15 +12,8 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Negocio.Services
 {
-    public class ImagemServices : IImagemServices
+    public class ImagemServices(IImagemRepository _imagemRepository) : IImagemServices
     {
-        private readonly IImagemRepository _imagemRepository;
-
-        public ImagemServices(IImagemRepository imagemRepository)
-        {
-            _imagemRepository = imagemRepository;
-        }
-
         public void Inserir(List<IFormFile> lista, int idProduto)
         {
             var imagem = new List<ImagemProduto>();
@@ -32,10 +25,8 @@ namespace BonaLiz.Negocio.Services
                 arquivo.ProdutoId = idProduto;
                 imagem.Add(arquivo);
             }
-
             _imagemRepository.Inserir(imagem);
         }
-
         public List<ImagemProdutoViewModel> Listar()
         {
             try
@@ -52,5 +43,29 @@ namespace BonaLiz.Negocio.Services
             catch(Exception ex) { throw; }
             
         }
+
+        public ImagemProdutoViewModel ListarPorId(int id)
+        {
+            var arquivo = _imagemRepository.ListarPorId(id);
+            return new ImagemProdutoViewModel()
+            {
+                ProdutoId = arquivo.ProdutoId,
+                Id = arquivo.Id,
+                NomeArquivo = arquivo.NomeImagem
+            };
+        }
+
+        public void Remover(ImagemProdutoViewModel model)
+        {
+            var arquivo = new ImagemProduto
+            {
+                Id = model.Id,
+                NomeImagem = model.NomeArquivo,
+                ProdutoId = model.ProdutoId
+            };
+            _imagemRepository.Remove(arquivo);
+        }
+
+
     }
 }

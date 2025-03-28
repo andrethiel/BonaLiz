@@ -24,5 +24,9 @@ namespace BonaLiz.Domain.Repository
         }
 
         public List<ImagemProduto> Listar() => _repositoryBase.Listar();
+
+        public ImagemProduto ListarPorId(int id) => _repositoryBase.ObterPorId(id);
+
+        public void Remove(ImagemProduto model) => _repositoryBase.Deletar(model);
     }
 }

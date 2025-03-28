@@ -99,6 +99,128 @@ export function validateLoginForm(values) {
   //   return true;
   // }
 
+  // function Valida() {
+  //   if (form.Nome == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Digite o nome do produto",
+  //       type: "Alert",
+  //     });
+  //     return false;
+  //   }
+  //   if (form.Quantidade == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Digite a quantidade",
+  //       type: "Alert",
+  //     });
+  //     return false;
+  //   }
+  //   if (form.FornecedorId == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Selecione o fornecedor do produto",
+  //       type: "Alert",
+  //     });
+  //     return false;
+  //   }
+  //   if (form.TipoProdutoId == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Selecione o Tipo do produto",
+  //       type: "Alert",
+  //     });
+  //     return false;
+  //   }
+  //   if (form.precoCusto == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Digite o valor de custo do produto",
+  //       type: "Alert",
+  //     });
+  //     return false;
+  //   }
+  //   if (form.precoVenda == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Digite o valor de venda do produto",
+  //       type: "Alert",
+  //     });
+  //     return false;
+  //   }
+  //   if (data.startDate == "") {
+  //     setAlert({
+  //       ...alert,
+  //       message: "Selecione a data da compra",
+  //       type: "Alert",
+  //     });
+  //     return false;
+  //   }
+
+  //   return true;
+  // }
+
+  // function Valida() {
+  //     if (form.Nome == "") {
+  //       setAlert({
+  //         ...alert,
+  //         message: "Digite o nome do produto",
+  //         type: "Alert",
+  //       });
+  //       return false;
+  //     }
+  //     if (form.Quantidade == "") {
+  //       setAlert({
+  //         ...alert,
+  //         message: "Digite a quantidade",
+  //         type: "Alert",
+  //       });
+  //       return false;
+  //     }
+  //     if (form.FornecedorId == "") {
+  //       setAlert({
+  //         ...alert,
+  //         message: "Selecione o fornecedor do produto",
+  //         type: "Alert",
+  //       });
+  //       return false;
+  //     }
+  //     if (form.TipoProdutoId == "") {
+  //       setAlert({
+  //         ...alert,
+  //         message: "Selecione o Tipo do produto",
+  //         type: "Alert",
+  //       });
+  //       return false;
+  //     }
+  //     if (form.precoCusto == "") {
+  //       setAlert({
+  //         ...alert,
+  //         message: "Digite o valor de custo do produto",
+  //         type: "Alert",
+  //       });
+  //       return false;
+  //     }
+  //     if (form.precoVenda == "") {
+  //       setAlert({
+  //         ...alert,
+  //         message: "Digite o valor de venda do produto",
+  //         type: "Alert",
+  //       });
+  //       return false;
+  //     }
+  //     if (data.startDate == "") {
+  //       setAlert({
+  //         ...alert,
+  //         message: "Selecione a data da compra",
+  //         type: "Alert",
+  //       });
+  //       return false;
+  //     }
+
+  //     return true;
+  //   }
+
   return {
     valid: Object.keys(errors).length === 0,
     errors,

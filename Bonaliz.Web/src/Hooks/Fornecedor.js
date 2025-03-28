@@ -58,7 +58,7 @@ export function FornecedorProvider({ children }) {
         setAlert({
           ...alert,
           type: "Danger",
-          message: e.message,
+          message: JSON.parse(e.request.response).message,
         });
       }
       setAlert({
@@ -93,7 +93,7 @@ export function FornecedorProvider({ children }) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     } finally {
       setIsLoading(false);
@@ -118,7 +118,7 @@ export function FornecedorProvider({ children }) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     } finally {
       setIsLoading(false);
@@ -138,17 +138,25 @@ export function FornecedorProvider({ children }) {
       setIsLoading(true);
       const response = await InserirFornecedor(form);
       if (!response.success) {
-        setAlert({ ...alert, message: response.message, type: "Danger" });
+        setAlert({
+          ...alert,
+          message: responsJSON.parse(e.request.response).message,
+          type: "Danger",
+        });
       } else {
         setFornecedores((prev) => [...prev, response.data]);
-        setAlert({ ...alert, message: response.message, type: "Success" });
+        setAlert({
+          ...alert,
+          message: responsJSON.parse(e.request.response).message,
+          type: "Success",
+        });
         router.back();
       }
     } catch (e) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
       setForm({
         Nome: "",
@@ -176,7 +184,7 @@ export function FornecedorProvider({ children }) {
         setAlert({
           ...alert,
           type: "Success",
-          message: response.message,
+          message: JSON.parse(e.request.response).message,
         });
 
         router.back();
@@ -184,14 +192,14 @@ export function FornecedorProvider({ children }) {
         setAlert({
           ...alert,
           type: "Danger",
-          message: response.message,
+          message: JSON.parse(e.request.response).message,
         });
       }
     } catch (e) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     } finally {
       setIsLoading(false);

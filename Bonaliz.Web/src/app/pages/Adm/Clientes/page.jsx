@@ -83,7 +83,7 @@ function Clientes() {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     }
   }
@@ -107,7 +107,7 @@ function Clientes() {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
       setIsLoading(false);
     }

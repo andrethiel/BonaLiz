@@ -11,9 +11,9 @@ namespace BonaLiz.Domain.Repository
 {
     public class ProdutoRepository(IRepositoryBase<Produto> _repositoryBase) : IProdutoRepository
     {
-        public void Editar(Produto model) => _repositoryBase.Editar(model);
+        public Produto Editar(Produto model) => _repositoryBase.Editar(model);
 
-        public void Inserir(Produto model) => _repositoryBase.Inserir(model);
+        public Produto Inserir(Produto model) => _repositoryBase.Inserir(model);
 
         public List<Produto> Listar() => _repositoryBase.Listar();
 
@@ -21,14 +21,11 @@ namespace BonaLiz.Domain.Repository
 
         public Produto ObterPorId(int id) => _repositoryBase.ObterPorId(id);
 
-
-
         public List<Produto> Filtrar(Produto model) => _repositoryBase.Listar()
-            .Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome))
+            .Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.ToUpper().Contains(model.Nome.ToUpper()))
             .Where(x => model.FornecedorId == null || x.FornecedorId == model.FornecedorId)
             .Where(x => model.TipoProdutoId == null || x.TipoProdutoId == model.TipoProdutoId)
-            .Where(x=> model.DataCompra == null || x.DataCompra == model.DataCompra)
-            .Where(x => x.Quantidade > 0 && x.Inativo == false).ToList();
+            .Where(x=> model.DataCompra == null || x.DataCompra == model.DataCompra).ToList();
             
     }
 }

@@ -61,7 +61,7 @@ export function TipoProdutoProvider({ children }) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     } finally {
       setIsLoading(false);
@@ -81,7 +81,7 @@ export function TipoProdutoProvider({ children }) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     } finally {
       setForm({
@@ -114,7 +114,7 @@ export function TipoProdutoProvider({ children }) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     } finally {
       setIsLoading(false);
@@ -132,17 +132,25 @@ export function TipoProdutoProvider({ children }) {
             item.id == response.data.id ? response.data : item
           )
         );
-        setAlert({ ...alert, message: response.message, type: "Success" });
+        setAlert({
+          ...alert,
+          message: responsJSON.parse(e.request.response).message,
+          type: "Success",
+        });
         router.back();
       } else {
-        setAlert({ ...alert, message: response.message, type: "Danger" });
+        setAlert({
+          ...alert,
+          message: responsJSON.parse(e.request.response).message,
+          type: "Danger",
+        });
         router.back();
       }
     } catch (e) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     } finally {
       setForm({
@@ -161,17 +169,25 @@ export function TipoProdutoProvider({ children }) {
       const response = await InserirTipoProduto(form);
       if (response.success) {
         setTipoProduto((prev) => [...prev, response.data]);
-        setAlert({ ...alert, message: response.message, type: "Success" });
+        setAlert({
+          ...alert,
+          message: responsJSON.parse(e.request.response).message,
+          type: "Success",
+        });
 
         router.back();
       } else {
-        setAlert({ ...alert, message: response.message, type: "Danger" });
+        setAlert({
+          ...alert,
+          message: responsJSON.parse(e.request.response).message,
+          type: "Danger",
+        });
       }
     } catch (e) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.message,
+        message: JSON.parse(e.request.response).message,
       });
     } finally {
       setForm({

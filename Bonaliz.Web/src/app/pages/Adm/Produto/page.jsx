@@ -1,9 +1,4 @@
 "use client";
-
-import { SelectListForncedor } from "@/Api/Controllers/Forncedor";
-import { FiltrarProdutos, ListarProdutos } from "@/Api/Controllers/Produto";
-import { SelectListTipoProduto } from "@/Api/Controllers/TipoProduto";
-
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import CustomLoading from "@/Components/CustomLoadingGrid";
@@ -12,10 +7,11 @@ import AgGrid from "@/Components/Grid";
 import Input from "@/Components/Input";
 import Linked from "@/Components/Link";
 import Select from "@/Components/Select";
+import { ProdutoContext } from "@/Hooks/Produto";
+import { format } from "date-fns";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { BsTag } from "react-icons/bs";
+import React, { useContext, useEffect, useState } from "react";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -30,109 +26,27 @@ const CustomButtonComponent = (props) => {
 };
 
 const Produto = () => {
-  useEffect(() => {
-    Listar();
-  }, []);
+  const {
+    isLoading,
+    alert,
+    form,
+    handleChange,
+    Filtrar,
+    Produto,
+    Fornecedor,
+    TipoProduto,
+    isOpen,
+    setIsOpen,
+    currentMonth,
+    setCurrentMonth,
+    handlePrevMonth,
+    handleNextMonth,
+  } = useContext(ProdutoContext);
 
-  async function Listar() {
-    setIsLoading(true);
-    try {
-      const response = await ListarProdutos();
-      if (response.length > 0) {
-        setProduto(response);
-      } else {
-        setProduto([]);
-        setAlert({
-          ...alert,
-          type: "Danger",
-          message: "Nenhum produto encontrado",
-        });
-      }
-      Fornecedores();
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
-    }
-    setIsLoading(false);
-    setAlert({
-      ...alert,
-      type: "",
-      message: "",
-    });
-  }
-
-  async function Fornecedores() {
-    const response = await SelectListForncedor();
-    if (response.length > 0) {
-      setFornecedores(response);
-      TipoProdutos();
-    }
-  }
-  async function TipoProdutos() {
-    const response = await SelectListTipoProduto();
-    if (response.length > 0) {
-      setTipoProduto(response);
-    }
-  }
-
-  async function Filtrar() {
-    form.DataCompra =
-      data.startDate != null ? dayjs(data.startDate).format("DD/MM/YYYY") : "";
-    setIsLoading(true);
-    try {
-      const response = await FiltrarProdutos(form);
-      if (response.length > 0) {
-        setProduto(response);
-      } else {
-        setProduto([]);
-        setAlert({
-          ...alert,
-          type: "Alert",
-          message: "Nenhum produto encontrado",
-        });
-      }
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: e.message,
-      });
-    }
-    setIsLoading(false);
-    setTimeout(() => {
-      setAlert({
-        ...alert,
-        type: "",
-        message: "",
-      });
-    }, 1500);
-  }
-
-  const [form, setForm] = useState({
-    Nome: "",
-    FornecedorId: "",
-    TipoProdutoId: "",
-    DataCompra: "",
-  });
-  const [data, setData] = useState({
-    startDate: new Date(),
-    endDate: null,
-  });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [Produto, setProduto] = useState();
-  const [Fornecedor, setFornecedores] = useState([]);
-  const [TipoProduto, setTipoProduto] = useState([]);
   const [columnsDef, setColumnsDef] = useState([
     {
       headerName: "Código",
-      field: "codigo",
+      field: "id",
       maxWidth: 90,
     },
     {
@@ -185,14 +99,6 @@ const Produto = () => {
     },
   ]);
 
-  const handleChange = (e) => {
-    const { value, name } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
   if (isLoading) return <CustomLoading loadingMessage="Aguarde..." />;
 
   return (
@@ -204,16 +110,16 @@ const Produto = () => {
       <div className="grid grid-col-1 lg:grid-cols-5 gap-2">
         <div>
           <Input
-            icon={<BsTag />}
+            icon={"tag"}
             placeholder="Nome do Produto"
             onChange={handleChange}
-            value={form.Nome}
             name={"Nome"}
+            id={"Nome"}
           />
         </div>
         <div>
           <Select
-            icon={<BsTag />}
+            icon={"tag"}
             placeholder="Selecione um fornecedor"
             onChange={handleChange}
             data={Fornecedor}
@@ -223,7 +129,7 @@ const Produto = () => {
         </div>
         <div>
           <Select
-            icon={<BsTag />}
+            icon={"tag"}
             placeholder="Selecione um tipo de produto"
             onChange={handleChange}
             data={TipoProduto}
@@ -231,15 +137,18 @@ const Produto = () => {
             name={"TipoProdutoId"}
           />
         </div>
-        <div>
-          <DataPicker
-            onChange={(newValue) => {
-              setData(newValue);
-            }}
-            value={data}
-            placeholder="Selecione uma data"
-          />
-        </div>
+        <DataPicker
+          onChange={handleChange}
+          valueInput={form.DataCompra}
+          value={form.Data}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          icon={"calendar"}
+          currentMonth={currentMonth}
+          setCurrentMonth={setCurrentMonth}
+          handlePrevMonth={handlePrevMonth}
+          handleNextMonth={handleNextMonth}
+        />
         <div>
           <Button children={"Pesquisar"} color={"primary"} onClick={Filtrar} />
         </div>

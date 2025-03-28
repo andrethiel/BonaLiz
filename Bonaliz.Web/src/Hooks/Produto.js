@@ -1,184 +1,324 @@
+"use client";
+import { SelectListForncedor } from "@/Api/Controllers/Forncedor";
 import {
+  CadastrarProduto,
   EditarProduto,
   FiltrarProdutos,
+  ListarProdutos,
+  LucroProduto,
   ProdutoPorGuid,
 } from "@/Api/Controllers/Produto";
+import { SelectListTipoProduto } from "@/Api/Controllers/TipoProduto";
+import ImageArquivo from "@/Components/Image";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { DragDropContext } from "./DragDrop";
 
-export function ProdutosHook() {
+export const ProdutoContext = createContext(null);
+
+const initialFormState = {
+  Nome: "",
+  Id: 0,
+  Guid: null,
+  Quantidade: "",
+  FornecedorId: "",
+  TipoProdutoId: "",
+  precoCusto: "",
+  precoVenda: "",
+  Lucro: "",
+  DataCompra: "",
+  Inativo: null,
+  Arquivo: [],
+  Imagem: [],
+  Status: "",
+  Data: "",
+};
+
+export function ProdutoProvider({ children }) {
   const router = useRouter();
   const [checked, setChecked] = useState(false);
 
-  const [form, setForm] = useState({
-    Nome: "",
-    Id: "",
-    Guid: "",
-    Quantidade: "",
-    FornecedorId: "",
-    TipoProdutoId: "",
-    precoCusto: "",
-    precoVenda: "",
-    Lucro: "",
-    DataCompra: "",
-    Inativo: "false",
-    Arquivo: "",
-    Imagem: "",
-    Status: "",
-  });
+  const [form, setForm] = useState(initialFormState);
   const [alert, setAlert] = useState({
     message: "",
     type: "",
   });
-  const [data, setData] = useState({
-    startDate: new Date(),
-    endDate: null,
-  });
+  // const [data, setData] = useState({
+  //   startDate: null,
+  //   endDate: null,
+  // });
   const [isLoading, setIsLoading] = useState(false);
+  const [Produto, setProduto] = useState();
+  const [Fornecedor, setFornecedores] = useState([]);
+  const [TipoProduto, setTipoProduto] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [isActive, setIsActive] = useState(false);
+  const [files, setFiles] = useState([]);
+  const [fileURLs, setFileURLs] = useState([]);
 
-  async function Buscar(guid) {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [res1, res2, res3] = await Promise.all([
+          Listar(),
+          Fornecedores(),
+          TipoProdutos(),
+        ]);
+      } catch (e) {
+        setAlert({
+          ...alert,
+          type: "Danger",
+          message: JSON.parse(e.request.response).message,
+        });
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAlert({ message: "", type: "" });
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [alert.message]);
+
+  const handlePrevMonth = () => {
+    setCurrentMonth(
+      new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1)
+    );
+  };
+
+  const handleNextMonth = () => {
+    setCurrentMonth(
+      new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1)
+    );
+  };
+
+  function Reset() {
+    setArquivo([]);
+    setForm(initialFormState);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  }
+
+  async function Listar() {
     setIsLoading(true);
-    const response = await ProdutoPorGuid(guid);
-    if (response.id != 0) {
-      setForm({
-        ...form,
-        Nome: response.nome,
-        Id: response.id,
-        Guid: response.guid,
-        Inativo:
-          response.inativo == "True" ? setChecked(true) : setChecked(false),
-        Quantidade: response.quantidade,
-        FornecedorId: response.fornecedorId,
-        TipoProdutoId: response.tipoProdutoId,
-        precoCusto: response.precoCusto,
-        precoVenda: response.precoVenda,
-        Lucro: response.lucro,
-        Imagem: response.urlImagem,
-        Status: response.status,
-      });
-
-      setData({
-        ...data,
-        startDate: Date(response.dataCompra),
-        endDate: Date(response.dataCompra),
-      });
-    } else {
+    try {
+      const response = await ListarProdutos();
+      if (response.success) {
+        setProduto(response.data);
+      }
+    } catch (e) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: "Fornecedor não encontrado",
+        message: JSON.parse(e.request.response).message,
       });
+      setProduto([]);
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
+  }
+
+  async function Fornecedores() {
+    const response = await SelectListForncedor();
+    setFornecedores(response);
+  }
+  async function TipoProdutos() {
+    const response = await SelectListTipoProduto();
+    setTipoProduto(response);
+  }
+
+  async function Filtrar() {
+    setIsLoading(true);
+    try {
+      const response = await FiltrarProdutos(form);
+      if (response.success) {
+        setProduto(response.data);
+      }
+    } catch (e) {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: JSON.parse(e.request.response).message,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function Buscar(guid) {
+    try {
+      setIsLoading(true);
+      const response = await ProdutoPorGuid(guid);
+      if (response.success) {
+        setForm({
+          ...form,
+          Nome: response.data.nome,
+          Id: response.data.id,
+          Guid: response.data.guid,
+          Inativo:
+            response.data.inativo == "True"
+              ? setChecked(true)
+              : setChecked(false),
+          Quantidade: response.data.quantidade,
+          FornecedorId: response.data.fornecedorId,
+          TipoProdutoId: response.data.tipoProdutoId,
+          precoCusto: response.data.precoCusto,
+          precoVenda: response.data.precoVenda,
+          Lucro: response.data.lucro,
+          Imagem: response.data.urlImagem,
+          Status: response.data.status,
+          DataCompra: response.data.dataCompra,
+        });
+      }
+    } catch (e) {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: JSON.parse(e.request.response).message,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function EditaProduto() {
-    if (Valida()) {
+    try {
       setIsLoading(true);
       form.Inativo = checked.toString();
-      form.DataCompra = dayjs(data.startDate).format("DD/MM/YYYY");
       const response = await EditarProduto(form);
-      if (response.status) {
+      if (response.success) {
         setAlert({
           ...alert,
           type: "Success",
           message: response.message,
         });
+      }
+    } catch (e) {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: JSON.parse(e.request.response).message,
+      });
+    } finally {
+      Reset();
+      setIsLoading(false);
+      router.back();
+    }
+  }
+
+  async function CriarProduto() {
+    try {
+      setIsLoading(true);
+      const response = await CadastrarProduto(form);
+      if (response.success) {
+        setAlert({
+          ...alert,
+          type: "Success",
+          message: response.message,
+        });
+
         router.back();
-      } else {
+      }
+    } catch (e) {
+      console.log(e);
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: JSON.parse(e.request.response).message,
+      });
+    } finally {
+      Reset();
+      setIsLoading(false);
+      router.back();
+    }
+  }
+
+  const handleBlur = async () => {
+    if (form.precoCusto != "" && form.precoVenda != "") {
+      setIsLoading(true);
+      try {
+        const response = await LucroProduto(form);
+        setForm({
+          ...form,
+          Lucro: response,
+        });
+      } catch (e) {
         setAlert({
           ...alert,
           type: "Danger",
-          message: response.message,
+          message: JSON.parse(e.request.response).message,
         });
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     }
-  }
-
-  async function PesquisarProduto(pesquisa) {
-    try {
-      const response = FiltrarProdutos(pesquisa);
-      return response;
-    } catch {}
-  }
-
-  function Valida() {
-    if (form.Nome == "") {
-      setAlert({
-        ...alert,
-        message: "Digite o nome do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.Quantidade == "") {
-      setAlert({
-        ...alert,
-        message: "Digite a quantidade",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.FornecedorId == "") {
-      setAlert({
-        ...alert,
-        message: "Selecione o fornecedor do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.TipoProdutoId == "") {
-      setAlert({
-        ...alert,
-        message: "Selecione o Tipo do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.precoCusto == "") {
-      setAlert({
-        ...alert,
-        message: "Digite o valor de custo do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (form.precoVenda == "") {
-      setAlert({
-        ...alert,
-        message: "Digite o valor de venda do produto",
-        type: "Alert",
-      });
-      return false;
-    }
-    if (data.startDate == "") {
-      setAlert({
-        ...alert,
-        message: "Selecione a data da compra",
-        type: "Alert",
-      });
-      return false;
-    }
-
-    return true;
-  }
-
-  return {
-    form,
-    setForm,
-    data,
-    setData,
-    alert,
-    setAlert,
-    isLoading,
-    setIsLoading,
-    EditaProduto,
-    setChecked,
-    checked,
-    router,
-    PesquisarProduto,
-    Buscar,
   };
+
+  const handleChange = (e) => {
+    if (e?.target) {
+      const { value, name } = e.target;
+      setForm({
+        ...form,
+        [name]: value,
+      });
+    } else {
+      setForm((previ) => ({
+        ...previ,
+        DataCompra: dayjs(e).format("DD/MM/YYYY").toString(),
+        Data: e,
+      }));
+    }
+  };
+
+  function Voltar() {
+    Reset();
+    router.back();
+  }
+
+  return (
+    <ProdutoContext.Provider
+      value={{
+        form,
+        setForm,
+        alert,
+        setAlert,
+        isLoading,
+        setIsLoading,
+        EditaProduto,
+        setChecked,
+        checked,
+        router,
+        Buscar,
+        handleChange,
+        Filtrar,
+        Produto,
+        Fornecedor,
+        TipoProduto,
+        isOpen,
+        setIsOpen,
+        handleNextMonth,
+        handlePrevMonth,
+        currentMonth,
+        setCurrentMonth,
+        CriarProduto,
+        handleBlur,
+        Voltar,
+        isActive,
+        setIsActive,
+        files,
+        setFiles,
+        fileURLs,
+        setFileURLs,
+      }}
+    >
+      {children}
+    </ProdutoContext.Provider>
+  );
 }

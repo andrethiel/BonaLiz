@@ -9,8 +9,8 @@ namespace BonaLiz.Negocio.Interfaces
 {
     public interface IProdutoServices
     {
-        void Cadastrar(ProdutoViewModel model);
-        void Editar(ProdutoViewModel model);
+        ProdutoViewModel Cadastrar(ProdutoViewModel model);
+        ProdutoViewModel Editar(ProdutoViewModel model);
         List<ProdutoViewModel> Listar(ProdutoViewModel model);
         List<ProdutoViewModel> ListarPrincipal(ProdutoViewModel model);
 		ProdutoViewModel ObterPorGuid(Guid guid);

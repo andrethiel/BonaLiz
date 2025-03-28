@@ -28,7 +28,6 @@ namespace BonaLiz.Api.Controllers
         [Route("/CadastrarForncedor")]
         public async Task<IActionResult> Cadastro(FornecedorViewModel model)
         {
-            var cookie = Response.HttpContext.Request.Cookies;
             try
             {
                 if(!_fornecedorServices.Listar().Where(x => x.Nome == model.Nome).Any())

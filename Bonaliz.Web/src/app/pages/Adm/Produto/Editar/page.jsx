@@ -1,23 +1,17 @@
 "use client";
-import { LucroProduto } from "@/Api/Controllers/Produto";
-import { SelectListTipoProduto } from "@/Api/Controllers/TipoProduto";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import Check from "@/Components/Check";
 import InputMoney from "@/Components/Currency";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import DataPicker from "@/Components/DatePicker";
+import Drop from "@/Components/Drop";
+import ImageArquivo from "@/Components/Image";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
-import { SelectListFornecedor } from "@/Hooks/FornecedorSelect";
-import { ProdutosHook } from "@/Hooks/Produto";
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { Suspense, useEffect } from "react";
-import { BsTag } from "react-icons/bs";
-import { FaGlobeAmericas, FaMoneyBill, FaRegFileImage } from "react-icons/fa";
-import { MdOutlineProductionQuantityLimits } from "react-icons/md";
-
-// import { Container } from './styles';
+import { ProdutoContext } from "@/Hooks/Produto";
+import { useSearchParams } from "next/navigation";
+import React, { Suspense, useContext, useEffect } from "react";
 
 const Editar = () => {
   const param = useSearchParams();
@@ -25,70 +19,72 @@ const Editar = () => {
 
   const {
     form,
-    setForm,
-    data,
-    setData,
     alert,
     isLoading,
-    setIsLoading,
     EditaProduto,
     setChecked,
     checked,
     router,
     Buscar,
-  } = ProdutosHook(guid);
+    handleChange,
+    Fornecedor,
+    TipoProduto,
+    handleBlur,
+    arquivo,
+    setArquivo,
+    fileInputRef,
+    setForm,
+    Voltar,
+  } = useContext(ProdutoContext);
 
   useEffect(() => {
     Buscar(guid);
-  }, []);
+  }, [guid]);
 
-  const { selectFornecedor } = SelectListFornecedor();
-  async function TipoProdutos() {
-    const response = await SelectListTipoProduto();
-    if (response.length > 0) {
-      setTipoProduto(response);
+  function Image(event) {
+    if (!event.target.files) return;
+
+    const files = Array.from(event.target.files);
+    const fileURLs = files.map((file) => URL.createObjectURL(file));
+
+    setArquivo((prev) => [...prev, ...fileURLs]);
+    setForm((prevForm) => ({
+      ...prevForm,
+      Arquivo: [...prevForm.Arquivo, ...files],
+    }));
+
+    // Limpa URLs antigas ao sair da memória
+    files.forEach((file) => URL.revokeObjectURL(file));
+  }
+  function handleRemovePhotoFile(index) {
+    setArquivo((prev) => prev.filter((_, i) => i !== index));
+    setForm((prevForm) => ({
+      ...prevForm,
+      Imagem: prevForm.Imagem.filter((_, i) => i !== index),
+    }));
+
+    // Se não houver mais arquivos, reseta o input
+    if (arquivo.length === 1 && fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
   }
-
-  const handleChange = (e) => {
-    const { value, name } = e.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
-  const handleBlur = async () => {
-    if (form.precoCusto != "" && form.precoVenda != "") {
-      setIsLoading(true);
-      var response = await LucroProduto({
-        precoCusto: form.precoCusto,
-        precoVenda: form.precoVenda,
-      });
-      setForm({
-        ...form,
-        Lucro: response,
-      });
-      setIsLoading(false);
-    }
-  };
 
   return (
     <Suspense>
       {isLoading && <CustomLoading loadingMessage="Aguarde..." />}
       <div className={`${isLoading && "hidden"} w-full`}>
         <div className="p-3 m-3">
-          <h3 className="text-2xl font-semibold">Cadastro de Produtos</h3>
+          <h3 className="text-2xl font-semibold">Editar produto</h3>
         </div>
         {isLoading && <CustomLoading loadingMessage="Aguarde" />}
-        {alert && <Alert type={alert.type}>{alert.message}</Alert>}
+        {alert.message && <Alert type={alert.type}>{alert.message}</Alert>}
         <div className="grid gap-4">
           <input name={"Id"} id={"Id"} value={form.Id} type="hidden" />
           <input name={"guid"} id={"guid"} value={form.Guid} type="hidden" />
           <div className="">
             <Input
               placeholder={"Nome do produto"}
-              icon={<BsTag />}
+              icon={"tag"}
               name={"Nome"}
               id={"Nome"}
               onChange={handleChange}
@@ -98,7 +94,7 @@ const Editar = () => {
           <div className="">
             <Input
               placeholder={"Quantidade"}
-              icon={<MdOutlineProductionQuantityLimits />}
+              icon={"arrow-down-0-1"}
               name={"Quantidade"}
               id={"Quantidade"}
               onChange={handleChange}
@@ -106,37 +102,34 @@ const Editar = () => {
             />
           </div>
           <div>
-            {selectFornecedor && (
-              <Select
-                data={selectFornecedor}
-                placeholder={"Selecione um Fornecedor"}
-                icon={<FaGlobeAmericas />}
-                name={"FornecedorId"}
-                id={"FornecedorId"}
-                onChange={handleChange}
-                value={form.FornecedorId}
-              />
-            )}
+            <Select
+              data={Fornecedor}
+              placeholder={"Selecione um Fornecedor"}
+              icon={"globe"}
+              name={"FornecedorId"}
+              id={"FornecedorId"}
+              onChange={handleChange}
+              value={form.FornecedorId}
+            />
           </div>
-          {/* <div>
-          <Select
-            data={TipoProduto}
-            placeholder={"Selecione um tipo de produto"}
-            icon={<FaGlobeAmericas />}
-            name={"TipoProdutoId"}
-            id={"TipoProdutoId"}
-            onChange={handleChange}
-            value={form.TipoProdutoId}
-          />
-        </div> */}
+          <div>
+            <Select
+              data={TipoProduto}
+              placeholder={"Selecione um tipo de produto"}
+              icon={"globe"}
+              name={"TipoProdutoId"}
+              id={"TipoProdutoId"}
+              onChange={handleChange}
+              value={form.TipoProdutoId}
+            />
+          </div>
           <div className="">
             <InputMoney
               placeholder={"Preço de custo"}
-              icon={<FaMoneyBill />}
+              icon={"badge-dollar-sign"}
               name={"precoCusto"}
               id={"precoCusto"}
               onChange={(event, originalValue, maskedValue) => {
-                const custo = maskedValue.replace(",", ".");
                 setForm({ ...form, precoCusto: maskedValue });
               }}
               value={form.precoCusto}
@@ -145,11 +138,10 @@ const Editar = () => {
           <div className="">
             <InputMoney
               placeholder={"Preço de venda"}
-              icon={<FaMoneyBill />}
+              icon={"badge-dollar-sign"}
               name={"precoVenda"}
               id={"precoVenda"}
               onChange={(event, originalValue, maskedValue) => {
-                const venda = maskedValue.replace(",", ".");
                 setForm({ ...form, precoVenda: maskedValue });
               }}
               value={form.precoVenda}
@@ -159,14 +151,14 @@ const Editar = () => {
           <div className="">
             <Input
               placeholder={"Lucro"}
-              icon={<FaMoneyBill />}
+              icon={"badge-dollar-sign"}
               name={"Lucro"}
               id={"Lucro"}
               value={form.Lucro}
               disabled={true}
             />
           </div>
-          <div className="">
+          {/* <div className="">
             <DataPicker
               onChange={(newValue) => {
                 setData(newValue);
@@ -174,37 +166,35 @@ const Editar = () => {
               value={data}
               placeholder="Selecione a data da compra"
             />
-          </div>
-          <div className="">
-            <Input
-              placeholder={"Arquivo"}
-              icon={<FaRegFileImage />}
-              type={"file"}
-              name={"Arquivo"}
-              id={"Arquivo"}
-              onChange={(e) => setForm({ ...form, Arquivo: e.target.files[0] })}
+          </div> */}
+          {/* <div className="">
+            <input
+              type="file"
+              multiple
+              placeholder="Arquivo"
+              onChange={Image}
+              accept="image/*"
+              ref={fileInputRef}
             />
           </div>
-          {form.Imagem != "" ? (
-            <div className="w-full flex mt-2">
-              <div className="flex flex-row h-24 gap-10">
-                <div className="flex flex-col justify-center items-center">
-                  <div>
-                    <span>Imagem atual</span>
-                    <img src={form.Imagem} className="h-20" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : null}
-          {form.Arquivo && (
-            <div className="w-full flex mt-2">
-              <div className="flex flex-col justify-center items-center">
-                <span>Nova Imagem</span>
-                <img src={URL.createObjectURL(form.Arquivo)} className="h-20" />
-              </div>
-            </div>
-          )}
+          <div className="w-full flex mt-2 gap-4">
+            {form.Imagem.length > 0
+              ? form.Imagem.map((imgSrc, index) => (
+                  <ImageArquivo
+                    key={index}
+                    arquivo={imgSrc.nomeArquivo}
+                    onClick={() => handleRemovePhotoFile(index)}
+                  />
+                ))
+              : arquivo.map((imgSrc, index) => (
+                  <ImageArquivo
+                    key={index}
+                    arquivo={imgSrc}
+                    onClick={() => handleRemovePhotoFile(index)}
+                  />
+                ))}
+          </div> */}
+          <Drop />
           <div>
             <Check
               onChange={(e) => setChecked(e.target.checked)}
@@ -216,7 +206,7 @@ const Editar = () => {
           <Button color={"primary"} onClick={EditaProduto}>
             Editar
           </Button>
-          <Button color={"secondary"} onClick={() => router.back()}>
+          <Button color={"secondary"} onClick={Voltar}>
             Voltar
           </Button>
         </div>
