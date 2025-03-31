@@ -27,7 +27,7 @@ export async function CadastrarProduto(props) {
   form.append("PrecoCusto", props.precoCusto);
   form.append("PrecoVenda", props.precoVenda);
   form.append("Lucro", props.Lucro);
-  form.append("DataCompra", props.dataCompra);
+  form.append("DataCompra", props.DataCompra);
   form.append("Quantidade", props.Quantidade);
   form.append("Inativo", props.Inativo);
   if (props.Arquivo.length > 0) {

@@ -4,11 +4,12 @@ import Button from "@/Components/Button";
 import InputMoney from "@/Components/Currency";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import DataPicker from "@/Components/DatePicker";
-import ImageArquivo from "@/Components/Image";
+import Drop from "@/Components/Drop";
+import Icones from "@/Components/Icons";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
 import { ProdutoContext } from "@/Hooks/Produto";
-import React, { Suspense, useContext } from "react";
+import React, { Suspense, useContext, useState } from "react";
 
 const Criar = () => {
   const {
@@ -21,40 +22,10 @@ const Criar = () => {
     TipoProduto,
     handleBlur,
     CriarProduto,
-    arquivo,
-    setArquivo,
-    router,
-    fileInputRef,
     Voltar,
+    show,
+    setShow,
   } = useContext(ProdutoContext);
-
-  function Image(event) {
-    if (!event.target.files) return;
-
-    const files = Array.from(event.target.files);
-    const fileURLs = files.map((file) => URL.createObjectURL(file));
-
-    setArquivo((prev) => [...prev, ...fileURLs]);
-    setForm((prevForm) => ({
-      ...prevForm,
-      Arquivo: [...prevForm.Arquivo, ...files],
-    }));
-
-    // Limpa URLs antigas ao sair da memória
-    files.forEach((file) => URL.revokeObjectURL(file));
-  }
-  function handleRemovePhotoFile(index) {
-    setArquivo((prev) => prev.filter((_, i) => i !== index));
-    setForm((prevForm) => ({
-      ...prevForm,
-      Arquivo: prevForm.Arquivo.filter((_, i) => i !== index),
-    }));
-
-    // Se não houver mais arquivos, reseta o input
-    if (arquivo.length === 1 && fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  }
 
   return (
     <Suspense>
@@ -143,41 +114,15 @@ const Criar = () => {
             />
           </div>
           <div className="">
-            {/* <DataPicker
-              onChange={(newValue) => {
-                setData(newValue);
-              }}
-              value={data}
-              placeholder="Selecione a data da compra"
-            /> */}
-          </div>
-          <div className="">
-            <input
-              type="file"
-              multiple
-              placeholder="Arquivo"
-              onChange={Image}
-              accept="image/*"
-              ref={fileInputRef}
+            <DataPicker
+              onChange={handleChange}
+              value={form.DataCompra}
+              show={show}
+              setIsOpen={() => setShow(false)}
+              onFocus={() => setShow(true)}
             />
-            {/* <Input
-              placeholder={"Arquivo"}
-              icon={<FaRegFileImage />}
-              type={"file"}
-              name={"Arquivo"}
-              id={"Arquivo"}
-              onChange={(e) => setForm({ ...form, Arquivo: e.target.files[0] })}
-            /> */}
           </div>
-          <div className="w-full flex mt-2 gap-4">
-            {arquivo.map((imgSrc, index) => (
-              <ImageArquivo
-                key={index}
-                arquivo={imgSrc}
-                onClick={() => handleRemovePhotoFile(index)}
-              />
-            ))}
-          </div>
+          <Drop />
 
           <Button color={"primary"} onClick={CriarProduto}>
             Criar

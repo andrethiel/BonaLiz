@@ -1,51 +1,61 @@
 import React from "react";
-import { Calendar } from "../ui/calendar";
 import Icones from "../Icons";
-import { meses } from "@/constants/calendario";
-import { ptBR } from "date-fns/locale";
+import Datepicker from "tailwind-datepicker-react";
+import Input from "../Input";
+
+const options = {
+  autoHide: true,
+  todayBtn: true,
+  clearBtn: true,
+  todayBtnText: "Hoje",
+  clearBtnText: "Limpar",
+  icons: {
+    // () => ReactElement | JSX.Element
+    prev: () => <Icones icon={"chevron-left"} size={18} />,
+    next: () => <Icones icon={"chevron-right"} size={18} />,
+  },
+  datepickerClassNames: "top-12",
+  language: "br",
+  disabledDates: [],
+  weekDays: ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"],
+  inputNameProp: "date",
+  inputIdProp: "date",
+  inputPlaceholderProp: "Selecione uma data",
+  inputDateFormatProp: {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+  },
+  autoSelectToday: false,
+};
 
 const DataPicker = ({
   onChange,
   value,
-  valueInput,
-  isOpen,
+  show,
   setIsOpen,
   icon,
+  onFocus,
   ...res
 }) => {
   return (
-    <div className="relative">
-      <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-        <Icones
-          icon={icon}
-          size={18}
-          className="absolute left-3 top-2.5 h-5 w-5 text-muted-foreground"
-          color={"gray"}
+    <div>
+      <Datepicker
+        options={options}
+        onChange={onChange}
+        show={show}
+        setShow={setIsOpen}
+      >
+        <Input
+          placeholder={"Selecione uma data"}
+          icon={"calendar"}
+          name={"DataCompra"}
+          id={"DataCompra"}
+          value={value}
+          onFocus={onFocus}
+          readOnly
         />
-      </div>
-      <input
-        type="text"
-        readOnly
-        value={valueInput}
-        placeholder="Selecione uma data"
-        className="border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2"
-        onClick={() => setIsOpen(!isOpen)}
-      />
-      {isOpen && (
-        <div className="absolute left-0 mt-2 bg-white border rounded shadow-lg z-10">
-          <Calendar
-            mode="single"
-            selected={value}
-            onSelect={(newDate) => {
-              onChange(newDate);
-              setIsOpen(false);
-            }}
-            captionLayout="dropdown-years"
-            locale={ptBR}
-            {...res}
-          />
-        </div>
-      )}
+      </Datepicker>
     </div>
   );
 };

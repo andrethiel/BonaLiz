@@ -11,13 +11,15 @@ import { createContext, useEffect, useState } from "react";
 
 export const TipoProdutoContext = createContext(null);
 
+const initialFormState = {
+  Id: 0,
+  Guid: null,
+  Nome: "",
+  Inativo: null,
+};
+
 export function TipoProdutoProvider({ children }) {
-  const [form, setForm] = useState({
-    Id: 0,
-    Guid: null,
-    Nome: "",
-    Inativo: null,
-  });
+  const [form, setForm] = useState(initialFormState);
   const [alert, setAlert] = useState({
     message: "",
     type: "",
@@ -74,8 +76,7 @@ export function TipoProdutoProvider({ children }) {
       const response = await PesquisarTipoProduto(form);
       if (response.success) {
         setTipoProduto(response.data);
-      } else {
-        setTipoProduto([]);
+        setForm(initialFormState);
       }
     } catch (e) {
       setAlert({
@@ -134,15 +135,8 @@ export function TipoProdutoProvider({ children }) {
         );
         setAlert({
           ...alert,
-          message: responsJSON.parse(e.request.response).message,
+          message: response.message,
           type: "Success",
-        });
-        router.back();
-      } else {
-        setAlert({
-          ...alert,
-          message: responsJSON.parse(e.request.response).message,
-          type: "Danger",
         });
         router.back();
       }
@@ -171,7 +165,7 @@ export function TipoProdutoProvider({ children }) {
         setTipoProduto((prev) => [...prev, response.data]);
         setAlert({
           ...alert,
-          message: responsJSON.parse(e.request.response).message,
+          message: response.message,
           type: "Success",
         });
 
@@ -179,7 +173,7 @@ export function TipoProdutoProvider({ children }) {
       } else {
         setAlert({
           ...alert,
-          message: responsJSON.parse(e.request.response).message,
+          message: JSON.parse(e.request.response).message,
           type: "Danger",
         });
       }
@@ -190,12 +184,6 @@ export function TipoProdutoProvider({ children }) {
         message: JSON.parse(e.request.response).message,
       });
     } finally {
-      setForm({
-        Id: 0,
-        Guid: null,
-        Nome: "",
-        Inativo: null,
-      });
       setIsLoading(false);
     }
   }

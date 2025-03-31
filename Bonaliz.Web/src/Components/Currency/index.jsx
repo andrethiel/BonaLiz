@@ -20,7 +20,7 @@ function InputMoney({ icon, placeholder, onChange, value, name, id, onBlur }) {
         name={name}
         id={id}
         placeholder={placeholder}
-        className="bg-gray-50 border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2.5"
+        className="border border-gray-300 text-sm rounded-lg block w-full ps-10 p-2"
         onChangeValue={onChange}
         value={value}
         onBlur={onBlur}

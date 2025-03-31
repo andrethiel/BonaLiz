@@ -86,10 +86,11 @@ export function AuthProvider({ children }) {
         router.replace("/pages/Adm");
       }
     } catch (e) {
+      console.log(e);
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.response,
+        message: e.response.data.detail,
       });
       setUser({ Email: "", Senha: "" });
     } finally {

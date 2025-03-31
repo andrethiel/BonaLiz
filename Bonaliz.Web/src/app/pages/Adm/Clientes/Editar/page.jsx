@@ -6,82 +6,30 @@ import Check from "@/Components/Check";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import Input from "@/Components/Input";
 import MaskInput from "@/Components/InputMask";
+import { ClientesContext } from "@/Hooks/Clientes";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { Suspense, useEffect, useState } from "react";
-import { FaUser } from "react-icons/fa";
-import { MdEmail, MdPhoneIphone } from "react-icons/md";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 
 function Editar() {
   const param = useSearchParams();
   const guid = param.get("Guid");
-  const [form, setForm] = useState({
-    Id: "",
-    Guid: "",
-    Nome: "",
-    Email: "",
-    Telefone: "",
-    Inativo: "false",
-  });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [checked, setChecked] = useState(false);
-  const router = useRouter();
+
+  const {
+    isLoading,
+    alert,
+    form,
+    handleChange,
+    router,
+    Voltar,
+    checked,
+    setChecked,
+    ClienteEditar,
+    Buscar,
+  } = useContext(ClientesContext);
 
   useEffect(() => {
-    setTimeout(() => {
-      setAlert({
-        ...alert,
-        message: "",
-        type: "",
-      });
-    }, [500]);
-  }, [alert]);
-
-  useEffect(() => {
-    Buscar();
+    Buscar(guid);
   }, []);
-
-  async function Buscar() {
-    setIsLoading(true);
-    const response = await ObterClienteGuid(guid);
-    if (response.id != 0) {
-      setForm({
-        ...form,
-        Nome: response.nome,
-        Email: response.email,
-        Telefone: response.telefone,
-        Id: response.id,
-        Guid: response.guid,
-        Inativo:
-          response.inativo == "True" ? setChecked(true) : setChecked(false),
-      });
-    }
-    setIsLoading(false);
-  }
-
-  async function ClienteEditar() {
-    setIsLoading(true);
-    form.Inativo = checked.toString();
-    const response = await EditarCliente(form);
-    if (response.status) {
-      setAlert({
-        ...alert,
-        type: "Success",
-        message: responsJSON.parse(e.request.response).message,
-      });
-      router.back();
-    } else {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: responsJSON.parse(e.request.response).message,
-      });
-    }
-    setIsLoading(false);
-  }
 
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 
@@ -90,40 +38,40 @@ function Editar() {
       <div className="p-3 m-3">
         <h3 className="text-2xl font-semibold">Cadastrar Clientes</h3>
       </div>
-      {alert && <Alert type={alert.type}>{alert.message}</Alert>}
+      {alert.message && <Alert type={alert.type}>{alert.message}</Alert>}
       <div className="grid gap-4">
         <input name={"Id"} id={"Id"} type="hidden" value={form.Id} />
         <input name={"guid"} id={"guid"} type="hidden" value={form.Guid} />
         <div>
           <Input
             placeholder={"Nome do cliente"}
-            icon={<FaUser />}
+            icon={"user-round"}
             name={"Nome"}
             id={"Nome"}
-            onChange={(e) => setForm({ ...form, Nome: e.target.value })}
+            onChange={handleChange}
             value={form.Nome}
           />
         </div>
         <div>
           <Input
             placeholder={"Email do cliente"}
-            icon={<MdEmail />}
+            icon={"at-sign"}
             name={"Email"}
             id={"Email"}
             type={"email"}
             value={form.Email}
-            onChange={(e) => setForm({ ...form, Email: e.target.value })}
+            onChange={handleChange}
           />
         </div>
         <div>
           <MaskInput
             placeholder={"Telefone do cliente"}
-            icon={<MdPhoneIphone />}
+            icon={"phone"}
             name={"Telefone"}
             id={"Telefone"}
             mask={"(00) 00000-0000"}
             value={form.Telefone}
-            onChange={(e) => setForm({ ...form, Telefone: e.target.value })}
+            onChange={handleChange}
           />
         </div>
         <Check onChange={(e) => setChecked(e.target.checked)} value={checked}>
@@ -132,7 +80,7 @@ function Editar() {
         <Button color={"primary"} onClick={ClienteEditar}>
           Editar
         </Button>
-        <Button color={"secondary"} onClick={() => router.back()}>
+        <Button color={"secondary"} onClick={Voltar}>
           Voltar
         </Button>
       </div>

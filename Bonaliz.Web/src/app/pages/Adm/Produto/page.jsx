@@ -3,6 +3,7 @@ import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import DataPicker from "@/Components/DatePicker";
+// import DataPicker from "@/Components/DatePicker";
 import AgGrid from "@/Components/Grid";
 import Input from "@/Components/Input";
 import Linked from "@/Components/Link";
@@ -35,12 +36,8 @@ const Produto = () => {
     Produto,
     Fornecedor,
     TipoProduto,
-    isOpen,
-    setIsOpen,
-    currentMonth,
-    setCurrentMonth,
-    handlePrevMonth,
-    handleNextMonth,
+    show,
+    setShow,
   } = useContext(ProdutoContext);
 
   const [columnsDef, setColumnsDef] = useState([
@@ -137,18 +134,15 @@ const Produto = () => {
             name={"TipoProdutoId"}
           />
         </div>
-        <DataPicker
-          onChange={handleChange}
-          valueInput={form.DataCompra}
-          value={form.Data}
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-          icon={"calendar"}
-          currentMonth={currentMonth}
-          setCurrentMonth={setCurrentMonth}
-          handlePrevMonth={handlePrevMonth}
-          handleNextMonth={handleNextMonth}
-        />
+        <div>
+          <DataPicker
+            onChange={handleChange}
+            value={form.DataCompra}
+            show={show}
+            setIsOpen={() => setShow(false)}
+            onFocus={() => setShow(true)}
+          />
+        </div>
         <div>
           <Button children={"Pesquisar"} color={"primary"} onClick={Filtrar} />
         </div>

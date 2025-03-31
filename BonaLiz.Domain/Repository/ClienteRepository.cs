@@ -13,12 +13,13 @@ namespace BonaLiz.Domain.Repository
 {
     public class ClienteRepository(IRepositoryBase<Cliente> _repositoryBase) : IClienteRepository
     {
-        public void Editar(Cliente model) => _repositoryBase.Editar(model);
+        public Cliente Editar(Cliente model) => _repositoryBase.Editar(model);
 
         public List<Cliente> Filtrar(Cliente model)
         {
-            var filtro = _repositoryBase.Listar().Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.Contains(model.Nome))
-                .Where(x => string.IsNullOrEmpty(model.Email) || x.Email.Contains(model.Email));
+            var filtro = _repositoryBase.Listar().Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.ToUpper().Contains(model.Nome.ToUpper()))
+                .Where(x => string.IsNullOrEmpty(model.Email) || x.Email.ToUpper().Contains(model.Email.ToUpper()))
+                .Where(x => string.IsNullOrEmpty(model.Telefone) || x.Telefone == model.Telefone);
 
             if(filtro.Count() == 0)
             {
@@ -30,7 +31,7 @@ namespace BonaLiz.Domain.Repository
 
         //public void Inserir(Cliente model) => _repositoryBase.Inserir(model);
 
-        public int Inserir(Cliente model) => _repositoryBase.InserirScalar(model);
+        public Cliente Inserir(Cliente model) => _repositoryBase.Inserir(model);
 
         public List<Cliente> Listar() => _repositoryBase.Listar();
 

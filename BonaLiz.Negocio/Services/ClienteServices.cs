@@ -11,28 +11,45 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Negocio.Services
 {
-	public class ClienteServices(IClienteRepository _clienteRepository, IMapper _mapper) : IClienteServices
+	public class ClienteServices(IClienteRepository _clienteRepository) : IClienteServices
 	{
 
-		public void Editar(ClienteViewModel model)
+		public ClienteViewModel Editar(ClienteViewModel model)
 		{
-			var cliente = _clienteRepository.ObterPorId(model.Id);
+            var cliente = _clienteRepository.ObterPorId(model.Id);
 			if (cliente != null) {
 				cliente.Nome = model.Nome;
 				cliente.Email = model.Email;
-				cliente.Telefone = model.Telefone;
+				cliente.Telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
 				cliente.Inativo = Convert.ToBoolean(model.Inativo);
 			}
-			_clienteRepository.Editar(cliente);
-		}
+			var clienteEntity = _clienteRepository.Editar(cliente);
+
+            return new ClienteViewModel()
+            {
+				Id = clienteEntity.Id,
+				Guid = clienteEntity.Guid,
+                Nome = clienteEntity.Nome,
+                Telefone = clienteEntity.Telefone,
+                Email = clienteEntity.Email,
+                Inativo = clienteEntity.Inativo.ToString()
+            };
+        }
 
 		public List<ClienteViewModel> Filtrar(ClienteViewModel model)
 		{
-			var lista = _clienteRepository.Filtrar(_mapper.Map<Cliente>(model));
+			var cliente = new Cliente
+			{
+				Nome = model.Nome,
+				Email = model.Email,
+				Telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", ""),
+				Inativo = Convert.ToBoolean(model.Inativo)
+			};
+
+
+            var lista = _clienteRepository.Filtrar(cliente);
 			return lista.Select(x => new ClienteViewModel()
             {
-                Id = x.Id,
-                Guid = x.Guid,
                 Nome = x.Nome,
                 Telefone = x.Telefone,
                 Email = x.Email,
@@ -40,17 +57,39 @@ namespace BonaLiz.Negocio.Services
             }).ToList();
         }
 
-        public void Inserir(ClienteViewModel model) => _clienteRepository.Inserir(_mapper.Map<Cliente>(model));
+        public ClienteViewModel Inserir(ClienteViewModel model)
+		{
+			var cliente = new Cliente
+			{
+				Id = model.Id,
+				Guid = Guid.NewGuid(),
+				Nome = model.Nome,
+				Email = model.Email,
+				Telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", ""),
+				Inativo = false
+			};
 
-        public List<ClienteViewModel> Listar(ClienteViewModel model)
+            var clienteEntity = _clienteRepository.Inserir(cliente);
+
+			return new ClienteViewModel()
+            {
+                Nome = clienteEntity.Nome,
+                Telefone = clienteEntity.Telefone,
+                Email = clienteEntity.Email,
+                Inativo = clienteEntity.Inativo.ToString()
+            };
+        }
+
+
+        public List<ClienteViewModel> Listar()
 		{
 			try
 			{
-                var lista =  _clienteRepository.Listar().Where(x => x.Inativo == Convert.ToBoolean(model.Inativo));
+				var lista = _clienteRepository.Listar();
                 return lista.Select(x => new ClienteViewModel()
                 {
-                    Id = x.Id,
-                    Guid = x.Guid,
+					Id = x.Id,
+					Guid = x.Guid,
                     Nome = x.Nome,
                     Telefone = x.Telefone,
                     Email = x.Email,
@@ -62,7 +101,16 @@ namespace BonaLiz.Negocio.Services
 
 		public ClienteViewModel ObterPorGuid(Guid Guid)
 		{
-			return _mapper.Map<ClienteViewModel>(_clienteRepository.ObterPorGuid(Guid));
+			var cliente = _clienteRepository.ObterPorGuid(Guid);
+			return new ClienteViewModel()
+			{
+                Id = cliente.Id,
+                Guid = cliente.Guid,
+                Nome = cliente.Nome,
+				Telefone = cliente.Telefone,
+				Email = cliente.Email,
+				Inativo = cliente.Inativo.ToString()
+			};
 		}
 
 		public ClienteViewModel ObterPorId(int id)

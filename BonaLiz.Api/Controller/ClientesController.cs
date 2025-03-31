@@ -1,16 +1,19 @@
 ﻿using BonaLiz.Api.Authentication;
+using BonaLiz.Api.Controller.Response;
 using BonaLiz.Api.Helpers;
+using BonaLiz.Dados.Models;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BonaLiz.Api.Controller
 {
 	[ApiController]
-	[ApiKey]
-	public class ClientesController : ControllerBase
+	[Authorize(Roles = "Administrador")]
+    public class ClientesController : ControllerBase
 	{
 		private readonly IClienteServices _clienteServices;
 
@@ -26,26 +29,20 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				var lista = _clienteServices.Listar(model);
+				var lista = _clienteServices.Listar();
 
                 if (!lista.Where(x => x.Nome == model.Nome).Any())
 				{
-					var telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
-					model.Telefone = telefone;
-					_clienteServices.Inserir(model);
-					return Ok(new
-					{
-						status = true,
-						message = "Cadastrado com sucesso"
-					});
+					var cliente = _clienteServices.Inserir(model);
+                    if (cliente == null)
+                    {
+                        return BadRequest(BaseResponseFactory.Fail<ClienteViewModel>("Erro ao cadastrar cliente"));
+                    }
+                    return Ok(BaseResponseFactory.Success(cliente));
 				}
 				else
 				{
-					return Ok(new
-					{
-						status = false,
-						message = "Cliente já cadastrado"
-					});
+                    return BadRequest(BaseResponseFactory.Fail<ClienteViewModel>("Cliente já cadastrado"));
 				}
 			}
 			catch (Exception ex)
@@ -60,15 +57,13 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				var telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
-				model.Telefone = telefone;
-				_clienteServices.Editar(model);
-				return Ok(new
-				{
-					status = true,
-					message = "Editado com sucesso"
-				});
-			}
+				var cliente = _clienteServices.Editar(model);
+                if (cliente == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ClienteViewModel>("Erro ao cadastrar cliente"));
+                }
+                return Ok(BaseResponseFactory.Success(cliente));
+            }
 			catch(Exception ex)
 			{
 				return BadRequest(ex);
@@ -77,11 +72,16 @@ namespace BonaLiz.Api.Controller
 
 		[HttpGet]
 		[Route("/ListarClientes")]
-		public async Task<IActionResult> Listar(ClienteViewModel model)
+		public async Task<IActionResult> Listar()
 		{
 			try
 			{
-				return Ok(_clienteServices.Listar(model));
+				var clientes = _clienteServices.Listar();
+                if (clientes.Count == 0)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ClienteViewModel>("Nenhum cliente encontrado"));
+                }
+                return Ok(BaseResponseFactory.Success(clientes));
 			}
 			catch (Exception ex)
 			{
@@ -95,8 +95,14 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				return Ok(_clienteServices.ObterPorGuid(guid));
-			}
+				var cliente = _clienteServices.ObterPorGuid(guid);
+
+                if (cliente == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ClienteViewModel>("Erro ao cadastrar cliente"));
+                }
+                return Ok(BaseResponseFactory.Success(cliente));
+            }
 			catch (Exception ex)
 			{
 				return BadRequest(ex);
@@ -109,7 +115,12 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				return Ok(_clienteServices.Filtrar(model));
+				var cliente = _clienteServices.Filtrar(model);
+                if (cliente == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ClienteViewModel>("Erro ao cadastrar cliente"));
+                }
+                return Ok(BaseResponseFactory.Success(cliente));
 			}
 			catch (Exception ex)
 			{
@@ -119,12 +130,17 @@ namespace BonaLiz.Api.Controller
 
 		[HttpGet]
 		[Route("/SelectListClientes")]
-		public async Task<IActionResult> SelectListFornencedor(ClienteViewModel model)
+		public async Task<IActionResult> SelectListFornencedor()
 		{
 			try
 			{
-				var lista = _clienteServices.Listar(model);
-                return Ok(SelectListHelper.AddSelectList(new SelectList(lista, "Id", "Nome")));
+				var clientes = _clienteServices.Listar();
+
+                if (clientes.Count == 0)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ClienteViewModel>("Erro ao cadastrar cliente"));
+                }
+                return Ok(BaseResponseFactory.Success(SelectListHelper.AddSelectList(new SelectList(clientes, "Id", "Nome"))));
 			}
 			catch (Exception ex)
 			{

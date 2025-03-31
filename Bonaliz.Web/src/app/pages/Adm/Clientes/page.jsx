@@ -1,5 +1,4 @@
 "use client";
-import { ClienteFiltrar, ListarClientes } from "@/Api/Controllers/Cliente";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import CustomLoading from "@/Components/CustomLoadingGrid";
@@ -7,10 +6,9 @@ import AgGrid from "@/Components/Grid";
 import Input from "@/Components/Input";
 import Linked from "@/Components/Link";
 import Modal from "@/Components/Modal";
+import { ClientesContext } from "@/Hooks/Clientes";
 import { useRouter } from "next/navigation";
-import React, { Suspense, useEffect, useState } from "react";
-import { FaUser } from "react-icons/fa";
-import { MdAlternateEmail } from "react-icons/md";
+import React, { Suspense, useContext, useState } from "react";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -25,16 +23,9 @@ const CustomButtonComponent = (props) => {
 };
 
 function Clientes() {
-  const [form, setForm] = useState({
-    Nome: "",
-    Email: "",
-  });
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [modalIsOpen, setmodalIsOpen] = useState(false);
+  const { clientes, isLoading, alert, setForm, form, Pesquisar } =
+    useContext(ClientesContext);
+
   const [columnsDef, setColumnsDef] = useState([
     {
       field: "nome",
@@ -58,65 +49,10 @@ function Clientes() {
     },
   ]);
 
-  const [clientes, setClientes] = useState([]);
-
-  useEffect(() => {
-    Listar();
-  }, []);
-
-  async function Listar() {
-    setIsLoading(true);
-    try {
-      const response = await ListarClientes();
-      if (response.length > 0) {
-        setClientes(response);
-      } else {
-        setClientes([]);
-        setAlert({
-          ...alert,
-          type: "Danger",
-          message: "Nenhum cliente encontrado",
-        });
-      }
-      setIsLoading(false);
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: JSON.parse(e.request.response).message,
-      });
-    }
-  }
-
-  async function Pesquisar() {
-    setIsLoading(true);
-    try {
-      const response = await ClienteFiltrar();
-      if (response.length > 0) {
-        setClientes(response);
-      } else {
-        setClientes([]);
-        setAlert({
-          ...alert,
-          type: "Danger",
-          message: "Nenhum cliente encontrado",
-        });
-      }
-      setIsLoading(false);
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: JSON.parse(e.request.response).message,
-      });
-      setIsLoading(false);
-    }
-  }
-
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 
-  if (modalIsOpen)
-    return <Modal cliente={form.Nome} onClick={() => setmodalIsOpen(false)} />;
+  // if (modalIsOpen)
+  //   return <Modal cliente={form.Nome} onClick={() => setmodalIsOpen(false)} />;
 
   return (
     <Suspense fallback={<CustomLoading loadingMessage="Aguarde" />}>
@@ -127,14 +63,14 @@ function Clientes() {
       <div className="grid grid-row-4 lg:grid-cols-4 gap-2">
         <div>
           <Input
-            icon={<FaUser />}
+            icon={"user-round"}
             placeholder="Nome do cliente"
             onChange={(e) => setForm({ ...form, Nome: e.target.value })}
           />
         </div>
         <div>
           <Input
-            icon={<MdAlternateEmail />}
+            icon={"at-sign"}
             placeholder="Email do cliente"
             onChange={(e) => setForm({ ...form, Email: e.target.value })}
           />

@@ -9,11 +9,9 @@ import {
   ProdutoPorGuid,
 } from "@/Api/Controllers/Produto";
 import { SelectListTipoProduto } from "@/Api/Controllers/TipoProduto";
-import ImageArquivo from "@/Components/Image";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
-import { DragDropContext } from "./DragDrop";
 
 export const ProdutoContext = createContext(null);
 
@@ -27,12 +25,11 @@ const initialFormState = {
   precoCusto: "",
   precoVenda: "",
   Lucro: "",
-  DataCompra: "",
+  DataCompra: null,
   Inativo: null,
   Arquivo: [],
-  Imagem: [],
+  Imagem: "",
   Status: "",
-  Data: "",
 };
 
 export function ProdutoProvider({ children }) {
@@ -44,39 +41,39 @@ export function ProdutoProvider({ children }) {
     message: "",
     type: "",
   });
-  // const [data, setData] = useState({
-  //   startDate: null,
-  //   endDate: null,
-  // });
   const [isLoading, setIsLoading] = useState(false);
   const [Produto, setProduto] = useState();
   const [Fornecedor, setFornecedores] = useState([]);
   const [TipoProduto, setTipoProduto] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentMonth, setCurrentMonth] = useState(new Date());
   const [isActive, setIsActive] = useState(false);
   const [files, setFiles] = useState([]);
   const [fileURLs, setFileURLs] = useState([]);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [res1, res2, res3] = await Promise.all([
-          Listar(),
-          Fornecedores(),
-          TipoProdutos(),
-        ]);
-      } catch (e) {
-        setAlert({
-          ...alert,
-          type: "Danger",
-          message: JSON.parse(e.request.response).message,
-        });
-      }
-    };
-
-    fetchData();
+    if (
+      !window.location.href.includes("Criar") ||
+      !window.location.href.includes("Editar")
+    ) {
+      Listar();
+    }
   }, []);
+
+  async function Listar() {
+    try {
+      const [res1, res2, res3] = await Promise.all([
+        Listar(),
+        Fornecedores(),
+        TipoProdutos(),
+      ]);
+    } catch (e) {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: JSON.parse(e.request.response).message,
+      });
+    }
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -86,24 +83,9 @@ export function ProdutoProvider({ children }) {
     return () => clearTimeout(timer);
   }, [alert.message]);
 
-  const handlePrevMonth = () => {
-    setCurrentMonth(
-      new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1)
-    );
-  };
-
-  const handleNextMonth = () => {
-    setCurrentMonth(
-      new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1)
-    );
-  };
-
   function Reset() {
-    setArquivo([]);
+    setFileURLs([]);
     setForm(initialFormState);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
   }
 
   async function Listar() {
@@ -140,6 +122,7 @@ export function ProdutoProvider({ children }) {
       const response = await FiltrarProdutos(form);
       if (response.success) {
         setProduto(response.data);
+        setForm(initialFormState);
       }
     } catch (e) {
       setAlert({
@@ -176,6 +159,7 @@ export function ProdutoProvider({ children }) {
           Status: response.data.status,
           DataCompra: response.data.dataCompra,
         });
+        setFileURLs(response.data.urlImagem);
       }
     } catch (e) {
       setAlert({
@@ -199,6 +183,8 @@ export function ProdutoProvider({ children }) {
           type: "Success",
           message: response.message,
         });
+        Reset();
+        router.back();
       }
     } catch (e) {
       setAlert({
@@ -207,15 +193,14 @@ export function ProdutoProvider({ children }) {
         message: JSON.parse(e.request.response).message,
       });
     } finally {
-      Reset();
       setIsLoading(false);
-      router.back();
     }
   }
 
   async function CriarProduto() {
     try {
       setIsLoading(true);
+      form.Inativo = false;
       const response = await CadastrarProduto(form);
       if (response.success) {
         setAlert({
@@ -223,8 +208,8 @@ export function ProdutoProvider({ children }) {
           type: "Success",
           message: response.message,
         });
-
         router.back();
+        Reset();
       }
     } catch (e) {
       console.log(e);
@@ -234,9 +219,7 @@ export function ProdutoProvider({ children }) {
         message: JSON.parse(e.request.response).message,
       });
     } finally {
-      Reset();
       setIsLoading(false);
-      router.back();
     }
   }
 
@@ -272,7 +255,6 @@ export function ProdutoProvider({ children }) {
       setForm((previ) => ({
         ...previ,
         DataCompra: dayjs(e).format("DD/MM/YYYY").toString(),
-        Data: e,
       }));
     }
   };
@@ -301,12 +283,6 @@ export function ProdutoProvider({ children }) {
         Produto,
         Fornecedor,
         TipoProduto,
-        isOpen,
-        setIsOpen,
-        handleNextMonth,
-        handlePrevMonth,
-        currentMonth,
-        setCurrentMonth,
         CriarProduto,
         handleBlur,
         Voltar,
@@ -316,6 +292,8 @@ export function ProdutoProvider({ children }) {
         setFiles,
         fileURLs,
         setFileURLs,
+        show,
+        setShow,
       }}
     >
       {children}

@@ -10,6 +10,7 @@ const Input = ({
   id,
   disabled,
   type,
+  onFocus,
   ...res
 }) => {
   return (
@@ -31,6 +32,7 @@ const Input = ({
         onChange={onChange}
         value={value}
         type={type}
+        onFocus={onFocus}
         {...res}
       />
     </div>

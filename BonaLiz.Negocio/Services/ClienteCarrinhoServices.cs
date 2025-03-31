@@ -19,8 +19,9 @@ namespace BonaLiz.Negocio.Services
 
             if (cliente.Count == 0)
             {
-                var clienteId = _clienteRepository.Inserir(new Cliente()
+                var clienteEntity = _clienteRepository.Inserir(new Cliente()
                 {
+                    Id = model.Id,
                     Guid = Guid.NewGuid(),
                     Nome = model.Nome,
                     Email = model.Email,
@@ -30,7 +31,7 @@ namespace BonaLiz.Negocio.Services
                 var carrinhoInserir = new Carrinho()
                 {
                     CarrinhoId = Guid.NewGuid(),
-                    ClienteId = clienteId,
+                    ClienteId = clienteEntity.Id,
                     DataCarrinho = DateTime.Now
                 };
 

@@ -4,8 +4,8 @@ namespace BonaLiz.Domain.Interfaces
 {
 	public interface IClienteRepository
     {
-        int Inserir(Cliente model);
-        void Editar(Cliente model);
+        Cliente Inserir(Cliente model);
+        Cliente Editar(Cliente model);
         List<Cliente> Listar();
         Cliente ObterPorId(int id);
         Cliente ObterPorGuid(Guid Guid);

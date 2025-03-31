@@ -8,7 +8,7 @@ import { ProdutoContext } from "@/Hooks/Produto";
 
 // import { Container } from './styles';
 
-function Drop() {
+function Drop({ arquivos }) {
   const {
     handleButtonClick,
     handleFileChange,
@@ -41,7 +41,7 @@ function Drop() {
             className="px-6 py-2 text-[16px] bg-primery font-medium rounded-md cursor-pointer"
             onClick={handleButtonClick}
           >
-            Browse File
+            Selecione uma foto
           </button>
         </div>
       </div>

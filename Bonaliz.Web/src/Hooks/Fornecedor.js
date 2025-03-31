@@ -11,7 +11,17 @@ import { createContext, useEffect, useState } from "react";
 
 export const FornecedorContext = createContext(null);
 
+const initialFormState = {
+  Id: 0,
+  Guid: null,
+  Nome: "",
+  CNPJ: "",
+  Estado: "",
+  Inativo: null,
+};
+
 export function FornecedorProvider({ children }) {
+  const [form, setForm] = useState(initialFormState);
   const [isLoading, setIsLoading] = useState(false);
   const [Fornecedores, setFornecedores] = useState();
   const [checked, setChecked] = useState(false);
@@ -22,18 +32,12 @@ export function FornecedorProvider({ children }) {
 
   const router = useRouter();
 
-  const [form, setForm] = useState({
-    Id: 0,
-    Guid: null,
-    Nome: "",
-    CNPJ: "",
-    Estado: "",
-    Inativo: null,
-  });
-
   useEffect(() => {
-    if (!window.location.href.includes("Criar" || "Editar")) {
-      listar();
+    if (
+      !window.location.href.includes("Criar") ||
+      !window.location.href.includes("Editar")
+    ) {
+      Listar();
     }
   }, []);
 
@@ -45,7 +49,7 @@ export function FornecedorProvider({ children }) {
     return () => clearTimeout(timer);
   }, [alert.message]);
 
-  async function listar() {
+  async function Listar() {
     setIsLoading(true);
     try {
       const response = await ListarFornecedor();
@@ -53,18 +57,10 @@ export function FornecedorProvider({ children }) {
         setFornecedores(response.data);
       }
     } catch (e) {
-      setFornecedores([]);
-      if (e.response == "Network Error") {
-        setAlert({
-          ...alert,
-          type: "Danger",
-          message: JSON.parse(e.request.response).message,
-        });
-      }
       setAlert({
         ...alert,
         type: "Danger",
-        message: "Usuário não autorizado/Caminho não encontrado",
+        message: JSON.parse(e.request.response).message,
       });
     } finally {
       setIsLoading(false);
@@ -106,13 +102,7 @@ export function FornecedorProvider({ children }) {
       const response = await PesquisarFornecedor(form);
       if (response.success) {
         setFornecedores(response.data);
-      } else {
-        setFornecedores([]);
-        setAlert({
-          ...alert,
-          type: "Alert",
-          message: "Nenhum fornecedor encontrado",
-        });
+        setForm(initialFormState);
       }
     } catch (e) {
       setAlert({
@@ -140,29 +130,23 @@ export function FornecedorProvider({ children }) {
       if (!response.success) {
         setAlert({
           ...alert,
-          message: responsJSON.parse(e.request.response).message,
+          message: JSON.parse(e.request.response).message,
           type: "Danger",
         });
       } else {
         setFornecedores((prev) => [...prev, response.data]);
         setAlert({
           ...alert,
-          message: responsJSON.parse(e.request.response).message,
+          message: response.message,
           type: "Success",
         });
-        router.back();
+        Voltar();
       }
     } catch (e) {
       setAlert({
         ...alert,
         type: "Danger",
         message: JSON.parse(e.request.response).message,
-      });
-      setForm({
-        Nome: "",
-        CNPJ: "",
-        Estado: "",
-        Iniciais: "",
       });
     } finally {
       setIsLoading(false);
@@ -184,10 +168,10 @@ export function FornecedorProvider({ children }) {
         setAlert({
           ...alert,
           type: "Success",
-          message: JSON.parse(e.request.response).message,
+          message: response.message,
         });
 
-        router.back();
+        Voltar();
       } else {
         setAlert({
           ...alert,
@@ -206,10 +190,15 @@ export function FornecedorProvider({ children }) {
     }
   }
 
+  function Voltar() {
+    setForm(initialFormState);
+    router.back();
+  }
+
   return (
     <FornecedorContext.Provider
       value={{
-        listar,
+        Listar,
         alert,
         Fornecedores,
         isLoading,
@@ -226,6 +215,7 @@ export function FornecedorProvider({ children }) {
         checked,
         setChecked,
         router,
+        Voltar,
       }}
     >
       {children}

@@ -48,7 +48,7 @@ namespace BonaLiz.Negocio.Services
                 produto.PrecoCusto = Convert.ToDecimal(model.PrecoCusto.Replace("R$", "").Trim());
                 produto.PrecoVenda = Convert.ToDecimal(model.PrecoVenda.Replace("R$", "").Trim());
                 produto.Lucro = Convert.ToDecimal(model.Lucro.Replace("R$", "").Trim());
-                produto.DataCompra = Convert.ToDateTime(model.DataCompra);
+                produto.DataCompra = string.IsNullOrEmpty(model.DataCompra) ?  Convert.ToDateTime(model.DataCompra) : null;
                 produto.Quantidade = Convert.ToInt32(model.Quantidade);
                 produto.Inativo = false;
                 var produtoEntity = _produtoRepository.Inserir(produto);

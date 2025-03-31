@@ -36,7 +36,7 @@ namespace BonaLiz.Domain.Repository
         public TEntity Inserir(TEntity model)
         {
              _DbSet.Add(model);
-            model.Id = _context.SaveChanges();
+            _context.SaveChanges();
             return model;
         }
 

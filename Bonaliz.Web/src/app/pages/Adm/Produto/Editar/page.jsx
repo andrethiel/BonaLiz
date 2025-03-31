@@ -30,44 +30,15 @@ const Editar = () => {
     Fornecedor,
     TipoProduto,
     handleBlur,
-    arquivo,
-    setArquivo,
-    fileInputRef,
     setForm,
     Voltar,
+    show,
+    setShow,
   } = useContext(ProdutoContext);
 
   useEffect(() => {
     Buscar(guid);
   }, [guid]);
-
-  function Image(event) {
-    if (!event.target.files) return;
-
-    const files = Array.from(event.target.files);
-    const fileURLs = files.map((file) => URL.createObjectURL(file));
-
-    setArquivo((prev) => [...prev, ...fileURLs]);
-    setForm((prevForm) => ({
-      ...prevForm,
-      Arquivo: [...prevForm.Arquivo, ...files],
-    }));
-
-    // Limpa URLs antigas ao sair da memória
-    files.forEach((file) => URL.revokeObjectURL(file));
-  }
-  function handleRemovePhotoFile(index) {
-    setArquivo((prev) => prev.filter((_, i) => i !== index));
-    setForm((prevForm) => ({
-      ...prevForm,
-      Imagem: prevForm.Imagem.filter((_, i) => i !== index),
-    }));
-
-    // Se não houver mais arquivos, reseta o input
-    if (arquivo.length === 1 && fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  }
 
   return (
     <Suspense>
@@ -158,43 +129,16 @@ const Editar = () => {
               disabled={true}
             />
           </div>
-          {/* <div className="">
+          <div className="">
             <DataPicker
-              onChange={(newValue) => {
-                setData(newValue);
-              }}
-              value={data}
-              placeholder="Selecione a data da compra"
-            />
-          </div> */}
-          {/* <div className="">
-            <input
-              type="file"
-              multiple
-              placeholder="Arquivo"
-              onChange={Image}
-              accept="image/*"
-              ref={fileInputRef}
+              onChange={handleChange}
+              value={form.DataCompra}
+              show={show}
+              setIsOpen={() => setShow(false)}
+              onFocus={() => setShow(true)}
             />
           </div>
-          <div className="w-full flex mt-2 gap-4">
-            {form.Imagem.length > 0
-              ? form.Imagem.map((imgSrc, index) => (
-                  <ImageArquivo
-                    key={index}
-                    arquivo={imgSrc.nomeArquivo}
-                    onClick={() => handleRemovePhotoFile(index)}
-                  />
-                ))
-              : arquivo.map((imgSrc, index) => (
-                  <ImageArquivo
-                    key={index}
-                    arquivo={imgSrc}
-                    onClick={() => handleRemovePhotoFile(index)}
-                  />
-                ))}
-          </div> */}
-          <Drop />
+          <Drop arquivos={form.Imagem} />
           <div>
             <Check
               onChange={(e) => setChecked(e.target.checked)}
