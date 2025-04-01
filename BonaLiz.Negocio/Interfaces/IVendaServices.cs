@@ -9,11 +9,11 @@ namespace BonaLiz.Negocio.Interfaces
 {
 	public interface IVendaServices
 	{
-		void Inserir(VendaViewModel model);
-		void Cancelar(int id);
+        VendaViewModel Inserir(VendaViewModel model);
+        VendaViewModel Cancelar(int id);
 		List<VendaViewModel> Listar();
 		VendaViewModel ObterPorGuid(Guid guid);
         List<VendaViewModel> Filtrar(VendaViewModel model);
-		void StatusVenda(int id, string status);
+        VendaViewModel StatusVenda(int id, string status);
 	}
 }

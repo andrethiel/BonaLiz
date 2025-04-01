@@ -36,6 +36,7 @@ export async function SelectList() {
   response.map((item) => {
     lista.push({ value: item.value, label: item.text });
   });
+  lista.unshift({ value: "", label: "Selecione uma opção" });
 
   return lista;
 }

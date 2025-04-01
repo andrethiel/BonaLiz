@@ -10,29 +10,27 @@ import Select from "@/Components/Select";
 import Select2 from "@/Components/Select2";
 import { StatusVenda } from "@/constants/status";
 import { SelectListProdutos } from "@/Hooks/ProdutosSelect";
-import { VendasHook } from "@/Hooks/Venda";
+import { VendasContext } from "@/Hooks/Venda";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { BsTag } from "react-icons/bs";
-import { FaMoneyBill } from "react-icons/fa";
+import React, { useContext, useState } from "react";
 
 function Vendas() {
   const {
     alert,
     isLoading,
     vendasLista,
-    data,
-    setData,
     Filtrar,
     form,
     setForm,
     Cancela,
-    Listar,
     IsOpen,
     setIsOpen,
     Status,
-    setAlert,
-  } = VendasHook();
+    handleCloseModal,
+    handleChange,
+    show,
+    setShow,
+  } = useContext(VendasContext);
 
   const CustomButtonComponent = (props) => {
     const router = useRouter();
@@ -41,7 +39,6 @@ function Vendas() {
         className="bg-secondary font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
         onClick={() => {
           Cancela(props.data.id);
-          Listar();
         }}
       >
         Cancelar Venda
@@ -55,7 +52,9 @@ function Vendas() {
         className="bg-secondary font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
         onClick={() => {
           setIsOpen(true);
-          setForm({ ...form, VendaId: props.data.id });
+          handleChange({
+            target: { name: "VendaId", value: props.data.id },
+          });
         }}
       >
         Editar status
@@ -108,41 +107,20 @@ function Vendas() {
     },
   ]);
 
-  function handleCloseModal() {
-    setIsOpen(false);
-  }
-
-  useEffect(() => {
-    Listar();
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setAlert({
-        ...alert,
-        message: "",
-        type: "",
-      });
-    }, [500]);
-  }, [alert]);
-
   return (
     <div>
       {isLoading && <CustomLoading loadingMessage="Aguarde..." />}
-      {alert && <Alert type={alert.type}>{alert.message}</Alert>}
+      {alert.message && <Alert type={alert.type}>{alert.message}</Alert>}
       <div className={`flex flex-col my-6 ${isLoading && "hidden"}`}>
         {IsOpen && (
           <Modal close={handleCloseModal} title={"Alterar status de pagemento"}>
             <Select
               placeholder={"Selecione o status de pagamento"}
               data={StatusVenda}
-              icon={<FaMoneyBill />}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  Status: e.target.value,
-                })
-              }
+              icon={"badge-dollar-sign"}
+              id={"Status"}
+              name="Status"
+              onChange={handleChange}
             />
             <Button
               color={"primary"}
@@ -161,37 +139,43 @@ function Vendas() {
         <div className="grid  grid-cols-1 md:grid-cols-5 lg:grid-cols-5 gap-4 pb-4">
           <Input
             placeholder={"Nome do cliente"}
-            icon={<BsTag />}
+            icon={"tag"}
             name={"Nome"}
             id={"Nome"}
-            onChange={(e) => setForm({ ...form, NomeCliente: e.target.value })}
+            onChange={handleChange}
           />
           <Select
             placeholder={"Selecione o status de pagamento"}
             data={StatusVenda}
-            icon={<FaMoneyBill />}
-            onChange={(e) =>
-              setForm({
-                ...form,
-                Status: e.target.value,
-              })
-            }
+            icon={"badge-dollar-sign"}
+            name={"Status"}
+            id={"Status"}
+            onChange={handleChange}
           />
           {selectProdutos && (
             <Select2
               data={selectProdutos}
               placeholder={"Selecione um Produto"}
-              onChange={(e) =>
-                setForm({ ...form, ProdutoId: e.value.toString() })
+              onChange={(selectedOption) =>
+                handleChange({
+                  target: { name: "ProdutoId", value: selectedOption?.value },
+                })
               }
+              name={"Status"}
+              id={"Status"}
+              icon={"package-search"}
             />
           )}
           <DataPicker
-            onChange={(newValue) => {
-              setData(newValue);
-            }}
-            value={data}
-            placeholder="Selecione uma data"
+            onChange={(selectedOption) =>
+              handleChange({
+                target: { name: "DataVenda", value: selectedOption },
+              })
+            }
+            value={form.DataVenda}
+            show={show}
+            setIsOpen={() => setShow(false)}
+            onFocus={() => setShow(true)}
           />
 
           <Button color={"primary"} onClick={Filtrar}>

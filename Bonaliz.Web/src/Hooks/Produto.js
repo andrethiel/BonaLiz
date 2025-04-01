@@ -183,6 +183,11 @@ export function ProdutoProvider({ children }) {
           type: "Success",
           message: response.message,
         });
+        setProduto((prev) =>
+          prev.map((item) =>
+            item.id == response.data.id ? response.data : item
+          )
+        );
         Reset();
         router.back();
       }
@@ -208,6 +213,7 @@ export function ProdutoProvider({ children }) {
           type: "Success",
           message: response.message,
         });
+        setProduto((prev) => [...prev, response.data]);
         router.back();
         Reset();
       }
@@ -247,15 +253,17 @@ export function ProdutoProvider({ children }) {
   const handleChange = (e) => {
     if (e?.target) {
       const { value, name } = e.target;
-      setForm({
-        ...form,
-        [name]: value,
-      });
-    } else {
-      setForm((previ) => ({
-        ...previ,
-        DataCompra: dayjs(e).format("DD/MM/YYYY").toString(),
-      }));
+      if (name == "DataVenda") {
+        setForm({
+          ...form,
+          [name]: dayjs(value).format("DD/MM/YYYY").toString(),
+        });
+      } else {
+        setForm({
+          ...form,
+          [name]: value,
+        });
+      }
     }
   };
 

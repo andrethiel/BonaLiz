@@ -35,6 +35,7 @@ export async function SelectListTipoProduto() {
       lista.push({ value: item.value, label: item.text });
     });
   }
+  lista.unshift({ value: "", label: "Selecione uma opção" });
 
   return lista;
 }

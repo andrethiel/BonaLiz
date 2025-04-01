@@ -136,7 +136,11 @@ const Produto = () => {
         </div>
         <div>
           <DataPicker
-            onChange={handleChange}
+            onChange={(selectedOption) =>
+              handleChange({
+                target: { name: "DataCompra", value: selectedOption?.value },
+              })
+            }
             value={form.DataCompra}
             show={show}
             setIsOpen={() => setShow(false)}

@@ -33,7 +33,7 @@ function Header() {
     <>
       {isMobileOpen && (
         <div
-          className="fixed inset-0 z-40 md:hidden animate-fade-in"
+          className="fixed inset-0 md:hidden animate-fade-in"
           onClick={toggleMobileSidebar}
         />
       )}
@@ -41,7 +41,7 @@ function Header() {
         onClick={toggleMobileSidebar}
         className={`fixed top-4 ${
           isMobileOpen ? "left-64" : "left-4"
-        }  z-50 p-2 rounded-md bg-white border border-border md:hidden aside-transition`}
+        }  p-2 rounded-md bg-white border border-border md:hidden aside-transition`}
         aria-label="Toggle menu"
       >
         {isMobileOpen ? (
@@ -52,7 +52,7 @@ function Header() {
       </button>
 
       <aside
-        className={`bg-white fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-border bg-sidebar shadow-sm transition-all duration-300 ease-in-out w-64 ${
+        className={`bg-white fixed top-0 bottom-0 left-0 flex flex-col border-r border-border bg-sidebar shadow-sm transition-all duration-300 ease-in-out w-64 ${
           isMobileOpen
             ? "translate-x-0 w-[calc(100%-14rem)]"
             : "-translate-x-full md:translate-x-0"

@@ -28,17 +28,41 @@ namespace BonaLiz.Negocio.Services
 			_clienteRepository = clienteRepository;
 		}
 
-		public void Inserir(VendaViewModel model)
+		public VendaViewModel Inserir(VendaViewModel model)
 		{
 			var produto = _produtoRepository.ObterPorId(Convert.ToInt32(model.ProdutoId));
+            var clientes = _clienteRepository.Listar();
 
-			var venda = produto.PrecoVenda * Convert.ToInt32(model.Quantidade);
-			model.Valor = venda.ToString();
+            var venda = new Venda
+			{
+				Cancelada = false,
+				ClienteId = Convert.ToInt32(model.ClienteId),
+				DataVenda = DateTime.Now,
+				ProdutoId = Convert.ToInt32(model.ProdutoId),
+				Quantidade = Convert.ToInt32(model.Quantidade),
+				Valor = produto.PrecoVenda * Convert.ToInt32(model.Quantidade),
+				Guid = Guid.NewGuid(),
+				Status = "Aguardando",
+			};
 
-			_vendaRepository.Inserir(_mapper.Map<Venda>(model));
+
+			var vendaEntity =_vendaRepository.Inserir(venda);
 			produto.Quantidade = produto.Quantidade - Convert.ToInt32(model.Quantidade);
 			_produtoRepository.Editar(produto);
-		}
+
+			return new VendaViewModel()
+            {
+                Id = vendaEntity.Id,
+                Guid = vendaEntity.Guid,
+                NomeCliente = _clienteRepository.ObterPorId(vendaEntity.ClienteId.Value).Nome,
+                NomeProduto = _produtoRepository.ObterPorId(vendaEntity.ProdutoId.Value).Nome,
+                Quantidade = vendaEntity.Quantidade.ToString(),
+                Valor = Formater.FormatarMoeda(vendaEntity.Valor),
+                DataVenda = vendaEntity.DataVenda.Value.ToString("dd/MM/yyyy"),
+                Cancelada = vendaEntity.Cancelada.ToString(),
+                Status = vendaEntity.Status
+            };
+        }
 
 		public List<VendaViewModel> Listar()
 		{
@@ -82,7 +106,15 @@ namespace BonaLiz.Negocio.Services
 
 		public List<VendaViewModel> Filtrar(VendaViewModel model)
 		{
-			var lista = Filtrar(_mapper.Map<Venda>(model));
+			var venda = new Venda
+			{
+				NomeCliente = model.NomeCliente,
+				ProdutoId = string.IsNullOrEmpty(model.ProdutoId) ? null : Convert.ToInt32(model.ProdutoId),
+				DataVenda = string.IsNullOrEmpty(model.DataVenda) ? null : Convert.ToDateTime(model.DataVenda),
+				Status = model.Status
+			};
+
+            var lista = Filtrar(venda);
 			var produtos = _produtoRepository.Listar();
 			var clientes = _clienteRepository.Listar();
 			if (lista == null)
@@ -106,17 +138,45 @@ namespace BonaLiz.Negocio.Services
 			}
 		}
 
-		public void Cancelar(int id)
+		public VendaViewModel Cancelar(int id)
 		{
 			var venda = _vendaRepository.Cancelar(id);
 
-			var produto = _produtoRepository.ObterPorId(venda.ProdutoId);
+			var produto = _produtoRepository.ObterPorId(venda.ProdutoId.Value);
 			produto.Quantidade = produto.Quantidade + venda.Quantidade;
 			_produtoRepository.Editar(produto);
 
-		}
+            return new VendaViewModel()
+            {
+                Id = venda.Id,
+                Guid = venda.Guid,
+                NomeCliente = _clienteRepository.ObterPorId(venda.ClienteId.Value).Nome,
+                NomeProduto = _produtoRepository.ObterPorId(venda.ProdutoId.Value).Nome,
+                Quantidade = venda.Quantidade.ToString(),
+                Valor = Formater.FormatarMoeda(venda.Valor),
+                DataVenda = venda.DataVenda.Value.ToString("dd/MM/yyyy"),
+                Cancelada = venda.Cancelada.ToString(),
+                Status = venda.Status
+            };
+        }
 
-		public void StatusVenda(int id, string status) => _vendaRepository.StatusVenda(id, status);
+		public VendaViewModel StatusVenda(int id, string status)
+		{
+			var vendaEntity = _vendaRepository.StatusVenda(id, status);
+
+            return new VendaViewModel()
+            {
+                Id = vendaEntity.Id,
+                Guid = vendaEntity.Guid,
+                NomeCliente = _clienteRepository.ObterPorId(vendaEntity.ClienteId.Value).Nome,
+                NomeProduto = _produtoRepository.ObterPorId(vendaEntity.ProdutoId.Value).Nome,
+                Quantidade = vendaEntity.Quantidade.ToString(),
+                Valor = Formater.FormatarMoeda(vendaEntity.Valor),
+                DataVenda = vendaEntity.DataVenda.Value.ToString("dd/MM/yyyy"),
+                Cancelada = vendaEntity.Cancelada.ToString(),
+                Status = vendaEntity.Status
+            };
+        }
 
 		private List<Venda> Filtrar(Venda model)
 		{
@@ -125,7 +185,7 @@ namespace BonaLiz.Negocio.Services
             var novaListaVenda = new List<Venda>();
 			var novaListaClientes = new List<Cliente>();
 			if (!string.IsNullOrEmpty(model.NomeCliente))
-				novaListaClientes = listaClientes.Where(x => x.Nome.Contains(model.NomeCliente)).ToList();
+				novaListaClientes = listaClientes.Where(x => x.Nome.ToUpper().Contains(model.NomeCliente.ToUpper())).ToList();
 			if (novaListaClientes.Count() > 0)
 			{
 				foreach (var item in novaListaClientes)
@@ -141,7 +201,7 @@ namespace BonaLiz.Negocio.Services
 			else
 			{
 				return vendas
-						.Where(x => model.ProdutoId == 0 || x.ProdutoId == model.ProdutoId)
+						.Where(x => model.ProdutoId == null || x.ProdutoId == model.ProdutoId)
 						.Where(x => model.DataVenda == null || x.DataVenda == model.DataVenda.Value)
 						.Where(x => string.IsNullOrEmpty(model.Status) || x.Status == model.Status)
 						.ToList();

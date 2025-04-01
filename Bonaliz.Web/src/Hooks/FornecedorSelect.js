@@ -15,7 +15,7 @@ export function SelectListFornecedor() {
   async function Select() {
     try {
       const response = await SelectListForncedor();
-      if (response.length > 0) {
+      if (response.success) {
         setSelectFornecedor(response);
       }
     } catch (e) {

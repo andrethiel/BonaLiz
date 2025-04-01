@@ -15,7 +15,7 @@ export function SelectListClientes(open) {
   async function Select() {
     try {
       const response = await SelectList();
-      if (response.length > 0) {
+      if (response.success) {
         setSelectClientes(response);
       }
     } catch (e) {

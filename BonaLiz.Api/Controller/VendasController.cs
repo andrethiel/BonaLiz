@@ -1,4 +1,6 @@
 ﻿using BonaLiz.Api.Authentication;
+using BonaLiz.Api.Controller.Response;
+using BonaLiz.Dados.Models;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.ViewModels;
@@ -10,16 +12,8 @@ namespace BonaLiz.Api.Controller
 {
     [ApiController]
     [Authorize(Roles = "Administrador")]
-    public class VendasController : ControllerBase
+    public class VendasController(IVendaServices _vendaServices, IProdutoServices _produtoServices) : ControllerBase
     {
-        private readonly IVendaServices _vendaServices;
-		private readonly IProdutoServices _produtoServices;
-
-		public VendasController(IVendaServices vendaServices, IProdutoServices produtoServices)
-		{
-			_vendaServices = vendaServices;
-			_produtoServices = produtoServices;
-		}
 
 		[HttpPost]
 		[Route("/CadastrarVenda")]
@@ -30,21 +24,14 @@ namespace BonaLiz.Api.Controller
 				var produtoQuantidade = _produtoServices.ObterPorId(Convert.ToInt32(model.ProdutoId)).Quantidade;
 				if (Convert.ToInt32(model.Quantidade) > Convert.ToInt32(produtoQuantidade))
 				{
-					return Ok(new
-					{
-						status = false,
-						message = "Quantidade maior que estoque"
-					});
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Quantidade maior que estoque"));
 				}
-				else
-				{
-					_vendaServices.Inserir(model);
-					return Ok(new
-					{
-						status = true,
-						message = "Cadastrado com sucesso"
-					});
-				}
+				var venda = _vendaServices.Inserir(model);
+                if (venda == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Erro ao inserir venda"));
+                }
+                return Ok(BaseResponseFactory.Success(venda));
 			}
 			catch (Exception ex)
 			{
@@ -59,8 +46,14 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				return Ok(_vendaServices.Listar());
-			}
+				var vendas = _vendaServices.Listar();
+
+                if (vendas == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Erro ao listar vendas"));
+                }
+                return Ok(BaseResponseFactory.Success(vendas));
+            }
 			catch (Exception ex)
 			{
 				return BadRequest(ex);
@@ -73,8 +66,14 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				return Ok(_vendaServices.ObterPorGuid(guid));
-			}
+				var venda = _vendaServices.ObterPorGuid(guid);
+
+                if (venda == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Erro ao listar vendas"));
+                }
+                return Ok(BaseResponseFactory.Success(venda));
+            }
 			catch (Exception ex)
 			{
 				return BadRequest(ex);
@@ -87,10 +86,14 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				model.ProdutoId = string.IsNullOrEmpty(model.ProdutoId) ? null : model.ProdutoId;
-				model.DataVenda = string.IsNullOrEmpty(model.DataVenda) ? null : model.DataVenda;
-				return Ok(_vendaServices.Filtrar(model));
-			}
+				var venda = _vendaServices.Filtrar(model);
+
+                if (venda == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Erro ao listar vendas"));
+                }
+                return Ok(BaseResponseFactory.Success(venda));
+            }
 			catch (Exception ex)
 			{
 				return BadRequest(ex);
@@ -103,13 +106,13 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				_vendaServices.Cancelar(id);
-				return Ok(new
-				{
-					status = true,
-					message = "Venda cancelada com sucesso"
-				});
-			}
+				var venda = _vendaServices.Cancelar(id);
+                if (venda == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Erro ao listar vendas"));
+                }
+                return Ok(BaseResponseFactory.Success(venda));
+            }
 			catch (Exception ex)
 			{
 				return BadRequest(ex);
@@ -122,13 +125,13 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-				_vendaServices.StatusVenda(id, status);
-				return Ok(new
-				{
-					status = true,
-					message = "Status da venda alterado com sucesso"
-				});
-			}
+				var venda = _vendaServices.StatusVenda(id, status);
+                if (venda == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<FornecedorViewModel>("Erro ao listar vendas"));
+                }
+                return Ok(BaseResponseFactory.Success(venda));
+            }
 			catch (Exception ex)
 			{
 				return BadRequest(ex);

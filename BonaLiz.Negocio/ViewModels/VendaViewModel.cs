@@ -9,7 +9,7 @@ namespace BonaLiz.Negocio.ViewModels
 	public class VendaViewModel
 	{
         public int Id { get; set; }
-        public Guid Guid { get; set; } = Guid.NewGuid();
+        public Guid? Guid { get; set; }
 		public string ClienteId { get; set; }
         public string ProdutoId { get; set; }
         public string Quantidade { get; set; }

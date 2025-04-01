@@ -86,9 +86,9 @@ export async function SelectListProduto() {
   let lista = [];
   const response = await Api.request.get("/SelectListProdutos");
 
-  response.map((item) => {
+  response.data.map((item) => {
     lista.push({ value: item.value, label: item.text });
   });
-
+  lista.unshift({ value: "", label: "Selecione uma opção" });
   return lista;
 }

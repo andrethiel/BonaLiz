@@ -1,5 +1,4 @@
 "use client";
-import { EditarCliente, ObterClienteGuid } from "@/Api/Controllers/Cliente";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import Check from "@/Components/Check";
@@ -7,8 +6,8 @@ import CustomLoading from "@/Components/CustomLoadingGrid";
 import Input from "@/Components/Input";
 import MaskInput from "@/Components/InputMask";
 import { ClientesContext } from "@/Hooks/Clientes";
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { Suspense, useContext, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import React, { Suspense, useContext, useEffect } from "react";
 
 function Editar() {
   const param = useSearchParams();

@@ -151,6 +151,11 @@ export function ClientesProvider({ children }) {
           type: "Success",
           message: response.message,
         });
+        setClientes((prev) =>
+          prev.map((item) =>
+            item.id == response.data.id ? response.data : item
+          )
+        );
         Voltar();
       }
     } catch (e) {

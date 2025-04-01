@@ -1,3 +1,4 @@
+"use client";
 import {
   CancelarVenda,
   InserirVenda,
@@ -7,123 +8,184 @@ import {
 } from "@/Api/Controllers/Vender";
 import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { PrincipalHook } from "./Principal";
+import { createContext, useEffect, useState } from "react";
+import { SelectListProdutos } from "./ProdutosSelect";
 
-export function VendasHook() {
+export const VendasContext = createContext(null);
+
+const initialFormState = {
+  Id: 0,
+  Guid: null,
+  NomeCliente: "",
+  ProdutoId: "",
+  DataVenda: "",
+  Status: "",
+  VendaId: "",
+};
+
+export function VendasProvider({ children }) {
+  const [form, setForm] = useState(initialFormState);
+  const [IsOpen, setIsOpen] = useState(false);
   const [vendasLista, setVendasLista] = useState([]);
-  const [data, setData] = useState({
-    startDate: null,
-    endDate: null,
-  });
   const [alert, setAlert] = useState({
     message: "",
     type: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [form, setForm] = useState({
-    NomeCliente: "",
-    ProdutoId: "",
-    DataVenda: "",
-    Status: "",
-    VendaId: "",
-  });
+  const [show, setShow] = useState(false);
 
-  const [IsOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    Listar();
+  }, []);
 
   async function Listar() {
-    setIsLoading(true);
     try {
+      setIsLoading(true);
       const response = await ListarVendas();
-      if (response.length > 0) {
-        setVendasLista(response);
-      } else {
-        setAlert({
-          ...alert,
-          type: "Danger",
-          message: "Nenhum produto encontrado",
-        });
+      if (response.success) {
+        setVendasLista(response.data);
       }
-      setIsLoading(false);
     } catch (e) {
       setAlert({
         ...alert,
         type: "Danger",
         message: JSON.parse(e.request.response).message,
       });
+    } finally {
       setIsLoading(false);
     }
   }
 
   async function Filtrar() {
-    setIsLoading(true);
-    form.DataVenda =
-      data.startDate != null ? dayjs(data.startDate).format("DD/MM/YYYY") : "";
-    const response = await VendasFiltar(form);
-    if (response.length > 0) {
-      setVendasLista(response);
-    } else {
-      setVendasLista([]);
-      setAlert({
-        ...alert,
-        type: "Alert",
-        message: "Nenhuma venda encontrado",
-      });
-    }
-    setIsLoading(false);
-  }
-
-  async function Cancela(id) {
-    setIsLoading(true);
-    const response = await CancelarVenda(id);
-    if (response.status) {
-      setAlert({
-        ...alert,
-        type: "Success",
-        message: responsJSON.parse(e.request.response).message,
-      });
-    }
-    setIsLoading(false);
-  }
-
-  async function Status(id, status) {
-    if (status == "") {
-      setAlert({
-        ...alert,
-        type: "Alert",
-        message: "Selecione um status de pagamento",
-      });
-    } else {
+    try {
       setIsLoading(true);
-      const response = await StatusVenda(id, status);
-      if (response.status) {
-        setAlert({
-          ...alert,
-          type: "Success",
-          message: responsJSON.parse(e.request.response).message,
-        });
-        Listar();
+      const response = await VendasFiltar(form);
+      if (response.success) {
+        setVendasLista(response.data);
       }
-      setIsOpen(false);
+    } catch (e) {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: JSON.parse(e.request.response).message,
+      });
+    } finally {
       setIsLoading(false);
     }
   }
 
-  return {
-    alert,
-    setAlert,
-    isLoading,
-    setIsLoading,
-    vendasLista,
-    data,
-    setData,
-    Filtrar,
-    form,
-    setForm,
-    Cancela,
-    Listar,
-    IsOpen,
-    setIsOpen,
-    Status,
+  function handleCloseModal() {
+    setIsOpen(false);
+  }
+
+  const handleChange = (e) => {
+    console.log(e);
+    if (e?.target) {
+      const { value, name } = e.target;
+      if (name == "DataVenda") {
+        setForm({
+          ...form,
+          [name]: dayjs(value).format("DD/MM/YYYY").toString(),
+        });
+      } else {
+        setForm({
+          ...form,
+          [name]: value,
+        });
+      }
+    } else {
+      setForm((prev) => ({
+        ...prev,
+        [e?.name]: e?.value || "", // Substitua "campo_do_select" pelo nome correto
+      }));
+    }
   };
+
+  async function Cancela(id) {
+    try {
+      setIsLoading(true);
+      const response = await CancelarVenda(id);
+      if (response.success) {
+        setAlert({
+          ...alert,
+          type: "Success",
+          message: response.message,
+        });
+        setVendasLista((prev) =>
+          prev.map((item) =>
+            item.id == response.data.id ? response.data : item
+          )
+        );
+      }
+    } catch (e) {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: JSON.parse(e.request.response).message,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function Status(id, status) {
+    try {
+      if (status == "") {
+        setAlert({
+          ...alert,
+          type: "Alert",
+          message: "Selecione um status de pagamento",
+        });
+      } else {
+        setIsLoading(true);
+        const response = await StatusVenda(id, status);
+        if (response.success) {
+          setAlert({
+            ...alert,
+            type: "Success",
+            message: response.message,
+          });
+          setVendasLista((prev) =>
+            prev.map((item) =>
+              item.id == response.data.id ? response.data : item
+            )
+          );
+          setIsOpen(false);
+        }
+      }
+    } catch (e) {
+      console.log(e);
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: JSON.parse(e.request.response).message,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  return (
+    <VendasContext.Provider
+      value={{
+        alert,
+        isLoading,
+        vendasLista,
+        Filtrar,
+        form,
+        setForm,
+        Cancela,
+        Listar,
+        IsOpen,
+        setIsOpen,
+        Status,
+        handleCloseModal,
+        handleChange,
+        show,
+        setShow,
+      }}
+    >
+      {children}
+    </VendasContext.Provider>
+  );
 }

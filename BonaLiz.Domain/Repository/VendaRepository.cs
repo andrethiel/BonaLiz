@@ -13,10 +13,10 @@ namespace BonaLiz.Domain.Repository
 {
 	public class VendaRepository(IRepositoryBase<Venda> _repositoryBase) : IVendaRepository
 	{
-		public void Inserir(Venda model)
+		public Venda Inserir(Venda model)
 		{
 			model.DataVenda = DateTime.Now;
-			_repositoryBase.Inserir(model);
+			return _repositoryBase.Inserir(model);
         }
 
 		public List<Venda> Listar() => _repositoryBase.Listar();
@@ -30,21 +30,23 @@ namespace BonaLiz.Domain.Repository
             if (venda != null)
 			{
 				venda.Cancelada = true;
-				_repositoryBase.Editar(venda);
+				return _repositoryBase.Editar(venda);
             }
 
-			return venda;
+			return venda!;
 		}
 
-		public void StatusVenda(int id, string status)
+		public Venda StatusVenda(int id, string status)
 		{
 			var venda = _repositoryBase.ObterPorId(id);
 
             if (venda != null)
 			{
 				venda.Status = status;
-                _repositoryBase.Editar(venda);
+                return _repositoryBase.Editar(venda);
             }
+
+			return venda!;
 		}
     }
 }
