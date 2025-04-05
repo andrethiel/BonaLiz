@@ -138,25 +138,6 @@ namespace BonaLiz.Api.Controller
 			}
 		}
 
-		[HttpGet]
-		[Route("/ListaPrincipal")]
-		public async Task<IActionResult> ListaPrincipal(ProdutoViewModel model)
-		{
-			try
-			{
-                var produto = _produtoServices.ListarPrincipal(model);
-                if (produto.Count == 0)
-                {
-                    return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>("Erro ao cadastrar produto"));
-                }
-                return Ok(BaseResponseFactory.Success(produto));
-            }
-			catch (Exception ex)
-			{
-				return BadRequest(ex);
-			}
-		}
-
 
 		[HttpGet]
 		[Route("/SelectListProdutos")]
@@ -176,12 +157,5 @@ namespace BonaLiz.Api.Controller
 				return BadRequest(ex);
 			}
 		}
-
-		//[HttpPost]
-		//[Route("/arquivoProduto")]
-		//public async Task<IActionResult> arquivoProduto([FromForm] ProdutoViewModel model)
-  //      {
-  //          return Ok(Arquivo.Imagem(model.Arquivo));
-  //      }
 	}
 }

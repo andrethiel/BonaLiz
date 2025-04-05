@@ -53,7 +53,7 @@ export function CarrinhoProvider({ children }) {
         Quantidade: quantidade,
       });
 
-      if (!response.status) {
+      if (!response.success) {
         alert("Erro ao criar carrinho");
         return;
       }
@@ -77,7 +77,7 @@ export function CarrinhoProvider({ children }) {
         ProdutoId: id,
       });
 
-      if (!response.status) {
+      if (!response.success) {
         alert("Erro ao criar carrinho");
         return;
       }
@@ -110,7 +110,7 @@ export function CarrinhoProvider({ children }) {
         },
       ]);
       AdicionaCarrinho(itemCarrinho);
-      if (!response.status) {
+      if (!response.success) {
         alert("Erro ao criar carrinho");
         return;
       }
@@ -122,7 +122,7 @@ export function CarrinhoProvider({ children }) {
   async function EnviarCarrinhoLogin() {
     if (itensCarrinho.length > 0) {
       const response = await CarrinhoInserir(itensCarrinho);
-      if (!response.status) {
+      if (!response.success) {
         alert("Erro ao criar carrinho");
         return;
       }

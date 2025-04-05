@@ -10,16 +10,14 @@ namespace BonaLiz.Dados.Models
 	public class Venda : Base
 	{
 		public int? ClienteId { get; set; }
-		public int? ProdutoId { get; set; }
-		public int Quantidade { get; set; }
-		public decimal Valor { get; set; }
         public bool? Cancelada { get; set; }
         public DateTime? DataVenda { get; set; }
-        public string Status { get; set; }
+        public string Status { get; set; } = "Pendente";
         [NotMapped]
 		public string NomeCliente { get; set; }
 		[NotMapped]
 		public string NomeProduto { get; set; }
         // public int? EmpresaId { get; set; }
+        List<VendaItens> VendaItens { get; set; } = new List<VendaItens>();
     }
 }

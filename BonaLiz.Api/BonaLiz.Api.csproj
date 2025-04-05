@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BonaLiz.Identity\BonaLiz.Identity.csproj" />
     <ProjectReference Include="..\BonaLiz.Negocio\BonaLiz.Negocio.csproj" />
+    <ProjectReference Include="..\BonaLiz.RabbitMQ\BonaLiz.RabbitMQ.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -116,9 +116,10 @@ namespace BonaLiz.Api.Controller
                 return BadRequest(ex);
             }
         }
+
 		[HttpGet]
 		[Route("/SelectListTipoProduto")]
-		public async Task<IActionResult> SelectListTipoProdutor()
+        public async Task<IActionResult> SelectListTipoProdutor()
 		{
 			try
 			{

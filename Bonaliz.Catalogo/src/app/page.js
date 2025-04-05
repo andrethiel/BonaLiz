@@ -38,9 +38,20 @@ export default function Home() {
   } = useAuth();
 
   useEffect(() => {
-    SelectList();
-    Listar();
+    ListarTudo();
   }, []);
+
+  async function ListarTudo() {
+    try {
+      const [res1, res2] = await Promise.all([SelectList(), Listar()]);
+    } catch (e) {
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: JSON.parse(e.request.response).message,
+      });
+    }
+  }
 
   if (produtos.length === 0) {
     return <CustomLoading loadingMessage="Aguarde..." />;

@@ -24,12 +24,14 @@ namespace BonaLiz.Dados.Context
 
             modelBuilder.Entity<Menu>().Ignore(x => x.Guid);
             modelBuilder.Entity<MenuPerfil>().Ignore(x => x.Guid);
+            modelBuilder.Entity<VendaItens>().Ignore(x => x.Guid);
         }
         public DbSet<Fornecedor> Fornecedor { get; set; }
         public DbSet<TipoProduto> TipoProduto { get; set; }
         public DbSet<Produto> Produto { get; set; }
 		public DbSet<Cliente> Cliente { get; set; }
 		public DbSet<Venda> Venda { get; set; }
+        public DbSet<VendaItens> VendaItens { get; set; }
         public DbSet<ImagemProduto> ImagemProduto { get; set; }
         public DbSet<Carrinho> Carrinho { get; set; }
         public DbSet<CarrinhoItens> CarrinhoItens { get; set; }

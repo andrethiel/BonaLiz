@@ -12,8 +12,8 @@ export function Principal() {
   async function Listar() {
     try {
       const response = await ListarProdutosPrincal();
-      if (response.length > 0) {
-        setProdutos(response);
+      if (response.success) {
+        setProdutos(response.data);
       } else {
         setProdutos([]);
       }
@@ -26,8 +26,8 @@ export function Principal() {
   async function SelectList() {
     try {
       const response = await SelectListTipoProduto();
-      if (response.length > 0) {
-        setSelectTipoProduto(response);
+      if (response.success) {
+        setSelectTipoProduto(response.data);
       }
     } catch (e) {
       setSelectTipoProduto([]);
@@ -38,8 +38,8 @@ export function Principal() {
   async function FiltrarProdutos(params) {
     try {
       const response = await Filtrar(params);
-      if (response.length > 0) {
-        setProdutos(response);
+      if (response.success) {
+        setProdutos(response.data);
       }
     } catch (e) {
       setSelectTipoProduto([]);

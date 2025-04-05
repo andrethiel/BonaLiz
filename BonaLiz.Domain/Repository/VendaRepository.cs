@@ -11,11 +11,10 @@ using System.Linq.Expressions;
 
 namespace BonaLiz.Domain.Repository
 {
-	public class VendaRepository(IRepositoryBase<Venda> _repositoryBase) : IVendaRepository
+	public class VendaRepository(IRepositoryBase<Venda> _repositoryBase, IRepositoryBase<VendaItens> repositoryBaseVendaItens) : IVendaRepository
 	{
 		public Venda Inserir(Venda model)
 		{
-			model.DataVenda = DateTime.Now;
 			return _repositoryBase.Inserir(model);
         }
 
@@ -48,5 +47,10 @@ namespace BonaLiz.Domain.Repository
 
 			return venda!;
 		}
+
+        public VendaItens InserirItemVenda(VendaItens model)
+        {
+            return repositoryBaseVendaItens.Inserir(model);
+        }
     }
 }

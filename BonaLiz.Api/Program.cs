@@ -1,8 +1,5 @@
 ﻿using BonaLiz.Api.Dependencias;
 using BonaLiz.Api.Extensions;
-using BonaLiz.Dados.Models;
-using BonaLiz.Identity.Context;
-using BonaLiz.Negocio.Utils;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +8,13 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Reflection.Metadata;
 using System.Text.Json.Serialization;
+using BonaLiz.RabbitMQ.MassTransit;
 
-SerilogExtensions.AddSerilog("Api BonaLiz");
+//SerilogExtensions.AddSerilog("Api BonaLiz");
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseSerilog(Log.Logger);
+//builder.Host.UseSerilog(Log.Logger);
 
 builder.Services.AddCors();
 builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
@@ -24,55 +22,31 @@ builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.Re
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    //c.AddSecurityDefinition("X-API-Key", new OpenApiSecurityScheme
-    //{
-    //	Description = "",
-    //	Type = SecuritySchemeType.ApiKey,
-    //	Name = "X-API-Key",
-    //	In = ParameterLocation.Header,
-    //	Scheme = "ApiKeyScheme"
-    //});
-
-    //var key = new OpenApiSecurityScheme()
-    //{
-    //	Reference = new OpenApiReference()
-    //	{
-    //		Type = ReferenceType.SecurityScheme,
-    //		Id = "X-API-Key"
-    //	},
-    //	In = ParameterLocation.Header,
-    //};
-
-    //var requirement = new OpenApiSecurityRequirement
-    //				{
-    //						 { key, new List<string>() }
-    //				};
-    //c.AddSecurityRequirement(requirement);
-
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    c.AddSecurityDefinition("X-API-Key", new OpenApiSecurityScheme
     {
-        Name = "Authorization",
+        Description = "",
         Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
+        Name = "X-API-Key",
         In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme.",
+        Scheme = "ApiKeyScheme"
     });
 
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    var key = new OpenApiSecurityScheme()
     {
+        Reference = new OpenApiReference()
         {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            new string[] {}
-        }
-    });
+            Type = ReferenceType.SecurityScheme,
+            Id = "X-API-Key"
+        },
+        In = ParameterLocation.Header,
+    };
+
+    var requirement = new OpenApiSecurityRequirement
+                    {
+                             { key, new List<string>() }
+                    };
+    c.AddSecurityRequirement(requirement);
+
 });
 //builder.Services.AddAuthentication(builder.Configuration);
 
@@ -102,11 +76,13 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
         builder => builder
-            .WithOrigins("https://localhost:3000", "http://localhost:3000") // 🔥 Substitua pelo seu domínio real
-            .AllowCredentials() // 🔥 ESSENCIAL para cookies HTTP-only funcionarem
+            .WithOrigins("https://localhost:3000", "http://localhost:3000", "https://localhost:3001", "http://localhost:3001") // 🔥 Substitua pelo seu domínio real
+            .AllowCredentials()
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
+
+builder.Services.AddMassTransitPublisher(builder.Configuration);
 
 
 var app = builder.Build();
