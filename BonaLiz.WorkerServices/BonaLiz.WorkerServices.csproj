@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-BonaLiz.WorkerServices-5a38bfd9-7959-4d0c-97c9-a4a2f0b0fd6f</UserSecretsId>
+    <Configurations>Producao;Homologacao;Desenvolvimento</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

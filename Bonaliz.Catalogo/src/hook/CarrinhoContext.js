@@ -1,6 +1,7 @@
 "use client";
 import {
   CarrinhoInserir,
+  Checkout,
   Remover,
   UpdateQuantidade,
 } from "@/Api/Controllers/Carrinho";
@@ -122,26 +123,36 @@ export function CarrinhoProvider({ children }) {
   async function EnviarCarrinhoLogin() {
     if (itensCarrinho.length > 0) {
       const response = await CarrinhoInserir(itensCarrinho);
+      handaleWhats();
       if (!response.success) {
         alert("Erro ao criar carrinho");
         return;
       }
     }
   }
-  function handaleWhats() {
+  async function handaleWhats() {
     if (isAuthenticated()) {
       let mensagem = "";
 
-      itensCarrinho.map(
-        (item, index) =>
-          (mensagem += `%0A${index + 1} - Produto:%0A ${
-            item.Produto
-          }%0APreço: ${item.Preco}%0AQuantidade: ${item.Quantidade}%0A`)
-      );
-      mensagem += `%0ATotal: R$ ${total.toFixed(2)}`;
-      window.open(
-        `https://api.whatsapp.com/send/?phone=5541987704278&text=Olá estou interessado nos produtos ${mensagem}&type=phone_number&app_absent=0`
-      );
+      const response = await Checkout(localStorage.getItem("CarrinhoId"));
+
+      if (response.success) {
+        itensCarrinho.map(
+          (item, index) =>
+            (mensagem += `%0A${index + 1} - Produto:%0A ${
+              item.Produto
+            }%0APreço: ${item.Preco}%0AQuantidade: ${item.Quantidade}%0A`)
+        );
+        mensagem += `%0ATotal: R$ ${total.toFixed(2)}`;
+        window.open(
+          `https://api.whatsapp.com/send/?phone=5541987704278&text=Olá estou interessado nos produtos ${mensagem}&type=phone_number&app_absent=0`
+        );
+
+        localStorage.clear();
+      } else {
+        alert("Erro ao fazer o checkout");
+        return;
+      }
     }
   }
 

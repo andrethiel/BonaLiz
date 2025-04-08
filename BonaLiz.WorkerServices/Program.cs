@@ -1,6 +1,7 @@
 using BonaLiz.RabbitMQ;
 using BonaLiz.WorkerServices;
 using BonaLiz.WorkerServices.Workers;
+using BonaLiz.RabbitMQ.MassTransit;
 using MassTransit;
 
 try
@@ -23,6 +24,7 @@ try
                     cfg.ConfigureEndpoints(ctx);
                 });
             });
+            collection.AddCronJob<TimerJob>(c => c.CronExpression = @"*/1 * * * *");
         })
         .Build();
     await host.RunAsync();

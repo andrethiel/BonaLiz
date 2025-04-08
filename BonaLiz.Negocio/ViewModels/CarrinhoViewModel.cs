@@ -8,6 +8,6 @@ namespace BonaLiz.Negocio.ViewModels
 {
     public class CarrinhoViewModel
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public string carrinhoId { get; set; } 
     }
 }

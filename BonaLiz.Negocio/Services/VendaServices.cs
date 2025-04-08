@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BonaLiz.Dados.Models;
+﻿using BonaLiz.Dados.Models;
 using BonaLiz.Domain.Interfaces;
 using BonaLiz.Domain.Repository;
 using BonaLiz.Negocio.Helpers;
@@ -14,26 +13,14 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Negocio.Services
 {
-	public class VendaServices : IVendaServices
+	public class VendaServices(IVendaRepository _vendaRepository, IProdutoRepository _produtoRepository, IClienteRepository _clienteRepository) : IVendaServices
 	{
-		private readonly IVendaRepository _vendaRepository;
-		private readonly IProdutoRepository _produtoRepository;
-		private readonly IClienteRepository _clienteRepository;
-		private readonly IMapper _mapper;
-		public VendaServices(IVendaRepository vendaRepository, IMapper mapper, IProdutoRepository produtoRepository, IClienteRepository clienteRepository)
-		{
-			_vendaRepository = vendaRepository;
-			_produtoRepository = produtoRepository;
-			_mapper = mapper;
-			_clienteRepository = clienteRepository;
-		}
-
 		public VendaViewModel Inserir(VendaViewModel model)
 		{
             var venda = new Venda
 			{
 				ClienteId = Convert.ToInt32(model.ClienteId),
-				DataVenda = DateTime.Now,
+				DataVenda = model.DataVenda == "" ? DateTime.Now : Convert.ToDateTime(model.DataVenda),
 				Guid = Guid.NewGuid()
 			};
 

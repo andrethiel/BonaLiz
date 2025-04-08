@@ -14,10 +14,9 @@ namespace BonaLiz.Negocio.Services
     {
         public CarrinhoIdViewModel Inserir(ClienteViewModel model)
         {
-            var cliente = _clienteRepository.Listar().Where(x => x.Telefone == model.Telefone).ToList();
-            
+            var cliente = _clienteRepository.Listar().Where(x => x.Telefone == model.Telefone).FirstOrDefault();
 
-            if (cliente.Count == 0)
+            if (cliente == null)
             {
                 var clienteEntity = _clienteRepository.Inserir(new Cliente()
                 {
@@ -43,14 +42,14 @@ namespace BonaLiz.Negocio.Services
                 };
             }
 
-            var carrinho = _carrinhoRepository.ObterPorClienteId(cliente.FirstOrDefault().Id);
+            var carrinho = _carrinhoRepository.ListarCarrinho().Where(x => x.ClienteId == cliente.Id).LastOrDefault();
 
-            if(carrinho.DataCarrinho < Convert.ToDateTime(DateTime.Now.ToString("00:00:00")))
+            if(carrinho == null)
             {
                 var carrinhoInserir = new Carrinho()
                 {
                     CarrinhoId = Guid.NewGuid(),
-                    ClienteId = cliente.FirstOrDefault().Id,
+                    ClienteId = cliente.Id,
                     DataCarrinho = DateTime.Now
                 };
 
@@ -61,6 +60,11 @@ namespace BonaLiz.Negocio.Services
                     CarrinhoId = carrinhoInserir.CarrinhoId.ToString()
                 };
             }
+
+            //if (carrinho.DataCarrinho < Convert.ToDateTime(DateTime.Now.ToString("00:00:00")))
+            //{
+
+            //}
 
             return new CarrinhoIdViewModel()
             {

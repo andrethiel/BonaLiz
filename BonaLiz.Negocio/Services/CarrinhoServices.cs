@@ -2,8 +2,6 @@
 using BonaLiz.Domain.Interfaces;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace BonaLiz.Negocio.Services
 {
@@ -15,6 +13,19 @@ namespace BonaLiz.Negocio.Services
             var carrinhoItem = carrinho.FirstOrDefault(x => x.ProdutoId == model.ProdutoId);
             carrinhoItem.Quantidade = model.Quantidade;
             _carrinhoRepository.Editar(carrinhoItem);
+        }
+
+        public void Deletar(string carrinhoId)
+        {
+            var carrinhoItens = _carrinhoRepository.ObterItensPorId(Guid.Parse(carrinhoId));
+            if (carrinhoItens.Count > 0)
+            {
+                foreach (var item in carrinhoItens)
+                {
+                    _carrinhoRepository.Deletar(item);
+                }
+            }
+            _carrinhoRepository.DeletarCarrinho(Guid.Parse(carrinhoId));
         }
 
         public void DeletarItem(CarrinhoItensViewModel model)
@@ -35,44 +46,52 @@ namespace BonaLiz.Negocio.Services
             var carrinho = _carrinhoRepository.ObterItensPorId(Guid.Parse(model[0].CarrinhoId));
             var lista = new List<CarrinhoItens>();
 
-            if (carrinho.Count > 0)
+            foreach (var item in model)
             {
-                foreach (var item in model)
+                if (!carrinho.Any(x => x.ProdutoId == item.ProdutoId))
                 {
-                    if (!carrinho.Any(x => x.ProdutoId == item.ProdutoId))
-                    {
-                        lista.Add(new CarrinhoItens
-                        {
-                            CarrinhoId = Guid.Parse(item.CarrinhoId),
-                            ProdutoId = item.ProdutoId,
-                            Quantidade = item.Quantidade,
-                        });
-
-                        _carrinhoRepository.InserirItens(lista);
-                    }
-                    else
-                    {
-                        var carrinhoItem = carrinho.FirstOrDefault(x => x.ProdutoId == item.ProdutoId);
-                        carrinhoItem.Quantidade = carrinhoItem.Quantidade += item.Quantidade;
-                        _carrinhoRepository.Editar(carrinhoItem);
-                    }
-                }
-            }
-            else
-            {
-                
-                foreach (var item in model)
-                {
-                    lista.Add(new CarrinhoItens
+                    var itens = new CarrinhoItens
                     {
                         CarrinhoId = Guid.Parse(item.CarrinhoId),
                         ProdutoId = item.ProdutoId,
                         Quantidade = item.Quantidade,
-                    });
-                }
+                    };
 
-                _carrinhoRepository.InserirItens(lista);
+                    _carrinhoRepository.InserirItens(itens);
+                }
+                else
+                {
+                    var carrinhoItem = carrinho.FirstOrDefault(x => x.ProdutoId == item.ProdutoId);
+                    carrinhoItem.Quantidade = carrinhoItem.Quantidade += item.Quantidade;
+                    _carrinhoRepository.Editar(carrinhoItem);
+                }
             }
+        }
+
+        public List<Carrinho> ListarCarrinhos() => _carrinhoRepository.ListarCarrinho();
+
+        public List<CarrinhoItensViewModel> ObterItensPorId(string carrinhoId)
+        {
+            var carrinhoItens = _carrinhoRepository.ObterItensPorId(Guid.Parse(carrinhoId));
+
+            return carrinhoItens.Select(x => new CarrinhoItensViewModel
+            {
+                CarrinhoId = x.CarrinhoId.ToString(),
+                ProdutoId = x.ProdutoId,
+                Quantidade = x.Quantidade,
+            }).ToList();
+        }
+
+        public CarrinhoIdViewModel ObterPorId(string carrinhoId)
+        {
+            var carrinho = _carrinhoRepository.ObterCarrinhoId(Guid.Parse(carrinhoId));
+
+            return new CarrinhoIdViewModel
+            {
+                CarrinhoId = carrinho.CarrinhoId.ToString(),
+                ClienteId = carrinho.ClienteId,
+                DataCarrinho = carrinho.DataCarrinho
+            };
         }
     }
 }

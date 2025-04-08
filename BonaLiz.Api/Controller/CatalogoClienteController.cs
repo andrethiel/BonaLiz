@@ -1,4 +1,6 @@
 ﻿using BonaLiz.Api.Authentication;
+using BonaLiz.Api.Controller.Response;
+using BonaLiz.Dados.Models;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -19,12 +21,12 @@ namespace BonaLiz.Api.Controller
                 var telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
                 model.Telefone = telefone;
                 var carrinho = _clienteCarrinhoServices.Inserir(model);
-                return Ok(new
-                {
-                    carrinhoId = carrinho.CarrinhoId,
-                    status = true,
 
-                });
+                if (carrinho == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ClienteViewModel>("Erro ao listar produto"));
+                }
+                return Ok(BaseResponseFactory.Success(carrinho));
             }
             catch (Exception ex)
             {

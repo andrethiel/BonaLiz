@@ -31,7 +31,7 @@ namespace BonaLiz.Negocio.Utils
 			foreach(var item in arquivos)
 			{
 				var arquivo = new ImagemProdutoViewModel();
-                if (!string.IsNullOrEmpty(item.NomeArquivo))
+                if (!string.IsNullOrEmpty(item.NomeArquivo) && _httpContextAccessor.HttpContext != null)
                 {
                     var request = _httpContextAccessor.HttpContext.Request;
 					arquivo.Id = item.Id;

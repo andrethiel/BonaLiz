@@ -17,3 +17,9 @@ export async function Remover(params) {
 
   return response;
 }
+
+export async function Checkout(params) {
+  const response = await Api.request.get(`/Checkout?carrinhoId=${params}`);
+
+  return response;
+}

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BonaLiz.Dados.Models;
+﻿using BonaLiz.Dados.Models;
 using BonaLiz.Domain.Interfaces;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.ViewModels;

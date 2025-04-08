@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using BonaLiz.Negocio.Helpers;
+﻿using BonaLiz.Negocio.Helpers;
 using BonaLiz.Dados.Models;
 using BonaLiz.Domain.Interfaces;
 using BonaLiz.Negocio.Interfaces;
@@ -19,23 +18,10 @@ using Microsoft.IdentityModel.Logging;
 
 namespace BonaLiz.Negocio.Services
 {
-    public class ProdutoServices : IProdutoServices
+    public class ProdutoServices(IProdutoRepository _produtoRepository, IFornecedorRepository _fornecedorRepository, 
+        ITipoProdutoRepository _tipoProdutoRepository, IImagemServices _imagemServices,
+        IHttpContextAccessor _httpContextAccessor) : IProdutoServices
     {
-        private readonly IProdutoRepository _produtoRepository;
-        private readonly IFornecedorRepository _fornecedorRepository;
-        private readonly ITipoProdutoRepository _tipoProdutoRepository;
-        private readonly IMapper _mapper;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IImagemServices _imagemServices;
-        public ProdutoServices(IProdutoRepository produtoRepository, IMapper mapper, ITipoProdutoRepository tipoProdutoRepository, IFornecedorRepository fornecedorRepository, IHttpContextAccessor httpContextAccessor, IImagemServices imagemServices)
-        {
-            _produtoRepository = produtoRepository;
-            _mapper = mapper;
-            _tipoProdutoRepository = tipoProdutoRepository;
-            _fornecedorRepository = fornecedorRepository;
-            _httpContextAccessor = httpContextAccessor;
-            _imagemServices = imagemServices;
-        }
         public ProdutoViewModel Cadastrar(ProdutoViewModel model)
         {
             try
@@ -187,13 +173,13 @@ namespace BonaLiz.Negocio.Services
             return new List<ProdutoViewModel>();
         }
 
-        public List<ProdutoViewModel> Listar(ProdutoViewModel model)
+        public List<ProdutoViewModel> Listar()
         {
             var imagens = _imagemServices.Listar();
             var fornecedores = _fornecedorRepository.Listar();
             var tipoProdutos = _tipoProdutoRepository.Listar();
 
-            return _produtoRepository.Listar().Where(x => x.Inativo == Convert.ToBoolean(model.Inativo)).Select(x => new ProdutoViewModel()
+            return _produtoRepository.Listar().Select(x => new ProdutoViewModel()
             {
                 Id = x.Id,
                 Guid = x.Guid,

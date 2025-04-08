@@ -24,7 +24,7 @@ namespace BonaLiz.Api.Controller
         {
             try
             {
-                if(!_produtoServices.Listar(model).Where(x => x.Nome == model.Nome).Any())
+                if(!_produtoServices.Listar().Where(x => x.Nome == model.Nome).Any())
                 {
                     var produto = _produtoServices.Cadastrar(model);
                     if (produto == null)
@@ -68,7 +68,7 @@ namespace BonaLiz.Api.Controller
         {
             try
             {
-                var produto = _produtoServices.Listar(model);
+                var produto = _produtoServices.Listar();
                 if (produto.Count == 0)
                 {
                     return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>("Erro ao cadastrar produto"));
@@ -145,7 +145,7 @@ namespace BonaLiz.Api.Controller
 		{
 			try
 			{
-                var produto = _produtoServices.Listar(model);
+                var produto = _produtoServices.Listar();
                 if (produto.Count == 0)
                 {
                     return BadRequest(BaseResponseFactory.Fail<ProdutoViewModel>("Erro ao cadastrar produto"));

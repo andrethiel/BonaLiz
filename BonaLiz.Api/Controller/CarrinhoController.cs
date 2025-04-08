@@ -1,4 +1,6 @@
 ﻿using BonaLiz.Api.Authentication;
+using BonaLiz.Api.Controller.Response;
+using BonaLiz.Dados.Models;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.ViewModels;
 using MassTransit;
@@ -10,7 +12,7 @@ namespace BonaLiz.Api.Controller
 {
     [ApiController]
     [ApiKey]
-    public class CarrinhoController(ICarrinhoServices _carrinhoServices, IPublishEndpoint _publishEndpoint, ILogger<CarrinhoController> _logger) : ControllerBase
+    public class CarrinhoController(ICarrinhoServices _carrinhoServices) : ControllerBase
     {
 
         [HttpPost]
@@ -20,11 +22,7 @@ namespace BonaLiz.Api.Controller
             try
             {
                 _carrinhoServices.Inserir(model);
-                return Ok(new
-                {
-                    status = true,
-                    message = "Cadastrado com sucesso"
-                });
+                return Ok(BaseResponseFactory.Success(""));
             }
             catch (Exception ex)
             {
@@ -40,11 +38,7 @@ namespace BonaLiz.Api.Controller
             {
 
                 _carrinhoServices.AlteraQuantidade(model);
-                return Ok(new
-                {
-                    status = true,
-                    message = "Cadastrado com sucesso"
-                });
+                return Ok(BaseResponseFactory.Success(""));
             }
             catch (Exception ex)
             {
@@ -60,30 +54,7 @@ namespace BonaLiz.Api.Controller
             {
 
                 _carrinhoServices.DeletarItem(model);
-                return Ok(new
-                {
-                    status = true,
-                    message = "Cadastrado com sucesso"
-                });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
-        }
-
-        [HttpPost]
-        [Route("Checkout")]
-        public async Task<IActionResult> Checkout([FromBody] CarrinhoItensViewModel model)
-        {
-            try
-            {
-                await _publishEndpoint.Publish(model);
-
-                _logger.LogInformation("Mensagem publicada com sucesso");
-
-                return Ok();
-                
+                return Ok(BaseResponseFactory.Success(""));
             }
             catch (Exception ex)
             {

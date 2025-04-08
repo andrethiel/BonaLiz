@@ -82,8 +82,10 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod());
 });
 
-builder.Services.AddMassTransitPublisher(builder.Configuration);
-
+if (builder.Configuration.GetValue<bool>("RabbitMqEnable"))
+{
+    builder.Services.AddMassTransitPublisher(builder.Configuration);
+}
 
 var app = builder.Build();
 

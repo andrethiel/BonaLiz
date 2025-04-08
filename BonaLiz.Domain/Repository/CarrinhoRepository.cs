@@ -13,14 +13,19 @@ namespace BonaLiz.Domain.Repository
     {
         public void Inserir(Carrinho model) => _repositoryCarrinho.Inserir(model);
 
-        public void InserirItens(List<CarrinhoItens> model) => _repositoryCarrinhoItens.InserirRange(model);
+        public void InserirItens(CarrinhoItens model) => _repositoryCarrinhoItens.Inserir(model);
 
         public Carrinho ObterPorClienteId(int clienteId) => _repositoryCarrinho.ObterPorId(clienteId)!;
 
         public List<CarrinhoItens> ObterItensPorId(Guid CarrinhoId) => _repositoryCarrinhoItens.Listar().Where(x => x.CarrinhoId == CarrinhoId).ToList();
+        public Carrinho ObterCarrinhoId(Guid carrinhoId) => _repositoryCarrinho.Listar().Where(x => x.CarrinhoId == carrinhoId).FirstOrDefault()!;
 
         public void Editar(CarrinhoItens model) => _repositoryCarrinhoItens.Editar(model);
 
         public void Deletar(CarrinhoItens model) => _repositoryCarrinhoItens.Deletar(model);
+
+        public void DeletarCarrinho(Guid carrinhoId) => _repositoryCarrinho.Deletar(_repositoryCarrinho.Listar().Where(x => x.CarrinhoId == carrinhoId).FirstOrDefault()!);
+
+        public List<Carrinho> ListarCarrinho() => _repositoryCarrinho.Listar();
     }
 }

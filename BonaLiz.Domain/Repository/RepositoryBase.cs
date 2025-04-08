@@ -23,7 +23,7 @@ namespace BonaLiz.Domain.Repository
         }
 
         public TEntity ObterPorGuid(Guid Guid) => _DbSet.Where(x=> x.Guid.Equals(Guid)).First();
-        public TEntity ObterPorId(int id) => _DbSet.Find(id);
+        public TEntity ObterPorId(int id) => _DbSet.Where(x => x.Id.Equals(id)).First();
         public List<TEntity> Listar()
         {
             try
@@ -38,14 +38,6 @@ namespace BonaLiz.Domain.Repository
              _DbSet.Add(model);
             _context.SaveChanges();
             return model;
-        }
-
-        public int InserirScalar(TEntity model)
-        {
-            _DbSet.Add(model);
-            _context.SaveChanges();
-
-            return model.Id;
         }
 
         public void InserirRange(List<TEntity> model)

@@ -9,5 +9,7 @@ namespace BonaLiz.Negocio.ViewModels
     public class CarrinhoIdViewModel
     {
         public string CarrinhoId { get; set; }
+        public int ClienteId { get; set; }
+        public DateTime DataCarrinho { get; set; }
     }
 }

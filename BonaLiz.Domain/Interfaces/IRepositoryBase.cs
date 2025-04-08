@@ -11,7 +11,6 @@ namespace BonaLiz.Domain.Interfaces
     public interface IRepositoryBase<TEntity> 
     {
         TEntity Inserir(TEntity model);
-        int InserirScalar(TEntity model);
         void InserirRange(List<TEntity> model);
         TEntity Editar(TEntity model);
         List<TEntity> Listar();

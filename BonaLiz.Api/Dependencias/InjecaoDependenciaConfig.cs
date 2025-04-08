@@ -5,7 +5,6 @@ using BonaLiz.Domain.Repository;
 using BonaLiz.Identity.Context;
 using BonaLiz.Identity.Interfaces;
 using BonaLiz.Identity.Services;
-using BonaLiz.Negocio.AutoMapper;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.Services;
 using Microsoft.AspNetCore.Identity;
@@ -39,15 +38,12 @@ namespace BonaLiz.Api.Dependencias
             services.AddScoped<ICarrinhoRepository, CarrinhoRepository>();
             services.AddScoped<ICarrinhoServices, CarrinhoServices>();
             services.AddScoped<IClienteCarrinhoServices, ClienteCarrinhoServices>();
+            services.AddScoped<ICheckoutServices, CheckoutServices>();
             services.AddScoped<IIdentityService, IdentityService>();
 
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IMenuServices, MenuServices>();
 
-
-
-            services.AddAutoMapper(typeof(AutoMapperConfiguration));
-            AutoMapperConfiguration.Mapper();            
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<DataContextIdentity>()

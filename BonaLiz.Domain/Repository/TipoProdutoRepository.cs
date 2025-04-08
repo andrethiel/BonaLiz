@@ -16,8 +16,7 @@ namespace BonaLiz.Domain.Repository
         {
             try
             {
-                model.Id = _repositoryBase.InserirScalar(model);
-                return model;
+                return _repositoryBase.Inserir(model);
             }
             catch (Exception ex) {
                 throw;
