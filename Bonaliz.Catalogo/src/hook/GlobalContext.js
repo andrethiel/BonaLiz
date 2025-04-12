@@ -10,8 +10,11 @@ const initialDefault = {
 
 export const GlobalStateProvider = ({ children }) => {
   const [user, setUser] = useState(initialDefault);
+  const [isLoading, setIsLoading] = useState(false);
   return (
-    <GlobalStateContext.Provider value={{ user, setUser, initialDefault }}>
+    <GlobalStateContext.Provider
+      value={{ user, setUser, initialDefault, isLoading, setIsLoading }}
+    >
       {children}
     </GlobalStateContext.Provider>
   );

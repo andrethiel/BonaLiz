@@ -24,7 +24,7 @@ import { useGlobalState } from "@/hook/GlobalContext";
 import Filter from "@/components/Filter";
 
 export default function Home() {
-  const { EnviarCarrinho, itensCarrinho, setIsOpen, isLoading } =
+  const { EnviarCarrinho, itensCarrinho, setIsOpen } =
     useContext(CarrinhoContext);
 
   const {
@@ -39,7 +39,7 @@ export default function Home() {
   const { produtos, selectTipoProduto, FiltrarProdutos } =
     useContext(ProdutoContext);
 
-  const { user, setUser } = useGlobalState();
+  const { user, setUser, isLoading } = useGlobalState();
 
   if (isLoading) {
     return <CustomLoading loadingMessage="Aguarde..." />;

@@ -7,6 +7,7 @@ import {
 } from "@/Api/Controllers/Carrinho";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useClienteCarrinho } from "./useCarrinho";
+import { useGlobalState } from "./GlobalContext";
 
 export const CarrinhoContext = createContext();
 
@@ -19,7 +20,8 @@ export function CarrinhoProvider({ children }) {
     return [];
   });
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+
+  const { isLoading, setIsLoading } = useGlobalState();
 
   async function AdicionaCarrinho(itemCarrinho) {
     setItensCarrinho((produto) => {
@@ -194,8 +196,6 @@ export function CarrinhoProvider({ children }) {
         handaleWhats,
         EnviarCarrinho,
         EnviarCarrinhoLogin,
-        isLoading,
-        setIsLoading,
         setItensCarrinho,
       }}
     >
