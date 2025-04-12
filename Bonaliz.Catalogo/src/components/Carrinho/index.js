@@ -90,15 +90,16 @@ function Carrinho() {
             <span className="text-lg font-semibold">Total</span>
             <span className="text-lg font-semibold">R$ {total.toFixed(2)}</span>
           </div>
-          <Button
-            color={"primary"}
-            disabled={itensCarrinho.length === 0}
-            onClick={() =>
-              !isAuthenticated ? setModalLogin(true) : handaleWhats()
-            }
-          >
-            Finalizar
-          </Button>
+          {itensCarrinho.length !== 0 && (
+            <Button
+              color={"primary"}
+              onClick={() =>
+                !isAuthenticated ? setModalLogin(true) : handaleWhats()
+              }
+            >
+              {!isAuthenticated ? "Entrar" : "Finalizar"}
+            </Button>
+          )}
         </div>
       </div>
     </div>

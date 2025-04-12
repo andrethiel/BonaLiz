@@ -32,7 +32,7 @@ export default function Home() {
     logout,
     modalLogin,
     setModalLogin,
-    Login,
+    handlerLogin,
     handlerOnBlur,
   } = useContext(AuthContext);
 
@@ -123,7 +123,10 @@ export default function Home() {
                 <div className="flex justify-end">
                   <Button
                     onClick={async () => {
-                      if (localStorage.getItem("CarrinhoId") == null) {
+                      if (
+                        localStorage.getItem("CarrinhoId") == null &&
+                        isAuthenticated
+                      ) {
                         setUser((prev) => ({
                           ...prev,
                           nome: localStorage.getItem("nome"),
@@ -175,7 +178,7 @@ export default function Home() {
                 value={user.nome}
               />
             </div>
-            <Button color={"primary"} onClick={Login}>
+            <Button color={"primary"} onClick={handlerLogin}>
               Enviar
             </Button>
             <Button color={"secondary"} onClick={() => setModalLogin(false)}>

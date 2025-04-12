@@ -8,12 +8,8 @@ export function useClienteCarrinho() {
 
   async function sincronizarComUsuario(carrinhoId) {
     if (itensCarrinho.length > 0) {
-      const novosItens = itensCarrinho.map((item) => ({
-        ...item,
-        CarrinhoId: carrinhoId,
-      }));
-      setItensCarrinho(novosItens);
-      await EnviarCarrinhoLogin(novosItens);
+      itensCarrinho.map((item) => (item.CarrinhoId = carrinhoId));
+      await EnviarCarrinhoLogin();
     }
   }
 

@@ -114,12 +114,7 @@ export function CarrinhoProvider({ children }) {
           },
         ]);
         AdicionaCarrinho(itemCarrinho);
-        if (!response.success) {
-          alert("Erro ao criar carrinho");
-          return;
-        }
       } catch (e) {
-        console.log(e);
         alert(e.message);
         return;
       } finally {
@@ -136,11 +131,11 @@ export function CarrinhoProvider({ children }) {
         setIsLoading(!true);
         const response = await CarrinhoInserir(itensCarrinho);
         if (response.success) {
-          handaleWhats();
+          // handaleWhats();
         }
       } catch (e) {
         console.log(e);
-        alert("Erro ao criar carrinho");
+        alert(e.message);
         return;
       } finally {
         setIsLoading(false);

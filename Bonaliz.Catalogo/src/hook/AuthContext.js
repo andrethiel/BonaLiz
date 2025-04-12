@@ -7,7 +7,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { CarrinhoContext } from "./CarrinhoContext";
 import { useClienteCarrinho } from "./useCarrinho";
 import { useGlobalState } from "./GlobalContext";
-import { loadUserFromStorage } from "@/utils/userStorage";
 
 export const AuthContext = createContext();
 
@@ -18,33 +17,41 @@ export function AuthProvider({ children }) {
   const { setIsOpen, setIsLoading } = useContext(CarrinhoContext);
 
   const { sincronizarComUsuario } = useClienteCarrinho();
-  const { user, setUser } = useGlobalState();
+  const { user, setUser, initialDefault } = useGlobalState();
 
-  async function Login() {
-    try {
+  function handlerLogin() {
+    if (localStorage.getItem("telefone") == null) {
       if (Verifica()) {
-        setIsLoading(true);
-        const response = await CadastrarClienteCatalogo(user);
-        if (response.success) {
-          localStorage.setItem("isAuthenticated", true);
-          setIsAuthenticated(true);
-          setModalLogin(false);
-          setIsOpen(false);
-          localStorage.setItem("CarrinhoId", response.data.carrinhoId);
-          localStorage.setItem("telefone", user.telefone);
-          localStorage.setItem("nome", user.nome);
+        Login(user);
+      }
+    } else {
+      Login({
+        nome: localStorage.getItem("nome"),
+        telefone: localStorage.getItem("telefone"),
+      });
+    }
+  }
 
-          await sincronizarComUsuario(response.data.carrinhoId);
+  async function Login(params) {
+    try {
+      setIsLoading(true);
+      const response = await CadastrarClienteCatalogo(params);
+      if (response.success) {
+        localStorage.setItem("isAuthenticated", true);
+        setIsAuthenticated(true);
+        setModalLogin(false);
+        setIsOpen(false);
+        localStorage.setItem("CarrinhoId", response.data.carrinhoId);
+        localStorage.setItem("telefone", params.telefone);
+        localStorage.setItem("nome", params.nome);
 
-          return true;
-        }
+        await sincronizarComUsuario(response.data.carrinhoId);
+        setUser(initialDefault);
       }
     } catch (e) {
       alert(e.message);
-      return;
     } finally {
       setIsLoading(false);
-      return false;
     }
   }
 
@@ -98,15 +105,10 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  useEffect(() => {
-    loadUserFromStorage(setUser);
-  }, []);
-
   return (
     <AuthContext.Provider
       value={{
         user,
-        Login,
         logout,
         isAuthenticated,
         modalLogin,
@@ -114,6 +116,7 @@ export function AuthProvider({ children }) {
         setUser,
         handlerOnBlur,
         setIsAuthenticated,
+        handlerLogin,
       }}
     >
       {children}
