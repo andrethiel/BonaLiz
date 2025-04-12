@@ -6,8 +6,9 @@ import {
   UpdateQuantidade,
 } from "@/Api/Controllers/Carrinho";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useClienteCarrinho } from "./useCarrinho";
 
-const CarrinhoContext = createContext();
+export const CarrinhoContext = createContext();
 
 export function CarrinhoProvider({ children }) {
   const [itensCarrinho, setItensCarrinho] = useState(() => {
@@ -18,6 +19,7 @@ export function CarrinhoProvider({ children }) {
     return [];
   });
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function AdicionaCarrinho(itemCarrinho) {
     setItensCarrinho((produto) => {
@@ -101,19 +103,27 @@ export function CarrinhoProvider({ children }) {
 
   async function EnviarCarrinho(itemCarrinho) {
     if (isAuthenticated()) {
-      const carrinhoId = localStorage.getItem("CarrinhoId");
-      const response = await CarrinhoInserir([
-        {
-          CarrinhoId: carrinhoId,
-          ProdutoId: itemCarrinho.id,
-          Produto: itemCarrinho.nome,
-          Quantidade: 1,
-        },
-      ]);
-      AdicionaCarrinho(itemCarrinho);
-      if (!response.success) {
-        alert("Erro ao criar carrinho");
+      try {
+        const carrinhoId = localStorage.getItem("CarrinhoId");
+        const response = await CarrinhoInserir([
+          {
+            CarrinhoId: carrinhoId,
+            ProdutoId: itemCarrinho.id,
+            Produto: itemCarrinho.nome,
+            Quantidade: 1,
+          },
+        ]);
+        AdicionaCarrinho(itemCarrinho);
+        if (!response.success) {
+          alert("Erro ao criar carrinho");
+          return;
+        }
+      } catch (e) {
+        console.log(e);
+        alert(e.message);
         return;
+      } finally {
+        setIsLoading(false);
       }
     } else {
       AdicionaCarrinho(itemCarrinho);
@@ -122,36 +132,52 @@ export function CarrinhoProvider({ children }) {
 
   async function EnviarCarrinhoLogin() {
     if (itensCarrinho.length > 0) {
-      const response = await CarrinhoInserir(itensCarrinho);
-      handaleWhats();
-      if (!response.success) {
+      try {
+        setIsLoading(!true);
+        const response = await CarrinhoInserir(itensCarrinho);
+        if (response.success) {
+          handaleWhats();
+        }
+      } catch (e) {
+        console.log(e);
         alert("Erro ao criar carrinho");
         return;
+      } finally {
+        setIsLoading(false);
       }
     }
   }
   async function handaleWhats() {
     if (isAuthenticated()) {
-      let mensagem = "";
+      try {
+        setIsLoading(true);
+        let mensagem = "";
 
-      const response = await Checkout(localStorage.getItem("CarrinhoId"));
+        const response = await Checkout(localStorage.getItem("CarrinhoId"));
 
-      if (response.success) {
-        itensCarrinho.map(
-          (item, index) =>
-            (mensagem += `%0A${index + 1} - Produto:%0A ${
-              item.Produto
-            }%0APreço: ${item.Preco}%0AQuantidade: ${item.Quantidade}%0A`)
-        );
-        mensagem += `%0ATotal: R$ ${total.toFixed(2)}`;
-        window.open(
-          `https://api.whatsapp.com/send/?phone=5541987704278&text=Olá estou interessado nos produtos ${mensagem}&type=phone_number&app_absent=0`
-        );
+        if (response.success) {
+          itensCarrinho.map(
+            (item, index) =>
+              (mensagem += `%0A${index + 1} - Produto:%0A ${
+                item.Produto
+              }%0APreço: ${item.Preco}%0AQuantidade: ${item.Quantidade}%0A`)
+          );
+          mensagem += `%0ATotal: R$ ${total.toFixed(2)}`;
+          window.open(
+            `https://api.whatsapp.com/send/?phone=5541987704278&text=Olá estou interessado nos produtos ${mensagem}&type=phone_number&app_absent=0`,
+            "_self"
+          );
 
-        localStorage.clear();
-      } else {
-        alert("Erro ao fazer o checkout");
+          localStorage.removeItem("carrinho");
+          localStorage.removeItem("CarrinhoId");
+          setItensCarrinho([]);
+        }
+      } catch (e) {
+        console.log(e);
+        alert("Erro ao criar carrinho");
         return;
+      } finally {
+        setIsLoading(false);
       }
     }
   }
@@ -173,18 +199,12 @@ export function CarrinhoProvider({ children }) {
         handaleWhats,
         EnviarCarrinho,
         EnviarCarrinhoLogin,
+        isLoading,
+        setIsLoading,
+        setItensCarrinho,
       }}
     >
       {children}
     </CarrinhoContext.Provider>
   );
-}
-
-export function UseCarrinho() {
-  const context = useContext(CarrinhoContext);
-  if (context == undefined) {
-    throw new Error("erro");
-  }
-
-  return context;
 }

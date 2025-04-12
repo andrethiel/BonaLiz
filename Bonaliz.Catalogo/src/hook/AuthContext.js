@@ -1,42 +1,58 @@
 "use client";
-import { CadastrarClienteCatalogo } from "@/Api/Controllers/User";
+import {
+  CadastrarClienteCatalogo,
+  ClienteCatalogo,
+} from "@/Api/Controllers/User";
 import { createContext, useContext, useEffect, useState } from "react";
-import { UseCarrinho } from "./CarrinhoContext";
+import { CarrinhoContext } from "./CarrinhoContext";
+import { useClienteCarrinho } from "./useCarrinho";
+import { useGlobalState } from "./GlobalContext";
+import { loadUserFromStorage } from "@/utils/userStorage";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState({
-    nome: "",
-    telefone: "",
-  });
   const [modalLogin, setModalLogin] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const { setIsOpen, itensCarrinho, EnviarCarrinhoLogin } = UseCarrinho();
+  const { setIsOpen, setIsLoading } = useContext(CarrinhoContext);
+
+  const { sincronizarComUsuario } = useClienteCarrinho();
+  const { user, setUser } = useGlobalState();
 
   async function Login() {
-    if (Verifica()) {
-      const response = await CadastrarClienteCatalogo(user);
-      if (response.status) {
-        localStorage.setItem("isAuthenticated", true);
-        setIsAuthenticated(true);
-        setModalLogin(false);
-        setIsOpen(false);
-        localStorage.setItem("CarrinhoId", response.carrinhoId);
-        if (itensCarrinho.length > 0) {
-          for (var i = 0; i < itensCarrinho.length; i++) {
-            itensCarrinho[i].CarrinhoId = response.carrinhoId;
-          }
-          EnviarCarrinhoLogin();
+    try {
+      if (Verifica()) {
+        setIsLoading(true);
+        const response = await CadastrarClienteCatalogo(user);
+        if (response.success) {
+          localStorage.setItem("isAuthenticated", true);
+          setIsAuthenticated(true);
+          setModalLogin(false);
+          setIsOpen(false);
+          localStorage.setItem("CarrinhoId", response.data.carrinhoId);
+          localStorage.setItem("telefone", user.telefone);
+          localStorage.setItem("nome", user.nome);
+
+          await sincronizarComUsuario(response.data.carrinhoId);
+
+          return true;
         }
       }
+    } catch (e) {
+      alert(e.message);
+      return;
+    } finally {
+      setIsLoading(false);
+      return false;
     }
   }
 
   const logout = () => {
     localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("CarrinhoId");
+    localStorage.removeItem("telefone");
+    localStorage.removeItem("nome");
     setIsAuthenticated(false);
   };
 
@@ -53,12 +69,37 @@ export function AuthProvider({ children }) {
     return true;
   }
 
+  async function handlerOnBlur() {
+    try {
+      setIsLoading(true);
+      const response = await ClienteCatalogo(user.telefone);
+      if (response.data != null) user.nome = response.data.nome;
+    } catch (e) {
+      alert("Erro ao fazer o login");
+      return;
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsAuthenticated(
-        localStorage.getItem("isAuthenticated") == "true" ? true : false
-      );
+      const auth = localStorage.getItem("isAuthenticated") === "true";
+      setIsAuthenticated(auth);
+
+      const handleStorage = (event) => {
+        if (event.key === "isAuthenticated") {
+          setIsAuthenticated(event.newValue === "true");
+        }
+      };
+
+      window.addEventListener("storage", handleStorage);
+      return () => window.removeEventListener("storage", handleStorage);
     }
+  }, []);
+
+  useEffect(() => {
+    loadUserFromStorage(setUser);
   }, []);
 
   return (
@@ -71,17 +112,11 @@ export function AuthProvider({ children }) {
         modalLogin,
         setModalLogin,
         setUser,
+        handlerOnBlur,
+        setIsAuthenticated,
       }}
     >
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
 }

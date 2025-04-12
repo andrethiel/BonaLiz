@@ -61,15 +61,16 @@ namespace BonaLiz.Negocio.Services
                 };
             }
 
-            //if (carrinho.DataCarrinho < Convert.ToDateTime(DateTime.Now.ToString("00:00:00")))
-            //{
-
-            //}
-
             return new CarrinhoIdViewModel()
             {
                 CarrinhoId = carrinho.CarrinhoId.ToString()
             };
         }
+
+        public ClienteViewModel Listar(ClienteViewModel model) => _clienteRepository.Listar().Where(x => x.Telefone == model.Telefone)
+            .Select(x => new ClienteViewModel()
+            {
+                Nome = x.Nome,
+            }).FirstOrDefault();
     }
 }

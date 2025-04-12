@@ -7,18 +7,13 @@ export async function ListarProdutosPrincal() {
 }
 
 export async function SelectListTipoProduto() {
-  var lista = [];
   const response = await Api.request.get("/TipoProdutoSelectList");
-  response.map((item) => {
-    lista.push({ value: item.value, label: item.text });
-  });
-
-  return lista;
+  return response;
 }
 
 export async function Filtrar(params) {
-  const response = await Api.request.post("/ProdutoFiltar", {
-    fornecedorId: params,
+  const response = await Api.request.post("/FiltarTipoProdutoId", {
+    TipoProdutoId: params,
   });
 
   return response;

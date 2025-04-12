@@ -1,8 +1,10 @@
 ﻿using BonaLiz.Api.Authentication;
 using BonaLiz.Api.Controller.Response;
 using BonaLiz.Negocio.Interfaces;
+using BonaLiz.Negocio.Services;
 using BonaLiz.Negocio.ViewModels;
 using MassTransit;
+using MassTransit.Transports;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,8 +12,11 @@ namespace BonaLiz.Api.Controller
 {
     [ApiController]
     [ApiKey]
-    public class CheckoutController( IPublishEndpoint _publishEndpoint, ICheckoutServices _checkoutServices) : ControllerBase
+    public class CheckoutController(ICheckoutServices _checkoutServices, IPublishEndpoint _publishEndpoint = null) : ControllerBase
     {
+        private readonly ICheckoutServices _checkoutServices = _checkoutServices;
+        private readonly IPublishEndpoint? _publishEndpoint = _publishEndpoint;
+
         [HttpGet]
         [Route("Checkout")]
         public async Task<IActionResult> Checkout(string carrinhoId)

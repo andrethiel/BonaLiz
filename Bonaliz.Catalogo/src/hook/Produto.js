@@ -1,13 +1,29 @@
-import { useEffect, useState } from "react";
+"use client";
+import { createContext, useEffect, useState } from "react";
 import {
   Filtrar,
   ListarProdutosPrincal,
   SelectListTipoProduto,
 } from "../Api/Controllers/Produto";
 
-export function Principal() {
+export const ProdutoContext = createContext();
+
+export function ProdutoProvider({ children }) {
+  useEffect(() => {
+    ListarTudo();
+  }, []);
+
+  async function ListarTudo() {
+    try {
+      const [res1, res2] = await Promise.all([SelectList(), Listar()]);
+    } catch (e) {
+      alert(e.request.response);
+    }
+  }
+
+  const [tipoProduto, setTipoProduto] = useState([]);
   const [produtos, setProdutos] = useState([]);
-  const [selectTipoProduto, setSelectTipoProduto] = useState();
+  const [selectTipoProduto, setSelectTipoProduto] = useState([]);
 
   async function Listar() {
     try {
@@ -26,6 +42,7 @@ export function Principal() {
   async function SelectList() {
     try {
       const response = await SelectListTipoProduto();
+      console.log(response);
       if (response.success) {
         setSelectTipoProduto(response.data);
       }
@@ -35,23 +52,47 @@ export function Principal() {
     }
   }
 
-  async function FiltrarProdutos(params) {
-    try {
-      const response = await Filtrar(params);
-      if (response.success) {
-        setProdutos(response.data);
+  useEffect(() => {
+    const filtrarProdutos = async () => {
+      if (tipoProduto.length > 0) {
+        try {
+          const response = await Filtrar(JSON.stringify(tipoProduto));
+          if (response.success) {
+            setProdutos(response.data);
+          }
+        } catch (e) {
+          setSelectTipoProduto([]);
+          alert(e.message);
+        }
+      } else {
+        Listar();
       }
-    } catch (e) {
-      setSelectTipoProduto([]);
-      alert(e.message);
-    }
+    };
+
+    filtrarProdutos();
+  }, [tipoProduto]);
+
+  async function FiltrarProdutos(id) {
+    setTipoProduto((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((item) => item != id);
+      } else {
+        return [...prev, id];
+      }
+    });
   }
 
-  return {
-    produtos,
-    Listar,
-    SelectList,
-    selectTipoProduto,
-    FiltrarProdutos,
-  };
+  return (
+    <ProdutoContext.Provider
+      value={{
+        produtos,
+        Listar,
+        SelectList,
+        selectTipoProduto,
+        FiltrarProdutos,
+      }}
+    >
+      {children}
+    </ProdutoContext.Provider>
+  );
 }

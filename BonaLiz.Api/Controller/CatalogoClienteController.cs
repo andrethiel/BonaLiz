@@ -33,5 +33,15 @@ namespace BonaLiz.Api.Controller
                 return BadRequest(ex);
             }
         }
+
+        [HttpGet]
+        [Route("/ClienteCatalogo")]
+        public async Task<IActionResult> Listar([FromQuery] ClienteViewModel model)
+        {
+            var telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
+            model.Telefone = telefone;
+            var cliente = _clienteCarrinhoServices.Listar(model);
+            return Ok(BaseResponseFactory.Success(cliente));
+        }
     }
 }

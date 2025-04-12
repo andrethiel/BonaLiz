@@ -242,44 +242,43 @@ namespace BonaLiz.Negocio.Services
             };
         }
 
-        public List<ProdutoViewModel> ListarPrincipal(ProdutoViewModel model)
+        public List<ProdutoViewModel> ListarPrincipal()
         {
             var imagens = _imagemServices.Listar();
 
-            return _produtoRepository.Listar().Where(x => x.Inativo == Convert.ToBoolean(model.Inativo))
+            return _produtoRepository.Listar().Where(x => x.Quantidade > 0 && x.Inativo == false)
             .Select(x => new ProdutoViewModel()
             {
                 Id = x.Id,
                 Quantidade = x.Quantidade.ToString(),
                 Nome = x.Nome,
                 PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
-                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor)
+                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor),
+                TipoProdutoId = x.TipoProdutoId.ToString()
             })
             .ToList();
         }
 
-        //private void Codigo(Produto produto)
-        //{
-        //    var lista = Listar();
-        //    var listaCodigos = lista.Where(x => x.FornecedorId == produto.FornecedorId).Where(x => x.Codigo != "").ToList().OrderBy(x => x.Codigo).ToList();
-        //    if (listaCodigos.Count > 0)
-        //    {
-        //        var codigo = listaCodigos.Last().Codigo.Length == 6 ? listaCodigos.Last().Codigo.Substring(2) : listaCodigos.Last().Codigo.Substring(1);
-        //        var zeros = codigo.Split("0").SkipLast(1).ToArray();
-        //        var codigoInt = Convert.ToInt32(codigo) + 1;
-        //        var iniciais = _context.Fornecedor.Where(x => x.Id == produto.FornecedorId).FirstOrDefault().Iniciais.Trim();
-        //        iniciais = string.Format("{0}{1}", iniciais.PadRight(iniciais.Length + zeros.Length, '0'), codigoInt);
+        public List<ProdutoViewModel> FiltrarTipoProdutoId(string listaFornecedores)
+        {
+            var lista = JsonConvert.DeserializeObject<List<int>>(listaFornecedores);
 
-        //        produto.Codigo = iniciais;
+            var produtos = _produtoRepository.Listar();
 
-        //    }
-        //    else
-        //    {
-        //        produto.Codigo = string.Format("{0}{1}{2}", _context.Fornecedor.Where(x => x.Id == produto.FornecedorId).FirstOrDefault().Iniciais, "000", 1);
-        //    }
+            produtos = produtos.Where(x => lista.Contains(x.TipoProdutoId.Value)).ToList();
 
-        //    _context.Produto.Update(produto);
-        //    _context.SaveChanges();
-        //}
+            var imagens = _imagemServices.Listar();
+
+            return produtos.Select(x => new ProdutoViewModel()
+            {
+                Id = x.Id,
+                Quantidade = x.Quantidade.ToString(),
+                Nome = x.Nome,
+                PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
+                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor),
+                TipoProdutoId = x.TipoProdutoId.ToString()
+            })
+            .ToList();
+        }
     }
 }

@@ -2,58 +2,46 @@
 import Logo from "@/app/fonts/logo.png";
 import Image from "next/image";
 import { FiFilter } from "react-icons/fi";
-import { Principal } from "../hook/Produto";
-import { useEffect, useState } from "react";
+import { ProdutoContext } from "../hook/Produto";
+import { useContext } from "react";
 import Button from "../components/Button";
 import CustomLoading from "@/components/CustomLoadingGrid";
 import Select from "@/components/Select";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import { Autoplay, Navigation } from "swiper/modules";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import { Autoplay, Navigation } from "swiper/modules";
 import { PiShoppingCart, PiSignOut, PiUser } from "react-icons/pi";
 import Carrinho from "@/components/Carrinho";
-import { UseCarrinho } from "@/hook/CarrinhoContext";
+import { CarrinhoContext } from "@/hook/CarrinhoContext";
 import Modal from "@/components/Modal";
 import Input from "@/components/Input";
-import { useAuth } from "@/hook/AuthContext";
+import { AuthContext } from "@/hook/AuthContext";
 import { IoPhonePortraitOutline } from "react-icons/io5";
 import MaskInput from "@/components/InputMask";
+import { useClienteCarrinho } from "@/hook/useCarrinho";
+import { useGlobalState } from "@/hook/GlobalContext";
+import Filter from "@/components/Filter";
 
 export default function Home() {
-  const { produtos, Listar, SelectList, selectTipoProduto, FiltrarProdutos } =
-    Principal();
-  const [tipoProduto, setTipoProduto] = useState("");
-
-  const { EnviarCarrinho, itensCarrinho, setIsOpen } = UseCarrinho();
+  const { EnviarCarrinho, itensCarrinho, setIsOpen, isLoading } =
+    useContext(CarrinhoContext);
 
   const {
     isAuthenticated,
     logout,
     modalLogin,
     setModalLogin,
-    setUser,
-    user,
     Login,
-  } = useAuth();
+    handlerOnBlur,
+  } = useContext(AuthContext);
 
-  useEffect(() => {
-    ListarTudo();
-  }, []);
+  const { produtos, selectTipoProduto, FiltrarProdutos } =
+    useContext(ProdutoContext);
 
-  async function ListarTudo() {
-    try {
-      const [res1, res2] = await Promise.all([SelectList(), Listar()]);
-    } catch (e) {
-      setAlert({
-        ...alert,
-        type: "Danger",
-        message: JSON.parse(e.request.response).message,
-      });
-    }
-  }
+  const { user, setUser } = useGlobalState();
 
-  if (produtos.length === 0) {
+  if (isLoading) {
     return <CustomLoading loadingMessage="Aguarde..." />;
   }
 
@@ -97,58 +85,70 @@ export default function Home() {
         </div>
       </nav>
 
-      <div className="flex items-center flex-col my-6 gap-4">
-        {selectTipoProduto && (
-          <div className="w-full flex flex-col gap-4">
-            <Select
+      <div className="flex items-center flex-col my-6 gap-4"></div>
+      <div className="flex flex-col md:flex-row gap-8">
+        <div className="md:block w-full md:w-1/4 lg:w-1/5">
+          {selectTipoProduto && (
+            <Filter
               data={selectTipoProduto}
-              icon={<FiFilter />}
-              placeholder={"Selecione um tipo de produto"}
-              onChange={(e) => setTipoProduto(e.target.value)}
+              onChange={(e) => FiltrarProdutos(parseInt(e.target.value))}
             />
-            <Button
-              color={"primary"}
-              onClick={() => FiltrarProdutos(tipoProduto)}
-            >
-              Filtrar
-            </Button>
-          </div>
-        )}
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-6">
-        {produtos.map((item, index) => (
-          <div
-            key={index}
-            className="rounded overflow-hidden shadow-md flex items-center cursor-pointer"
-          >
-            {item.urlImagem && item.urlImagem.length == 0 ? (
-              ""
-            ) : item.urlImagem.length > 1 ? (
-              item.urlImagem.map((imagem, index) => (
-                <img className="w-32 object-cover" src={imagem} key={index} />
-              ))
-            ) : (
-              <img
-                className="w-32 object-cover"
-                src={item.urlImagem[0].nomeArquivo}
-              />
-            )}
+          )}
+        </div>
 
-            <div className="flex flex-col px-6 py-4 gap-4">
-              <div className="text-xl">{item.nome}</div>
-              <div className="font-bold text-xl">Valor: {item.precoVenda}</div>
-              <div className="flex justify-end">
-                <Button onClick={() => EnviarCarrinho(item)}>
-                  Adicionar ao carrinho
-                </Button>
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 mb-6">
+          {produtos.map((item, index) => (
+            <div
+              key={index}
+              className="rounded overflow-hidden shadow-md flex items-center cursor-pointer"
+            >
+              {item.urlImagem && item.urlImagem.length == 0 ? (
+                ""
+              ) : item.urlImagem.length > 1 ? (
+                item.urlImagem.map((imagem, index) => (
+                  <img className="w-32 object-cover" src={imagem} key={index} />
+                ))
+              ) : (
+                <img
+                  className="w-32 object-cover"
+                  src={item.urlImagem[0].nomeArquivo}
+                />
+              )}
+
+              <div className="flex flex-col px-6 py-4 gap-4">
+                <div className="text-xl">{item.nome}</div>
+                <div className="font-bold text-xl">
+                  Valor: {item.precoVenda}
+                </div>
+                <div className="flex justify-end">
+                  <Button
+                    onClick={async () => {
+                      if (localStorage.getItem("CarrinhoId") == null) {
+                        setUser((prev) => ({
+                          ...prev,
+                          nome: localStorage.getItem("nome"),
+                          telefone: localStorage.getItem("telefone"),
+                        }));
+                        if (await Login()) {
+                          EnviarCarrinho(item);
+                          return;
+                        }
+                      }
+                      EnviarCarrinho(item);
+                    }}
+                  >
+                    Adicionar ao carrinho
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div>
+          <Carrinho />
+        </div>
       </div>
-      <div>
-        <Carrinho />
-      </div>
+
       {modalLogin && (
         <Modal>
           <div>
@@ -164,6 +164,7 @@ export default function Home() {
                 mask={"(00) 00000-0000"}
                 onChange={(e) => setUser({ ...user, telefone: e.target.value })}
                 value={user.telefone}
+                onBlur={handlerOnBlur}
               />
             </div>
             <div>

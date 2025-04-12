@@ -1,10 +1,10 @@
-import { UseCarrinho } from "@/hook/CarrinhoContext";
-import React from "react";
+import { CarrinhoContext } from "@/hook/CarrinhoContext";
+import React, { useContext } from "react";
 import { PiPlus } from "react-icons/pi";
 import { VscChromeMinimize } from "react-icons/vsc";
 import { AiOutlineClose } from "react-icons/ai";
 import Button from "../Button";
-import { useAuth } from "@/hook/AuthContext";
+import { AuthContext } from "@/hook/AuthContext";
 
 function Carrinho() {
   const {
@@ -15,9 +15,9 @@ function Carrinho() {
     removerItem,
     total,
     handaleWhats,
-  } = UseCarrinho();
+  } = useContext(CarrinhoContext);
 
-  const { setModalLogin, isAuthenticated } = useAuth();
+  const { setModalLogin, isAuthenticated } = useContext(AuthContext);
 
   if (!isOpen) return null;
 
@@ -44,7 +44,7 @@ function Carrinho() {
           ) : (
             itensCarrinho.map((item) => (
               <div
-                key={item.Id}
+                key={item.ProdutoId}
                 className="flex justify-center gap-4 rounded-lg p-4"
               >
                 <img

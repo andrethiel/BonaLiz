@@ -76,7 +76,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
         builder => builder
-            .WithOrigins("https://localhost:3000", "http://localhost:3000", "https://localhost:3001", "http://localhost:3001", "https://catalogo.bonaliz.com.br/") // 🔥 Substitua pelo seu domínio real
+            .WithOrigins("https://localhost:3000", "http://localhost:3000", "https://localhost:3001", "http://localhost:3001", "https://catalogo.bonaliz.com.br") // 🔥 Substitua pelo seu domínio real
             .AllowCredentials()
             .AllowAnyHeader()
             .AllowAnyMethod());
@@ -89,7 +89,7 @@ if (builder.Configuration.GetValue<bool>("RabbitMqEnable"))
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.

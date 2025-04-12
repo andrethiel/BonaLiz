@@ -59,12 +59,12 @@ namespace BonaLiz.Negocio.Services
 
                     _carrinhoRepository.InserirItens(itens);
                 }
-                else
-                {
-                    var carrinhoItem = carrinho.FirstOrDefault(x => x.ProdutoId == item.ProdutoId);
-                    carrinhoItem.Quantidade = carrinhoItem.Quantidade += item.Quantidade;
-                    _carrinhoRepository.Editar(carrinhoItem);
-                }
+                //else
+                //{
+                //    var carrinhoItem = carrinho.FirstOrDefault(x => x.ProdutoId == item.ProdutoId);
+                //    carrinhoItem.Quantidade = carrinhoItem.Quantidade += item.Quantidade;
+                //    _carrinhoRepository.Editar(carrinhoItem);
+                //}
             }
         }
 
