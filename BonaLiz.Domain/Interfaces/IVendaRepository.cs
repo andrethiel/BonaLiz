@@ -16,5 +16,6 @@ namespace BonaLiz.Domain.Interfaces
 		List<Venda> Filtrar(Venda model);
         Venda StatusVenda(int id, string status);
 		VendaItens InserirItemVenda(VendaItens model);
+		List<VendaItens> ListarItens();
 	}
 }

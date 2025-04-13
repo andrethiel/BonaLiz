@@ -7,9 +7,8 @@ import {
   VendasFiltar,
 } from "@/Api/Controllers/Vender";
 import dayjs from "dayjs";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
-import { SelectListProdutos } from "./ProdutosSelect";
 
 export const VendasContext = createContext(null);
 
@@ -34,8 +33,12 @@ export function VendasProvider({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
 
+  const pathname = usePathname();
+
   useEffect(() => {
-    Listar();
+    if (pathname === "/pages/Adm/Vendas") {
+      Listar();
+    }
   }, []);
 
   async function Listar() {

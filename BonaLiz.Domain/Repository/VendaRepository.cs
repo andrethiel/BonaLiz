@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace BonaLiz.Domain.Repository
 {
-	public class VendaRepository(IRepositoryBase<Venda> _repositoryBase, IRepositoryBase<VendaItens> repositoryBaseVendaItens) : IVendaRepository
+	public class VendaRepository(IRepositoryBase<Venda> _repositoryBase, IRepositoryBase<VendaItens> _repositoryBaseVendaItens) : IVendaRepository
 	{
 		public Venda Inserir(Venda model)
 		{
@@ -50,7 +50,9 @@ namespace BonaLiz.Domain.Repository
 
         public VendaItens InserirItemVenda(VendaItens model)
         {
-            return repositoryBaseVendaItens.Inserir(model);
+            return _repositoryBaseVendaItens.Inserir(model);
         }
+
+		public List<VendaItens> ListarItens() => _repositoryBaseVendaItens.Listar();
     }
 }

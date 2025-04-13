@@ -24,8 +24,8 @@ export function MenuProvider({ children }) {
 
   async function criarMenu(role) {
     const response = await ListarMenu(role);
-    if (response.length > 0) {
-      setMenu(response);
+    if (response.success) {
+      setMenu(response.data);
     }
   }
 

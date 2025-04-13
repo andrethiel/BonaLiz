@@ -10,7 +10,7 @@ import {
 } from "@/Api/Controllers/Produto";
 import { SelectListTipoProduto } from "@/Api/Controllers/TipoProduto";
 import dayjs from "dayjs";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 export const ProdutoContext = createContext(null);
@@ -34,6 +34,7 @@ const initialFormState = {
 
 export function ProdutoProvider({ children }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [checked, setChecked] = useState(false);
 
   const [form, setForm] = useState(initialFormState);
@@ -51,10 +52,7 @@ export function ProdutoProvider({ children }) {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (
-      !window.location.href.includes("Criar") ||
-      !window.location.href.includes("Editar")
-    ) {
+    if (pathname === "/pages/Adm/Produto") {
       Listar();
     }
   }, []);

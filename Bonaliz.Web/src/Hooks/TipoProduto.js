@@ -6,7 +6,7 @@ import {
   PesquisarTipoProduto,
   TipoProdutoPorGuid,
 } from "@/Api/Controllers/TipoProduto";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 
 export const TipoProdutoContext = createContext(null);
@@ -26,6 +26,7 @@ export function TipoProdutoProvider({ children }) {
   });
 
   const router = useRouter();
+  const pathname = usePathname();
   const [isLoading, setIsLoading] = useState(false);
   const [TipoProduto, setTipoProduto] = useState();
   const [checked, setChecked] = useState(false);
@@ -39,7 +40,7 @@ export function TipoProdutoProvider({ children }) {
   };
 
   useEffect(() => {
-    if (!window.location.href.includes("Criar" || "Editar")) {
+    if (pathname === "/pages/Adm/TipoProduto") {
       Listar();
     }
   }, []);

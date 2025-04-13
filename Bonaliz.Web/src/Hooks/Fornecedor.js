@@ -6,7 +6,7 @@ import {
   ObterFornecedorGuid,
   PesquisarFornecedor,
 } from "@/Api/Controllers/Forncedor";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 
 export const FornecedorContext = createContext(null);
@@ -31,12 +31,10 @@ export function FornecedorProvider({ children }) {
   });
 
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
-    if (
-      !window.location.href.includes("Criar") ||
-      !window.location.href.includes("Editar")
-    ) {
+    if (pathname === "/pages/Adm/Fornecedor") {
       Listar();
     }
   }, []);

@@ -65,10 +65,6 @@ function Vendas() {
   const { selectProdutos } = SelectListProdutos();
   const [columnsDef, setColumnsDef] = useState([
     {
-      headerName: "Nome do produto",
-      field: "nomeProduto",
-    },
-    {
       headerName: "Nome do cliente",
       field: "nomeCliente",
     },

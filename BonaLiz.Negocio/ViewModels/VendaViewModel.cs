@@ -17,6 +17,8 @@ namespace BonaLiz.Negocio.ViewModels
 		public string DataVenda { get; set; }
         public string Cancelada { get; set; }
         public string Status { get; set; }
+        public string Quantidade { get; set; }
+        public string Valor { get; set; }
         public List<VendaItensViewModel> VendaItensViewModel { get; set; }
     }
 }

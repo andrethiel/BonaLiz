@@ -36,7 +36,7 @@ namespace BonaLiz.Negocio.Services
 					ProdutoId = Convert.ToInt32(item.ProdutoId),
 					Quantidade = Convert.ToInt32(item.Quantidade),
 					VendaId = vendaEntity.Id,
-					ValorUnitario = Convert.ToDecimal(item.Valor)
+					Valor = Convert.ToDecimal(item.Valor)
 				};
 
                 vendaItem = _vendaRepository.InserirItemVenda(vendaItem);
@@ -68,17 +68,18 @@ namespace BonaLiz.Negocio.Services
 		{
 			var produtos = _produtoRepository.Listar();
 			var clientes = _clienteRepository.Listar();
+			var venda = _vendaRepository.Listar();
+			var vendaItens = _vendaRepository.ListarItens();
 
-            return _vendaRepository.Listar().Select(x => new VendaViewModel()
+			return venda.Select(x => new VendaViewModel()
 			{
-				Id = x.Id, 
+				Id = x.Id,
 				Guid = x.Guid,
 				NomeCliente = clientes.Where(y => y.Id.Equals(x.ClienteId)).First().Nome,
-				//NomeProduto = produtos.Where(y => y.Id.Equals(x.ProdutoId)).First().Nome,
-				//Quantidade = x.Quantidade.ToString(),
-				//Valor = Formater.FormatarMoeda(x.Valor),
+				Quantidade = vendaItens.Where(y => y.VendaId == x.Id).FirstOrDefault().Quantidade.ToString(),
+				//Valor = Formater.FormatarMoeda(vendaItens.Where(y => y.VendaId == x.Id).FirstOrDefault().Valor).ToString(),
 				DataVenda = x.DataVenda.Value.ToString("dd/MM/yyyy"),
-				Cancelada = x.Cancelada.ToString(),
+				Cancelada = x.Cancelada.HasValue ? x.Cancelada.ToString() : "",
 				Status = x.Status
 			}).ToList();
 

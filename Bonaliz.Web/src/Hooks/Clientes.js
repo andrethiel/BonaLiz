@@ -8,6 +8,7 @@ import {
 } from "@/Api/Controllers/Cliente";
 import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export const ClientesContext = createContext(null);
 
@@ -22,6 +23,7 @@ const initialFormState = {
 
 export function ClientesProvider({ children }) {
   const router = useRouter();
+  const pathname = usePathname();
   const [form, setForm] = useState(initialFormState);
   const [alert, setAlert] = useState({
     message: "",
@@ -33,10 +35,7 @@ export function ClientesProvider({ children }) {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    if (
-      !window.location.href.includes("Criar") ||
-      !window.location.href.includes("Editar")
-    ) {
+    if (pathname === "/pages/Adm/Clientes") {
       Listar();
     }
   }, []);

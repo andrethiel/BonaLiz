@@ -14,10 +14,10 @@ export function AuthProvider({ children }) {
   const [modalLogin, setModalLogin] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const { setIsOpen, setIsLoading } = useContext(CarrinhoContext);
+  const { setIsOpen } = useContext(CarrinhoContext);
 
   const { sincronizarComUsuario } = useClienteCarrinho();
-  const { user, setUser, initialDefault } = useGlobalState();
+  const { user, setUser, initialDefault, setIsLoading } = useGlobalState();
 
   function handlerLogin() {
     if (localStorage.getItem("telefone") == null) {

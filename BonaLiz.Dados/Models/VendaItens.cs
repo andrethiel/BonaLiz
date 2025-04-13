@@ -11,7 +11,7 @@ namespace BonaLiz.Dados.Models
         public int VendaId { get; set; } 
         public int ProdutoId { get; set; }
         public int Quantidade { get; set; }
-        public decimal ValorUnitario { get; set; }
+        public decimal Valor { get; set; }
         public Venda Venda { get; set; }
     }
 }
