@@ -1,5 +1,5 @@
 import { ListarProdutosPrincal } from "@/Api/Controllers/Produto";
-import { InserirVenda } from "@/Api/Controllers/Vender";
+import { InserirVenda } from "@/Api/Controllers/Vendas";
 import { useEffect, useState } from "react";
 
 export function PrincipalHook() {

@@ -166,7 +166,7 @@ namespace BonaLiz.Negocio.Services
                     Quantidade = x.Quantidade.ToString(),
                     Inativo = x.Inativo.ToString(),
 
-                    UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor)
+                    UrlImagem = Arquivo.AtualizaListaComURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor)
                 }).ToList();
             }
 
@@ -194,7 +194,7 @@ namespace BonaLiz.Negocio.Services
                 TipoProduto = tipoProdutos.Where(y => y.Id == x.TipoProdutoId).First().Nome,
                 Quantidade = x.Quantidade.ToString(),
                 Inativo = x.Inativo.ToString(),
-                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor)
+                UrlImagem = Arquivo.AtualizaListaComURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor)
             }).ToList();
         }
 
@@ -217,7 +217,7 @@ namespace BonaLiz.Negocio.Services
                 Quantidade = produto.Quantidade.ToString(),
                 Inativo = produto.Inativo.ToString(),
 
-                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == produto.Id).ToList(), _httpContextAccessor)
+                UrlImagem = Arquivo.AtualizaListaComURL(imagens.Where(y => y.ProdutoId == produto.Id).ToList(), _httpContextAccessor)
             };
         }
 
@@ -238,7 +238,7 @@ namespace BonaLiz.Negocio.Services
                 DataCompra = produto.DataCompra.Value.ToString("dd/MM/yyyy"),
                 Quantidade = produto.Quantidade.ToString(),
                 Inativo = produto.Inativo.ToString(),
-                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == produto.Id).ToList(), _httpContextAccessor)
+                UrlImagem = Arquivo.AtualizaListaComURL(imagens.Where(y => y.ProdutoId == produto.Id).ToList(), _httpContextAccessor)
             };
         }
 
@@ -253,7 +253,7 @@ namespace BonaLiz.Negocio.Services
                 Quantidade = x.Quantidade.ToString(),
                 Nome = x.Nome,
                 PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
-                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor),
+                UrlImagem = Arquivo.AtualizaListaComURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor),
                 TipoProdutoId = x.TipoProdutoId.ToString()
             })
             .ToList();
@@ -275,7 +275,7 @@ namespace BonaLiz.Negocio.Services
                 Quantidade = x.Quantidade.ToString(),
                 Nome = x.Nome,
                 PrecoVenda = Formater.FormatarMoeda(x.PrecoVenda),
-                UrlImagem = Arquivo.FormataNomeURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor),
+                UrlImagem = Arquivo.AtualizaListaComURL(imagens.Where(y => y.ProdutoId == x.Id).ToList(), _httpContextAccessor),
                 TipoProdutoId = x.TipoProdutoId.ToString()
             })
             .ToList();

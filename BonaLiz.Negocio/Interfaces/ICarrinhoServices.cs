@@ -16,6 +16,6 @@ namespace BonaLiz.Negocio.Interfaces
         CarrinhoIdViewModel ObterPorId(string carrinhoId);
         List<CarrinhoItensViewModel> ObterItensPorId(string carrinhoId);
         void Deletar(string carrinhoId);
-        List<Carrinho> ListarCarrinhos();
+        List<CarrinhoViewModel> ListarCarrinhos();
     }
 }

@@ -1,11 +1,15 @@
 ﻿using BonaLiz.Dados.Models;
 using BonaLiz.Domain.Interfaces;
+using BonaLiz.Domain.Repository;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace BonaLiz.Negocio.Services
 {
-    public class CarrinhoServices(ICarrinhoRepository _carrinhoRepository) : ICarrinhoServices
+    public class CarrinhoServices(ICarrinhoRepository _carrinhoRepository, IProdutoRepository _produtoRepository,
+        IClienteRepository _clienteRepository, IImagemRepository _imagemRepository,
+         IHttpContextAccessor _httpContextAccessor) : ICarrinhoServices
     {
         public void AlteraQuantidade(CarrinhoItensViewModel model)
         {
@@ -68,7 +72,33 @@ namespace BonaLiz.Negocio.Services
             }
         }
 
-        public List<Carrinho> ListarCarrinhos() => _carrinhoRepository.ListarCarrinho();
+        public List<CarrinhoViewModel> ListarCarrinhos()
+        {
+            var carrinho = _carrinhoRepository.ListarCarrinho();
+            var clientes = _clienteRepository.Listar();
+            var itens = _carrinhoRepository.ListarItens();
+
+            return carrinho.Select(x => new CarrinhoViewModel
+            {
+                CarrinhoId = x.CarrinhoId.ToString(),
+                NomeCliente = clientes.FirstOrDefault(c => c.Id == x.ClienteId)?.Nome,
+                DataCarrinho = x.DataCarrinho.ToString("dd/MM/yyyy"),
+                Quantidade = itens.Where(y => y.CarrinhoId == x.CarrinhoId).Sum(y => y.Quantidade)
+            }).ToList();
+        }
+
+        //public List<CarrinhoItensViewModel> ListarItensCarrinhos(Guid id)
+        //{
+        //    var itens = _carrinhoRepository.ObterItensPorId(id);
+        //    var clientes = _clienteRepository.Listar();
+        //    var produtos = _produtoRepository.Listar();
+        //    var imagens = _imagemRepository.Listar();
+
+        //    return itens.Select(x => new CarrinhoItensViewModel
+        //    {
+        //        NomeCliente = clientes.Where(y => y.Id == x.cl)
+        //    })
+        //}
 
         public List<CarrinhoItensViewModel> ObterItensPorId(string carrinhoId)
         {

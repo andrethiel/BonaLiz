@@ -19,5 +19,6 @@ namespace BonaLiz.Domain.Interfaces
         Carrinho ObterCarrinhoId(Guid carrinhoId);
         void DeletarCarrinho(Guid carrinhoId);
         List<Carrinho> ListarCarrinho();
+        List<CarrinhoItens> ListarItens();
     }
 }

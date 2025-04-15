@@ -27,5 +27,7 @@ namespace BonaLiz.Domain.Repository
         public void DeletarCarrinho(Guid carrinhoId) => _repositoryCarrinho.Deletar(_repositoryCarrinho.Listar().Where(x => x.CarrinhoId == carrinhoId).FirstOrDefault()!);
 
         public List<Carrinho> ListarCarrinho() => _repositoryCarrinho.Listar();
+
+        public List<CarrinhoItens> ListarItens() => _repositoryCarrinhoItens.Listar();
     }
 }

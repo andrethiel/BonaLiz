@@ -21,13 +21,21 @@ namespace BonaLiz.Api.Controller
         [Route("Checkout")]
         public async Task<IActionResult> Checkout(string carrinhoId)
         {
-            var venda = _checkoutServices.Checkout(carrinhoId);
-            if (venda == null)
+            try
             {
-                return BadRequest(BaseResponseFactory.Fail<string>("Erro ao inserir venda"));
-            }
+                var venda = _checkoutServices.Checkout(carrinhoId);
+                if (venda == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<string>("Erro ao inserir venda"));
+                }
 
-            return Ok(BaseResponseFactory.Success(venda));
+                return Ok(BaseResponseFactory.Success(venda));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
 
         [HttpPost]

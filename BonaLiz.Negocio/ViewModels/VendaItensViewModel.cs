@@ -11,7 +11,9 @@ namespace BonaLiz.Negocio.ViewModels
         public int Id { get; set; }
         public int VendaId { get; set; }
         public string ProdutoId { get; set; }
+        public string NomeProduto { get; set; }
         public string Quantidade { get; set; }
         public string Valor { get; set; }
+        public string ImagemProduto { get; set; }
     }
 }

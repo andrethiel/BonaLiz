@@ -13,32 +13,40 @@ namespace BonaLiz.Negocio.Services
     {
         public VendaViewModel Checkout(string carrinhoId)
         {
-            var carrinho = _carrinhoServices.ObterPorId(carrinhoId);
-            var carrinhoItem = _carrinhoServices.ObterItensPorId(carrinhoId);
-            var produto = _produtoServices.Listar();
-
-            var venda = new VendaViewModel
+            try
             {
-                ClienteId = carrinho.ClienteId.ToString(),
-                DataVenda = carrinho.DataCarrinho.ToString(),
-                VendaItensViewModel = carrinhoItem.Select(x => new VendaItensViewModel
+                var carrinho = _carrinhoServices.ObterPorId(carrinhoId);
+                var carrinhoItem = _carrinhoServices.ObterItensPorId(carrinhoId);
+                var produto = _produtoServices.Listar();
+
+                var venda = new VendaViewModel
                 {
-                    ProdutoId = x.ProdutoId.ToString(),
-                    Quantidade = x.Quantidade.ToString(),
-                    Valor = string.Format("{0}", Convert.ToDecimal(produto.Where(y => y.Id == x.ProdutoId).FirstOrDefault().PrecoVenda.Replace("R$", "").Trim()) * x.Quantidade),
-                }).ToList()
-            };
+                    ClienteId = carrinho.ClienteId.ToString(),
+                    DataVenda = carrinho.DataCarrinho.ToString(),
+                    VendaItensViewModel = carrinhoItem.Select(x => new VendaItensViewModel
+                    {
+                        ProdutoId = x.ProdutoId.ToString(),
+                        Quantidade = x.Quantidade.ToString(),
+                        Valor = string.Format("{0}", Convert.ToDecimal(produto.Where(y => y.Id == x.ProdutoId).FirstOrDefault().PrecoVenda.Replace("R$", "").Trim()) * x.Quantidade),
+                    }).ToList()
+                };
 
-            var vendaEntity = _vendaServices.Inserir(venda);
+                var vendaEntity = _vendaServices.Inserir(venda);
 
-            if(vendaEntity == null)
-            {
-                return new VendaViewModel();
+                if (vendaEntity == null)
+                {
+                    return new VendaViewModel();
+                }
+
+                _carrinhoServices.Deletar(carrinhoId);
+
+                return vendaEntity;
             }
-
-            _carrinhoServices.Deletar(carrinhoId);
-
-            return vendaEntity;
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
         }
     }
 }

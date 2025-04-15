@@ -13,13 +13,13 @@ namespace BonaLiz.RabbitMQ.Consumer
         {
             try
             {
-                _logger.LogInformation("Iniciando processamento do pedido: {CarrinhoId}", context.Message.carrinhoId);
-                var venda = _checkoutServices.Checkout(context.Message.carrinhoId);
+                _logger.LogInformation("Iniciando processamento do pedido: {CarrinhoId}", context.Message.CarrinhoId);
+                var venda = _checkoutServices.Checkout(context.Message.CarrinhoId);
 
 
                 if(venda == null)
                 {
-                    _logger.LogWarning("Carrinho inválido ou não encontrado: {CarrinhoId}", context.Message.carrinhoId);
+                    _logger.LogWarning("Carrinho inválido ou não encontrado: {CarrinhoId}", context.Message.CarrinhoId);
                     throw new InvalidOperationException("Carrinho inválido. Não foi possível gerar a venda.");
                 }
                 _logger.LogInformation("Venda processada com sucesso. Id da Venda: {VendaId}", venda.Id);

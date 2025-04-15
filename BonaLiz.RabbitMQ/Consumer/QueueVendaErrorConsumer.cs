@@ -17,7 +17,7 @@ namespace BonaLiz.RabbitMQ.Consumer
             var exceptionMessage = context.Message.Exceptions.FirstOrDefault()?.Message;
 
             _logger.LogCritical("🚨 Pedido falhou permanentemente. CarrinhoId: {CarrinhoId}, Erro: {Erro}",
-                failedMessage.carrinhoId,
+                failedMessage.CarrinhoId,
                 exceptionMessage);
 
             // Aqui você pode: salvar no banco, enviar e-mail, etc.

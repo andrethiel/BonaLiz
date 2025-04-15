@@ -24,7 +24,7 @@ namespace BonaLiz.Negocio.Utils
 			}
 		}
 
-		public static List<ImagemProdutoViewModel> FormataNomeURL(List<ImagemProdutoViewModel> arquivos, IHttpContextAccessor _httpContextAccessor)
+		public static List<ImagemProdutoViewModel> AtualizaListaComURL(List<ImagemProdutoViewModel> arquivos, IHttpContextAccessor _httpContextAccessor)
 		{
 			var lista = new List<ImagemProdutoViewModel>();
 
@@ -43,6 +43,13 @@ namespace BonaLiz.Negocio.Utils
             }
             return lista;
 
+        }
+
+		public static string FormataURL(string imagem, IHttpContextAccessor _httpContextAccessor)
+		{
+            var request = _httpContextAccessor.HttpContext.Request;
+
+			return string.Format("{0}://{1}/Imagens/{2}", request.Scheme, request.Host, imagem);
         }
 
 		public static string RemoveURL(string imagem)

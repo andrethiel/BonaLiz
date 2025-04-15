@@ -4,11 +4,13 @@ import {
   InserirVenda,
   ListarVendas,
   StatusVenda,
+  VendaItens,
   VendasFiltar,
-} from "@/Api/Controllers/Vender";
+} from "@/Api/Controllers/Vendas";
 import dayjs from "dayjs";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
+import { GlobalState } from "./GlobalState";
 
 export const VendasContext = createContext(null);
 
@@ -23,15 +25,14 @@ const initialFormState = {
 };
 
 export function VendasProvider({ children }) {
+  const { setAlert, setIsLoading } = GlobalState();
+
   const [form, setForm] = useState(initialFormState);
   const [IsOpen, setIsOpen] = useState(false);
   const [vendasLista, setVendasLista] = useState([]);
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
   const [show, setShow] = useState(false);
+  const [isModalVenda, setIsModalVenda] = useState(false);
+  const [itensVenda, setItensVenda] = useState([]);
 
   const pathname = usePathname();
 
@@ -168,11 +169,37 @@ export function VendasProvider({ children }) {
     }
   }
 
+  async function ListaItensVenda(vendaId) {
+    try {
+      setIsLoading(true);
+      const response = await VendaItens(vendaId);
+      if (response.success) {
+        setItensVenda(response.data);
+        setIsModalVenda(true);
+      }
+    } catch (e) {
+      console.log(e);
+      setAlert({
+        ...alert,
+        type: "Danger",
+        message: JSON.parse(e.request.response).message,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  const total = itensVenda.reduce(
+    (sum, item) =>
+      sum +
+      parseFloat(item.valor.replace("R$ ", "").replace(",", ".")) *
+        item.quantidade,
+    0
+  );
+
   return (
     <VendasContext.Provider
       value={{
-        alert,
-        isLoading,
         vendasLista,
         Filtrar,
         form,
@@ -186,6 +213,11 @@ export function VendasProvider({ children }) {
         handleChange,
         show,
         setShow,
+        isModalVenda,
+        setIsModalVenda,
+        itensVenda,
+        ListaItensVenda,
+        total,
       }}
     >
       {children}

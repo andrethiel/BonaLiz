@@ -3,7 +3,9 @@ using BonaLiz.Domain.Interfaces;
 using BonaLiz.Domain.Repository;
 using BonaLiz.Negocio.Helpers;
 using BonaLiz.Negocio.Interfaces;
+using BonaLiz.Negocio.Utils;
 using BonaLiz.Negocio.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,9 @@ using System.Threading.Tasks;
 
 namespace BonaLiz.Negocio.Services
 {
-	public class VendaServices(IVendaRepository _vendaRepository, IProdutoRepository _produtoRepository, IClienteRepository _clienteRepository) : IVendaServices
+	public class VendaServices(IVendaRepository _vendaRepository, IProdutoRepository _produtoRepository,
+		IClienteRepository _clienteRepository, IImagemRepository _imagemRepository,
+         IHttpContextAccessor _httpContextAccessor) : IVendaServices
 	{
 		public VendaViewModel Inserir(VendaViewModel model)
 		{
@@ -76,8 +80,8 @@ namespace BonaLiz.Negocio.Services
 				Id = x.Id,
 				Guid = x.Guid,
 				NomeCliente = clientes.Where(y => y.Id.Equals(x.ClienteId)).First().Nome,
-				Quantidade = vendaItens.Where(y => y.VendaId == x.Id).FirstOrDefault().Quantidade.ToString(),
-				//Valor = Formater.FormatarMoeda(vendaItens.Where(y => y.VendaId == x.Id).FirstOrDefault().Valor).ToString(),
+				Quantidade = vendaItens.Where(y => y.VendaId == x.Id).Sum(y => y.Quantidade).ToString(),
+				Valor = Formater.FormatarMoeda(vendaItens.Where(y => y.VendaId == x.Id).Sum(y => y.Valor)).ToString(),
 				DataVenda = x.DataVenda.Value.ToString("dd/MM/yyyy"),
 				Cancelada = x.Cancelada.HasValue ? x.Cancelada.ToString() : "",
 				Status = x.Status
@@ -90,15 +94,15 @@ namespace BonaLiz.Negocio.Services
             var produtos = _produtoRepository.Listar();
             var clientes = _clienteRepository.Listar();
             var venda = _vendaRepository.ObterPorGuid(guid);
-			return new VendaViewModel()
+            var vendaItens = _vendaRepository.ListarItens();
+            return new VendaViewModel()
 			{
 				Id = venda.Id,
 				Guid = venda.Guid,
                 NomeCliente = clientes.Where(y => y.Id.Equals(venda.ClienteId)).First().Nome,
-    //            NomeProduto = produtos.Where(y => y.Id.Equals(venda.ProdutoId)).First().Nome,
-    //            Quantidade = venda.Quantidade.ToString(),
-				//Valor = Formater.FormatarMoeda(venda.Valor),
-				DataVenda = venda.DataVenda.Value.ToString("dd/MM/yyyy"),
+                Quantidade = vendaItens.Where(y => y.VendaId == venda.Id).Sum(y => y.Quantidade).ToString(),
+                Valor = Formater.FormatarMoeda(vendaItens.Where(y => y.VendaId == venda.Id).Sum(y => y.Valor)).ToString(),
+                DataVenda = venda.DataVenda.Value.ToString("dd/MM/yyyy"),
 				Cancelada = venda.Cancelada.ToString(),
 				Status = venda.Status
 			};
@@ -118,6 +122,7 @@ namespace BonaLiz.Negocio.Services
             var lista = Filtrar(venda);
 			var produtos = _produtoRepository.Listar();
 			var clientes = _clienteRepository.Listar();
+			var vendaItens = _vendaRepository.ListarItens();
 			if (lista == null)
 			{
 				return new List<VendaViewModel>();
@@ -129,10 +134,9 @@ namespace BonaLiz.Negocio.Services
 					Id = x.Id,
 					Guid = x.Guid,
 					NomeCliente = clientes.Where(y => y.Id.Equals(x.ClienteId)).First().Nome,
-					//NomeProduto = produtos.Where(y => y.Id.Equals(x.ProdutoId)).First().Nome,
-					//Quantidade = x.Quantidade.ToString(),
-					//Valor = Formater.FormatarMoeda(x.Valor),
-					DataVenda = x.DataVenda.Value.ToString("dd/MM/yyyy"),
+                    Quantidade = vendaItens.Where(y => y.VendaId == x.Id).Sum(y => y.Quantidade).ToString(),
+                    Valor = Formater.FormatarMoeda(vendaItens.Where(y => y.VendaId == x.Id).Sum(y => y.Valor)).ToString(),
+                    DataVenda = x.DataVenda.Value.ToString("dd/MM/yyyy"),
 					Cancelada = x.Cancelada.ToString(),
 					Status = x.Status
 				}).ToList();
@@ -141,20 +145,32 @@ namespace BonaLiz.Negocio.Services
 
 		public VendaViewModel Cancelar(int id)
 		{
-			var venda = _vendaRepository.Cancelar(id);
+			var venda = _vendaRepository.Listar().Where(x => x.Id == id).FirstOrDefault();
+            var clientes = _clienteRepository.Listar();
+			var itens = _vendaRepository.ListarItens();
+            string status = string.Empty;
 
-			//var produto = _produtoRepository.ObterPorId(venda.ProdutoId.Value);
-			//produto.Quantidade = produto.Quantidade + venda.Quantidade;
-			//_produtoRepository.Editar(produto);
+            if (venda.Cancelada == null)
+			{
+                var cancelada = _vendaRepository.Cancelar(id);
+				venda.Cancelada = cancelada.Cancelada;
+                var vendaItens = _vendaRepository.ListarItens().Where(x => x.VendaId == id);
+                foreach (var item in vendaItens)
+                {
+                    var produto = _produtoRepository.ObterPorId(item.ProdutoId);
+                    produto.Quantidade = produto.Quantidade + item.Quantidade;
+                    _produtoRepository.Editar(produto);
+                }
+
+            }
 
             return new VendaViewModel()
             {
                 Id = venda.Id,
                 Guid = venda.Guid,
-                NomeCliente = _clienteRepository.ObterPorId(venda.ClienteId.Value).Nome,
-                //NomeProduto = _produtoRepository.ObterPorId(venda.ProdutoId.Value).Nome,
-                //Quantidade = venda.Quantidade.ToString(),
-                //Valor = Formater.FormatarMoeda(venda.Valor),
+                NomeCliente = clientes.Where(y => y.Id.Equals(venda.ClienteId)).First().Nome,
+                Quantidade = itens.Where(y => y.VendaId == venda.Id).Sum(y => y.Quantidade).ToString(),
+                Valor = Formater.FormatarMoeda(itens.Where(y => y.VendaId == venda.Id).Sum(y => y.Valor)).ToString(),
                 DataVenda = venda.DataVenda.Value.ToString("dd/MM/yyyy"),
                 Cancelada = venda.Cancelada.ToString(),
                 Status = venda.Status
@@ -164,15 +180,15 @@ namespace BonaLiz.Negocio.Services
 		public VendaViewModel StatusVenda(int id, string status)
 		{
 			var vendaEntity = _vendaRepository.StatusVenda(id, status);
+            var vendaItens = _vendaRepository.ListarItens();
 
             return new VendaViewModel()
             {
                 Id = vendaEntity.Id,
                 Guid = vendaEntity.Guid,
                 NomeCliente = _clienteRepository.ObterPorId(vendaEntity.ClienteId.Value).Nome,
-                //NomeProduto = _produtoRepository.ObterPorId(vendaEntity.ProdutoId.Value).Nome,
-                //Quantidade = vendaEntity.Quantidade.ToString(),
-                //Valor = Formater.FormatarMoeda(vendaEntity.Valor),
+                Quantidade = vendaItens.Where(y => y.VendaId == vendaEntity.Id).Sum(y => y.Quantidade).ToString(),
+                Valor = Formater.FormatarMoeda(vendaItens.Where(y => y.VendaId == vendaEntity.Id).Sum(y => y.Valor)).ToString(),
                 DataVenda = vendaEntity.DataVenda.Value.ToString("dd/MM/yyyy"),
                 Cancelada = vendaEntity.Cancelada.ToString(),
                 Status = vendaEntity.Status
@@ -208,5 +224,21 @@ namespace BonaLiz.Negocio.Services
 						.ToList();
 			}
 		}
-	}
+
+        public List<VendaItensViewModel> ListaItensVenda(int vendaId)
+        {
+            var vendaItens = _vendaRepository.ListarItens().Where(x => x.VendaId == vendaId);
+			var produtos = _produtoRepository.Listar();
+			var imagens = _imagemRepository.Listar();
+
+			return vendaItens.Select(x => new VendaItensViewModel
+			{
+				Id = x.Id,
+				NomeProduto = produtos.Where(y => y.Id == x.ProdutoId).FirstOrDefault().Nome,
+				Quantidade = x.Quantidade.ToString(),
+				Valor = Formater.FormatarMoeda(x.Valor),
+				ImagemProduto = Arquivo.FormataURL(imagens.Where(y => y.ProdutoId == x.ProdutoId).FirstOrDefault().NomeImagem, _httpContextAccessor)
+			}).ToList();
+        }
+    }
 }

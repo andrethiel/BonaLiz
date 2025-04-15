@@ -132,5 +132,24 @@ namespace BonaLiz.Api.Controller
 				return BadRequest(ex);
 			}
 		}
-	}
+
+        [HttpGet]
+        [Route("/ItensVenda")]
+        public async Task<IActionResult> ItensVenda(int vendaId)
+        {
+            try
+            {
+				var venda = _vendaServices.ListaItensVenda(vendaId);
+                if (venda == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<VendaViewModel>("Erro ao listar vendas"));
+                }
+                return Ok(BaseResponseFactory.Success(venda));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+    }
 }

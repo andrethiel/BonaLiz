@@ -37,3 +37,9 @@ export async function StatusVenda(id, status) {
 
   return response;
 }
+
+export async function VendaItens(id) {
+  const response = await Api.request.get(`/ItensVenda?vendaId=${id}`);
+
+  return response;
+}

@@ -9,6 +9,7 @@ import Modal from "@/Components/Modal";
 import Select from "@/Components/Select";
 import Select2 from "@/Components/Select2";
 import { StatusVenda } from "@/constants/status";
+import { GlobalState } from "@/Hooks/GlobalState";
 import { SelectListProdutos } from "@/Hooks/ProdutosSelect";
 import { VendasContext } from "@/Hooks/Venda";
 import { useRouter } from "next/navigation";
@@ -16,12 +17,9 @@ import React, { useContext, useState } from "react";
 
 function Vendas() {
   const {
-    alert,
-    isLoading,
     vendasLista,
     Filtrar,
     form,
-    setForm,
     Cancela,
     IsOpen,
     setIsOpen,
@@ -30,7 +28,14 @@ function Vendas() {
     handleChange,
     show,
     setShow,
+    isModalVenda,
+    setIsModalVenda,
+    itensVenda,
+    ListaItensVenda,
+    total,
   } = useContext(VendasContext);
+
+  const { isLoading, alert } = GlobalState();
 
   const CustomButtonComponent = (props) => {
     const router = useRouter();
@@ -62,8 +67,26 @@ function Vendas() {
     );
   };
 
+  const CustomButtonLista = (props) => {
+    return (
+      <button
+        className="bg-secondary font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+        onClick={() => {
+          ListaItensVenda(props.data.id);
+        }}
+      >
+        Ver Lista
+      </button>
+    );
+  };
+
   const { selectProdutos } = SelectListProdutos();
   const [columnsDef, setColumnsDef] = useState([
+    {
+      field: "",
+      cellRenderer: CustomButtonLista,
+      maxWidth: 135,
+    },
     {
       headerName: "Nome do cliente",
       field: "nomeCliente",
@@ -86,6 +109,7 @@ function Vendas() {
     {
       headerName: "Status",
       field: "status",
+      maxWidth: 110,
     },
     {
       headerName: "Cancelada",
@@ -96,10 +120,12 @@ function Vendas() {
     {
       field: "",
       cellRenderer: CustomButtonStatus,
+      maxWidth: 140,
     },
     {
       field: "",
       cellRenderer: CustomButtonComponent,
+      maxWidth: 160,
     },
   ]);
 
@@ -182,6 +208,44 @@ function Vendas() {
           <AgGrid Data={vendasLista} Columns={columnsDef} />
         </div>
       </div>
+      {isModalVenda && (
+        <Modal>
+          <div>
+            <h5 className="text-center text-lg font-medium mb-4">
+              Produtos Vendidos
+            </h5>
+          </div>
+          <div className="space-y-4 w-full max-w-sm mx-auto">
+            {itensVenda.map((item) => (
+              <div
+                key={item.id}
+                className="flex justify-center gap-4 rounded-lg p-4"
+              >
+                <img
+                  src={item.imagemProduto}
+                  alt={item.imagemProduto}
+                  className="h-16 w-16 rounded-md object-cover"
+                />
+                <div className="flex-1">
+                  <h3 className="font-medium">{item.nomeProduto}</h3>
+                  <p className="text-sm text-gray-500">{item.valor}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-auto border-t pt-4">
+            <div className="mb-4 flex items-center justify-between">
+              <span className="text-lg font-semibold">Total</span>
+              <span className="text-lg font-semibold">
+                R$ {total.toFixed(2)}
+              </span>
+            </div>
+          </div>
+          <Button color={"primary"} onClick={() => setIsModalVenda(false)}>
+            Fechar
+          </Button>
+        </Modal>
+      )}
     </div>
   );
 }

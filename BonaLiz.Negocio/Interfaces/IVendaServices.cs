@@ -15,5 +15,6 @@ namespace BonaLiz.Negocio.Interfaces
 		VendaViewModel ObterPorGuid(Guid guid);
         List<VendaViewModel> Filtrar(VendaViewModel model);
         VendaViewModel StatusVenda(int id, string status);
+		List<VendaItensViewModel> ListaItensVenda(int vendaId);
 	}
 }

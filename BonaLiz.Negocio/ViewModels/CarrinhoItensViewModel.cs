@@ -11,5 +11,8 @@ namespace BonaLiz.Negocio.ViewModels
         public string CarrinhoId { get; set; }
         public int ProdutoId { get; set; }
         public int Quantidade { get; set; }
+        public string NomeProduto { get; set; }
+        public string NomeCliente { get; set; }
+        public string Valor { get; set; }
     }
 }
