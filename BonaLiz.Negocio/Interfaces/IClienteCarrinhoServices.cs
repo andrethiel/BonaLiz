@@ -11,6 +11,6 @@ namespace BonaLiz.Negocio.Interfaces
     public interface IClienteCarrinhoServices
     {
         CarrinhoIdViewModel Inserir(ClienteViewModel model);
-        ClienteViewModel Listar(ClienteViewModel model);
+        ClienteViewModel ObterClientePorTelefone(ClienteViewModel model);
     }
 }

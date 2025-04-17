@@ -14,6 +14,8 @@ namespace BonaLiz.Negocio.Services
     {
         public CarrinhoIdViewModel Inserir(ClienteViewModel model)
         {
+            var telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
+            model.Telefone = telefone;
             var cliente = _clienteRepository.Listar().Where(x => x.Telefone == model.Telefone).FirstOrDefault();
 
             if (cliente == null)
@@ -67,10 +69,15 @@ namespace BonaLiz.Negocio.Services
             };
         }
 
-        public ClienteViewModel Listar(ClienteViewModel model) => _clienteRepository.Listar().Where(x => x.Telefone == model.Telefone)
+        public ClienteViewModel ObterClientePorTelefone(ClienteViewModel model)
+        {
+            var telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
+            model.Telefone = telefone;
+            return _clienteRepository.Listar().Where(x => x.Telefone == model.Telefone)
             .Select(x => new ClienteViewModel()
             {
                 Nome = x.Nome,
             }).FirstOrDefault();
+        }
     }
 }

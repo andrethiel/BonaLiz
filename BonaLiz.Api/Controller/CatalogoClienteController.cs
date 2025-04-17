@@ -18,8 +18,6 @@ namespace BonaLiz.Api.Controller
         {
             try
             {
-                var telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
-                model.Telefone = telefone;
                 var carrinho = _clienteCarrinhoServices.Inserir(model);
 
                 if (carrinho == null)
@@ -35,13 +33,22 @@ namespace BonaLiz.Api.Controller
         }
 
         [HttpGet]
-        [Route("/ClienteCatalogo")]
-        public async Task<IActionResult> Listar([FromQuery] ClienteViewModel model)
+        [Route("/ObterClientePorTelefone")]
+        public async Task<IActionResult> ObterClientePorTelefone([FromQuery] ClienteViewModel model)
         {
-            var telefone = model.Telefone.Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "");
-            model.Telefone = telefone;
-            var cliente = _clienteCarrinhoServices.Listar(model);
-            return Ok(BaseResponseFactory.Success(cliente));
+            try
+            {
+                var cliente = _clienteCarrinhoServices.ObterClientePorTelefone(model);
+                if (cliente == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ClienteViewModel>("Erro ao listar produto"));
+                }
+                return Ok(BaseResponseFactory.Success(cliente));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }

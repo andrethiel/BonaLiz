@@ -7,10 +7,11 @@ export function useClienteCarrinho() {
     useContext(CarrinhoContext);
 
   async function sincronizarComUsuario(carrinhoId) {
-    if (itensCarrinho.length > 0) {
-      itensCarrinho.map((item) => (item.CarrinhoId = carrinhoId));
-      await EnviarCarrinhoLogin();
-    }
+    console.log(itensCarrinho);
+    // if (itensCarrinho.length > 0) {
+    //   itensCarrinho.map((item) => (item.CarrinhoId = carrinhoId));
+    //   await EnviarCarrinhoLogin();
+    // }
   }
 
   async function clienteCatalogo(user) {

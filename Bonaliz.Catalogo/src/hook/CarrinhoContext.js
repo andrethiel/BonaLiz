@@ -8,6 +8,7 @@ import {
 import { createContext, useContext, useEffect, useState } from "react";
 import { useClienteCarrinho } from "./useCarrinho";
 import { useGlobalState } from "./GlobalContext";
+import { CadastrarClienteCatalogo } from "@/Api/Controllers/User";
 
 export const CarrinhoContext = createContext();
 
@@ -107,15 +108,25 @@ export function CarrinhoProvider({ children }) {
     if (isAuthenticated()) {
       try {
         const carrinhoId = localStorage.getItem("CarrinhoId");
-        const response = await CarrinhoInserir([
-          {
-            CarrinhoId: carrinhoId,
-            ProdutoId: itemCarrinho.id,
-            Produto: itemCarrinho.nome,
-            Quantidade: 1,
-          },
-        ]);
-        AdicionaCarrinho(itemCarrinho);
+        if (carrinhoId != null) {
+          const response = await CarrinhoInserir([
+            {
+              CarrinhoId: carrinhoId,
+              ProdutoId: itemCarrinho.id,
+              Produto: itemCarrinho.nome,
+              Quantidade: 1,
+            },
+          ]);
+          AdicionaCarrinho(itemCarrinho);
+        } else {
+          const response = await CadastrarClienteCatalogo({
+            Telefone: localStorage.getItem("telefone"),
+          });
+          if (response.success) {
+            localStorage.setItem("CarrinhoId", response.data.carrinhoId);
+            EnviarCarrinho(itemCarrinho);
+          }
+        }
       } catch (e) {
         alert(e.message);
         return;
@@ -130,7 +141,7 @@ export function CarrinhoProvider({ children }) {
   async function EnviarCarrinhoLogin() {
     if (itensCarrinho.length > 0) {
       try {
-        setIsLoading(!true);
+        setIsLoading(true);
         const response = await CarrinhoInserir(itensCarrinho);
         if (response.success) {
           // handaleWhats();

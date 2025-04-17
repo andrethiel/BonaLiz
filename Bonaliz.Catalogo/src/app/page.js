@@ -127,17 +127,10 @@ export default function Home() {
                         localStorage.getItem("CarrinhoId") == null &&
                         isAuthenticated
                       ) {
-                        setUser((prev) => ({
-                          ...prev,
-                          nome: localStorage.getItem("nome"),
-                          telefone: localStorage.getItem("telefone"),
-                        }));
-                        if (await Login()) {
-                          EnviarCarrinho(item);
-                          return;
-                        }
+                        EnviarCarrinho(item);
+                      } else {
+                        EnviarCarrinho(item);
                       }
-                      EnviarCarrinho(item);
                     }}
                   >
                     Adicionar ao carrinho
