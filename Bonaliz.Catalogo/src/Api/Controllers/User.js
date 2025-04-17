@@ -7,7 +7,9 @@ export async function CadastrarClienteCatalogo(params) {
 }
 
 export async function ClienteCatalogo(params) {
-  const response = await Api.request.get(`/ClienteCatalogo?Telefone=${params}`);
+  const response = await Api.request.get(
+    `/ObterClientePorTelefone?Telefone=${params}`
+  );
 
   return response;
 }
