@@ -6,6 +6,7 @@ import CustomLoading from "@/Components/CustomLoadingGrid";
 import Input from "@/Components/Input";
 import MaskInput from "@/Components/InputMask";
 import { ClientesContext } from "@/Hooks/Clientes";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import { useSearchParams } from "next/navigation";
 import React, { Suspense, useContext, useEffect } from "react";
 
@@ -14,8 +15,6 @@ function Editar() {
   const guid = param.get("Guid");
 
   const {
-    isLoading,
-    alert,
     form,
     handleChange,
     router,
@@ -25,6 +24,8 @@ function Editar() {
     ClienteEditar,
     Buscar,
   } = useContext(ClientesContext);
+
+  const { isLoading, alert } = useContext(GlobalContext);
 
   useEffect(() => {
     Buscar(guid);

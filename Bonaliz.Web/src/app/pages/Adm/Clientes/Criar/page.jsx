@@ -5,11 +5,13 @@ import CustomLoading from "@/Components/CustomLoadingGrid";
 import Input from "@/Components/Input";
 import MaskInput from "@/Components/InputMask";
 import { ClientesContext } from "@/Hooks/Clientes";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import React, { Suspense, useContext } from "react";
 
 function Criar() {
-  const { isLoading, alert, handleChange, CriarCliente, Voltar } =
-    useContext(ClientesContext);
+  const { handleChange, CriarCliente, Voltar } = useContext(ClientesContext);
+
+  const { isLoading, alert } = useContext(GlobalContext);
 
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
   return (

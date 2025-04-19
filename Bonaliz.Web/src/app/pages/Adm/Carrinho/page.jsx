@@ -23,14 +23,14 @@ function Carrinho() {
 
   const CustomButtonLista = (props) => {
     return (
-      <button
-        className="bg-secondary font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+      <Button
+        color={"primary"}
         onClick={() => {
           ListarItensCarrinho(props.data.carrinhoId);
         }}
       >
-        Ver Produtos
-      </button>
+        Editar/Excluir
+      </Button>
     );
   };
   const [columnsDef, setColumnsDef] = useState([

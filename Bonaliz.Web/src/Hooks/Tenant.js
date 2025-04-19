@@ -23,6 +23,7 @@ export function TenantConfigProvider({ children }) {
       const response = await ObterTenant();
       if (response.success) {
         setTenantConfig(response.data);
+        setConfig(response.data);
       }
     } catch (e) {
       setAlert({

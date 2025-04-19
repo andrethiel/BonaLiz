@@ -9,6 +9,7 @@ import Drop from "@/Components/Drop";
 import ImageArquivo from "@/Components/Image";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import { ProdutoContext } from "@/Hooks/Produto";
 import { useSearchParams } from "next/navigation";
 import React, { Suspense, useContext, useEffect } from "react";
@@ -19,8 +20,6 @@ const Editar = () => {
 
   const {
     form,
-    alert,
-    isLoading,
     EditaProduto,
     setChecked,
     checked,
@@ -35,6 +34,8 @@ const Editar = () => {
     show,
     setShow,
   } = useContext(ProdutoContext);
+
+  const { isLoading, alert } = useContext(GlobalContext);
 
   useEffect(() => {
     Buscar(guid);

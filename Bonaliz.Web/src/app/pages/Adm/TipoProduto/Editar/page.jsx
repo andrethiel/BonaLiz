@@ -4,25 +4,19 @@ import Button from "@/Components/Button";
 import Check from "@/Components/Check";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import Input from "@/Components/Input";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import { TipoProdutoContext } from "@/Hooks/TipoProduto";
 import { useSearchParams } from "next/navigation";
-import React, { Suspense, useContext, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect } from "react";
 
 const Editar = () => {
   const param = useSearchParams();
   const guid = param.get("Guid");
 
-  const {
-    Buscar,
-    isLoading,
-    alert,
-    form,
-    handleChange,
-    Editar,
-    router,
-    checked,
-    setChecked,
-  } = useContext(TipoProdutoContext);
+  const { Buscar, form, handleChange, Editar, router, checked, setChecked } =
+    useContext(TipoProdutoContext);
+
+  const { isLoading, alert } = useContext(GlobalContext);
 
   useEffect(() => {
     Buscar(guid);

@@ -7,24 +7,26 @@ import Input from "@/Components/Input";
 import Linked from "@/Components/Link";
 import Modal from "@/Components/Modal";
 import { ClientesContext } from "@/Hooks/Clientes";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import { useRouter } from "next/navigation";
 import React, { Suspense, useContext, useState } from "react";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
   return (
-    <button
-      className="bg-secondary font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+    <Button
+      color={"primary"}
       onClick={() => router.push("Clientes/Editar?Guid=" + props.data.guid)}
     >
       Editar/Excluir
-    </button>
+    </Button>
   );
 };
 
 function Clientes() {
-  const { clientes, isLoading, alert, setForm, form, Pesquisar } =
-    useContext(ClientesContext);
+  const { clientes, setForm, form, Pesquisar } = useContext(ClientesContext);
+
+  const { isLoading, alert } = useContext(GlobalContext);
 
   const [columnsDef, setColumnsDef] = useState([
     {

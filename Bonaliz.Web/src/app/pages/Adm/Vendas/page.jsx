@@ -7,12 +7,9 @@ import AgGrid from "@/Components/Grid";
 import Input from "@/Components/Input";
 import Modal from "@/Components/Modal";
 import Select from "@/Components/Select";
-import Select2 from "@/Components/Select2";
 import { StatusVenda } from "@/constants/status";
-import { GlobalState } from "@/Hooks/GlobalState";
-import { SelectListProdutos } from "@/Hooks/ProdutosSelect";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import { VendasContext } from "@/Hooks/Venda";
-import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 
 function Vendas() {
@@ -35,27 +32,29 @@ function Vendas() {
     total,
   } = useContext(VendasContext);
 
-  const { isLoading, alert } = GlobalState();
+  const { isLoading, alert } = useContext(GlobalContext);
 
   const CustomButtonComponent = (props) => {
-    const router = useRouter();
     return (
-      <button
-        className="bg-secondary font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+      <Button
+        color={"secondary"}
         onClick={() => {
           Cancela(props.data.id);
         }}
       >
         Cancelar Venda
-      </button>
+      </Button>
     );
   };
 
   const CustomButtonStatus = (props) => {
     return (
-      <button
-        className="bg-secondary font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+      <Button
+        color={"secondary"}
         onClick={() => {
+          if (props.data.cancelada == "Cancelada") {
+            return;
+          }
           setIsOpen(true);
           handleChange({
             target: { name: "VendaId", value: props.data.id },
@@ -63,24 +62,23 @@ function Vendas() {
         }}
       >
         Editar status
-      </button>
+      </Button>
     );
   };
 
   const CustomButtonLista = (props) => {
     return (
-      <button
-        className="bg-secondary font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+      <Button
+        color={"secondary"}
         onClick={() => {
           ListaItensVenda(props.data.id);
         }}
       >
         Ver Lista
-      </button>
+      </Button>
     );
   };
 
-  const { selectProdutos } = SelectListProdutos();
   const [columnsDef, setColumnsDef] = useState([
     {
       field: "",
@@ -174,20 +172,6 @@ function Vendas() {
             id={"Status"}
             onChange={handleChange}
           />
-          {selectProdutos && (
-            <Select2
-              data={selectProdutos}
-              placeholder={"Selecione um Produto"}
-              onChange={(selectedOption) =>
-                handleChange({
-                  target: { name: "ProdutoId", value: selectedOption?.value },
-                })
-              }
-              name={"Status"}
-              id={"Status"}
-              icon={"package-search"}
-            />
-          )}
           <DataPicker
             onChange={(selectedOption) =>
               handleChange({

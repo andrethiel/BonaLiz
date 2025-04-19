@@ -8,6 +8,7 @@ import MaskInput from "@/Components/InputMask";
 import Select from "@/Components/Select";
 import { Estados } from "@/constants/estados";
 import { FornecedorContext } from "@/Hooks/Fornecedor";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import { useSearchParams } from "next/navigation";
 import React, { Suspense, useContext, useEffect } from "react";
 const Editar = () => {
@@ -16,9 +17,6 @@ const Editar = () => {
 
   const {
     form,
-    setForm,
-    alert,
-    isLoading,
     checked,
     setChecked,
     BuscarFornecedor,
@@ -26,6 +24,8 @@ const Editar = () => {
     handleChange,
     router,
   } = useContext(FornecedorContext);
+
+  const { isLoading, alert } = useContext(GlobalContext);
 
   useEffect(() => {
     BuscarFornecedor(guid);

@@ -3,12 +3,14 @@ import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import Input from "@/Components/Input";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import { TipoProdutoContext } from "@/Hooks/TipoProduto";
 import React, { useContext } from "react";
 
 const Cadastrar = () => {
-  const { isLoading, alert, handleChange, Inserir, router } =
-    useContext(TipoProdutoContext);
+  const { handleChange, Inserir, router } = useContext(TipoProdutoContext);
+
+  const { isLoading, alert } = useContext(GlobalContext);
 
   if (isLoading) return <CustomLoading loadingMessage="Aguarde" />;
 

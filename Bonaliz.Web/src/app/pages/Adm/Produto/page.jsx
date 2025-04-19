@@ -8,6 +8,7 @@ import AgGrid from "@/Components/Grid";
 import Input from "@/Components/Input";
 import Linked from "@/Components/Link";
 import Select from "@/Components/Select";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import { ProdutoContext } from "@/Hooks/Produto";
 import { format } from "date-fns";
 import dayjs from "dayjs";
@@ -17,19 +18,17 @@ import React, { useContext, useEffect, useState } from "react";
 const CustomButtonComponent = (props) => {
   const router = useRouter();
   return (
-    <button
-      className="bg-secondary font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+    <Button
       onClick={() => router.push("Produto/Editar?Guid=" + props.data.guid)}
+      color={"secondary"}
     >
       Editar/Excluir
-    </button>
+    </Button>
   );
 };
 
 const Produto = () => {
   const {
-    isLoading,
-    alert,
     form,
     handleChange,
     Filtrar,
@@ -39,6 +38,8 @@ const Produto = () => {
     show,
     setShow,
   } = useContext(ProdutoContext);
+
+  const { isLoading, alert } = useContext(GlobalContext);
 
   const [columnsDef, setColumnsDef] = useState([
     {

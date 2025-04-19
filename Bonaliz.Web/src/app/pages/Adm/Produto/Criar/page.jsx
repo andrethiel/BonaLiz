@@ -8,14 +8,13 @@ import Drop from "@/Components/Drop";
 import Icones from "@/Components/Icons";
 import Input from "@/Components/Input";
 import Select from "@/Components/Select";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import { ProdutoContext } from "@/Hooks/Produto";
 import React, { Suspense, useContext, useState } from "react";
 
 const Criar = () => {
   const {
-    alert,
     Fornecedor,
-    isLoading,
     form,
     setForm,
     handleChange,
@@ -26,6 +25,8 @@ const Criar = () => {
     show,
     setShow,
   } = useContext(ProdutoContext);
+
+  const { isLoading, alert } = useContext(GlobalContext);
 
   return (
     <Suspense>

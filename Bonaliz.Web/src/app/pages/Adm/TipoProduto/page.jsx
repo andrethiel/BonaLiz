@@ -5,6 +5,7 @@ import CustomLoading from "@/Components/CustomLoadingGrid";
 import AgGrid from "@/Components/Grid";
 import Input from "@/Components/Input";
 import Linked from "@/Components/Link";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import { TipoProdutoContext } from "@/Hooks/TipoProduto";
 import { useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
@@ -12,18 +13,20 @@ import React, { useContext, useState } from "react";
 const CustomButtonComponent = (props) => {
   const router = useRouter();
   return (
-    <button
-      className="bg-secondary font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+    <Button
       onClick={() => router.push("TipoProduto/Editar?Guid=" + props.data.guid)}
+      color={"secondary"}
     >
       Editar/Excluir
-    </button>
+    </Button>
   );
 };
 
 const TipoProduto = () => {
-  const { Pesquisar, handleChange, isLoading, TipoProduto, alert } =
+  const { Pesquisar, handleChange, TipoProduto } =
     useContext(TipoProdutoContext);
+
+  const { isLoading, alert } = useContext(GlobalContext);
 
   const [columnsDef, setColumnsDef] = useState([
     {
@@ -67,7 +70,7 @@ const TipoProduto = () => {
         </div>
       </div>
       <div className="mb-5 flex justify-end">
-        <Linked href={"TipoProduto/Cadastrar"}>Criar tipo de produto</Linked>
+        <Linked href={"TipoProduto/Criar"}>Criar tipo de produto</Linked>
       </div>
       <div>
         <AgGrid Data={TipoProduto} Columns={columnsDef} />
