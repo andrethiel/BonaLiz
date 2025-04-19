@@ -15,7 +15,7 @@ using System.Net;
 namespace BonaLiz.Api.Controller
 {
     [ApiController]
-    public class UsuarioController(IIdentityService _identityService, IHttpContextAccessor _acessor) : ControllerBase
+    public class UsuarioController(IIdentityService _identityService) : ControllerBase
     {
         [Authorize(Roles = "Administrador")]
         [Route("CadastrarUsuario")]
@@ -30,35 +30,6 @@ namespace BonaLiz.Api.Controller
             }
 
             return Ok(resultado);
-        }
-
-        [HttpPost]
-        [Route("Login")]
-        [AllowAnonymous]
-
-        public async Task<ActionResult<UsuarioResponseViewModel>> Login(UsuarioViewModel model)
-        {
-            var resultado = await _identityService.Login(model, Response.HttpContext);
-            if (!resultado.Status)
-            {
-                var problemas = new CustomProblemDetails(HttpStatusCode.BadRequest, Request, errors: resultado.Erros);
-                return BadRequest(problemas);
-            }
-
-            return Ok(new
-            {
-                status = resultado.Status,
-                nome = resultado.Nome,
-                email = resultado.Email,
-                role = resultado.Role
-            });
-        }
-
-        [HttpGet]
-        [Route("Sair")]
-        public async Task Sair()
-        {
-            await Response.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
         //[HttpPost("refresh-token")]
