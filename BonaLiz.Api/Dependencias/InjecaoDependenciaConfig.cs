@@ -44,6 +44,9 @@ namespace BonaLiz.Api.Dependencias
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IMenuServices, MenuServices>();
 
+            services.AddScoped<ITenantRepository, TenantRepository>();
+            services.AddScoped<ITenantServices, TenantServices>();
+
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<DataContextIdentity>()

@@ -47,6 +47,11 @@ namespace BonaLiz.Negocio.Utils
 
 		public static string FormataURL(string imagem, IHttpContextAccessor _httpContextAccessor)
 		{
+			if (string.IsNullOrEmpty(imagem))
+			{
+				return string.Empty;
+            }
+
             var request = _httpContextAccessor.HttpContext.Request;
 
 			return string.Format("{0}://{1}/Imagens/{2}", request.Scheme, request.Host, imagem);

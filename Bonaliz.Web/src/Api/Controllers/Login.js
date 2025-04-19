@@ -1,13 +1,15 @@
-import Api from "..";
+import { createApi } from "..";
 
-export async function Entrar(form) {
-  const response = await Api.request.post("/Login", form);
+export async function Entrar(form, tenantId) {
+  const Api = createApi(tenantId);
+  const response = await Api.post("/Login", form);
 
   return response;
 }
 
-export async function Logout() {
-  const response = await Api.request.get("/sair");
+export async function Logout(tenantId) {
+  const Api = createApi(tenantId);
+  const response = await Api.get("/sair");
 
   return response;
 }

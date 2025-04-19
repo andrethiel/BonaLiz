@@ -12,6 +12,6 @@ namespace BonaLiz.Dados.Models
 		public string Email { get; set; }
 		public string Telefone { get; set; }
         public bool Inativo { get; set; }
-        // public int? EmpresaId { get; set; }
+        public Guid TenantId { get; set; }
     }
 }

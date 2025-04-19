@@ -8,9 +8,9 @@ import {
   VendasFiltar,
 } from "@/Api/Controllers/Vendas";
 import dayjs from "dayjs";
-import { usePathname, useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
-import { GlobalState } from "./GlobalState";
+import { usePathname } from "next/navigation";
+import { createContext, useContext, useEffect, useState } from "react";
+import { GlobalContext } from "./GlobalState";
 
 export const VendasContext = createContext(null);
 
@@ -25,7 +25,7 @@ const initialFormState = {
 };
 
 export function VendasProvider({ children }) {
-  const { setAlert, setIsLoading } = GlobalState();
+  const { setIsLoading, alert, setAlert } = useContext(GlobalContext);
 
   const [form, setForm] = useState(initialFormState);
   const [IsOpen, setIsOpen] = useState(false);

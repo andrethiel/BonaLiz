@@ -13,6 +13,9 @@ namespace BonaLiz.Negocio.ViewModels
         public int Quantidade { get; set; }
         public string NomeProduto { get; set; }
         public string NomeCliente { get; set; }
+        public string TelefoneCliente { get; set; }
+        public string EmailCliente { get; set; }
         public string Valor { get; set; }
+        public string imagemProduto { get; set; }
     }
 }

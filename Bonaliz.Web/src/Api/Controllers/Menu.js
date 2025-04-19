@@ -1,7 +1,8 @@
-import Api from "..";
+import { createApi } from "..";
 
 export async function ListarMenu(role) {
-  const response = await Api.request.get(`/MenuListar?role=${role}`);
+  const Api = createApi();
+  const response = await Api.get(`/MenuListar?role=${role}`);
 
   return response;
 }

@@ -10,7 +10,6 @@ namespace BonaLiz.Dados.Models
     { 
         public string Nome { get; set; }
 		public bool? Inativo { get; set; }
-
-        // public int? EmpresaId { get; set; }
+        public Guid TenantId { get; set; }
     }
 }

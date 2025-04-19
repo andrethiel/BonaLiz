@@ -1,35 +1,41 @@
-import Api from "..";
+import { createApi } from "..";
 
-export async function ListarTipoProduto() {
-  const response = await Api.request.get("/ListarTipoProduto");
-
-  return response;
-}
-export async function PesquisarTipoProduto(props) {
-  const response = await Api.request.post("TipoProdutoFiltar", props);
+export async function ListarTipoProduto(tenantId) {
+  const Api = createApi(tenantId);
+  const response = await Api.get("/ListarTipoProduto");
 
   return response;
 }
-export async function InserirTipoProduto(props) {
-  const response = await Api.request.post("/CadastrarTipoProduto", props);
+export async function PesquisarTipoProduto(props, tenantId) {
+  const Api = createApi(tenantId);
+  const response = await Api.post("TipoProdutoFiltar", props);
 
   return response;
 }
-export async function EditarTipoProduto(props) {
-  const response = await Api.request.put("/EditarTipoProduto", props);
+export async function InserirTipoProduto(props, tenantId) {
+  const Api = createApi(tenantId);
+  const response = await Api.post("/CadastrarTipoProduto", props);
+
+  return response;
+}
+export async function EditarTipoProduto(props, tenantId) {
+  const Api = createApi(tenantId);
+  const response = await Api.put("/EditarTipoProduto", props);
 
   return response;
 }
 
-export async function TipoProdutoPorGuid(props) {
-  const response = await Api.request.get(`/TipoProdutoPorGuid?guid=${props}`);
+export async function TipoProdutoPorGuid(props, tenantId) {
+  const Api = createApi(tenantId);
+  const response = await Api.get(`/TipoProdutoPorGuid?guid=${props}`);
 
   return response;
 }
 
-export async function SelectListTipoProduto() {
+export async function SelectListTipoProduto(tenantId) {
+  const Api = createApi(tenantId);
   var lista = [];
-  const response = await Api.request.get("/SelectListTipoProduto");
+  const response = await Api.get("/SelectListTipoProduto");
   if (response.success) {
     response.data.map((item) => {
       lista.push({ value: item.value, label: item.text });

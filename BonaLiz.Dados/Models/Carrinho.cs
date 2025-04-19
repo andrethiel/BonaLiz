@@ -14,6 +14,7 @@ namespace BonaLiz.Dados.Models
         public Guid CarrinhoId { get; set; }
         public int ClienteId { get; set; }
         public DateTime DataCarrinho { get; set; }
+        public Guid TenantId { get; set; }
 
         [NotMapped]
         public List<CarrinhoItens> CarrinhoItens { get; set; }

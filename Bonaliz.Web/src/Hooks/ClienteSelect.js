@@ -1,12 +1,10 @@
 import { SelectList } from "@/Api/Controllers/Cliente";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { GlobalContext } from "./GlobalState";
 
 export function SelectListClientes(open) {
   const [selectClientes, setSelectClientes] = useState();
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
+  const { setIsLoading, alert, setAlert } = useContext(GlobalContext);
 
   useEffect(() => {
     Select();

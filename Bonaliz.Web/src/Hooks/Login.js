@@ -3,6 +3,7 @@ import { Entrar, Logout } from "@/Api/Controllers/Login";
 import { validateLoginForm } from "@/Utils/validation";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
+import { GlobalContext } from "./GlobalState";
 
 export const AuthContext = createContext(null);
 
@@ -15,27 +16,12 @@ export function AuthProvider({ children }) {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-
-  const [isLoading, setIsLoading] = useState(false);
   const [touched, setTouched] = useState({});
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAlert({ message: "", type: "" });
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [alert.message]);
+  const { setIsLoading, alert, setAlert, tenant } = useContext(GlobalContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prev) => ({ ...prev, [name]: value }));
-
-    // Validate on change if field was already touched
     if (touched[name]) {
       const result = validateLoginForm({ ...user, [name]: value });
       setErrors((prev) => ({ ...prev, [name]: result.errors[name] }));
@@ -78,7 +64,7 @@ export function AuthProvider({ children }) {
   async function EntrarLogin(updatedUser) {
     try {
       localStorage.clear();
-      const response = await Entrar(updatedUser);
+      const response = await Entrar(updatedUser, tenant);
       if (response.status) {
         localStorage.setItem("nome", response.nome);
         localStorage.setItem("email", response.email);
@@ -90,7 +76,7 @@ export function AuthProvider({ children }) {
       setAlert({
         ...alert,
         type: "Danger",
-        message: e.response.data.detail,
+        message: e.message,
       });
       setUser({ Email: "", Senha: "" });
     } finally {
@@ -99,7 +85,7 @@ export function AuthProvider({ children }) {
   }
 
   async function sair() {
-    await Logout();
+    await Logout(tenant);
     localStorage.clear();
     router.replace("/");
   }
@@ -107,15 +93,12 @@ export function AuthProvider({ children }) {
   return (
     <AuthContext.Provider
       value={{
-        isLoading,
-        setIsLoading,
         onSubmit,
         handleBlur,
         handleChange,
         user,
         errors,
         touched,
-        alert,
         sair,
       }}
     >

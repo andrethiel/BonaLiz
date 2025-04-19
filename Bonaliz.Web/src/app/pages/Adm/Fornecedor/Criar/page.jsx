@@ -1,5 +1,4 @@
 "use client";
-import { InserirFornecedor } from "@/Api/Controllers/Forncedor";
 import Alert from "@/Components/Alert";
 import Button from "@/Components/Button";
 import CustomLoading from "@/Components/CustomLoadingGrid";
@@ -8,13 +7,14 @@ import MaskInput from "@/Components/InputMask";
 import Select from "@/Components/Select";
 import { Estados } from "@/constants/estados";
 import { FornecedorContext } from "@/Hooks/Fornecedor";
-import { Iniciais } from "@/Utils/Iniciais";
+import { GlobalContext } from "@/Hooks/GlobalState";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 
 const Criar = () => {
-  const { handleChange, isLoading, alert, CriarFornecedor } =
-    useContext(FornecedorContext);
+  const { handleChange, CriarFornecedor } = useContext(FornecedorContext);
+
+  const { isLoading, alert } = useContext(GlobalContext);
 
   const router = useRouter();
 

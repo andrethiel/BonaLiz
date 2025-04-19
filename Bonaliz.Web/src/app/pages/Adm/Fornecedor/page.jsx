@@ -9,29 +9,24 @@ import { useRouter } from "next/navigation";
 import CustomLoading from "@/Components/CustomLoadingGrid";
 import { FornecedorContext, Lista } from "@/Hooks/Fornecedor";
 import Alert from "@/Components/Alert";
+import { GlobalContext } from "@/Hooks/GlobalState";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
   return (
-    <button
-      className="bg-secondary font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+    <Button
+      color={"primary"}
       onClick={() => router.push("Fornecedor/Editar?Guid=" + props.data.guid)}
     >
       Editar/Excluir
-    </button>
+    </Button>
   );
 };
 
 function Fornecedor() {
-  const {
-    alert,
-    Fornecedores,
-    isLoading,
-    Pesquisar,
-    form,
-    setForm,
-    handleChange,
-  } = useContext(FornecedorContext);
+  const { Fornecedores, Pesquisar, handleChange } =
+    useContext(FornecedorContext);
+  const { isLoading, alert } = useContext(GlobalContext);
 
   const [columnsDef, setColumnsDef] = useState([
     {

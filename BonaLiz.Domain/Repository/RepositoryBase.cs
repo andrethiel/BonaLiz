@@ -22,7 +22,7 @@ namespace BonaLiz.Domain.Repository
             _DbSet = _context.Set<TEntity>();
         }
 
-        public TEntity ObterPorGuid(Guid Guid) => _DbSet.Where(x=> x.Guid.Equals(Guid)).First();
+        public TEntity ObterPorGuid(Guid Guid) => _DbSet.Where(x=> x.Guid.Equals(Guid)).FirstOrDefault()!;
         public TEntity ObterPorId(int id) => _DbSet.Where(x => x.Id.Equals(id)).First();
         public List<TEntity> Listar()
         {

@@ -4,6 +4,7 @@ import Icones from "../Icons";
 import AsideItem from "../AsideItem/aside";
 import { MenuContext } from "@/Hooks/Menu";
 import { AuthContext } from "@/Hooks/Login";
+import { getTenantConfig } from "@/lib/tenantConfig";
 
 function Header() {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -13,6 +14,9 @@ function Header() {
 
   const { user, menu } = useContext(MenuContext);
   const { sair } = useContext(AuthContext);
+
+  const config = getTenantConfig();
+
   const toggleExpandedItem = (id) => {
     setExpandedItems((current) =>
       current.includes(id)
@@ -28,6 +32,8 @@ function Header() {
   const toggleMobileSidebar = () => {
     setIsMobileOpen((prev) => !prev);
   };
+
+  if (!config) return null;
 
   return (
     <>
@@ -58,8 +64,12 @@ function Header() {
             : "-translate-x-full md:translate-x-0"
         } animate-slide-in-left md:animate-none `}
       >
-        <div className="flex items-center justify-between h-16 px-4 border-b border-border">
-          <span className="text-lg font-semibold truncate">App Name</span>
+        <div className="flex items-center justify-center h-40 p-4 border-b border-border">
+          <img
+            src={config.logoUrl}
+            alt="Logo"
+            className="h-full w-full object-contain"
+          />
         </div>
         <div className="flex-1 overflow-y-auto py-4 px-3">
           <ul className="space-y-1">

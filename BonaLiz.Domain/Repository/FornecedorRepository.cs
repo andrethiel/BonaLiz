@@ -41,10 +41,8 @@ namespace BonaLiz.Domain.Repository
         Fornecedor IFornecedorRepository.ObterPorGuid(Guid Guid) => _repositoryBase.ObterPorGuid(Guid);
         List<Fornecedor> IFornecedorRepository.Filtrar(Fornecedor model)
         {
-            Console.Write(model.Nome == "");
-            var cnpj = model.CNPJ.Replace(".", "").Replace("/", "").Replace("-", "");
             return _repositoryBase.Listar()
-                .Where(x => string.IsNullOrEmpty(model.CNPJ) || x.CNPJ == cnpj)
+                .Where(x => string.IsNullOrEmpty(model.CNPJ) || x.CNPJ == model.CNPJ)
                 .Where(x => string.IsNullOrEmpty(model.Nome) || x.Nome.ToUpper().Contains(model.Nome.ToUpper())).ToList();
         }
     }

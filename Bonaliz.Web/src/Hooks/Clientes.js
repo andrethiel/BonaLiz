@@ -7,8 +7,9 @@ import {
   ObterClienteGuid,
 } from "@/Api/Controllers/Cliente";
 import { useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { GlobalContext } from "./GlobalState";
 
 export const ClientesContext = createContext(null);
 
@@ -25,28 +26,17 @@ export function ClientesProvider({ children }) {
   const router = useRouter();
   const pathname = usePathname();
   const [form, setForm] = useState(initialFormState);
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
   const [clientes, setClientes] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [modalIsOpen, setmodalIsOpen] = useState(false);
   const [checked, setChecked] = useState(false);
+
+  const { setIsLoading, alert, setAlert, tenant } = useContext(GlobalContext);
 
   useEffect(() => {
     if (pathname === "/pages/Adm/Clientes") {
       Listar();
     }
   }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAlert({ message: "", type: "" });
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [alert.message]);
 
   async function Listar() {
     try {
@@ -185,8 +175,6 @@ export function ClientesProvider({ children }) {
     <ClientesContext.Provider
       value={{
         clientes,
-        isLoading,
-        alert,
         setForm,
         form,
         Pesquisar,

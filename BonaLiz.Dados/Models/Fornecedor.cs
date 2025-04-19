@@ -12,6 +12,6 @@ namespace BonaLiz.Dados.Models
         public string CNPJ { get; set; }
         public string Estado { get; set; }
 		public bool? Inativo { get; set; }
-        // public int? EmpresaId { get; set; }
+        public Guid TenantId { get; set; }
     }
 }

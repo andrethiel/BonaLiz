@@ -17,7 +17,7 @@ namespace BonaLiz.Dados.Models
 		public string NomeCliente { get; set; }
 		[NotMapped]
 		public string NomeProduto { get; set; }
-        // public int? EmpresaId { get; set; }
+        public Guid TenantId { get; set; }
         List<VendaItens> VendaItens { get; set; } = new List<VendaItens>();
     }
 }

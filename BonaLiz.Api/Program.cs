@@ -9,6 +9,7 @@ using Serilog;
 using System.Reflection.Metadata;
 using System.Text.Json.Serialization;
 using BonaLiz.RabbitMQ.MassTransit;
+using BonaLiz.Api.Middleware;
 
 //SerilogExtensions.AddSerilog("Api BonaLiz");
 
@@ -88,6 +89,8 @@ if (builder.Configuration.GetValue<bool>("RabbitMqEnable"))
 }
 
 var app = builder.Build();
+
+app.UseMiddleware<TenantMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

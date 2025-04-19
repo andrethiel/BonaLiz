@@ -73,14 +73,6 @@ export function ProdutoProvider({ children }) {
     }
   }
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAlert({ message: "", type: "" });
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [alert.message]);
-
   function Reset() {
     setFileURLs([]);
     setForm(initialFormState);

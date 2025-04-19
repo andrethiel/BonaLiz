@@ -1,25 +1,28 @@
-import Api from "..";
+import { createApi } from "..";
 
-export async function ListarProdutos() {
-  const response = await Api.request.get("/ListarProdutos");
-
-  return response;
-}
-
-export async function ListarProdutosPrincal() {
-  const response = await Api.request.get("/ListaPrincipal");
+export async function ListarProdutos(tenantId) {
+  const Api = createApi(tenantId);
+  const response = await Api.get("/ListarProdutos");
 
   return response;
 }
 
-export async function FiltrarProdutos(props) {
-  console.log(props);
-  const response = await Api.request.post("/ProdutoFiltar", props);
+export async function ListarProdutosPrincal(tenantId) {
+  const Api = createApi(tenantId);
+  const response = await Api.get("/ListaPrincipal");
 
   return response;
 }
 
-export async function CadastrarProduto(props) {
+export async function FiltrarProdutos(props, tenantId) {
+  const Api = createApi(tenantId);
+  const response = await Api.post("/ProdutoFiltar", props);
+
+  return response;
+}
+
+export async function CadastrarProduto(props, tenantId) {
+  const Api = createApi(tenantId);
   const form = new FormData();
   form.append("Nome", props.Nome);
   form.append("TipoProdutoId", props.TipoProdutoId);
@@ -36,26 +39,29 @@ export async function CadastrarProduto(props) {
     });
   }
 
-  const response = await Api.request.postForm("/CadastrarProduto", form);
+  const response = await Api.postForm("/CadastrarProduto", form);
 
   return response;
 }
 
-export async function ProdutoPorGuid(props) {
-  const response = await Api.request.get(`/ProdutoPorGuid?guid=${props}`);
+export async function ProdutoPorGuid(props, tenantId) {
+  const Api = createApi(tenantId);
+  const response = await Api.get(`/ProdutoPorGuid?guid=${props}`);
 
   return response;
 }
 
 export async function LucroProduto(props) {
-  const response = await Api.request.get(
+  const Api = createApi();
+  const response = await Api.get(
     `/ProdutoLucro?PrecoVenda=${props.precoCusto}&PrecoCusto=${props.precoVenda}`
   );
 
   return response;
 }
 
-export async function EditarProduto(props) {
+export async function EditarProduto(props, tenantId) {
+  const Api = createApi(tenantId);
   const form = new FormData();
   form.append("Id", props.Id);
   form.append("Guid", props.Guid);
@@ -73,18 +79,19 @@ export async function EditarProduto(props) {
   }
   if (props.Arquivo.length > 0) {
     props.Arquivo.forEach((file, index) => {
-      form.append(`Arquivo`, file); // Não precisa do índice na chave, apenas no backend
+      form.append(`Arquivo`, file);
     });
   }
 
-  const response = await Api.request.putForm("/EditarProduto", form);
+  const response = await Api.putForm("/EditarProduto", form);
 
   return response;
 }
 
-export async function SelectListProduto() {
+export async function SelectListProduto(tenantId) {
+  const Api = createApi(tenantId);
   let lista = [];
-  const response = await Api.request.get("/SelectListProdutos");
+  const response = await Api.get("/SelectListProdutos");
 
   response.data.map((item) => {
     lista.push({ value: item.value, label: item.text });

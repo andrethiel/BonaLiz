@@ -1,14 +1,16 @@
 ﻿using BonaLiz.Dados.Models;
 using BonaLiz.Domain.Interfaces;
 using BonaLiz.Domain.Repository;
+using BonaLiz.Negocio.Helpers;
 using BonaLiz.Negocio.Interfaces;
+using BonaLiz.Negocio.Utils;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Http;
 
 namespace BonaLiz.Negocio.Services
 {
     public class CarrinhoServices(ICarrinhoRepository _carrinhoRepository, IProdutoRepository _produtoRepository,
-        IClienteRepository _clienteRepository, IImagemRepository _imagemRepository,
+        IClienteServices _clienteServices, IImagemRepository _imagemRepository, IVendaRepository _vendaRepository,
          IHttpContextAccessor _httpContextAccessor) : ICarrinhoServices
     {
         public void AlteraQuantidade(CarrinhoItensViewModel model)
@@ -75,7 +77,7 @@ namespace BonaLiz.Negocio.Services
         public List<CarrinhoViewModel> ListarCarrinhos()
         {
             var carrinho = _carrinhoRepository.ListarCarrinho();
-            var clientes = _clienteRepository.Listar();
+            var clientes = _clienteServices.Listar();
             var itens = _carrinhoRepository.ListarItens();
 
             return carrinho.Select(x => new CarrinhoViewModel
@@ -102,13 +104,28 @@ namespace BonaLiz.Negocio.Services
 
         public List<CarrinhoItensViewModel> ObterItensPorId(string carrinhoId)
         {
+            var venda = _vendaRepository.ObterPorGuid(Guid.Parse(carrinhoId));
+            if(venda != null)
+            {
+                throw new Exception("O carrinho ja esta vendido");
+            }
+
+            var carrinho = _carrinhoRepository.ObterCarrinhoId(Guid.Parse(carrinhoId));
             var carrinhoItens = _carrinhoRepository.ObterItensPorId(Guid.Parse(carrinhoId));
+            var produtos = _produtoRepository.Listar();
+            var imagens = _imagemRepository.Listar();
+            var cliente = _clienteServices.ObterPorId(carrinho.ClienteId);
 
             return carrinhoItens.Select(x => new CarrinhoItensViewModel
             {
                 CarrinhoId = x.CarrinhoId.ToString(),
-                ProdutoId = x.ProdutoId,
                 Quantidade = x.Quantidade,
+                NomeProduto = produtos.Where(y => y.Id == x.ProdutoId).FirstOrDefault().Nome,
+                EmailCliente = cliente.Email,
+                NomeCliente = cliente.Nome,
+                TelefoneCliente = cliente.Telefone,
+                Valor = Formater.FormatarMoeda(produtos.Where(y => y.Id == x.ProdutoId).FirstOrDefault().PrecoVenda),
+                imagemProduto = Arquivo.FormataURL(imagens.Where(y => y.ProdutoId == x.ProdutoId).FirstOrDefault().NomeImagem, _httpContextAccessor)
             }).ToList();
         }
 

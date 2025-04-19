@@ -1,4 +1,5 @@
 ﻿using BonaLiz.Api.Controller.Response;
+using BonaLiz.Dados.Models;
 using BonaLiz.Negocio.Interfaces;
 using BonaLiz.Negocio.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -28,6 +29,25 @@ namespace BonaLiz.Api.Controller
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ListarItensCarrinho")]
+        public IActionResult ListarItensCarrinho(string carrinhoId)
+        {
+            try
+            {
+                var itens = _carrinhoServices.ObterItensPorId(carrinhoId);
+                if (itens == null)
+                {
+                    return BadRequest(BaseResponseFactory.Fail<ClienteViewModel>("Erro ao listar produto"));
+                }
+                return Ok(BaseResponseFactory.Success(itens));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(BaseResponseFactory.Fail<ClienteViewModel>(ex.Message));
             }
         }
     }

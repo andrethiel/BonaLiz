@@ -17,7 +17,7 @@ namespace BonaLiz.Api.Controller
     [ApiController]
     public class UsuarioController(IIdentityService _identityService, IHttpContextAccessor _acessor) : ControllerBase
     {
-        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+        [Authorize(Roles = "Administrador")]
         [Route("CadastrarUsuario")]
         [HttpPost]
         public async Task<IActionResult> Cadastrar(UsuarioViewModel model)
@@ -56,7 +56,6 @@ namespace BonaLiz.Api.Controller
 
         [HttpGet]
         [Route("Sair")]
-        [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
         public async Task Sair()
         {
             await Response.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

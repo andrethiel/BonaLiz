@@ -7,7 +7,8 @@ import {
   PesquisarFornecedor,
 } from "@/Api/Controllers/Forncedor";
 import { usePathname, useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { GlobalContext } from "./GlobalState";
 
 export const FornecedorContext = createContext(null);
 
@@ -22,30 +23,18 @@ const initialFormState = {
 
 export function FornecedorProvider({ children }) {
   const [form, setForm] = useState(initialFormState);
-  const [isLoading, setIsLoading] = useState(false);
   const [Fornecedores, setFornecedores] = useState();
   const [checked, setChecked] = useState(false);
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-
   const router = useRouter();
   const pathname = usePathname();
+
+  const { setIsLoading, alert, setAlert } = useContext(GlobalContext);
 
   useEffect(() => {
     if (pathname === "/pages/Adm/Fornecedor") {
       Listar();
     }
   }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAlert({ message: "", type: "" });
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [alert.message]);
 
   async function Listar() {
     setIsLoading(true);
@@ -197,11 +186,7 @@ export function FornecedorProvider({ children }) {
     <FornecedorContext.Provider
       value={{
         Listar,
-        alert,
         Fornecedores,
-        isLoading,
-        setIsLoading,
-        setAlert,
         setFornecedores,
         Pesquisar,
         form,

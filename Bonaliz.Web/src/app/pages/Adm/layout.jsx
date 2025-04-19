@@ -8,6 +8,8 @@ import { DragDropProvider } from "@/Hooks/DragDrop";
 import { ClientesProvider } from "@/Hooks/Clientes";
 import { VendasProvider } from "@/Hooks/Venda";
 import { CarrinhoProvider } from "@/Hooks/Carrinho";
+import { GlobalProvider } from "@/Hooks/GlobalState";
+import { TenantConfigProvider } from "@/Hooks/Tenant";
 
 export const metadata = {
   title: "Sistema - Bona Liz",
@@ -17,28 +19,32 @@ export default function PrincipalLayout({ children }) {
   return (
     <html lang="br">
       <body className="container">
-        <MenuProvider>
-          <FornecedorProvider>
-            <TipoProdutoProvider>
-              <ProdutoProvider>
-                <DragDropProvider>
-                  <ClientesProvider>
-                    <VendasProvider>
-                      <CarrinhoProvider>
-                        <div>
-                          <Header />
-                        </div>
-                        <div className="pl-12 md:pl-64 lg:pl-64 xl:pl-64">
-                          {children}
-                        </div>
-                      </CarrinhoProvider>
-                    </VendasProvider>
-                  </ClientesProvider>
-                </DragDropProvider>
-              </ProdutoProvider>
-            </TipoProdutoProvider>
-          </FornecedorProvider>
-        </MenuProvider>
+        <TenantConfigProvider>
+          <MenuProvider>
+            <GlobalProvider>
+              <FornecedorProvider>
+                <TipoProdutoProvider>
+                  <ProdutoProvider>
+                    <DragDropProvider>
+                      <ClientesProvider>
+                        <VendasProvider>
+                          <CarrinhoProvider>
+                            <div>
+                              <Header />
+                            </div>
+                            <div className="pl-12 md:pl-64 lg:pl-64 xl:pl-64">
+                              {children}
+                            </div>
+                          </CarrinhoProvider>
+                        </VendasProvider>
+                      </ClientesProvider>
+                    </DragDropProvider>
+                  </ProdutoProvider>
+                </TipoProdutoProvider>
+              </FornecedorProvider>
+            </GlobalProvider>
+          </MenuProvider>
+        </TenantConfigProvider>
       </body>
     </html>
   );
