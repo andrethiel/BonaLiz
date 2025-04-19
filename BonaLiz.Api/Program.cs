@@ -77,7 +77,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend",
         builder => builder
-            .WithOrigins("https://localhost:3000", "http://localhost:3000", "https://localhost:3001", "http://localhost:3001", "https://catalogo.bonaliz.com.br") // 🔥 Substitua pelo seu domínio real
+            .WithOrigins("https://localhost:3000", "http://localhost:3000", "https://localhost:3001", "http://localhost:3001", "https://catalogo.bonaliz.com.br", "https://sistema.bonaliz.com.br") // 🔥 Substitua pelo seu domínio real
             .AllowCredentials()
             .AllowAnyHeader()
             .AllowAnyMethod());

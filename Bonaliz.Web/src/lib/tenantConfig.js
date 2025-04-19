@@ -21,5 +21,12 @@ export function getTenantConfig() {
     if (stored) tenantConfig = JSON.parse(stored);
   }
 
-  return tenantConfig;
+  return (
+    tenantConfig || {
+      nome: "Padrão",
+      logoUrl: "",
+      corPrimaria: "#000000",
+      corSecundaria: "#ffffff",
+    }
+  );
 }
