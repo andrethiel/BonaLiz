@@ -3,24 +3,16 @@ import {
   ListarCarrinhos,
   ListarItensCarrinhos,
 } from "@/Api/Controllers/Carrrinho";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { GlobalContext } from "./GlobalState";
-import { usePathname } from "next/navigation";
 
 export const CarrinhoContext = createContext(null);
 
 export function CarrinhoProvider({ children }) {
-  const pathname = usePathname();
   const [carrinho, setCarrinho] = useState([]);
   const [isModalCarrinho, setIsModalCarrinho] = useState(false);
   const [itensCarrinho, setItensCarrinho] = useState([]);
   const { setIsLoading, alert, setAlert } = useContext(GlobalContext);
-
-  useEffect(() => {
-    if (pathname === "/pages/Adm/Carrinho") {
-      Listar();
-    }
-  }, []);
 
   async function Listar() {
     try {
@@ -76,6 +68,7 @@ export function CarrinhoProvider({ children }) {
         itensCarrinho,
         ListarItensCarrinho,
         total,
+        Listar,
       }}
     >
       {children}

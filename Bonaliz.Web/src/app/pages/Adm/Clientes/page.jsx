@@ -9,7 +9,7 @@ import Modal from "@/Components/Modal";
 import { ClientesContext } from "@/Hooks/Clientes";
 import { GlobalContext } from "@/Hooks/GlobalState";
 import { useRouter } from "next/navigation";
-import React, { Suspense, useContext, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -24,9 +24,14 @@ const CustomButtonComponent = (props) => {
 };
 
 function Clientes() {
-  const { clientes, setForm, form, Pesquisar } = useContext(ClientesContext);
+  const { clientes, setForm, form, Pesquisar, Listar } =
+    useContext(ClientesContext);
 
   const { isLoading, alert } = useContext(GlobalContext);
+
+  useEffect(() => {
+    Listar();
+  }, []);
 
   const [columnsDef, setColumnsDef] = useState([
     {

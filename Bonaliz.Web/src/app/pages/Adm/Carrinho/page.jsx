@@ -7,7 +7,7 @@ import Modal from "@/Components/Modal";
 import { useAlert } from "@/Hooks/Alert";
 import { CarrinhoContext } from "@/Hooks/Carrinho";
 import { GlobalContext } from "@/Hooks/GlobalState";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 function Carrinho() {
   const {
@@ -17,7 +17,12 @@ function Carrinho() {
     itensCarrinho,
     ListarItensCarrinho,
     total,
+    Listar,
   } = useContext(CarrinhoContext);
+
+  useEffect(() => {
+    Listar();
+  }, []);
 
   const { isLoading, alert } = useContext(GlobalContext);
 

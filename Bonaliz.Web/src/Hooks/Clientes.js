@@ -32,12 +32,6 @@ export function ClientesProvider({ children }) {
 
   const { setIsLoading, alert, setAlert, tenant } = useContext(GlobalContext);
 
-  useEffect(() => {
-    if (pathname === "/pages/Adm/Clientes") {
-      Listar();
-    }
-  }, []);
-
   async function Listar() {
     try {
       setIsLoading(true);
@@ -186,6 +180,7 @@ export function ClientesProvider({ children }) {
         setChecked,
         ClienteEditar,
         Buscar,
+        Listar,
       }}
     >
       {children}

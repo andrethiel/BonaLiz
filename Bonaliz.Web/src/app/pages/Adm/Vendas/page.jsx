@@ -10,7 +10,7 @@ import Select from "@/Components/Select";
 import { StatusVenda } from "@/constants/status";
 import { GlobalContext } from "@/Hooks/GlobalState";
 import { VendasContext } from "@/Hooks/Venda";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 function Vendas() {
   const {
@@ -30,6 +30,7 @@ function Vendas() {
     itensVenda,
     ListaItensVenda,
     total,
+    Listar,
   } = useContext(VendasContext);
 
   const { isLoading, alert } = useContext(GlobalContext);
@@ -78,6 +79,10 @@ function Vendas() {
       </Button>
     );
   };
+
+  useEffect(() => {
+    Listar();
+  }, []);
 
   const [columnsDef, setColumnsDef] = useState([
     {

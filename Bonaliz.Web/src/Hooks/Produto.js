@@ -12,6 +12,7 @@ import { SelectListTipoProduto } from "@/Api/Controllers/TipoProduto";
 import dayjs from "dayjs";
 import { usePathname, useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { GlobalContext } from "./GlobalState";
 
 export const ProdutoContext = createContext(null);
 
@@ -38,11 +39,6 @@ export function ProdutoProvider({ children }) {
   const [checked, setChecked] = useState(false);
 
   const [form, setForm] = useState(initialFormState);
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
   const [Produto, setProduto] = useState();
   const [Fornecedor, setFornecedores] = useState([]);
   const [TipoProduto, setTipoProduto] = useState([]);
@@ -51,11 +47,7 @@ export function ProdutoProvider({ children }) {
   const [fileURLs, setFileURLs] = useState([]);
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    if (pathname === "/pages/Adm/Produto") {
-      Listar();
-    }
-  }, []);
+  const { setIsLoading, alert, setAlert } = useContext(GlobalContext);
 
   async function Listar() {
     try {
@@ -267,10 +259,6 @@ export function ProdutoProvider({ children }) {
       value={{
         form,
         setForm,
-        alert,
-        setAlert,
-        isLoading,
-        setIsLoading,
         EditaProduto,
         setChecked,
         checked,
@@ -292,6 +280,7 @@ export function ProdutoProvider({ children }) {
         setFileURLs,
         show,
         setShow,
+        Listar,
       }}
     >
       {children}

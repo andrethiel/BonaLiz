@@ -7,7 +7,8 @@ import {
   TipoProdutoPorGuid,
 } from "@/Api/Controllers/TipoProduto";
 import { usePathname, useRouter } from "next/navigation";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { GlobalContext } from "./GlobalState";
 
 export const TipoProdutoContext = createContext(null);
 
@@ -20,16 +21,10 @@ const initialFormState = {
 
 export function TipoProdutoProvider({ children }) {
   const [form, setForm] = useState(initialFormState);
-  const [alert, setAlert] = useState({
-    message: "",
-    type: "",
-  });
-
   const router = useRouter();
-  const pathname = usePathname();
-  const [isLoading, setIsLoading] = useState(false);
   const [TipoProduto, setTipoProduto] = useState();
   const [checked, setChecked] = useState(false);
+  const { setIsLoading, alert, setAlert } = useContext(GlobalContext);
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -38,20 +33,6 @@ export function TipoProdutoProvider({ children }) {
       [name]: value,
     });
   };
-
-  useEffect(() => {
-    if (pathname === "/pages/Adm/TipoProduto") {
-      Listar();
-    }
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAlert({ message: "", type: "" });
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [alert.message]);
 
   async function Listar() {
     setIsLoading(true);
@@ -194,9 +175,7 @@ export function TipoProdutoProvider({ children }) {
       value={{
         Pesquisar,
         handleChange,
-        isLoading,
         TipoProduto,
-        alert,
         Buscar,
         Editar,
         form,
@@ -204,6 +183,7 @@ export function TipoProdutoProvider({ children }) {
         setChecked,
         Inserir,
         router,
+        Listar,
       }}
     >
       {children}

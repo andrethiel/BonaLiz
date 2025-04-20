@@ -76,9 +76,12 @@ function Login() {
               )}
             </div>
             <div>
-              <Button color={"primary"} type={"submit"}>
+              <button
+                className="bg-primery w-full font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+                type="submit"
+              >
                 Entrar
-              </Button>
+              </button>
             </div>
           </form>
           <div className="flex flex-col mt-4">
@@ -87,7 +90,9 @@ function Login() {
             </Link>
             <div className="mt-4 border-t">
               <div className="mt-8">
-                <Button>Criar conta</Button>
+                <button className="bg-secondary w-full font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                  Criar conta
+                </button>
               </div>
             </div>
           </div>

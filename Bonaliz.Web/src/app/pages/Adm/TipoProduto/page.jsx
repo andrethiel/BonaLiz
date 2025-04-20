@@ -8,7 +8,7 @@ import Linked from "@/Components/Link";
 import { GlobalContext } from "@/Hooks/GlobalState";
 import { TipoProdutoContext } from "@/Hooks/TipoProduto";
 import { useRouter } from "next/navigation";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const CustomButtonComponent = (props) => {
   const router = useRouter();
@@ -27,6 +27,10 @@ const TipoProduto = () => {
     useContext(TipoProdutoContext);
 
   const { isLoading, alert } = useContext(GlobalContext);
+
+  useEffect(() => {
+    Listar();
+  }, []);
 
   const [columnsDef, setColumnsDef] = useState([
     {

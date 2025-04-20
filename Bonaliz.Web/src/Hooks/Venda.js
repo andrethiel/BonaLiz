@@ -8,7 +8,6 @@ import {
   VendasFiltar,
 } from "@/Api/Controllers/Vendas";
 import dayjs from "dayjs";
-import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 import { GlobalContext } from "./GlobalState";
 
@@ -33,14 +32,6 @@ export function VendasProvider({ children }) {
   const [show, setShow] = useState(false);
   const [isModalVenda, setIsModalVenda] = useState(false);
   const [itensVenda, setItensVenda] = useState([]);
-
-  const pathname = usePathname();
-
-  useEffect(() => {
-    if (pathname === "/pages/Adm/Vendas") {
-      Listar();
-    }
-  }, []);
 
   async function Listar() {
     try {
@@ -218,6 +209,7 @@ export function VendasProvider({ children }) {
         itensVenda,
         ListaItensVenda,
         total,
+        Listar,
       }}
     >
       {children}

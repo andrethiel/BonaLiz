@@ -37,9 +37,14 @@ const Produto = () => {
     TipoProduto,
     show,
     setShow,
+    Listar,
   } = useContext(ProdutoContext);
 
   const { isLoading, alert } = useContext(GlobalContext);
+
+  useEffect(() => {
+    Listar();
+  }, []);
 
   const [columnsDef, setColumnsDef] = useState([
     {

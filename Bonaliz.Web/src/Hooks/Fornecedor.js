@@ -30,12 +30,6 @@ export function FornecedorProvider({ children }) {
 
   const { setIsLoading, alert, setAlert } = useContext(GlobalContext);
 
-  useEffect(() => {
-    if (pathname === "/pages/Adm/Fornecedor") {
-      Listar();
-    }
-  }, []);
-
   async function Listar() {
     setIsLoading(true);
     try {
@@ -199,6 +193,7 @@ export function FornecedorProvider({ children }) {
         setChecked,
         router,
         Voltar,
+        Listar,
       }}
     >
       {children}

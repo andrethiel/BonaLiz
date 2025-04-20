@@ -57,12 +57,24 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 })
-                .AddCookie(options =>
-                {
-                    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-                    options.SlidingExpiration = true;
-                    options.AccessDeniedPath = "/Forbidden/";
-                });
+  .AddCookie(options =>
+  {
+      options.Cookie.Name = ".AspNetCore.Cookies";
+      options.Cookie.HttpOnly = true;
+      options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+      options.Cookie.SameSite = SameSiteMode.None;
+      options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+      options.SlidingExpiration = true;
+  });
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = ".AspNetCore.Identity.Application";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.SameSite = SameSiteMode.None;
+});
+
 builder.Services.RegisterServices(builder.Configuration);
 
 builder.Services.Configure<IdentityOptions>(x =>
@@ -92,7 +104,7 @@ var app = builder.Build();
 
 app.UseMiddleware<TenantMiddleware>();
 
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.
@@ -120,11 +132,11 @@ app.UseStaticFiles(
         RequestPath = "/Imagens"
     });
 
-
+app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors("AllowFrontend");
+
 app.UseCookiePolicy();
 app.MapControllers();
 

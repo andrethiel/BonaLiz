@@ -24,9 +24,13 @@ const CustomButtonComponent = (props) => {
 };
 
 function Fornecedor() {
-  const { Fornecedores, Pesquisar, handleChange } =
+  const { Fornecedores, Pesquisar, handleChange, Listar } =
     useContext(FornecedorContext);
   const { isLoading, alert } = useContext(GlobalContext);
+
+  useEffect(() => {
+    Listar();
+  }, []);
 
   const [columnsDef, setColumnsDef] = useState([
     {
